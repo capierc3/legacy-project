@@ -35,8 +35,8 @@ public class App {
        The actual values are substituted by the Ant build script using 
        'version' property and datestamp.*/
 
-	public static final String VERSION_INFO = "@VERSION@";
-	public static final String BUILD_INFO = "@BUILD@";
+	public static final String VERSION_INFO = "V 1.0";
+	public static final String BUILD_INFO = "Build 1";
 	
 	/*========================================================================*/
 
@@ -158,8 +158,8 @@ public class App {
 		splash.setSize(400, 300);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		splash.setLocation(
-			(screenSize.width - 400) / 2,
-			(screenSize.height - 300) / 2);
+			(screenSize.width - 400),
+			(screenSize.height - 300));
 		splash.setUndecorated(true);
 		splash.setVisible(true);
 	}

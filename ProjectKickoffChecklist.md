@@ -1,20 +1,20 @@
 For each of you individually copy the checklist and check them of if it is done. This will be graded.
 
-<MyName>
+<Chase Pierce>
   
-- [ ] Download and install Git
+- [X] Download and install Git
   
-- [ ] I have a GitHub account with a username that we can map to your real name
+- [X] I have a GitHub account with a username that we can map to your real name
 
-- [ ] Filled out the individual survey for group forming
+- [X] Filled out the individual survey for group forming
 
-- [ ] Received a Taiga invite
+- [X] Received a Taiga invite
 
-- [ ] Accepted the Taiga invite
+- [X] Accepted the Taiga invite
 
-- [ ] Do you check Slack regularly
+- [X] Do you check Slack regularly
 
-- [ ] Did you contact your team members
+- [X] Did you contact your team members
 
 - [ ] Did you read the kickoff document
 
