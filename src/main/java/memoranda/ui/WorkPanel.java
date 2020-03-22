@@ -38,6 +38,7 @@ public class WorkPanel extends JPanel {
 	public JButton tasksB = new JButton();
 	public JButton eventsB = new JButton();
 	public JButton filesB = new JButton();
+	public JButton funB = new JButton();
 	JButton currentB = null;
 	Border border1;
 
@@ -93,6 +94,31 @@ public class WorkPanel extends JPanel {
 		agendaB.setOpaque(false);
 		agendaB.setMargin(new Insets(0, 0, 0, 0));
 		agendaB.setSelected(true);
+		
+		
+		funB.setBackground(Color.white);
+		funB.setMaximumSize(new Dimension(200, 200));
+		funB.setMinimumSize(new Dimension(200, 200));
+
+		funB.setFont(new java.awt.Font("Dialog", 1, 10));
+		funB.setPreferredSize(new Dimension(200, 200));
+		funB.setBorderPainted(false);
+		funB.setContentAreaFilled(false);
+		funB.setFocusPainted(false);
+		funB.setHorizontalTextPosition(SwingConstants.CENTER);
+		funB.setText(Local.getString("Click for fun!"));
+		funB.setVerticalAlignment(SwingConstants.TOP);
+		funB.setVerticalTextPosition(SwingConstants.BOTTOM);
+
+		funB.setIcon(
+			new ImageIcon(
+				main.java.memoranda.ui.AppFrame.class.getResource(
+					"/ui/icons/1.jpg")));
+		funB.setOpaque(false);
+		funB.setMargin(new Insets(0, 0, 0, 0));
+		funB.setSelected(false);
+		
+		
 
 		eventsB.setBackground(Color.white);
 		eventsB.setMaximumSize(new Dimension(60, 80));
@@ -205,6 +231,7 @@ public class WorkPanel extends JPanel {
 		toolBar.add(tasksB, null);
 		toolBar.add(notesB, null);
 		toolBar.add(filesB, null);
+		toolBar.add(funB, null);
 		currentB = agendaB;
 		// Default blue color
 		currentB.setBackground(new Color(215, 225, 250));
