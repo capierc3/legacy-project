@@ -79,7 +79,7 @@ public class WorkPanel extends JPanel {
 		agendaB.setContentAreaFilled(false);
 		agendaB.setFocusPainted(false);
 		agendaB.setHorizontalTextPosition(SwingConstants.CENTER);
-		agendaB.setText(Local.getString("Agenda"));
+		agendaB.setText(Local.getString("Dharma Initiative"));
 		agendaB.setVerticalAlignment(SwingConstants.TOP);
 		agendaB.setVerticalTextPosition(SwingConstants.BOTTOM);
 		agendaB.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +130,7 @@ public class WorkPanel extends JPanel {
 		eventsB.setContentAreaFilled(false);
 		eventsB.setFocusPainted(false);
 		eventsB.setHorizontalTextPosition(SwingConstants.CENTER);
-		eventsB.setText(Local.getString("Events"));
+		eventsB.setText(Local.getString("4 8 15 16 23 42"));
 		eventsB.setVerticalAlignment(SwingConstants.TOP);
 		eventsB.setVerticalTextPosition(SwingConstants.BOTTOM);
 		eventsB.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +160,7 @@ public class WorkPanel extends JPanel {
 			}
 		});
 		tasksB.setVerticalAlignment(SwingConstants.TOP);
-		tasksB.setText(Local.getString("Tasks"));
+		tasksB.setText(Local.getString("Swan Station"));
 		tasksB.setHorizontalTextPosition(SwingConstants.CENTER);
 		tasksB.setFocusPainted(false);
 		tasksB.setBorderPainted(false);
@@ -182,7 +182,7 @@ public class WorkPanel extends JPanel {
 		notesB.setContentAreaFilled(false);
 		notesB.setFocusPainted(false);
 		notesB.setHorizontalTextPosition(SwingConstants.CENTER);
-		notesB.setText(Local.getString("Notes"));
+		notesB.setText(Local.getString("The Others"));
 		notesB.setVerticalAlignment(SwingConstants.TOP);
 		notesB.setVerticalTextPosition(SwingConstants.BOTTOM);
 		notesB.addActionListener(new java.awt.event.ActionListener() {
@@ -212,7 +212,7 @@ public class WorkPanel extends JPanel {
 		});
 		filesB.setFont(new java.awt.Font("Dialog", 1, 10));
 		filesB.setVerticalAlignment(SwingConstants.TOP);
-		filesB.setText(Local.getString("Resources"));
+		filesB.setText(Local.getString("Henry Gale"));
 		filesB.setHorizontalTextPosition(SwingConstants.CENTER);
 		filesB.setFocusPainted(false);
 		filesB.setBorderPainted(false);
