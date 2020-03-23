@@ -135,7 +135,7 @@ public class NoteListImpl implements NoteList {
         }
         return v;
     }
-    	 
+
     public Note getNoteForDate(CalendarDate date) {
         Day d = getDay(date);
         if (d == null)

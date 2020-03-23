@@ -314,7 +314,7 @@ public class EventsPanel extends JPanel {
     }
     
     void newEventB_actionPerformed(ActionEvent e, String tasktext, Date startDate, Date endDate) {
-    	EventDialog dlg = new EventDialog(App.getFrame(), Local.getString("New event"));
+    	EventDialog dlg = new EventDialog(App.getFrame(), Local.getString("Create event"));
     	Dimension frmSize = App.getFrame().getSize();
     	Point loc = App.getFrame().getLocation();
     	if (tasktext != null) {
