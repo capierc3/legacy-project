@@ -1,37 +1,6 @@
 package main.java.memoranda.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.Date;
-import java.util.Vector;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import main.java.memoranda.CurrentProject;
-import main.java.memoranda.History;
-import main.java.memoranda.NoteList;
-import main.java.memoranda.Project;
-import main.java.memoranda.ProjectListener;
-import main.java.memoranda.ResourcesList;
-import main.java.memoranda.Task;
-import main.java.memoranda.TaskList;
+import main.java.memoranda.*;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
 import main.java.memoranda.date.DateListener;
@@ -39,6 +8,14 @@ import main.java.memoranda.util.Context;
 import main.java.memoranda.util.CurrentStorage;
 import main.java.memoranda.util.Local;
 import main.java.memoranda.util.Util;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Date;
+import java.util.Vector;
 
 /*$Id: TaskPanel.java,v 1.27 2007/01/17 20:49:12 killerjoe Exp $*/
 public class TaskPanel extends JPanel {
@@ -84,9 +61,9 @@ public class TaskPanel extends JPanel {
         historyBackB.setBorderPainted(false);
         historyBackB.setToolTipText(Local.getString("History back"));
         historyBackB.setRequestFocusEnabled(false);
-        historyBackB.setPreferredSize(new Dimension(24, 24));
-        historyBackB.setMinimumSize(new Dimension(24, 24));
-        historyBackB.setMaximumSize(new Dimension(24, 24));
+        historyBackB.setPreferredSize(new Dimension(50, 50));
+        historyBackB.setMinimumSize(new Dimension(20, 20));
+        historyBackB.setMaximumSize(new Dimension(80, 80));
         historyBackB.setText("");
 
         historyForwardB.setAction(History.historyForwardAction);
@@ -95,18 +72,18 @@ public class TaskPanel extends JPanel {
         historyForwardB.setPreferredSize(new Dimension(24, 24));
         historyForwardB.setRequestFocusEnabled(false);
         historyForwardB.setToolTipText(Local.getString("History forward"));
-        historyForwardB.setMinimumSize(new Dimension(24, 24));
-        historyForwardB.setMaximumSize(new Dimension(24, 24));
+        historyForwardB.setMinimumSize(new Dimension(20, 20));
+        historyForwardB.setMaximumSize(new Dimension(80, 80));
         historyForwardB.setText("");
 
         newTaskB.setIcon(
             new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/todo_new.png")));
         newTaskB.setEnabled(true);
-        newTaskB.setMaximumSize(new Dimension(24, 24));
-        newTaskB.setMinimumSize(new Dimension(24, 24));
+        newTaskB.setMaximumSize(new Dimension(80, 80));
+        newTaskB.setMinimumSize(new Dimension(20, 20));
         newTaskB.setToolTipText(Local.getString("Create new task"));
         newTaskB.setRequestFocusEnabled(false);
-        newTaskB.setPreferredSize(new Dimension(24, 24));
+        newTaskB.setPreferredSize(new Dimension(50, 50));
         newTaskB.setFocusable(false);
         newTaskB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -118,11 +95,11 @@ public class TaskPanel extends JPanel {
         subTaskB.setIcon(
             new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/todo_new_sub.png")));
         subTaskB.setEnabled(true);
-        subTaskB.setMaximumSize(new Dimension(24, 24));
-        subTaskB.setMinimumSize(new Dimension(24, 24));
+        subTaskB.setMaximumSize(new Dimension(80, 80));
+        subTaskB.setMinimumSize(new Dimension(20, 20));
         subTaskB.setToolTipText(Local.getString("Add subtask"));
         subTaskB.setRequestFocusEnabled(false);
-        subTaskB.setPreferredSize(new Dimension(24, 24));
+        subTaskB.setPreferredSize(new Dimension(50, 50));
         subTaskB.setFocusable(false);
         subTaskB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -154,11 +131,11 @@ public class TaskPanel extends JPanel {
                 removeTaskB_actionPerformed(e);
             }
         });
-        removeTaskB.setPreferredSize(new Dimension(24, 24));
+        removeTaskB.setPreferredSize(new Dimension(50, 50));
         removeTaskB.setRequestFocusEnabled(false);
         removeTaskB.setToolTipText(Local.getString("Remove task"));
-        removeTaskB.setMinimumSize(new Dimension(24, 24));
-        removeTaskB.setMaximumSize(new Dimension(24, 24));
+        removeTaskB.setMinimumSize(new Dimension(20, 20));
+        removeTaskB.setMaximumSize(new Dimension(80, 80));
         removeTaskB.setIcon(
             new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/todo_remove.png")));
         
@@ -169,11 +146,11 @@ public class TaskPanel extends JPanel {
                 ppCompleteTask_actionPerformed(e);
             }
         });
-        completeTaskB.setPreferredSize(new Dimension(24, 24));
+        completeTaskB.setPreferredSize(new Dimension(50, 50));
         completeTaskB.setRequestFocusEnabled(false);
         completeTaskB.setToolTipText(Local.getString("Complete task"));
-        completeTaskB.setMinimumSize(new Dimension(24, 24));
-        completeTaskB.setMaximumSize(new Dimension(24, 24));
+        completeTaskB.setMinimumSize(new Dimension(20, 20));
+        completeTaskB.setMaximumSize(new Dimension(80, 80));
         completeTaskB.setIcon(
             new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/todo_complete.png")));
 
