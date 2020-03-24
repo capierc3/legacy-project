@@ -73,7 +73,7 @@ public class ProjectDialog extends JDialog {
 	this.setResizable(false);
         getContentPane().setLayout(new GridBagLayout());
         topPanel.setBorder(new EmptyBorder(new Insets(0, 5, 0, 5)));
-        topPanel.setBackground(Color.WHITE);        
+        topPanel.setBackground(Color.RED);
         header.setFont(new java.awt.Font("Dialog", 0, 20));
         header.setForeground(new Color(0, 0, 124));
         header.setText(Local.getString("Project"));
