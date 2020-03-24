@@ -62,7 +62,8 @@ public class EventsPanel extends JPanel {
         }
     }
     void jbInit() throws Exception {
-        eventsToolBar.setFloatable(false);
+        //change 3
+        eventsToolBar.setFloatable(true);
 
         historyBackB.setAction(History.historyBackAction);
         historyBackB.setFocusable(false);
