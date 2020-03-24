@@ -124,7 +124,8 @@ public class App {
 
 		frame.pack();
 		if (JVMVer >= 1.4) {
-			frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+			//change 1
+			frame.setExtendedState(Frame.NORMAL);
 		} else {
 			frame.setExtendedState(Frame.NORMAL);
 		}
