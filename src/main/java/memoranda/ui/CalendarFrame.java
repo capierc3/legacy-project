@@ -26,9 +26,9 @@ public class CalendarFrame extends JInternalFrame {
 
   }
   private void jbInit() throws Exception {
-    border1 = BorderFactory.createLineBorder(Color.gray,2); // changed border thickness
+    border1 = BorderFactory.createLineBorder(Color.gray,2); // changed border thickness from 1 to 2
     this.setClosable(true);
-    this.setTitle(Local.getString("Select date"));
+    this.setTitle(Local.getString("Choose date"));              // changed text from "Select" to "Choose"
     this.setBorder(border1);
     //this.setPreferredSize(new Dimension(200, 200));
     this.setToolTipText("");
