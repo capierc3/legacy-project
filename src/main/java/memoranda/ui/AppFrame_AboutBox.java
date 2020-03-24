@@ -1,20 +1,12 @@
 package main.java.memoranda.ui;
 
-import java.awt.AWTEvent;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Frame;
+import main.java.memoranda.util.Local;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-
-import main.java.memoranda.util.Local;
 
 /**
  * 
@@ -33,23 +25,23 @@ public class AppFrame_AboutBox extends JDialog implements ActionListener {
   String url = App.WEBSITE_URL;
   String developersHead = Local.getString("Developers") + ":";
   String[] developers = {
-              "Alex Alishevskikh (alexeya@users.sourceforge.net)",
-              "Patrick Bielen (bielen@stafa.nl)",
-              "Ryan Ho (rawsushi@users.sourceforge.net)",
-              "Ivan Ribas (ivanrise@users.sourceforge.net)",
-              "Jyrki Velhonoja (velhonoja@kapsi.fi>)",
-  			  "Jeremy Whitlock (jwhitlock@starprecision.com)"              
+              "A. Alishevskikh (alexeya@users.sourceforge.net)",
+              "P. Bielen (bielen@stafa.nl)",
+              "R. Ho (rawsushi@users.sourceforge.net)",
+              "I. Ribas (ivanrise@users.sourceforge.net)",
+              "J. Velhonoja (velhonoja@kapsi.fi>)",
+  			  "J. Whitlock (jwhitlock@starprecision.com)"
   };
   String othersHead = Local.getString("Other contributors") + ":";
   String[] others = {
-              "Thomas Chuffart (informatique@pierrelouiscarlier.fr)",
-              "Willy Dobe (wdobe@gmx.de)",
-              "Yunjie Liu (liu-610@163.com)",
-              "Kenneth J. Pouncey (kjpou@pt.lu)",
-              "Michael Radtke (mradtke@abigale.de)",
-              "Carel-J Rischmuller (carel-j.rischmuller@epiuse.com)",
-              "Milena Vitali-Charewicz (milo22370@yahoo.com)",
-              "Toru Watanabe (t-wata@cablenet.ne.jp)"                            
+              "T. Chuffart (informatique@pierrelouiscarlier.fr)",
+              "W. Dobe (wdobe@gmx.de)",
+              "Y. Liu (liu-610@163.com)",
+              "K. J. Pouncey (kjpou@pt.lu)",
+              "M.  Radtke (mradtke@abigale.de)",
+              "C. J. Rischmuller (carel-j.rischmuller@epiuse.com)",
+              "M,  Vitali-Charewicz (milo22370@yahoo.com)",
+              "T. Watanabe (t-wata@cablenet.ne.jp)"
  };
     
   JLayeredPane layeredPane;
