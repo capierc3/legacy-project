@@ -3,13 +3,13 @@
 
 ## 1: Basic Information (needed before you start with your Sprint -- Sprint Planning)
 
-**Topic you chose:**
+**Topic you chose:** Gym Scheduling
 
-**Sprint Number:** Nr
+**Sprint Number:** Sprint 1
 
-**Scrum Master**: Name
+**Scrum Master**: Daimi Mussey
 
-**Git Master**: Name
+**Git Master**: Chase Pierce
 
 ### Sprint Planning (For Sprint 1-4)
 Document your Sprint Planning here. Also check the kickoff document for more details on what needs to be done. This is just the documentation. 
@@ -140,7 +140,7 @@ I would also advise you to already fill out the Contributions section (End of sp
   
 ## 4: Checklist for you to see if you are done
 - [ ] Filled out the complete form from above, all fields are filled and written in full sentences
-- [ ] Read the kickoff again to make sure you have all the details
+- [X] Read the kickoff again to make sure you have all the details
 - [ ] User Stories that were not completed, were left in the Sprint and a copy created
 - [ ] Your Quality Policies are accurate and up to date
 - [ ] **Individual** Survey was submitted **individually** (create checkboxes below -- see Canvas to get link)
