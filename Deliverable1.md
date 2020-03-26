@@ -14,7 +14,7 @@
 ### Sprint Planning (For Sprint 1-4)
 Document your Sprint Planning here. Also check the kickoff document for more details on what needs to be done. This is just the documentation. 
 
-**Sprint Goal:** Your Sprint goal
+**Sprint Goal:** Restore and refresh application to a modern, useable state
 
 **How many User Stories did you add to the Product Backlog:**  Number
 
