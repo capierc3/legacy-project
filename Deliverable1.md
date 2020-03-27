@@ -14,24 +14,24 @@
 ### Sprint Planning (For Sprint 1-4)
 Document your Sprint Planning here. Also check the kickoff document for more details on what needs to be done. This is just the documentation. 
 
-**Sprint Goal:** Restore and refresh application to a modern, useable state
+**Sprint Goal:** Restore and refresh application to a modern, useable state.  
 
-**How many User Stories did you add to the Product Backlog:**  Number
+**How many User Stories did you add to the Product Backlog:** 6
 
 **How many User Stories did you add to this Sprint:** 
-> Answer the questions below about your Sprint Planning?
+> 9
 
 **Why did you add exactly these US?**
 
-> Your Answer
+> 7 of the user stories were mandated.  Additionally, he team voted on the top two user stories from that backlog that were deemed the most essential to add to the sprint.
 
 **Why do you think you will get them done? (details)**
 
-> Your Answer
+> The team has discussed the areas they feel most comfortable working in and have agreed to split out the work based on skillset and comfort level.
 
 **Do you have a rough idea what you need to do? (if the answer is no then please let me know on Slack)**
 
-> Your Answer
+> Yes, each member of the team has reviewed the project requirements in detail and understand what is expected of us.
 
 
 
