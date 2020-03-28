@@ -149,17 +149,18 @@ public class App {
 	 */
 	private void showSplash() {
 		splash = new JFrame();
+		//Splash image goes here//
 		ImageIcon spl =
-			new ImageIcon(App.class.getResource("/ui/splash.png"));
+			new ImageIcon(App.class.getResource("/ui/cheeseGym.jpg"));
 		JLabel l = new JLabel();
 		l.setSize(400, 300);
 		l.setIcon(spl);
 		splash.getContentPane().add(l);
-		splash.setSize(400, 300);
+		splash.setSize(366, 377);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		splash.setLocation(
-			(screenSize.width - 400) / 2,
-			(screenSize.height - 300) / 2);
+			(screenSize.width - 366) / 2,
+			(screenSize.height - 377) / 2);
 		splash.setUndecorated(true);
 		splash.setVisible(true);
 	}
