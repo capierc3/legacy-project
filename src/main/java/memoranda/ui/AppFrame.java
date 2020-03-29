@@ -57,13 +57,13 @@ import nu.xom.Element;
 import nu.xom.Elements;
 
 
-/**
- * 
- * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
- */
+
 
 /*$Id: AppFrame.java,v 1.33 2005/07/05 08:17:24 alexeya Exp $*/
-
+/**
+ * Holds the information for the main fram of the app.
+ * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
+ */
 public class AppFrame extends JFrame {
 
     JPanel contentPane;

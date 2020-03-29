@@ -15,7 +15,7 @@ import main.java.memoranda.util.Configuration;
 
 /**
  * Main class that starts up the software, Builds the main frame and splash screen.
- * 
+ *
  * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
  */
 
