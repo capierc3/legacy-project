@@ -307,12 +307,14 @@ public class PreferencesDialog extends JDialog {
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(lfJavaRB, gbc);
 		lfGroup.add(lfCustomRB);
+		lfGroup.add(lfSystemRB);
+		lfGroup.add(lfJavaRB);
+		lfSystemRB.setText("System");
+		lfSystemRB.addActionListener(this::lfSystemRB_actionPerformed);
+		lfJavaRB.setText("Java");
+		lfJavaRB.addActionListener(this::lfJavaRB_actionPerformed);
 		lfCustomRB.setText(Local.getString("Custom"));
-		lfCustomRB.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				lfCustomRB_actionPerformed(e);
-			}
-		});
+		lfCustomRB.addActionListener(this::lfCustomRB_actionPerformed);
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 7;
