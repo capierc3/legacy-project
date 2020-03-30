@@ -30,7 +30,7 @@ public class WorkPanel extends JPanel {
 	JToolBar toolBar = new JToolBar();
 	JPanel panel = new JPanel();
 	CardLayout cardLayout1 = new CardLayout();
-
+	/* Old Buttons 
 	public JButton notesB = new JButton();
 	public DailyItemsPanel dailyItemsPanel = new DailyItemsPanel(this);
 	public ResourcesPanel filesPanel = new ResourcesPanel();
@@ -38,6 +38,32 @@ public class WorkPanel extends JPanel {
 	public JButton tasksB = new JButton();
 	public JButton eventsB = new JButton();
 	public JButton filesB = new JButton();
+	*/
+	public DailyItemsPanel dailyItemsPanel = new DailyItemsPanel(this);
+	public ResourcesPanel filesPanel = new ResourcesPanel();
+	
+	// previously agenda, agenda panel
+	public JButton myStuff = new JButton();
+	
+	// new -- task panel
+	public JButton myCalendar = new JButton();
+	
+	// new, events Panel
+	public JButton upcomingClasses = new JButton();
+	
+	// new, -- Resources Panel
+	public JButton trainerProfiles = new JButton();
+	
+	// new, resources panel
+	public JButton roomInfo = new JButton();	
+	
+	// new --- Resources Panel
+	public JButton bookTrainer = new JButton();
+	
+	// ResourcesPanel
+	public JButton resources = new JButton();
+
+	
 	JButton currentB = null;
 	Border border1;
 
@@ -65,9 +91,9 @@ public class WorkPanel extends JPanel {
 		toolBar.setBackground(Color.white);
 
 		toolBar.setBorderPainted(false);
-		toolBar.setFloatable(false);
+		toolBar.setFloatable(true);
 		panel.setLayout(cardLayout1);
-
+		/* Setting up old buttons
 		agendaB.setBackground(Color.white);
 		agendaB.setMaximumSize(new Dimension(60, 80));
 		agendaB.setMinimumSize(new Dimension(30, 30));
@@ -196,16 +222,207 @@ public class WorkPanel extends JPanel {
 		filesB.setOpaque(false);
 		filesB.setMaximumSize(new Dimension(60, 80));
 		filesB.setBackground(Color.white);
+		*/
+		
+		// New Buttons added on March 29, 2020 to reflect gym usages
+		myStuff.setBackground(Color.white);
+		myStuff.setMaximumSize(new Dimension(100, 100));
+		myStuff.setMinimumSize(new Dimension(100, 100));
+
+		myStuff.setFont(new java.awt.Font("Dialog", 1, 10));
+		myStuff.setPreferredSize(new Dimension(100, 100));
+		myStuff.setBorderPainted(false);
+		myStuff.setContentAreaFilled(false);
+		myStuff.setFocusPainted(false);
+		myStuff.setHorizontalTextPosition(SwingConstants.CENTER);
+		myStuff.setText(Local.getString("My Info"));
+		myStuff.setVerticalAlignment(SwingConstants.TOP);
+		myStuff.setVerticalTextPosition(SwingConstants.BOTTOM);
+		myStuff.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				myStuff_actionPerformed(e);
+			}
+		});
+		myStuff.setIcon(
+			new ImageIcon(
+				main.java.memoranda.ui.AppFrame.class.getResource(
+					"/ui/icons/agenda.png")));
+		myStuff.setOpaque(false);
+		myStuff.setMargin(new Insets(0, 0, 0, 0));
+		myStuff.setSelected(true);
+
+		
+		myCalendar.setSelected(true);
+		myCalendar.setFont(new java.awt.Font("Dialog", 1, 10));
+		myCalendar.setMargin(new Insets(0, 0, 0, 0));
+		myCalendar.setIcon(
+			new ImageIcon(
+				main.java.memoranda.ui.AppFrame.class.getResource(
+					"/ui/icons/tasks.png")));
+		myCalendar.setVerticalTextPosition(SwingConstants.BOTTOM);
+		myCalendar.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				myCalendar_actionPerformed(e);
+			}
+		});
+		myCalendar.setVerticalAlignment(SwingConstants.TOP);
+		myCalendar.setText(Local.getString("My Events"));
+		myCalendar.setHorizontalTextPosition(SwingConstants.CENTER);
+		myCalendar.setFocusPainted(false);
+		myCalendar.setBorderPainted(false);
+		myCalendar.setContentAreaFilled(false);
+		myCalendar.setPreferredSize(new Dimension(100, 100));
+		myCalendar.setMinimumSize(new Dimension(100, 100));
+		myCalendar.setOpaque(false);
+		myCalendar.setMaximumSize(new Dimension(100, 100));
+		myCalendar.setBackground(Color.red);
+		
+		
+		
+		upcomingClasses.setBackground(Color.white);
+		upcomingClasses.setMaximumSize(new Dimension(100, 100));
+		upcomingClasses.setMinimumSize(new Dimension(100, 100));
+
+		upcomingClasses.setFont(new java.awt.Font("Dialog", 1, 10));
+		upcomingClasses.setPreferredSize(new Dimension(100, 100));
+		upcomingClasses.setBorderPainted(false);
+		upcomingClasses.setContentAreaFilled(false);
+		upcomingClasses.setFocusPainted(false);
+		upcomingClasses.setHorizontalTextPosition(SwingConstants.CENTER);
+		upcomingClasses.setText(Local.getString("Upcoming Classes"));
+		upcomingClasses.setVerticalAlignment(SwingConstants.TOP);
+		upcomingClasses.setVerticalTextPosition(SwingConstants.BOTTOM);
+		upcomingClasses.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				upcomingClasses_actionPerformed(e);
+			}
+		});
+		upcomingClasses.setIcon(
+			new ImageIcon(
+				main.java.memoranda.ui.AppFrame.class.getResource(
+					"/ui/icons/events.png")));
+		upcomingClasses.setOpaque(false);
+		upcomingClasses.setMargin(new Insets(0, 0, 0, 0));
+		
+		trainerProfiles.setSelected(true);
+		trainerProfiles.setMargin(new Insets(0, 0, 0, 0));
+		trainerProfiles.setIcon(
+			new ImageIcon(
+				main.java.memoranda.ui.AppFrame.class.getResource(
+					"/ui/icons/files.png")));
+		trainerProfiles.setVerticalTextPosition(SwingConstants.BOTTOM);
+		trainerProfiles.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				trainerProfiles_actionPerformed(e);
+			}
+		});
+		trainerProfiles.setFont(new java.awt.Font("Dialog", 1, 10));
+		trainerProfiles.setVerticalAlignment(SwingConstants.TOP);
+		trainerProfiles.setText(Local.getString("Trainer Profiles"));
+		trainerProfiles.setHorizontalTextPosition(SwingConstants.CENTER);
+		trainerProfiles.setFocusPainted(false);
+		trainerProfiles.setBorderPainted(false);
+		trainerProfiles.setContentAreaFilled(false);
+		trainerProfiles.setPreferredSize(new Dimension(100, 100));
+		trainerProfiles.setMinimumSize(new Dimension(100, 100));
+		trainerProfiles.setOpaque(false);
+		trainerProfiles.setMaximumSize(new Dimension(100, 100));
+		trainerProfiles.setBackground(Color.white);	
+		
+
+		roomInfo.setSelected(true);
+		roomInfo.setMargin(new Insets(0, 0, 0, 0));
+		roomInfo.setIcon(
+			new ImageIcon(
+				main.java.memoranda.ui.AppFrame.class.getResource(
+					"/ui/icons/files.png")));
+		roomInfo.setVerticalTextPosition(SwingConstants.BOTTOM);
+		roomInfo.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				roomInfo_actionPerformed(e);
+			}
+		});
+		roomInfo.setFont(new java.awt.Font("Dialog", 1, 10));
+		roomInfo.setVerticalAlignment(SwingConstants.TOP);
+		roomInfo.setText(Local.getString("Room Info"));
+		roomInfo.setHorizontalTextPosition(SwingConstants.CENTER);
+		roomInfo.setFocusPainted(false);
+		roomInfo.setBorderPainted(false);
+		roomInfo.setContentAreaFilled(false);
+		roomInfo.setPreferredSize(new Dimension(100, 100));
+		roomInfo.setMinimumSize(new Dimension(100, 100));
+		roomInfo.setOpaque(false);
+		roomInfo.setMaximumSize(new Dimension(100, 100));
+		roomInfo.setBackground(Color.white);				
+		
+		
+		
+		bookTrainer.setBackground(Color.white);
+		bookTrainer.setMaximumSize(new Dimension(100, 100));
+		bookTrainer.setMinimumSize(new Dimension(100, 100));
+
+		bookTrainer.setFont(new java.awt.Font("Dialog", 1, 10));
+		bookTrainer.setPreferredSize(new Dimension(100, 100));
+		bookTrainer.setBorderPainted(false);
+		bookTrainer.setContentAreaFilled(false);
+		bookTrainer.setFocusPainted(false);
+		bookTrainer.setHorizontalTextPosition(SwingConstants.CENTER);
+		bookTrainer.setText(Local.getString("Book A Trainer"));
+		bookTrainer.setVerticalAlignment(SwingConstants.TOP);
+		bookTrainer.setVerticalTextPosition(SwingConstants.BOTTOM);
+		bookTrainer.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				bookTrainer_actionPerformed(e);
+			}
+		});
+		bookTrainer.setIcon(
+			new ImageIcon(
+				main.java.memoranda.ui.AppFrame.class.getResource(
+					"/ui/icons/events.png")));
+		bookTrainer.setOpaque(false);
+		bookTrainer.setMargin(new Insets(0, 0, 0, 0));	
+
+		this.setPreferredSize(new Dimension(1073, 300));
+
+		resources.setSelected(true);
+		resources.setMargin(new Insets(0, 0, 0, 0));
+		resources.setIcon(
+			new ImageIcon(
+				main.java.memoranda.ui.AppFrame.class.getResource(
+					"/ui/icons/files.png")));
+		resources.setVerticalTextPosition(SwingConstants.BOTTOM);
+		resources.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				resources_actionPerformed(e);
+			}
+		});
+		resources.setFont(new java.awt.Font("Dialog", 1, 10));
+		resources.setVerticalAlignment(SwingConstants.TOP);
+		resources.setText(Local.getString("Resources"));
+		resources.setHorizontalTextPosition(SwingConstants.CENTER);
+		resources.setFocusPainted(false);
+		resources.setBorderPainted(false);
+		resources.setContentAreaFilled(false);
+		resources.setPreferredSize(new Dimension(100, 100));
+		resources.setMinimumSize(new Dimension(100, 100));
+		resources.setOpaque(false);
+		resources.setMaximumSize(new Dimension(100, 100));
+		resources.setBackground(Color.white);
+	
+
+		// Add buttons to panel
 		this.add(toolBar, BorderLayout.WEST);
 		this.add(panel, BorderLayout.CENTER);
 		panel.add(dailyItemsPanel, "DAILYITEMS");
 		panel.add(filesPanel, "FILES");
-		toolBar.add(agendaB, null);
-		toolBar.add(eventsB, null);
-		toolBar.add(tasksB, null);
-		toolBar.add(notesB, null);
-		toolBar.add(filesB, null);
-		currentB = agendaB;
+		toolBar.add(myStuff, null);
+		toolBar.add(myCalendar, null);
+		toolBar.add(upcomingClasses, null);
+		toolBar.add(trainerProfiles, null);
+		toolBar.add(roomInfo, null);
+		toolBar.add(bookTrainer, null);
+		toolBar.add(resources, null);
+		currentB = myStuff;
 		// Default blue color
 		currentB.setBackground(new Color(215, 225, 250));
 		currentB.setOpaque(true);
@@ -217,6 +434,10 @@ public class WorkPanel extends JPanel {
 
 	}
 
+	/*
+	 * Not sure what this did, was causing errors and didn't seem functional so I commented it out and tried to
+	 * recreate below with udpated event names -- Justin
+	 * 
 	public void selectPanel(String pan) {
 		if (pan != null) {
 			if (pan.equals("NOTES"))
@@ -228,39 +449,66 @@ public class WorkPanel extends JPanel {
 			else if (pan.equals("FILES"))
 				filesB_actionPerformed(null);
 		}
-	}
+	} */
+	public void selectPanel(String pan) {
+		if (pan != null) {
+			if (pan.equals("TASKS"))
+				myCalendar_actionPerformed(null);
+			else if (pan.equals("EVENTS"))
+				upcomingClasses_actionPerformed(null);
+			else if (pan.equals("FILES"))
+				trainerProfiles_actionPerformed(null);
+				roomInfo_actionPerformed(null);
+				bookTrainer_actionPerformed(null);
+				resources_actionPerformed(null);
+		}
+	} 	
 
-	public void agendaB_actionPerformed(ActionEvent e) {
+	
+	
+
+	public void myStuff_actionPerformed(ActionEvent e) {
 		cardLayout1.show(panel, "DAILYITEMS");
 		dailyItemsPanel.selectPanel("AGENDA");
-		setCurrentButton(agendaB);
+		setCurrentButton(myStuff);
 		Context.put("CURRENT_PANEL", "AGENDA");
 	}
 
-	public void notesB_actionPerformed(ActionEvent e) {
-		cardLayout1.show(panel, "DAILYITEMS");
-		dailyItemsPanel.selectPanel("NOTES");
-		setCurrentButton(notesB);
-		Context.put("CURRENT_PANEL", "NOTES");
-	}
-
-	public void tasksB_actionPerformed(ActionEvent e) {
+	public void myCalendar_actionPerformed(ActionEvent e) {
 		cardLayout1.show(panel, "DAILYITEMS");
 		dailyItemsPanel.selectPanel("TASKS");
-		setCurrentButton(tasksB);
+		setCurrentButton(myCalendar);
 		Context.put("CURRENT_PANEL", "TASKS");
 	}
 
-	public void eventsB_actionPerformed(ActionEvent e) {
+	public void upcomingClasses_actionPerformed(ActionEvent e) {
 		cardLayout1.show(panel, "DAILYITEMS");
 		dailyItemsPanel.selectPanel("EVENTS");
-		setCurrentButton(eventsB);
+		setCurrentButton(upcomingClasses);
 		Context.put("CURRENT_PANEL", "EVENTS");
 	}
 
-	public void filesB_actionPerformed(ActionEvent e) {
+	public void trainerProfiles_actionPerformed(ActionEvent e) {
 		cardLayout1.show(panel, "FILES");
-		setCurrentButton(filesB);
+		setCurrentButton(trainerProfiles);
+		Context.put("CURRENT_PANEL", "FILES");
+	}
+	
+	public void roomInfo_actionPerformed(ActionEvent e) {
+		cardLayout1.show(panel, "FILES");
+		setCurrentButton(roomInfo);
+		Context.put("CURRENT_PANEL", "FILES");
+	}	
+
+	public void bookTrainer_actionPerformed(ActionEvent e) {
+		cardLayout1.show(panel, "FILES");
+		setCurrentButton(bookTrainer);
+		Context.put("CURRENT_PANEL", "FILES");
+	}
+	
+	public void resources_actionPerformed(ActionEvent e) {
+		cardLayout1.show(panel, "FILES");
+		setCurrentButton(resources);
 		Context.put("CURRENT_PANEL", "FILES");
 	}
 

@@ -177,11 +177,12 @@ public class DailyItemsPanel extends JPanel {
         flowLayout1.setAlignment(FlowLayout.RIGHT);
         flowLayout1.setVgap(0);
         taskB.setMargin(new Insets(0, 0, 0, 0));
+        /* tasks currently not being used
         taskB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 taskB_actionPerformed(e);
             }
-        });
+        });*/
         taskB.setPreferredSize(new Dimension(24, 24));
         taskB.setToolTipText(Local.getString("Active to-do tasks"));
         taskB.setBorderPainted(false);
@@ -473,11 +474,12 @@ public class DailyItemsPanel extends JPanel {
 	public String getCurrentPanel() {
 		return CurrentPanel;
 	}
-    void taskB_actionPerformed(ActionEvent e) {
+    /* Justin commented out, wasn't being used
+	void taskB_actionPerformed(ActionEvent e) {
         parentPanel.tasksB_actionPerformed(null);
-    }
+    }*/
 
     void alarmB_actionPerformed(ActionEvent e) {
-        parentPanel.eventsB_actionPerformed(null);
+        parentPanel.myCalendar_actionPerformed(null);
     }
 }
