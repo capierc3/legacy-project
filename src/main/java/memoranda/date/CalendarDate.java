@@ -1,11 +1,3 @@
-/**
- * CalendarDate.java
- * Created on 11.02.2003, 18:02:02 Alex
- * Package: net.sf.memoranda
- *
- * @author Alex V. Alishevskikh, alex@openmechanics.net
- * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
- */
 package main.java.memoranda.date;
 
 import java.text.DateFormat;
@@ -16,7 +8,7 @@ import main.java.memoranda.util.Local;
 import main.java.memoranda.util.Util;
 
 /**
- *
+ * Class that holds the information for dates; year,month,day
  */
 /*$Id: CalendarDate.java,v 1.3 2004/01/30 12:17:41 alexeya Exp $*/
 public class CalendarDate {
@@ -25,6 +17,11 @@ public class CalendarDate {
     private int _month;
     private int _day;
 
+    /**
+     * Returns a calender object with inputted date.
+     * @param date
+     * @return
+     */
     public static Calendar dateToCalendar(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
@@ -100,25 +97,35 @@ public class CalendarDate {
         return cal.getTime();
     }
 
+    //Basic getters
     public Calendar getCalendar() {
         return toCalendar(_day, _month, _year);
     }
-
     public Date getDate() {
         return toDate(_day, _month, _year);
     }
-
     public int getDay() {
         return _day;
     }
-
     public int getMonth() {
         return _month;
     }
-
     public int getYear() {
         return _year;
     }
+    public String getFullDateString() {
+        return Local.getDateString(this, DateFormat.FULL);
+    }
+    public String getMediumDateString() {
+        return Local.getDateString(this, DateFormat.MEDIUM);
+    }
+    public String getLongDateString() {
+        return Local.getDateString(this, DateFormat.LONG);
+    }
+    public String getShortDateString() {
+        return Local.getDateString(this, DateFormat.SHORT);
+    }
+
 
     public boolean equals(Object object) {
         if (object.getClass().isInstance(CalendarDate.class)) {
@@ -135,7 +142,6 @@ public class CalendarDate {
         }
         return super.equals(object);
     }
-
     public boolean equals(CalendarDate date) {
         if (date == null) return false;
         return ((date.getDay() == getDay()) && (date.getMonth() == getMonth()) && (date.getYear() == getYear()));
@@ -145,7 +151,6 @@ public class CalendarDate {
         if (date == null) return true;
         return this.getCalendar().before(date.getCalendar());
     }
-
     public boolean after(CalendarDate date) {
         if (date == null) return true;
         return this.getCalendar().after(date.getCalendar());
@@ -157,23 +162,7 @@ public class CalendarDate {
 
     public String toString() {
         return Util.getDateStamp(this);
-    }  
-    
-    public String getFullDateString() {
-        return Local.getDateString(this, DateFormat.FULL);
     }
-    
-    public String getMediumDateString() {
-        return Local.getDateString(this, DateFormat.MEDIUM);
-    }
-    
-    public String getLongDateString() {
-        return Local.getDateString(this, DateFormat.LONG);
-    }
-    
-    public String getShortDateString() {
-        return Local.getDateString(this, DateFormat.SHORT);
-    }
-    
+
 
 }
