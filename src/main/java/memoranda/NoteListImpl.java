@@ -1,11 +1,3 @@
-/**
- * NoteListImpl.java
- * Created on 21.02.2003, 15:43:26 Alex
- * Package: net.sf.memoranda
- * 
- * @author Alex V. Alishevskikh, alex@openmechanics.net
- * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
- */
 package main.java.memoranda;
 import java.util.Collection;
 import java.util.Vector;
@@ -17,20 +9,21 @@ import nu.xom.Attribute;
 import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Elements;
-/**
- * 
- */
 /*$Id: NoteListImpl.java,v 1.14 2004/10/28 11:30:15 alexeya Exp $*/
+/**
+ *  Class that implements the Note list interface
+ */
 public class NoteListImpl implements NoteList {
 
     private Project _project = null;
     private Document _doc = null;
     private Element _root = null;
 
-//    public static final String NS_JNNL = "http://www.openmechanics.org/2003/jnotes-noteslist";
 
     /**
-     * Constructor for NoteListImpl.
+     * Constructor when using a existing Document and project
+     * @param doc nu.xom.document
+     * @param prj Project object
      */
     public NoteListImpl(Document doc, Project prj) {
         _doc = doc;
@@ -38,30 +31,36 @@ public class NoteListImpl implements NoteList {
         _project = prj;
     }
 
+    /**
+     * Constructor with out existing Document
+     * @param prj Project object
+     */
     public NoteListImpl(Project prj) {
-    	
-        //_root = new Element("noteslist", NS_JNNL);
         _root = new Element("noteslist");
         _doc = new Document(_root);
         _project = prj;    
     }
 
+    /**
+     * @see NoteList#getAllNotes()
+     * @return Vector
+     */
     public Collection getAllNotes() {
         Vector v = new Vector();
         Elements yrs = _root.getChildElements("year");
         for (int yi = 0; yi < yrs.size(); yi++) {
             Year y = new Year(yrs.get(yi));
             Vector ms = y.getMonths();
-            for (int mi = 0; mi < ms.size(); mi++) {
-                Month m = (Month) ms.get(mi);
+            for (Object o : ms) {
+                Month m = (Month) o;
                 Vector ds = m.getDays();
-                for (int di = 0; di < ds.size(); di++) {
-                    Day d = (Day) ds.get(di);
-					Vector ns = d.getNotes();
-					for(int ni = 0; ni < ns.size(); ni++) {
-						NoteElement n = (NoteElement) ns.get(ni);
-						v.add(new NoteImpl(n.getElement(), _project));
-					}
+                for (Object value : ds) {
+                    Day d = (Day) value;
+                    Vector ns = d.getNotes();
+                    for (Object item : ns) {
+                        NoteElement n = (NoteElement) item;
+                        v.add(new NoteImpl(n.getElement(), _project));
+                    }
                 }
             }
         }
@@ -94,6 +93,12 @@ public class NoteListImpl implements NoteList {
 	        return v;
 	}
 
+    /**
+     * @see main.java.memoranda.NoteList#getNotesForPeriod(CalendarDate, CalendarDate)
+     * @param startDate CalendarDate
+     * @param endDate CalendarDate
+     * @return Vector
+     */
     public Collection getNotesForPeriod(CalendarDate startDate, CalendarDate endDate) {
         Vector v = new Vector();
         Elements yrs = _root.getChildElements("year");
@@ -124,12 +129,12 @@ public class NoteListImpl implements NoteList {
         return v;
     }
 
-	/**
-	 * returns the first note for a date.
-	 * @param CalendarDate
-	 * @return Note
-	 */
-	 
+
+    /**
+     * @see  main.java.memoranda.NoteList#getNoteForDate(CalendarDate)
+      * @param date CalendarDate
+     * @return Note
+     */
     public Note getNoteForDate(CalendarDate date) {
         Day d = getDay(date);
         if (d == null)
@@ -144,6 +149,11 @@ public class NoteListImpl implements NoteList {
         //return new NoteImpl(d.getElement(), _project);
     }
 
+    /**
+     * @see main.java.memoranda.NoteList#createNoteForDate(CalendarDate)
+     * @param date CalendarDate
+     * @return Note
+     */
     public Note createNoteForDate(CalendarDate date) {
         Year y = getYear(date.getYear());
         if (y == null)
@@ -167,6 +177,12 @@ public class NoteListImpl implements NoteList {
         d.getElement().getParent().removeChild(d.getElement());             
     }
 */
+
+    /**
+     * @see main.java.memoranda.NoteList#removeNote(CalendarDate, String)
+     * @param date CalendarDate
+     * @param id String
+     */
 	 public void removeNote(CalendarDate date, String id) {
         Day d = getDay(date);
         if (d == null) return;
@@ -178,26 +194,39 @@ public class NoteListImpl implements NoteList {
 		}
 //		CurrentNote.set(null);
     }
-	
+
+    /**
+     * @see NoteList#getActiveNote()
+     * @return Note
+     */
     public Note getActiveNote() {
-        //return CurrentNote.get(); 
+        //return CurrentNote.get();
     	return getNoteForDate(CurrentDate.get());
     	// FIXED: Must return the first note for today [alexeya]
     }
 
+    /**
+     * getter for a year element in the _root doc
+     * @param y int for the year
+     * @return Year object
+     */
     private Year getYear(int y) {
         Elements yrs = _root.getChildElements("year");
-        String yy = new Integer(y).toString();
+        String yy = Integer.toString(y);
         for (int i = 0; i < yrs.size(); i++)
             if (yrs.get(i).getAttribute("year").getValue().equals(yy))
                 return new Year(yrs.get(i));
-        //return createYear(y);
         return null;
     }
 
+    /**
+     * creates a new Year object from the _root doc
+     * @param y int for the year
+     * @return Year object
+     */
     private Year createYear(int y) {
         Element el = new Element("year");
-        el.addAttribute(new Attribute("year", new Integer(y).toString()));
+        el.addAttribute(new Attribute("year", Integer.toString(y)));
         _root.appendChild(el);
         return new Year(el);
     }
@@ -210,6 +239,12 @@ public class NoteListImpl implements NoteList {
         return v;
     }
 */
+
+    /**
+     * getter that returns a Day object from a CalendarDate object
+     * @param date CalendarDate
+     * @return Day
+     */
     private Day getDay(CalendarDate date) {
         Year y = getYear(date.getYear());
         if (y == null)
@@ -220,34 +255,58 @@ public class NoteListImpl implements NoteList {
         return m.getDay(date.getDay());
     }
 
+    /**
+     * Private class for the Year data
+     */
     private class Year {
         Element yearElement = null;
 
+        /**
+         * constructor for the year, sets the element for the class
+         * @param el
+         */
         public Year(Element el) {
             yearElement = el;
         }
 
+        /**
+         * gets the int value for the year object
+         * @return int
+         */
         public int getValue() {
-            return new Integer(yearElement.getAttribute("year").getValue()).intValue();
+            return Integer.parseInt(yearElement.getAttribute("year").getValue());
         }
 
+        /**
+         * Returns a month object that corresponds to the int value
+         * @param m int
+         * @return Month
+         */
         public Month getMonth(int m) {
             Elements ms = yearElement.getChildElements("month");
-            String mm = new Integer(m).toString();
+            String mm = Integer.toString(m);
             for (int i = 0; i < ms.size(); i++)
                 if (ms.get(i).getAttribute("month").getValue().equals(mm))
                     return new Month(ms.get(i));
-            //return createMonth(m);
             return null;
         }
 
+        /**
+         * creates a Month object and stores in the yearElement, also returns the Month object
+         * @param m int
+         * @return Month
+         */
         private Month createMonth(int m) {
             Element el = new Element("month");
-            el.addAttribute(new Attribute("month", new Integer(m).toString()));
+            el.addAttribute(new Attribute("month", Integer.toString(m)));
             yearElement.appendChild(el);
             return new Month(el);
         }
 
+        /**
+         * Gets the vector of months in the year object
+         * @return Vector
+         */
         public Vector getMonths() {
             Vector v = new Vector();
             Elements ms = yearElement.getChildElements("month");
@@ -256,51 +315,68 @@ public class NoteListImpl implements NoteList {
             return v;
         }
 
+        /**
+         * getter that returns the yearElement used.
+         * @return Element
+         */
         public Element getElement() {
             return yearElement;
         }
-
     }
 
+    /**
+     * Private class for the Month data
+     */
     private class Month {
         Element mElement = null;
 
+        /**
+         * Constructor that sets the month element to the inputted element
+         * @param el Element
+         */
         public Month(Element el) {
             mElement = el;
         }
 
+        /**
+         * gets the values of the
+         * @return
+         */
         public int getValue() {
-            return new Integer(mElement.getAttribute("month").getValue()).intValue();
+            return Integer.parseInt(mElement.getAttribute("month").getValue());
         }
 
+        /**
+         * Returns a Day object with the corresponding int day value.
+         * @param d int
+         * @return Day
+         */
         public Day getDay(int d) {
-            if (mElement == null)
-                return null;
+            if (mElement == null) return null;
             Elements ds = mElement.getChildElements("day");
-            String dd = new Integer(d).toString();
+            String dd = Integer.toString(d);
             for (int i = 0; i < ds.size(); i++)
                 if (ds.get(i).getAttribute("day").getValue().equals(dd))
                     return new Day(ds.get(i));
-            //return createDay(d);
             return null;
         }
 
+        /**
+         * creates a new Day object and adds it to the month, also returns it.
+         * @param d int
+         * @return Day
+         */
         private Day createDay(int d) {
             Element el = new Element("day");
-            el.addAttribute(new Attribute("day", new Integer(d).toString()));
-/*            el.addAttribute(
-                new Attribute(
-                    "date",
-                    new CalendarDate(
-                        d,
-                        getValue(),
-                        new Integer(((Element) mElement.getParent()).getAttribute("year").getValue()).intValue())
-                        .toString()));
-*/
+            el.addAttribute(new Attribute("day", Integer.toString(d)));
             mElement.appendChild(el);
             return new Day(el);
         }
 
+        /**
+         * returns a vector of Day objects that are in the month
+         * @return Vector
+         */
         public Vector getDays() {
             if (mElement == null)
                 return null;
@@ -311,24 +387,27 @@ public class NoteListImpl implements NoteList {
             return v;
         }
 
+        /**
+         * getter for the month element used.
+         * @return Element
+         */
         public Element getElement() {
             return mElement;
         }
-
     }
 
-	
-	/*
-	 * private class Day
-	 */
-	 
+    /**
+     * Private class for the Day data
+     */
     private class Day {
-        Element dEl = null;
+        Element dEl;
 
+        /**
+         * constructor for the Day object, sets the main element to the inputted one
+         * @param el Element
+         */
         public Day(Element el) {
             dEl = el;
-            // Added to fix old '.notes' XML format 
-            // Old-style XML is converted on the fly [alexeya]
             if (dEl.getAttribute("date") != null) {
             	Attribute dAttr = dEl.getAttribute("date");
             	Attribute tAttr = dEl.getAttribute("title");
@@ -342,26 +421,38 @@ public class NoteListImpl implements NoteList {
             }
         }
 
+        /**
+         * getter for the int value of the Day
+         * @return int
+         */
         public int getValue() {
-            return new Integer(dEl.getAttribute("day").getValue()).intValue();
+            return Integer.parseInt(dEl.getAttribute("day").getValue());
         }
 
         /*public Note getNote() {
             return new NoteImpl(dEl);
         }*/
-		
+
+        /**
+         * Returns the note stored in the element
+         * @param d String
+         * @return NoteElement
+         */
 		public NoteElement getNote(String d) {
             if (dEl == null) 
 				return null;
             Elements ne = dEl.getChildElements("note");
-            
             for (int i = 0; i < ne.size(); i++)
                 if (ne.get(i).getAttribute("refid").getValue().equals(d))
                     return new NoteElement(ne.get(i));
-            //return createDay(d);
             return null;
         }
 
+        /**
+         * Creates a note element and adds it to the day
+         * @param d String
+         * @return NoteElement
+         */
         public NoteElement createNote(String d) {
             Element el = new Element("note");
 //			el.addAttribute(new Attribute("refid", d));
@@ -373,11 +464,15 @@ public class NoteListImpl implements NoteList {
                         10,
                         10,
                         2004).toString()));
-*/						
+*/
             dEl.appendChild(el);
             return new NoteElement(el);
         }
 
+        /**
+         * Getter that returns a vector of all the notes stored in the day
+         * @return Vector
+         */
         public Vector getNotes() {
             if (dEl == null)
                 return null;
@@ -388,28 +483,38 @@ public class NoteListImpl implements NoteList {
             return v;
         }
 
+        /**
+         * getter that returns the main element used in the class
+         * @return Element
+         */
         public Element getElement() {
             return dEl;
         }
     }
-	
-	
-	/*
-	 * private class Day
-	 */
-	 
-	private class NoteElement {
+
+    /**
+     * private class to hold the note data
+     */
+    private class NoteElement {
 		Element nEl;
-		
+
+        /**
+         * Constructor that sets the inputted element to the class element.
+         * @param el Element
+         */
 		public NoteElement(Element el) {
 			nEl = el;
 		}
-		
+
+        /**
+         * returns the main element
+         * @return Element
+         */
 		public Element getElement() {
 			return nEl;
 		}
 	}
-	
+
     /**
      * @see main.java.memoranda.NoteList#getXMLContent()
      */

@@ -1,28 +1,22 @@
-/**
- * NoteImpl.java
- * Created on 13.02.2003, 15:36:55 Alex
- * Package: net.sf.memoranda
- * 
- * @author Alex V. Alishevskikh, alex@openmechanics.net
- * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
- */
 package main.java.memoranda;
 
 import main.java.memoranda.date.CalendarDate;
 import nu.xom.Attribute;
 import nu.xom.Element;
 
-/**
- * 
- */
 /*$Id: NoteImpl.java,v 1.6 2004/10/06 19:15:44 ivanrise Exp $*/
+/**
+ * Class that implements the note interface.
+ */
 public class NoteImpl implements Note, Comparable {
     
     private Element _el = null; 
     private Project _project;
-    
+
     /**
-     * Constructor for NoteImpl.
+     * Constructor that creates the note element.
+     * @param el XML element to hold the note information
+     * @param project Project object
      */
     public NoteImpl(Element el, Project project) {
         _el = el;
@@ -36,18 +30,19 @@ public class NoteImpl implements Note, Comparable {
 		Element day = (Element)_el.getParent();
 		Element month = (Element)day.getParent();
 		Element year = (Element)month.getParent();
-
-     //   return new CalendarDate(day.getAttribute("date").getValue());
-		
-		return new CalendarDate(new Integer(day.getAttribute("day").getValue()).intValue(), 
-								new Integer(month.getAttribute("month").getValue()).intValue(),
-								new Integer(year.getAttribute("year").getValue()).intValue());
+		return new CalendarDate(Integer.parseInt(day.getAttribute("day").getValue()),
+                Integer.parseInt(month.getAttribute("month").getValue()),
+                Integer.parseInt(year.getAttribute("year").getValue()));
 
     }
-    
+
+    /**
+     * @see main.java.memoranda.Note#getProject()
+     */
     public Project getProject() {
         return _project;
     }
+
     /**
      * @see main.java.memoranda.Note#getTitle()
      */
@@ -56,6 +51,7 @@ public class NoteImpl implements Note, Comparable {
         if (ta == null) return "";
         return _el.getAttribute("title").getValue();
     }
+
     /**
      * @see main.java.memoranda.Note#setTitle(java.lang.String)
      */
@@ -69,7 +65,6 @@ public class NoteImpl implements Note, Comparable {
 	/**
      * @see main.java.memoranda.Note#getId
      */
-	
 	public String getId() {
 		Attribute id = _el.getAttribute("refid");
 		if (id==null) return "";
@@ -79,17 +74,18 @@ public class NoteImpl implements Note, Comparable {
 	/**
      * @see main.java.memoranda.Note#setId(java.lang.String)
      */
-	 
 	public void setId(String s) {
 		Attribute id = _el.getAttribute("refid");
 		if(id==null) _el.addAttribute(new Attribute("refid", s));
 	}
+
     /**
      * @see main.java.memoranda.Note#isMarked()
      */
     public boolean isMarked() {
         return _el.getAttribute("bookmark") != null;        
     }
+
     /**
      * @see main.java.memoranda.Note#setMark(boolean)
      */
@@ -103,10 +99,12 @@ public class NoteImpl implements Note, Comparable {
         else if (!mark)
             _el.removeAttribute(ma);
     }
-	
-	/*
-	 * Comparable interface
-	 */
+
+    /**
+     * Comparable interface
+     * @param o Object
+     * @return int
+     */
 	public int compareTo(Object o) {
 		Note note = (Note) o;
 		if(getDate().getDate().getTime() > note.getDate().getDate().getTime())
