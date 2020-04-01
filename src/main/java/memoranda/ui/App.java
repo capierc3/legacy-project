@@ -150,17 +150,18 @@ public class App {
 	 */
 	private void showSplash() {
 		splash = new JFrame();
+		//Splash image goes here//
 		ImageIcon spl =
-			new ImageIcon(App.class.getResource("/ui/splash.png"));
+			new ImageIcon(App.class.getResource("/ui/kaese-splash.png"));
 		JLabel l = new JLabel();
-		l.setSize(400, 300);
+		l.setSize(400, 300);	// what is this size for, exactly? doesn't seem to affect splash size
 		l.setIcon(spl);
 		splash.getContentPane().add(l);
-		splash.setSize(400, 300);
+		splash.setSize(363, 420);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		splash.setLocation(
-			(screenSize.width - 400) / 2,
-			(screenSize.height - 300) / 2);
+			(screenSize.width - 363) / 2,
+			(screenSize.height - 420) / 2);
 		splash.setUndecorated(true);
 		splash.setVisible(true);
 	}
