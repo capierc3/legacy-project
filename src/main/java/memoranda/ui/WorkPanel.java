@@ -62,6 +62,9 @@ public class WorkPanel extends JPanel {
 	
 	// ResourcesPanel
 	public JButton resources = new JButton();
+	
+	
+	public JButton notesB = new JButton();
 
 	
 	JButton currentB = null;
@@ -408,6 +411,34 @@ public class WorkPanel extends JPanel {
 		resources.setOpaque(false);
 		resources.setMaximumSize(new Dimension(100, 100));
 		resources.setBackground(Color.white);
+		
+		notesB.setFont(new java.awt.Font("Dialog", 1, 10));
+		notesB.setBackground(Color.white);
+		notesB.setBorder(null);
+		notesB.setMaximumSize(new Dimension(100, 100));
+		notesB.setMinimumSize(new Dimension(100, 100));
+		notesB.setOpaque(false);
+		notesB.setPreferredSize(new Dimension(100, 100));
+		notesB.setBorderPainted(false);
+		notesB.setContentAreaFilled(false);
+		notesB.setFocusPainted(false);
+		notesB.setHorizontalTextPosition(SwingConstants.CENTER);
+		notesB.setText(Local.getString("Notes"));
+		notesB.setVerticalAlignment(SwingConstants.TOP);
+		notesB.setVerticalTextPosition(SwingConstants.BOTTOM);
+		notesB.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				notesB_actionPerformed(e);
+			}
+		});
+		notesB.setIcon(
+			new ImageIcon(
+				main.java.memoranda.ui.AppFrame.class.getResource(
+					"/ui/icons/notes.png")));
+		notesB.setMargin(new Insets(0, 0, 0, 0));
+		notesB.setSelected(true);
+		
+		
 	
 
 		// Add buttons to panel
@@ -415,6 +446,7 @@ public class WorkPanel extends JPanel {
 		this.add(panel, BorderLayout.CENTER);
 		panel.add(dailyItemsPanel, "DAILYITEMS");
 		panel.add(filesPanel, "FILES");
+		toolBar.add(notesB, null);
 		toolBar.add(myStuff, null);
 		toolBar.add(myCalendar, null);
 		toolBar.add(upcomingClasses, null);
@@ -422,6 +454,7 @@ public class WorkPanel extends JPanel {
 		toolBar.add(roomInfo, null);
 		toolBar.add(bookTrainer, null);
 		toolBar.add(resources, null);
+		
 		currentB = myStuff;
 		// Default blue color
 		currentB.setBackground(new Color(215, 225, 250));
@@ -452,7 +485,10 @@ public class WorkPanel extends JPanel {
 	} */
 	public void selectPanel(String pan) {
 		if (pan != null) {
-			if (pan.equals("TASKS"))
+			if (pan.equals("NOTES"))
+				notesB_actionPerformed(null);
+			
+			else if (pan.equals("TASKS"))
 				myCalendar_actionPerformed(null);
 			else if (pan.equals("EVENTS"))
 				upcomingClasses_actionPerformed(null);
@@ -472,6 +508,13 @@ public class WorkPanel extends JPanel {
 		dailyItemsPanel.selectPanel("AGENDA");
 		setCurrentButton(myStuff);
 		Context.put("CURRENT_PANEL", "AGENDA");
+	}
+	
+	public void notesB_actionPerformed(ActionEvent e) {
+		cardLayout1.show(panel, "DAILYITEMS");
+		dailyItemsPanel.selectPanel("NOTES");
+		setCurrentButton(notesB);
+		Context.put("CURRENT_PANEL", "NOTES");
 	}
 
 	public void myCalendar_actionPerformed(ActionEvent e) {
