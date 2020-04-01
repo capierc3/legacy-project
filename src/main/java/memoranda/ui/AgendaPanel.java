@@ -83,16 +83,16 @@ public class AgendaPanel extends JPanel {
 			public void hyperlinkUpdate(HyperlinkEvent e) {
 				if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
 					String d = e.getDescription();
-					if (d.equalsIgnoreCase("memoranda:events"))
+					if (d.equalsIgnoreCase("kaesekuchen:events"))
 						parentPanel.alarmB_actionPerformed(null);
-					else if (d.startsWith("memoranda:tasks")) {
+					else if (d.startsWith("kaesekuchen:tasks")) {
 						String id = d.split("#")[1];
 						CurrentProject.set(ProjectManager.getProject(id));
 						//parentPanel.taskB_actionPerformed(null);
-					} else if (d.startsWith("memoranda:project")) {
+					} else if (d.startsWith("kaesekuchen:project")) {
 						String id = d.split("#")[1];
 						CurrentProject.set(ProjectManager.getProject(id));
-					} else if (d.startsWith("memoranda:removesticker")) {
+					} else if (d.startsWith("kaesekuchen:removesticker")) {
                         String id = d.split("#")[1];
                         StickerConfirmation stc = new StickerConfirmation(App.getFrame());
                         Dimension frmSize = App.getFrame().getSize();
@@ -107,7 +107,7 @@ public class AgendaPanel extends JPanel {
                         EventsManager.removeSticker(id);
                         CurrentStorage.get().storeEventsManager();}
                         refresh(CurrentDate.get());
-					} else if (d.startsWith("memoranda:addsticker")) {
+					} else if (d.startsWith("kaesekuchen:addsticker")) {
 						StickerDialog dlg = new StickerDialog(App.getFrame());
 						Dimension frmSize = App.getFrame().getSize();
 						dlg.setSize(new Dimension(300,380));
@@ -127,17 +127,17 @@ public class AgendaPanel extends JPanel {
 						}
 						refresh(CurrentDate.get());
 						System.out.println("Added a sticker");
-					} else if (d.startsWith("memoranda:expandsubtasks")) {
+					} else if (d.startsWith("kaesekuchen:expandsubtasks")) {
 						String id = d.split("#")[1];
 						gotoTask = id;
 						expandedTasks.add(id);
 						refresh(CurrentDate.get());
-					} else if (d.startsWith("memoranda:closesubtasks")) {
+					} else if (d.startsWith("kaesekuchen:closesubtasks")) {
 						String id = d.split("#")[1];
 						gotoTask = id;
 						expandedTasks.remove(id);
 						refresh(CurrentDate.get());
-					} else if (d.startsWith("memoranda:expandsticker")) {
+					} else if (d.startsWith("kaesekuchen:expandsticker")) {
 						String id = d.split("#")[1];
 						Element pre_sticker=(Element)((Map)EventsManager.getStickers()).get(id);
 						String sticker = pre_sticker.getValue();
@@ -159,7 +159,7 @@ public class AgendaPanel extends JPanel {
 								+ loc.y);
 						dlg.stickerText.setText(sticker);
 						dlg.setVisible(true);
-					}else if (d.startsWith("memoranda:editsticker")) {
+					}else if (d.startsWith("kaesekuchen:editsticker")) {
 						String id = d.split("#")[1];
 						Element pre_sticker=(Element)((Map)EventsManager.getStickers()).get(id);
 						String sticker = pre_sticker.getValue();
@@ -191,19 +191,19 @@ public class AgendaPanel extends JPanel {
 							CurrentStorage.get().storeEventsManager();
 						 }
 						 refresh(CurrentDate.get());
-					}else if (d.startsWith("memoranda:exportstickerst")) {
+					}else if (d.startsWith("kaesekuchen:exportstickerst")) {
 						 /*  Meanwhile, need to add the export sticker..*/
 						 final JFrame parent = new JFrame();
 						 String name = JOptionPane.showInputDialog(parent,Local.getString("Enter name of file to export"),null);
 						 new ExportSticker(name).export("txt");
 						 //JOptionPane.showMessageDialog(null,name);
-					}else if (d.startsWith("memoranda:exportstickersh")) {
+					}else if (d.startsWith("kaesekuchen:exportstickersh")) {
 						 /*  Still need to add the export sticker in the meantime..*/
 						 final JFrame parent = new JFrame();
 						 String name = JOptionPane.showInputDialog(parent,Local.getString("Enter name of file to export"),null);
 						 new ExportSticker(name).export("html");
 						 //JOptionPane.showMessageDialog(null,name);
-					}else if (d.startsWith("memoranda:importstickers")) {
+					}else if (d.startsWith("kaesekuchen:importstickers")) {
 						final JFrame parent = new JFrame();
 						String name = JOptionPane.showInputDialog(parent,Local.getString("Enter name of file to import"),null);
 						new ImportSticker(name).import_file();
