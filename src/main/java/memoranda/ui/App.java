@@ -146,6 +146,8 @@ public class App {
 	}
 
 	public static void minimizeWindow(){
+		if (frame == null)
+			return;
 
 	}
 
