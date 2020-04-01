@@ -255,7 +255,7 @@ public class WorkPanel extends JPanel {
 		myStuff.setSelected(true);
 
 		
-		myCalendar.setSelected(true);
+		myCalendar.setSelected(false);
 		myCalendar.setFont(new java.awt.Font("Dialog", 1, 10));
 		myCalendar.setMargin(new Insets(0, 0, 0, 0));
 		myCalendar.setIcon(
@@ -307,7 +307,7 @@ public class WorkPanel extends JPanel {
 		upcomingClasses.setOpaque(false);
 		upcomingClasses.setMargin(new Insets(0, 0, 0, 0));
 		
-		trainerProfiles.setSelected(true);
+		trainerProfiles.setSelected(false);
 		trainerProfiles.setMargin(new Insets(0, 0, 0, 0));
 		trainerProfiles.setIcon(
 			new ImageIcon(
@@ -333,7 +333,7 @@ public class WorkPanel extends JPanel {
 		trainerProfiles.setBackground(Color.white);	
 		
 
-		roomInfo.setSelected(true);
+		roomInfo.setSelected(false);
 		roomInfo.setMargin(new Insets(0, 0, 0, 0));
 		roomInfo.setIcon(
 			new ImageIcon(
@@ -387,7 +387,6 @@ public class WorkPanel extends JPanel {
 
 		this.setPreferredSize(new Dimension(1073, 300));
 
-		resources.setSelected(true);
 		resources.setMargin(new Insets(0, 0, 0, 0));
 		resources.setIcon(
 			new ImageIcon(
@@ -411,6 +410,7 @@ public class WorkPanel extends JPanel {
 		resources.setOpaque(false);
 		resources.setMaximumSize(new Dimension(100, 100));
 		resources.setBackground(Color.white);
+		resources.setSelected(false);
 		
 		notesB.setFont(new java.awt.Font("Dialog", 1, 10));
 		notesB.setBackground(Color.white);
@@ -436,7 +436,7 @@ public class WorkPanel extends JPanel {
 				main.java.memoranda.ui.AppFrame.class.getResource(
 					"/ui/icons/notes.png")));
 		notesB.setMargin(new Insets(0, 0, 0, 0));
-		notesB.setSelected(true);
+		notesB.setSelected(false);
 		
 		
 	
@@ -551,7 +551,7 @@ public class WorkPanel extends JPanel {
 	
 	public void resources_actionPerformed(ActionEvent e) {
 		cardLayout1.show(panel, "FILES");
-		setCurrentButton(resources);
+		setCurrentButton(myStuff);
 		Context.put("CURRENT_PANEL", "FILES");
 	}
 
