@@ -249,7 +249,7 @@ public class WorkPanel extends JPanel {
 		myStuff.setIcon(
 			new ImageIcon(
 				main.java.memoranda.ui.AppFrame.class.getResource(
-					"/ui/icons/agenda.png")));
+					"/ui/icons/personal_info.png")));
 		myStuff.setOpaque(false);
 		myStuff.setMargin(new Insets(0, 0, 0, 0));
 		myStuff.setSelected(true);
@@ -312,7 +312,7 @@ public class WorkPanel extends JPanel {
 		trainerProfiles.setIcon(
 			new ImageIcon(
 				main.java.memoranda.ui.AppFrame.class.getResource(
-					"/ui/icons/files.png")));
+					"/ui/icons/trainer-profiles.png")));
 		trainerProfiles.setVerticalTextPosition(SwingConstants.BOTTOM);
 		trainerProfiles.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -338,7 +338,7 @@ public class WorkPanel extends JPanel {
 		roomInfo.setIcon(
 			new ImageIcon(
 				main.java.memoranda.ui.AppFrame.class.getResource(
-					"/ui/icons/files.png")));
+					"/ui/icons/room.png")));
 		roomInfo.setVerticalTextPosition(SwingConstants.BOTTOM);
 		roomInfo.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -381,7 +381,7 @@ public class WorkPanel extends JPanel {
 		bookTrainer.setIcon(
 			new ImageIcon(
 				main.java.memoranda.ui.AppFrame.class.getResource(
-					"/ui/icons/events.png")));
+					"/ui/icons/agenda.png")));
 		bookTrainer.setOpaque(false);
 		bookTrainer.setMargin(new Insets(0, 0, 0, 0));	
 
@@ -391,7 +391,7 @@ public class WorkPanel extends JPanel {
 		resources.setIcon(
 			new ImageIcon(
 				main.java.memoranda.ui.AppFrame.class.getResource(
-					"/ui/icons/files.png")));
+					"/ui/icons/notes.png")));
 		resources.setVerticalTextPosition(SwingConstants.BOTTOM);
 		resources.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
