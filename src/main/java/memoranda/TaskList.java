@@ -1,44 +1,71 @@
-/**
- * TaskList.java
- * Created on 21.02.2003, 12:25:16 Alex
- * Package: net.sf.memoranda
- * 
- * @author Alex V. Alishevskikh, alex@openmechanics.net
- * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
- */
 package main.java.memoranda;
 import java.util.Collection;
 
 import main.java.memoranda.date.CalendarDate;
-/**
- * 
- */
 /*$Id: TaskList.java,v 1.8 2005/12/01 08:12:26 alexeya Exp $*/
+/**
+ * Interface to be used for the TaskList
+ */
 public interface TaskList {
 
+    /**
+     * getter that returns the task's project
+     * @return Project
+     */
 	Project getProject();
+
+    /**
+     * getter that returns a Task biased on an inputted ID
+     * @param id String
+     * @return Task
+     */
     Task getTask(String id);
 
+    /**
+     * creates a new task object with inputted values
+     * @param startDate CalendarDate
+     * @param endDate CalendarDate
+     * @param text String
+     * @param priority int
+     * @param effort int
+     * @param description String
+     * @param parentTaskId String
+     * @return Task
+     */
     Task createTask(CalendarDate startDate, CalendarDate endDate, String text, int priority, long effort, String description, String parentTaskId);
 
+    /**
+     * removes a task from the list
+     * @param task
+     */
     void removeTask(Task task);
 
-    public boolean hasSubTasks(String id);
-    
-	public boolean hasParentTask(String id);
+    /**
+     * boolean to show if there is subtasks within a task
+     * @param id String
+     * @return boolean
+     */
+    boolean hasSubTasks(String id);
 
-	public Collection getTopLevelTasks();
+    /**
+     * boolean to show if a task is a subtask of a parent
+     * @param id String
+     * @return boolean
+     */
+	boolean hasParentTask(String id);
+
+	Collection getTopLevelTasks();
 	
-    public Collection getAllSubTasks(String taskId);
-    public Collection getActiveSubTasks(String taskId,CalendarDate date);
+    Collection getAllSubTasks(String taskId);
+    Collection getActiveSubTasks(String taskId,CalendarDate date);
     
-//    public void adjustParentTasks(Task t);
-    
-    public long calculateTotalEffortFromSubTasks(Task t);
-    public CalendarDate getLatestEndDateFromSubTasks(Task t);
-    public CalendarDate getEarliestStartDateFromSubTasks(Task t);
-    public long[] calculateCompletionFromSubTasks(Task t);
+
+    long calculateTotalEffortFromSubTasks(Task t);
+    CalendarDate getLatestEndDateFromSubTasks(Task t);
+    CalendarDate getEarliestStartDateFromSubTasks(Task t);
+    long[] calculateCompletionFromSubTasks(Task t);
 
     nu.xom.Document getXMLContent();
 
+//    public void adjustParentTasks(Task t);
 }

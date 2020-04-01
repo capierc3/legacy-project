@@ -1,11 +1,3 @@
-/**
- * TaskListImpl.java
- * Created on 21.02.2003, 12:29:54 Alex
- * Package: net.sf.memoranda
- * 
- * @author Alex V. Alishevskikh, alex@openmechanics.net
- * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
- */
 package main.java.memoranda;
 
 import java.util.Collection;
@@ -20,15 +12,11 @@ import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Elements;
 import nu.xom.Node;
-import nu.xom.Nodes;
-//import nu.xom.converters.*;
-//import org.apache.xerces.dom.*;
-//import nux.xom.xquery.XQueryUtil;
 
-/**
- * 
- */
 /*$Id: TaskListImpl.java,v 1.14 2006/07/03 11:59:19 alexeya Exp $*/
+/**
+ * Class that implements the TaskList class
+ */
 public class TaskListImpl implements TaskList {
 
     private Project _project = null;
@@ -40,9 +28,11 @@ public class TaskListImpl implements TaskList {
 	 * (ID => element) 
 	 */
 	private Hashtable elements = new Hashtable();
-    
+
     /**
-     * Constructor for TaskListImpl.
+     * Constructor for the TaskListImpl with an existing document
+     * @param doc Document
+     * @param prj Project
      */
     public TaskListImpl(Document doc, Project prj) {
         _doc = doc;
@@ -50,18 +40,25 @@ public class TaskListImpl implements TaskList {
         _project = prj;
 		buildElements(_root);
     }
-    
+
+    /**
+     * Constructor for the TaskListImpl without an existing document
+     * @param prj Project
+     */
     public TaskListImpl(Project prj) {            
             _root = new Element("tasklist");
             _doc = new Document(_root);
             _project = prj;
     }
-    
+
+    /**
+     * @see TaskList#getProject()
+     */
 	public Project getProject() {
 		return _project;
 	}
 		
-	/*
+	/**
 	 * Build the hashtable recursively
 	 */
 	private void buildElements(Element parent) {
@@ -136,9 +133,7 @@ public class TaskListImpl implements TaskList {
         return new TaskImpl(el, this);
     }
 	
-	/**
-     * @see net.sf.memoranda.TaskList#removeTask(import net.sf.memoranda.Task)
-     */
+
 
     public void removeTask(Task task) {
         String parentTaskId = task.getParentId();
@@ -329,7 +324,11 @@ public class TaskListImpl implements TaskList {
 		}
 		return el;
     }
-    
+
+    /**
+     * gets all the task from the _root element.
+     * @return
+     */
     private Collection getAllRootTasks() {
         Elements tasks = _root.getChildElements("task");
         return convertToTaskObjects(tasks);    	    		
