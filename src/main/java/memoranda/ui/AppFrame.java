@@ -993,7 +993,7 @@ public class AppFrame extends JFrame {
                             notesName.put(id,name);
                     }
                     System.out.println("id: "+id+" name: "+name);
-                    
+
                     Elements contlist = body.getChildElements("a");
                     for(int i = 0;i<(contlist.size()-1);i++){
                             item = contlist.get(i);
