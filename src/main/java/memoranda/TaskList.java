@@ -54,9 +54,20 @@ public interface TaskList {
      */
 	boolean hasParentTask(String id);
 
+    /**
+     * getter for only the root tasks
+     * @return Collection
+     */
 	Collection getTopLevelTasks();
-	
+
+    /**
+     * getter that returns all sub task of an inputted task id
+     * @param taskId String
+     * @return Collection
+     */
     Collection getAllSubTasks(String taskId);
+
+
     Collection getActiveSubTasks(String taskId,CalendarDate date);
     
 
