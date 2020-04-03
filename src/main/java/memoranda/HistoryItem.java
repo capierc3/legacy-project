@@ -25,20 +25,37 @@ public class HistoryItem {
         _date = date;
         _project = project;
     }
-    
+
+    /**
+     * Constructor for HistoryItem based on Note passed in
+     * @param note
+     */
     public HistoryItem(Note note) {
         _date = note.getDate();
         _project = note.getProject();
     }
-    
+
+    /**
+     * Method to return the current Date tied to the HistoryItem
+     * @return CalendarDate
+     */
     public CalendarDate getDate() {
        return _date;
     }
-    
+
+    /**
+     * Method to return the current Project tied to the HistoryItem
+     * @return Project
+     */
     public Project getProject() {
        return _project;
     }
-    
+
+    /**
+     * Method that compares HistoryItem
+     * @param i
+     * @return boolean
+     */
     public boolean equals(HistoryItem i) {
        return i.getDate().equals(_date) && i.getProject().getID().equals(_project.getID());
     } 

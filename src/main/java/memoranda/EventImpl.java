@@ -140,7 +140,12 @@ public class EventImpl implements Event, Comparable {
         if (a != null && a.getValue().equals("true")) return true;
         return false;
 	}
-	
+
+    /**
+     * Method to compare object to event
+     * @param o
+     * @return int
+     */
 	public int compareTo(Object o) {
 		Event event = (Event) o;
 		return (getHour() * 60 + getMinute()) - (event.getHour() * 60 + event.getMinute());

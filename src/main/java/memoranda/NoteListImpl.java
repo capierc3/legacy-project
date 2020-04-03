@@ -38,6 +38,10 @@ public class NoteListImpl implements NoteList {
         _project = prj;
     }
 
+    /**
+     * Constructor for implementing NoteList based on project passed in
+     * @param prj
+     */
     public NoteListImpl(Project prj) {
     	
         //_root = new Element("noteslist", NS_JNNL);
@@ -46,6 +50,10 @@ public class NoteListImpl implements NoteList {
         _project = prj;    
     }
 
+    /**
+     * Method that returns the Collection of all Notes
+     * @return Collection
+     */
     public Collection getAllNotes() {
         Vector v = new Vector();
         Elements yrs = _root.getChildElements("year");
@@ -94,6 +102,12 @@ public class NoteListImpl implements NoteList {
 	        return v;
 	}
 
+    /**
+     * Method that returns Collection of Notes during a specific time period
+     * @param startDate
+     * @param endDate
+     * @return Collection
+     */
     public Collection getNotesForPeriod(CalendarDate startDate, CalendarDate endDate) {
         Vector v = new Vector();
         Elements yrs = _root.getChildElements("year");
@@ -144,6 +158,11 @@ public class NoteListImpl implements NoteList {
         //return new NoteImpl(d.getElement(), _project);
     }
 
+    /**
+     * Method that creates a Note for the CalendarDate date passed in and returns the Note
+     * @param date
+     * @return Note
+     */
     public Note createNoteForDate(CalendarDate date) {
         Year y = getYear(date.getYear());
         if (y == null)
@@ -167,6 +186,12 @@ public class NoteListImpl implements NoteList {
         d.getElement().getParent().removeChild(d.getElement());             
     }
 */
+
+    /**
+     * Method that removes Note for the CalendarDate and Id passed in
+     * @param date
+     * @param id
+     */
 	 public void removeNote(CalendarDate date, String id) {
         Day d = getDay(date);
         if (d == null) return;
@@ -178,13 +203,22 @@ public class NoteListImpl implements NoteList {
 		}
 //		CurrentNote.set(null);
     }
-	
+
+    /**
+     * Method that gets and returns the current Active Note
+     * @return Note
+     */
     public Note getActiveNote() {
         //return CurrentNote.get(); 
     	return getNoteForDate(CurrentDate.get());
     	// FIXED: Must return the first note for today [alexeya]
     }
 
+    /**
+     * Method that returns the Year based on the int value y passed in
+     * @param y
+     * @return Year
+     */
     private Year getYear(int y) {
         Elements yrs = _root.getChildElements("year");
         String yy = new Integer(y).toString();
@@ -195,6 +229,11 @@ public class NoteListImpl implements NoteList {
         return null;
     }
 
+    /**
+     * Method that creates and returns a Year based on the int y passed in
+     * @param y
+     * @return Year
+     */
     private Year createYear(int y) {
         Element el = new Element("year");
         el.addAttribute(new Attribute("year", new Integer(y).toString()));
@@ -210,6 +249,12 @@ public class NoteListImpl implements NoteList {
         return v;
     }
 */
+
+    /**
+     * Method that returns the Day based on the CalendarDate date passed in
+     * @param date
+     * @return Day
+     */
     private Day getDay(CalendarDate date) {
         Year y = getYear(date.getYear());
         if (y == null)
@@ -220,17 +265,33 @@ public class NoteListImpl implements NoteList {
         return m.getDay(date.getDay());
     }
 
+    /**
+     * Inner Year class
+     */
     private class Year {
         Element yearElement = null;
 
+        /**
+         * Constructor for Year and sets current Year to Element el passed in
+         * @param el
+         */
         public Year(Element el) {
             yearElement = el;
         }
 
+        /**
+         * Method that returns the int value of the current Year
+         * @return int
+         */
         public int getValue() {
             return new Integer(yearElement.getAttribute("year").getValue()).intValue();
         }
 
+        /**
+         * Method that returns the Month tied to the current Year
+         * @param m
+         * @return Month
+         */
         public Month getMonth(int m) {
             Elements ms = yearElement.getChildElements("month");
             String mm = new Integer(m).toString();
@@ -241,6 +302,11 @@ public class NoteListImpl implements NoteList {
             return null;
         }
 
+        /**
+         * Method to create and return a Month object based on the int m passed in, and ties to current Year
+         * @param m
+         * @return Month
+         */
         private Month createMonth(int m) {
             Element el = new Element("month");
             el.addAttribute(new Attribute("month", new Integer(m).toString()));
@@ -248,6 +314,10 @@ public class NoteListImpl implements NoteList {
             return new Month(el);
         }
 
+        /**
+         * Method to return Vector of Months of the current Year
+         * @return
+         */
         public Vector getMonths() {
             Vector v = new Vector();
             Elements ms = yearElement.getChildElements("month");
@@ -256,23 +326,43 @@ public class NoteListImpl implements NoteList {
             return v;
         }
 
+        /**
+         * Method to return current Year
+         * @return Element
+         */
         public Element getElement() {
             return yearElement;
         }
 
     }
 
+    /**
+     * Inner Month class
+     */
     private class Month {
         Element mElement = null;
 
+        /**
+         * Constructor that sets the current Month to the Element el passed in
+         * @param el
+         */
         public Month(Element el) {
             mElement = el;
         }
 
+        /**
+         * Method that returns an int value of the current Month
+         * @return int
+         */
         public int getValue() {
             return new Integer(mElement.getAttribute("month").getValue()).intValue();
         }
 
+        /**
+         * Method that gets and returns the Day of the current Month based on the int d passed in
+         * @param d
+         * @return Day
+         */
         public Day getDay(int d) {
             if (mElement == null)
                 return null;
@@ -285,6 +375,11 @@ public class NoteListImpl implements NoteList {
             return null;
         }
 
+        /**
+         * Method that creates and returns a Day object tied to the current Month based on the int d passed in
+         * @param d
+         * @return Day
+         */
         private Day createDay(int d) {
             Element el = new Element("day");
             el.addAttribute(new Attribute("day", new Integer(d).toString()));
@@ -301,6 +396,10 @@ public class NoteListImpl implements NoteList {
             return new Day(el);
         }
 
+        /**
+         * Method that gets the Vector of Days tied to current Month
+         * @return Vector
+         */
         public Vector getDays() {
             if (mElement == null)
                 return null;
@@ -311,6 +410,10 @@ public class NoteListImpl implements NoteList {
             return v;
         }
 
+        /**
+         * Method that returns the current Month Element
+         * @return Element
+         */
         public Element getElement() {
             return mElement;
         }
@@ -318,13 +421,17 @@ public class NoteListImpl implements NoteList {
     }
 
 	
-	/*
+	/**
 	 * private class Day
 	 */
 	 
     private class Day {
         Element dEl = null;
 
+        /**
+         * Constructor to build a Day based on the Element passed in, and sets the current Day to that Element
+         * @param el
+         */
         public Day(Element el) {
             dEl = el;
             // Added to fix old '.notes' XML format 
@@ -342,6 +449,10 @@ public class NoteListImpl implements NoteList {
             }
         }
 
+        /**
+         * Method that returns the int value of the current Day
+         * @return int
+         */
         public int getValue() {
             return new Integer(dEl.getAttribute("day").getValue()).intValue();
         }
@@ -349,7 +460,12 @@ public class NoteListImpl implements NoteList {
         /*public Note getNote() {
             return new NoteImpl(dEl);
         }*/
-		
+
+        /**
+         * Method that gets and returns the NoteElement from the current day based on String d passed in
+         * @param d
+         * @return NoteElement
+         */
 		public NoteElement getNote(String d) {
             if (dEl == null) 
 				return null;
@@ -362,6 +478,11 @@ public class NoteListImpl implements NoteList {
             return null;
         }
 
+        /**
+         * Method that creates and returns a NoteElement from String d passed in
+         * @param d
+         * @return NoteElement
+         */
         public NoteElement createNote(String d) {
             Element el = new Element("note");
 //			el.addAttribute(new Attribute("refid", d));
@@ -378,6 +499,10 @@ public class NoteListImpl implements NoteList {
             return new NoteElement(el);
         }
 
+        /**
+         * Method returns Vector of Notes tied to the current Day
+         * @return Vector
+         */
         public Vector getNotes() {
             if (dEl == null)
                 return null;
@@ -388,6 +513,10 @@ public class NoteListImpl implements NoteList {
             return v;
         }
 
+        /**
+         * Method that returns the current Day Element
+         * @return Element
+         */
         public Element getElement() {
             return dEl;
         }

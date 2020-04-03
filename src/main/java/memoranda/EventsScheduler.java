@@ -24,10 +24,16 @@ public class EventsScheduler {
 
     static Timer changeDateTimer = new Timer();
 
+    /**
+     * Initializer to add DefaultEventNotifier Listener
+     */
     static {
         addListener(new DefaultEventNotifier());            
     }
 
+    /**
+     * Method to initialize EventsScheduler
+     */
     public static void init() {
         cancelAll();
         //changeDateTimer.cancel();
@@ -57,20 +63,31 @@ public class EventsScheduler {
         notifyChanged();
     }
 
+    /**
+     * Method to remove all of the EventTimer from the _timers Vector
+     */
     public static void cancelAll() {
         for (int i = 0; i < _timers.size(); i++) {
             EventTimer t = (EventTimer)_timers.get(i);
             t.cancel();
         }
     }
-    
+
+    /**
+     * Method that returns a Vector of Scheduled Events
+     * @return Vector
+     */
     public static Vector getScheduledEvents() {
         Vector v = new Vector();
         for (int i = 0; i < _timers.size(); i++) 
             v.add(((EventTimer)_timers.get(i)).getEvent());
         return v;
     }
-    
+
+    /**
+     * Method that returns the first ScheduledEvent from the Events Vector
+     * @return Event
+     */
     public static Event getFirstScheduledEvent() {
         if (!isEventScheduled()) return null;
         Event e1 = ((EventTimer)_timers.get(0)).getEvent();
@@ -81,26 +98,44 @@ public class EventsScheduler {
         }
         return e1;
     }
-            
 
+    /**
+     * Method that adds an EventNotificationListener to the Vector of _listeners
+     * @param enl
+     */
     public static void addListener(EventNotificationListener enl) {
         _listeners.add(enl);
     }
 
+    /**
+     * Method that returns a boolean based on if any Events are scheduled
+     * @return boolean
+     */
     public static boolean isEventScheduled() {
         return _timers.size() > 0;
     }
-        
+
+    /**
+     * Method to notify EventNotificationListeners if the event has occurred
+     * @param ev
+     */
     private static void notifyListeners(Event ev) {
         for (int i = 0; i < _listeners.size(); i++)
             ((EventNotificationListener)_listeners.get(i)).eventIsOccured(ev);
     }
 
+    /**
+     * Method that notifies the EventNotificationListeners that the event has changed
+     */
     private static void notifyChanged() {
         for (int i = 0; i < _listeners.size(); i++)
             ((EventNotificationListener)_listeners.get(i)).eventsChanged();
     }
 
+    /**
+     * Method that returns Date at midnight
+     * @return Date
+     */
     private static Date getMidnight() {
        Calendar cal = Calendar.getInstance();
        cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -111,15 +146,25 @@ public class EventsScheduler {
        return cal.getTime();
     }
 
+    /**
+     * Inner NotifyTask class that extends TimerTask
+     */
     static class NotifyTask extends TimerTask {
         
         EventTimer _timer;
 
+        /**
+         * Method that creates NotifyTask based on EventTimer t passed in and sets current timer to NotifyTask
+         * @param t
+         */
         public NotifyTask(EventTimer t) {
             super();            
             _timer = t;
         }
-        
+
+        /**
+         * Method that runs the timer.
+         */
         public void run() {            
             _timer.cancel();
             _timers.remove(_timer);
@@ -127,15 +172,26 @@ public class EventsScheduler {
             notifyChanged();
         }
     }
-    
+
+    /**
+     * Inner EventTimer class
+     */
     static class EventTimer extends Timer {
         Event _event;
-        
+
+        /**
+         * Method to create an EventTimer based on Event ev passed in, and sets current Event to ev
+         * @param ev
+         */
         public EventTimer(Event ev) {
             super();
             _event = ev;
         }
-        
+
+        /**
+         * Method that returns the current Event
+         * @return Event
+         */
         public Event getEvent() {
             return _event;
         }

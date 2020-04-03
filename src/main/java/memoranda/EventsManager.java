@@ -44,6 +44,9 @@ public class EventsManager {
 	public static Document _doc = null;
 	static Element _root = null;
 
+	/**
+	 * Initializing Events Manager root and document
+	 */
 	static {
 		CurrentStorage.get().openEventsManager();
 		if (_doc == null) {
@@ -57,6 +60,11 @@ public class EventsManager {
 
 	}
 
+	/**
+	 * Method to create a sticker for the Event, and settings id and priority
+	 * @param text
+	 * @param prior
+	 */
 	public static void createSticker(String text, int prior) {
 		Element el = new Element("sticker");
 		el.addAttribute(new Attribute("id", Util.generateId()));
@@ -64,6 +72,11 @@ public class EventsManager {
 		el.appendChild(text);
 		_root.appendChild(el);
 	}
+
+	/**
+	 * Method that returns a Map of Id and Stickers
+	 * @return Map
+	 */
 
 	@SuppressWarnings("unchecked")
 	public static Map getStickers() {
@@ -76,6 +89,10 @@ public class EventsManager {
 		return m;
 	}
 
+	/**
+	 * Method to remove a sticker from the event
+	 * @param stickerId
+	 */
 	public static void removeSticker(String stickerId) {
 		Elements els = _root.getChildElements("sticker");
 		for (int i = 0; i < els.size(); i++) {
@@ -87,6 +104,11 @@ public class EventsManager {
 		}
 	}
 
+	/**
+	 * Method checks to see if there is an event on that date
+	 * @param date
+	 * @return boolean
+	 */
 	public static boolean isNREventsForDate(CalendarDate date) {
 		Day d = getDay(date);
 		if (d == null)
@@ -96,6 +118,11 @@ public class EventsManager {
 		return false;
 	}
 
+	/**
+	 * Method that returns collection of Events for the date passed in
+	 * @param date
+	 * @return Collection
+	 */
 	public static Collection getEventsForDate(CalendarDate date) {
 		Vector v = new Vector();
 		Day d = getDay(date);
@@ -112,6 +139,14 @@ public class EventsManager {
 		return v;
 	}
 
+	/**
+	 * Method that creates an Event and returns the created one-time event
+	 * @param date
+	 * @param hh
+	 * @param mm
+	 * @param text
+	 * @return Event
+	 */
 	public static Event createEvent(
 		CalendarDate date,
 		int hh,
@@ -129,6 +164,18 @@ public class EventsManager {
 		return new EventImpl(el);
 	}
 
+	/**
+	 * Method that creates a repeatable note and returns that Event
+	 * @param type
+	 * @param startDate
+	 * @param endDate
+	 * @param period
+	 * @param hh
+	 * @param mm
+	 * @param text
+	 * @param workDays
+	 * @return Event
+	 */
 	public static Event createRepeatableEvent(
 		int type,
 		CalendarDate startDate,
@@ -159,6 +206,10 @@ public class EventsManager {
 		return new EventImpl(el);
 	}
 
+	/**
+	 * Method to get the Collection of Repeatable Events
+	 * @return Collection
+	 */
 	public static Collection getRepeatableEvents() {
 		Vector v = new Vector();
 		Element rep = _root.getFirstChildElement("repeatable");
@@ -170,6 +221,11 @@ public class EventsManager {
 		return v;
 	}
 
+	/**
+	 * Method to get the Collection of Repeatable Events for the date passed in
+	 * @param date
+	 * @return Collection
+	 */
 	public static Collection getRepeatableEventsForDate(CalendarDate date) {
 		Vector reps = (Vector) getRepeatableEvents();
 		Vector v = new Vector();
@@ -220,10 +276,21 @@ public class EventsManager {
 		return v;
 	}
 
+	/**
+	 * Method to return Collection of Active Events
+	 * @return
+	 */
 	public static Collection getActiveEvents() {
 		return getEventsForDate(CalendarDate.today());
 	}
 
+	/**
+	 * Method that returns the Event for the date, hour, and minute passed in
+	 * @param date
+	 * @param hh
+	 * @param mm
+	 * @return
+	 */
 	public static Event getEvent(CalendarDate date, int hh, int mm) {
 		Day d = getDay(date);
 		if (d == null)
@@ -240,17 +307,32 @@ public class EventsManager {
 		return null;
 	}
 
+	/**
+	 * Method to remove Event from Calendar based on date, hour, and minute passed in
+	 * @param date
+	 * @param hh
+	 * @param mm
+	 */
 	public static void removeEvent(CalendarDate date, int hh, int mm) {
 		Day d = getDay(date);
 		if (d == null)
 			d.getElement().removeChild(getEvent(date, hh, mm).getContent());
 	}
 
+	/**
+	 * Method to remove Event based on Event passed in
+	 * @param ev
+	 */
 	public static void removeEvent(Event ev) {
 		ParentNode parent = ev.getContent().getParent();
 		parent.removeChild(ev.getContent());
 	}
 
+	/**
+	 * Method that creates and returns a Day from the CalendarDate passed in
+	 * @param date
+	 * @return Day
+	 */
 	private static Day createDay(CalendarDate date) {
 		Year y = getYear(date.getYear());
 		if (y == null)
@@ -264,6 +346,11 @@ public class EventsManager {
 		return d;
 	}
 
+	/**
+	 * Method that returns a Year that is created by the int y passed in
+	 * @param y
+	 * @return Year
+	 */
 	private static Year createYear(int y) {
 		Element el = new Element("year");
 		el.addAttribute(new Attribute("year", new Integer(y).toString()));
@@ -271,6 +358,11 @@ public class EventsManager {
 		return new Year(el);
 	}
 
+	/**
+	 * Method to gets the Year based on the int y passed in, and returns the Year
+	 * @param y
+	 * @return Year
+	 */
 	private static Year getYear(int y) {
 		Elements yrs = _root.getChildElements("year");
 		String yy = new Integer(y).toString();
@@ -281,6 +373,11 @@ public class EventsManager {
 		return null;
 	}
 
+	/**
+	 * Method to get the Day based on CalendarDate date passed in
+	 * @param date
+	 * @return Day
+	 */
 	private static Day getDay(CalendarDate date) {
 		Year y = getYear(date.getYear());
 		if (y == null)
@@ -291,6 +388,9 @@ public class EventsManager {
 		return m.getDay(date.getDay());
 	}
 
+	/**
+	 * Initializing inner Year class
+	 */
 	static class Year {
 		Element yearElement = null;
 
@@ -298,11 +398,20 @@ public class EventsManager {
 			yearElement = el;
 		}
 
+		/**
+		 * Method to get the int value for the current Year
+		 * @return int
+		 */
 		public int getValue() {
 			return new Integer(yearElement.getAttribute("year").getValue())
 				.intValue();
 		}
 
+		/**
+		 * Method to return Month based on the int m passed in tied to the current Year
+		 * @param m
+		 * @return Month
+		 */
 		public Month getMonth(int m) {
 			Elements ms = yearElement.getChildElements("month");
 			String mm = new Integer(m).toString();
@@ -313,6 +422,12 @@ public class EventsManager {
 			return null;
 		}
 
+		/**
+		 * Method that creates and returns a Month created based on the int m passed in and
+		 * ties to current Year
+		 * @param m
+		 * @return Month
+		 */
 		private Month createMonth(int m) {
 			Element el = new Element("month");
 			el.addAttribute(new Attribute("month", new Integer(m).toString()));
@@ -320,6 +435,10 @@ public class EventsManager {
 			return new Month(el);
 		}
 
+		/**
+		 * Method that gets and returns a Vector of Months in the current Year
+		 * @return Vector
+		 */
 		public Vector getMonths() {
 			Vector v = new Vector();
 			Elements ms = yearElement.getChildElements("month");
@@ -328,24 +447,44 @@ public class EventsManager {
 			return v;
 		}
 
+		/**
+		 * Method that gets and returns the current Year Element
+		 * @return Element
+		 */
 		public Element getElement() {
 			return yearElement;
 		}
 
 	}
 
+	/**
+	 * Inner Month class for Event
+	 */
 	static class Month {
 		Element mElement = null;
 
+		/**
+		 * Contructor that creates and sets current Month based on Element passed in
+		 * @param el
+		 */
 		public Month(Element el) {
 			mElement = el;
 		}
 
+		/**
+		 * Method that returns the int value of the current Month element
+		 * @return int
+		 */
 		public int getValue() {
 			return new Integer(mElement.getAttribute("month").getValue())
 				.intValue();
 		}
 
+		/**
+		 * Method that returns the Day tied to the current Month based on the int d value for the Day
+		 * @param d
+		 * @return Day
+		 */
 		public Day getDay(int d) {
 			if (mElement == null)
 				return null;
@@ -358,6 +497,11 @@ public class EventsManager {
 			return null;
 		}
 
+		/**
+		 * Method to creates and returns a Day object and ties to the current Month
+		 * @param d
+		 * @return Day
+		 */
 		private Day createDay(int d) {
 			Element el = new Element("day");
 			el.addAttribute(new Attribute("day", new Integer(d).toString()));
@@ -378,6 +522,10 @@ public class EventsManager {
 			return new Day(el);
 		}
 
+		/**
+		 * Method to return Vector of days related to the current Month
+		 * @return Vector
+		 */
 		public Vector getDays() {
 			if (mElement == null)
 				return null;
@@ -388,19 +536,34 @@ public class EventsManager {
 			return v;
 		}
 
+		/**
+		 * Method to return the current Month element
+		 * @return Element
+		 */
 		public Element getElement() {
 			return mElement;
 		}
 
 	}
 
+	/**
+	 * Inner Day class
+	 */
 	static class Day {
 		Element dEl = null;
 
+		/**
+		 * Constructor that creates the current day to the Element el passed in
+		 * @param el
+		 */
 		public Day(Element el) {
 			dEl = el;
 		}
 
+		/**
+		 * Method to gets the int value for the current Day
+		 * @return int
+		 */
 		public int getValue() {
 			return new Integer(dEl.getAttribute("day").getValue()).intValue();
 		}
@@ -409,6 +572,10 @@ public class EventsManager {
 		 * public Note getNote() { return new NoteImpl(dEl);
 		 */
 
+		/**
+		 * Method that returns the current Day element
+		 * @return Element
+		 */
 		public Element getElement() {
 			return dEl;
 		}
