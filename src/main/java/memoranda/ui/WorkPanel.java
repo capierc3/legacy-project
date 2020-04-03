@@ -249,13 +249,13 @@ public class WorkPanel extends JPanel {
 		myStuff.setIcon(
 			new ImageIcon(
 				main.java.memoranda.ui.AppFrame.class.getResource(
-					"/ui/icons/agenda.png")));
+					"/ui/icons/personal_info.png")));
 		myStuff.setOpaque(false);
 		myStuff.setMargin(new Insets(0, 0, 0, 0));
 		myStuff.setSelected(true);
 
 		
-		myCalendar.setSelected(true);
+		myCalendar.setSelected(false);
 		myCalendar.setFont(new java.awt.Font("Dialog", 1, 10));
 		myCalendar.setMargin(new Insets(0, 0, 0, 0));
 		myCalendar.setIcon(
@@ -307,12 +307,12 @@ public class WorkPanel extends JPanel {
 		upcomingClasses.setOpaque(false);
 		upcomingClasses.setMargin(new Insets(0, 0, 0, 0));
 		
-		trainerProfiles.setSelected(true);
+		trainerProfiles.setSelected(false);
 		trainerProfiles.setMargin(new Insets(0, 0, 0, 0));
 		trainerProfiles.setIcon(
 			new ImageIcon(
 				main.java.memoranda.ui.AppFrame.class.getResource(
-					"/ui/icons/files.png")));
+					"/ui/icons/trainer-profiles.png")));
 		trainerProfiles.setVerticalTextPosition(SwingConstants.BOTTOM);
 		trainerProfiles.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -333,12 +333,12 @@ public class WorkPanel extends JPanel {
 		trainerProfiles.setBackground(Color.white);	
 		
 
-		roomInfo.setSelected(true);
+		roomInfo.setSelected(false);
 		roomInfo.setMargin(new Insets(0, 0, 0, 0));
 		roomInfo.setIcon(
 			new ImageIcon(
 				main.java.memoranda.ui.AppFrame.class.getResource(
-					"/ui/icons/files.png")));
+					"/ui/icons/room.png")));
 		roomInfo.setVerticalTextPosition(SwingConstants.BOTTOM);
 		roomInfo.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -381,18 +381,17 @@ public class WorkPanel extends JPanel {
 		bookTrainer.setIcon(
 			new ImageIcon(
 				main.java.memoranda.ui.AppFrame.class.getResource(
-					"/ui/icons/events.png")));
+					"/ui/icons/agenda.png")));
 		bookTrainer.setOpaque(false);
 		bookTrainer.setMargin(new Insets(0, 0, 0, 0));	
 
 		this.setPreferredSize(new Dimension(1073, 300));
 
-		resources.setSelected(true);
 		resources.setMargin(new Insets(0, 0, 0, 0));
 		resources.setIcon(
 			new ImageIcon(
 				main.java.memoranda.ui.AppFrame.class.getResource(
-					"/ui/icons/files.png")));
+					"/ui/icons/notes.png")));
 		resources.setVerticalTextPosition(SwingConstants.BOTTOM);
 		resources.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -411,6 +410,7 @@ public class WorkPanel extends JPanel {
 		resources.setOpaque(false);
 		resources.setMaximumSize(new Dimension(100, 100));
 		resources.setBackground(Color.white);
+		resources.setSelected(false);
 		
 		notesB.setFont(new java.awt.Font("Dialog", 1, 10));
 		notesB.setBackground(Color.white);
@@ -436,7 +436,7 @@ public class WorkPanel extends JPanel {
 				main.java.memoranda.ui.AppFrame.class.getResource(
 					"/ui/icons/notes.png")));
 		notesB.setMargin(new Insets(0, 0, 0, 0));
-		notesB.setSelected(true);
+		notesB.setSelected(false);
 		
 		
 	
@@ -551,7 +551,7 @@ public class WorkPanel extends JPanel {
 	
 	public void resources_actionPerformed(ActionEvent e) {
 		cardLayout1.show(panel, "FILES");
-		setCurrentButton(resources);
+		setCurrentButton(myStuff);
 		Context.put("CURRENT_PANEL", "FILES");
 	}
 
