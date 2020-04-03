@@ -1,10 +1,3 @@
-/**
- * EventsManager.java Created on 08.03.2003, 12:35:19 Alex Package:
- * net.sf.memoranda
- * 
- * @author Alex V. Alishevskikh, alex@openmechanics.net Copyright (c) 2003
- *         Memoranda Team. http://memoranda.sf.net
- */
 package main.java.memoranda;
 
 import java.util.ArrayList;
@@ -27,10 +20,10 @@ import nu.xom.Element;
 import nu.xom.Elements;
 import nu.xom.ParentNode;
 
-/**
- *  
- */
 /*$Id: EventsManager.java,v 1.11 2004/10/06 16:00:11 ivanrise Exp $*/
+/**
+ * Event manager class
+ */
 public class EventsManager {
 /*	public static final String NS_JNEVENTS =
 		"http://www.openmechanics.org/2003/jnotes-events-file";
@@ -48,15 +41,17 @@ public class EventsManager {
 		CurrentStorage.get().openEventsManager();
 		if (_doc == null) {
 			_root = new Element("eventslist");
-/*			_root.addNamespaceDeclaration("jnevents", NS_JNEVENTS);
-			_root.appendChild(
-				new Comment("This is JNotes 2 data file. Do not modify.")); */
 			_doc = new Document(_root);
 		} else
 			_root = _doc.getRootElement();
 
 	}
 
+	/**
+	 * creates a sticker and adds it to root
+	 * @param text String
+	 * @param prior int
+	 */
 	public static void createSticker(String text, int prior) {
 		Element el = new Element("sticker");
 		el.addAttribute(new Attribute("id", Util.generateId()));
@@ -65,7 +60,10 @@ public class EventsManager {
 		_root.appendChild(el);
 	}
 
-	@SuppressWarnings("unchecked")
+	/**
+	 * gets a hashmap of all the stickers
+	 * @return HashMap
+	 */
 	public static Map getStickers() {
 		Map m = new HashMap();
 		Elements els = _root.getChildElements("sticker");
@@ -76,6 +74,10 @@ public class EventsManager {
 		return m;
 	}
 
+	/**
+	 * removes a sticker
+	 * @param stickerId String
+	 */
 	public static void removeSticker(String stickerId) {
 		Elements els = _root.getChildElements("sticker");
 		for (int i = 0; i < els.size(); i++) {
@@ -87,15 +89,23 @@ public class EventsManager {
 		}
 	}
 
+	/**
+	 * find if there is an event on a given day
+	 * @param date CalendarDate
+	 * @return boolean
+	 */
 	public static boolean isNREventsForDate(CalendarDate date) {
 		Day d = getDay(date);
 		if (d == null)
 			return false;
-		if (d.getElement().getChildElements("event").size() > 0)
-			return true;
-		return false;
+		return d.getElement().getChildElements("event").size() > 0;
 	}
 
+	/**
+	 * returns all events for a given date
+	 * @param date CalendarDate
+	 * @return Vector
+	 */
 	public static Collection getEventsForDate(CalendarDate date) {
 		Vector v = new Vector();
 		Day d = getDay(date);
@@ -107,16 +117,19 @@ public class EventsManager {
 		Collection r = getRepeatableEventsForDate(date);
 		if (r.size() > 0)
 			v.addAll(r);
-		//EventsVectorSorter.sort(v);
 		Collections.sort(v);
 		return v;
 	}
 
-	public static Event createEvent(
-		CalendarDate date,
-		int hh,
-		int mm,
-		String text) {
+	/**
+	 * creates a new event Object with inputted information
+	 * @param date CalendarDate
+	 * @param hh int
+	 * @param mm int
+	 * @param text String
+	 * @return Event
+	 */
+	public static Event createEvent(CalendarDate date, int hh, int mm, String text) {
 		Element el = new Element("event");
 		el.addAttribute(new Attribute("id", Util.generateId()));
 		el.addAttribute(new Attribute("hour", String.valueOf(hh)));
@@ -129,15 +142,20 @@ public class EventsManager {
 		return new EventImpl(el);
 	}
 
+	/**
+	 * creates a repeatable event with given information
+	 * @param type int
+	 * @param startDate CalendarDate
+	 * @param endDate CalendarDate
+	 * @param period int
+	 * @param hh int
+	 * @param mm int
+	 * @param text String
+	 * @param workDays boolean
+	 * @return Event
+	 */
 	public static Event createRepeatableEvent(
-		int type,
-		CalendarDate startDate,
-		CalendarDate endDate,
-		int period,
-		int hh,
-		int mm,
-		String text,
-		boolean workDays) {
+		int type, CalendarDate startDate, CalendarDate endDate, int period, int hh, int mm, String text, boolean workDays) {
 		Element el = new Element("event");
 		Element rep = _root.getFirstChildElement("repeatable");
 		if (rep == null) {
@@ -159,6 +177,10 @@ public class EventsManager {
 		return new EventImpl(el);
 	}
 
+	/**
+	 * Returns a vector of all repeatable events
+	 * @return Vector
+	 */
 	public static Collection getRepeatableEvents() {
 		Vector v = new Vector();
 		Element rep = _root.getFirstChildElement("repeatable");
@@ -170,16 +192,20 @@ public class EventsManager {
 		return v;
 	}
 
+	/**
+	 * gets all repeatable events that happen on a certain date
+	 * @param date CalenderDate
+	 * @return Vector
+	 */
 	public static Collection getRepeatableEventsForDate(CalendarDate date) {
 		Vector reps = (Vector) getRepeatableEvents();
 		Vector v = new Vector();
-		for (int i = 0; i < reps.size(); i++) {
-			Event ev = (Event) reps.get(i);
-			
+		for (Object rep : reps) {
+			Event ev = (Event) rep;
 			// --- ivanrise
 			// ignore this event if it's a 'only working days' event and today is weekend.
-			if(ev.getWorkingDays() && (date.getCalendar().get(Calendar.DAY_OF_WEEK) == 1 ||
-				date.getCalendar().get(Calendar.DAY_OF_WEEK) == 7)) continue;
+			if (ev.getWorkingDays() && (date.getCalendar().get(Calendar.DAY_OF_WEEK) == 1 ||
+					date.getCalendar().get(Calendar.DAY_OF_WEEK) == 7)) continue;
 			// ---
 			/*
 			 * /if ( ((date.after(ev.getStartDate())) &&
@@ -192,24 +218,24 @@ public class EventsManager {
 				if (ev.getRepeat() == REPEAT_DAILY) {
 					int n = date.getCalendar().get(Calendar.DAY_OF_YEAR);
 					int ns =
-						ev.getStartDate().getCalendar().get(
-							Calendar.DAY_OF_YEAR);
+							ev.getStartDate().getCalendar().get(
+									Calendar.DAY_OF_YEAR);
 					//System.out.println((n - ns) % ev.getPeriod());
 					if ((n - ns) % ev.getPeriod() == 0)
 						v.add(ev);
 				} else if (ev.getRepeat() == REPEAT_WEEKLY) {
 					if (date.getCalendar().get(Calendar.DAY_OF_WEEK)
-						== ev.getPeriod())
+							== ev.getPeriod())
 						v.add(ev);
 				} else if (ev.getRepeat() == REPEAT_MONTHLY) {
 					if (date.getCalendar().get(Calendar.DAY_OF_MONTH)
-						== ev.getPeriod())
+							== ev.getPeriod())
 						v.add(ev);
 				} else if (ev.getRepeat() == REPEAT_YEARLY) {
 					int period = ev.getPeriod();
 					//System.out.println(date.getCalendar().get(Calendar.DAY_OF_YEAR));
 					if ((date.getYear() % 4) == 0
-						&& date.getCalendar().get(Calendar.DAY_OF_YEAR) > 60)
+							&& date.getCalendar().get(Calendar.DAY_OF_YEAR) > 60)
 						period++;
 
 					if (date.getCalendar().get(Calendar.DAY_OF_YEAR) == period)
@@ -220,10 +246,21 @@ public class EventsManager {
 		return v;
 	}
 
+	/**
+	 * gets all events currently happening
+	 * @return Collection
+	 */
 	public static Collection getActiveEvents() {
 		return getEventsForDate(CalendarDate.today());
 	}
 
+	/**
+	 * Returns an event that happens on inputted date and time, if exists
+	 * @param date CalenderDate
+	 * @param hh int
+	 * @param mm int
+	 * @return Event
+	 */
 	public static Event getEvent(CalendarDate date, int hh, int mm) {
 		Day d = getDay(date);
 		if (d == null)
@@ -231,25 +268,37 @@ public class EventsManager {
 		Elements els = d.getElement().getChildElements("event");
 		for (int i = 0; i < els.size(); i++) {
 			Element el = els.get(i);
-			if ((new Integer(el.getAttribute("hour").getValue()).intValue()
+			if ((Integer.parseInt(el.getAttribute("hour").getValue())
 				== hh)
-				&& (new Integer(el.getAttribute("min").getValue()).intValue()
+				&& (Integer.parseInt(el.getAttribute("min").getValue())
 					== mm))
 				return new EventImpl(el);
 		}
 		return null;
 	}
 
+	/**
+	 * removes a date on specified date and time, if exists.
+	 * @param date CalendarDate
+	 * @param hh int
+	 * @param mm int
+	 */
 	public static void removeEvent(CalendarDate date, int hh, int mm) {
 		Day d = getDay(date);
 		if (d == null)
 			d.getElement().removeChild(getEvent(date, hh, mm).getContent());
 	}
 
+	/**
+	 * removes an event.
+	 * @param ev Event
+	 */
 	public static void removeEvent(Event ev) {
 		ParentNode parent = ev.getContent().getParent();
 		parent.removeChild(ev.getContent());
 	}
+
+	//year, month, and day class just like Notes has. Should just turn into its own classes.
 
 	private static Day createDay(CalendarDate date) {
 		Year y = getYear(date.getYear());
@@ -402,7 +451,7 @@ public class EventsManager {
 		}
 
 		public int getValue() {
-			return new Integer(dEl.getAttribute("day").getValue()).intValue();
+			return Integer.parseInt(dEl.getAttribute("day").getValue());
 		}
 
 		/*
