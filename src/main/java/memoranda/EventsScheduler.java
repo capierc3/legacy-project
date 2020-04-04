@@ -16,6 +16,9 @@ public class EventsScheduler {
 
     static Timer changeDateTimer = new Timer();
 
+    /**
+     * Initializer to add DefaultEventNotifier Listener
+     */
     static {
         addListener(new DefaultEventNotifier());            
     }
@@ -64,7 +67,7 @@ public class EventsScheduler {
     }
 
     /**
-     * method that returns a vector of all scheduled events
+     * method that returns a vector of all scheduled events\
      * @return Vector
      */
     public static Vector getScheduledEvents() {
@@ -134,15 +137,25 @@ public class EventsScheduler {
     }
 
     //Nested classes where IntelliJ can't find any uses.
+    /**
+     * Inner NotifyTask class that extends TimerTask
+     */
     static class NotifyTask extends TimerTask {
         
         EventTimer _timer;
 
+        /**
+         * Method that creates NotifyTask based on EventTimer t passed in and sets current timer to NotifyTask
+         * @param t
+         */
         public NotifyTask(EventTimer t) {
             super();            
             _timer = t;
         }
-        
+
+        /**
+         * Method that runs the timer.
+         */
         public void run() {            
             _timer.cancel();
             _timers.remove(_timer);
@@ -150,15 +163,26 @@ public class EventsScheduler {
             notifyChanged();
         }
     }
-    
+
+    /**
+     * Inner EventTimer class
+     */
     static class EventTimer extends Timer {
         Event _event;
-        
+
+        /**
+         * Method to create an EventTimer based on Event ev passed in, and sets current Event to ev
+         * @param ev
+         */
         public EventTimer(Event ev) {
             super();
             _event = ev;
         }
-        
+
+        /**
+         * Method that returns the current Event
+         * @return Event
+         */
         public Event getEvent() {
             return _event;
         }
