@@ -50,7 +50,8 @@ public class EventDialog extends JDialog implements WindowListener {
     public JLabel header = new JLabel();
     JPanel eventPanel = new JPanel(new GridBagLayout());
     GridBagConstraints gbc;
-    JLabel lblTime = new JLabel();
+    JLabel lblStTime = new JLabel();
+    JLabel lblEdTime = new JLabel();
     public JSpinner timeSpin = new JSpinner(new SpinnerDateModel(new Date(), null, null, Calendar.MINUTE));
     JLabel lblText = new JLabel();
     public JTextField textField = new JTextField();
@@ -100,26 +101,33 @@ public class EventDialog extends JDialog implements WindowListener {
         headerPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
         header.setFont(new java.awt.Font("Dialog", 0, 20));
         header.setForeground(new Color(0, 0, 124));
-        header.setText(Local.getString("Event"));
+        header.setText(Local.getString("Class"));
         header.setIcon(new ImageIcon(main.java.memoranda.ui.EventDialog.class.getResource(
-            "/ui/icons/event48.png")));
+            "/ui/icons/events.png")));
         headerPanel.add(header);
         
         // Build eventPanel
-        lblTime.setText(Local.getString("Time"));
-        lblTime.setMinimumSize(new Dimension(60, 24));
+        lblStTime.setText(Local.getString("Start Time"));
+        lblStTime.setMinimumSize(new Dimension(60, 24));
+        lblEdTime.setText(Local.getString("End Time"));
+        lblEdTime.setMinimumSize(new Dimension(60, 24));
         gbc = new GridBagConstraints();
         gbc.gridx = 0; gbc.gridy = 0;
         gbc.insets = new Insets(10, 10, 5, 10);
         gbc.anchor = GridBagConstraints.WEST;
-        eventPanel.add(lblTime, gbc);
+        eventPanel.add(lblStTime, gbc);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 3; gbc.gridy = 0;
+        gbc.insets = new Insets(10, 10, 5, 10);
+        gbc.anchor = GridBagConstraints.WEST;
+        eventPanel.add(lblEdTime,gbc);
         timeSpin.setPreferredSize(new Dimension(60, 24));
         gbc = new GridBagConstraints();
         gbc.gridx = 1; gbc.gridy = 0;
         gbc.insets = new Insets(10, 0, 5, 0);
         gbc.anchor = GridBagConstraints.WEST;
         eventPanel.add(timeSpin, gbc);
-        lblText.setText(Local.getString("Text"));
+        lblText.setText(Local.getString("Name"));
         lblText.setMinimumSize(new Dimension(120, 24));
         gbc = new GridBagConstraints();
         gbc.gridx = 0; gbc.gridy = 1;

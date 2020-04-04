@@ -89,7 +89,7 @@ public class EventsPanel extends JPanel {
         newEventB.setEnabled(true);
         newEventB.setMaximumSize(new Dimension(24, 24));
         newEventB.setMinimumSize(new Dimension(24, 24));
-        newEventB.setToolTipText(Local.getString("New event"));
+        newEventB.setToolTipText(Local.getString("New Class"));
         newEventB.setRequestFocusEnabled(false);
         newEventB.setPreferredSize(new Dimension(24, 24));
         newEventB.setFocusable(false);
@@ -109,7 +109,7 @@ public class EventsPanel extends JPanel {
         });
         editEventB.setPreferredSize(new Dimension(24, 24));
         editEventB.setRequestFocusEnabled(false);
-        editEventB.setToolTipText(Local.getString("Edit event"));
+        editEventB.setToolTipText(Local.getString("Edit Class"));
         editEventB.setMinimumSize(new Dimension(24, 24));
         editEventB.setMaximumSize(new Dimension(24, 24));
         editEventB.setEnabled(true);
@@ -125,7 +125,7 @@ public class EventsPanel extends JPanel {
         });
         removeEventB.setPreferredSize(new Dimension(24, 24));
         removeEventB.setRequestFocusEnabled(false);
-        removeEventB.setToolTipText(Local.getString("Remove event"));
+        removeEventB.setToolTipText(Local.getString("Remove Class"));
         removeEventB.setMinimumSize(new Dimension(24, 24));
         removeEventB.setMaximumSize(new Dimension(24, 24));
         removeEventB.setIcon(
@@ -137,7 +137,7 @@ public class EventsPanel extends JPanel {
         eventsTable.setRowHeight(24);
         eventPPMenu.setFont(new java.awt.Font("Dialog", 1, 10));
         ppEditEvent.setFont(new java.awt.Font("Dialog", 1, 11));
-        ppEditEvent.setText(Local.getString("Edit event") + "...");
+        ppEditEvent.setText(Local.getString("Edit Class") + "...");
         ppEditEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ppEditEvent_actionPerformed(e);
@@ -147,7 +147,7 @@ public class EventsPanel extends JPanel {
         ppEditEvent.setIcon(
             new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_edit.png")));
         ppRemoveEvent.setFont(new java.awt.Font("Dialog", 1, 11));
-        ppRemoveEvent.setText(Local.getString("Remove event"));
+        ppRemoveEvent.setText(Local.getString("Remove Class"));
         ppRemoveEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ppRemoveEvent_actionPerformed(e);
@@ -157,7 +157,7 @@ public class EventsPanel extends JPanel {
             new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_remove.png")));
         ppRemoveEvent.setEnabled(false);
         ppNewEvent.setFont(new java.awt.Font("Dialog", 1, 11));
-        ppNewEvent.setText(Local.getString("New event") + "...");
+        ppNewEvent.setText(Local.getString("New Class") + "...");
         ppNewEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ppNewEvent_actionPerformed(e);
@@ -231,7 +231,7 @@ public class EventsPanel extends JPanel {
                 EventsTable.EVENT);
         
         dlg.timeSpin.getModel().setValue(ev.getTime());
-        /*if (new CalendarDate(ev.getTime()).equals(CalendarDate.today())) 
+        /*if (new CalendarDate(ev.getTime()).equals(CalendarDate.today()))
             ((SpinnerDateModel)dlg.timeSpin.getModel()).setStart(new Date());
         else
         ((SpinnerDateModel)dlg.timeSpin.getModel()).setStart(CalendarDate.today().getDate());
@@ -314,7 +314,7 @@ public class EventsPanel extends JPanel {
     }
     
     void newEventB_actionPerformed(ActionEvent e, String tasktext, Date startDate, Date endDate) {
-    	EventDialog dlg = new EventDialog(App.getFrame(), Local.getString("New event"));
+    	EventDialog dlg = new EventDialog(App.getFrame(), Local.getString("New Class"));
     	Dimension frmSize = App.getFrame().getSize();
     	Point loc = App.getFrame().getLocation();
     	if (tasktext != null) {
@@ -402,7 +402,7 @@ public class EventsPanel extends JPanel {
 			ev = (main.java.memoranda.Event) eventsTable.getModel().getValueAt(
                 eventsTable.getSelectedRow(),
                 EventsTable.EVENT);
-			msg = Local.getString("Remove event") + "\n'" 
+			msg = Local.getString("Remove Class") + "\n'"
 				+ ev.getText() + "'\n" + Local.getString("Are you sure?");
 		}
 
@@ -410,7 +410,7 @@ public class EventsPanel extends JPanel {
             JOptionPane.showConfirmDialog(
                 App.getFrame(),
                 msg,
-                Local.getString("Remove event"),
+                Local.getString("Remove Class"),
                 JOptionPane.YES_NO_OPTION);
         if (n != JOptionPane.YES_OPTION) return;
 
