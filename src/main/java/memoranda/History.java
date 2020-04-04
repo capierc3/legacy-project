@@ -22,7 +22,7 @@ import javax.swing.KeyStroke;
 
 import main.java.memoranda.util.Local;
 /**
- * 
+ *
  */
 /*$Id: History.java,v 1.7 2006/10/31 15:34:14 hglas Exp $*/
 public class History {
