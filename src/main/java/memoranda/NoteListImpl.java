@@ -330,7 +330,7 @@ public class NoteListImpl implements NoteList {
     private class Month {
         Element mElement = null;
 
-        /**
+        /**]
          * Constructor that sets the month element to the inputted element
          * @param el Element
          */
@@ -340,7 +340,7 @@ public class NoteListImpl implements NoteList {
 
         /**
          * gets the values of the
-         * @return
+         * @return int
          */
         public int getValue() {
             return Integer.parseInt(mElement.getAttribute("month").getValue());
@@ -422,7 +422,11 @@ public class NoteListImpl implements NoteList {
         }
 
         /**
+<<<<<<< HEAD
          * getter for the int value of the Day
+=======
+         * Method that returns the int value of the current Day
+>>>>>>> US_44/comments-to-util-package
          * @return int
          */
         public int getValue() {
@@ -434,8 +438,13 @@ public class NoteListImpl implements NoteList {
         }*/
 
         /**
+<<<<<<< HEAD
          * Returns the note stored in the element
          * @param d String
+=======
+         * Method that gets and returns the NoteElement from the current day based on String d passed in
+         * @param d
+>>>>>>> US_44/comments-to-util-package
          * @return NoteElement
          */
 		public NoteElement getNote(String d) {
@@ -449,8 +458,13 @@ public class NoteListImpl implements NoteList {
         }
 
         /**
+<<<<<<< HEAD
          * Creates a note element and adds it to the day
          * @param d String
+=======
+         * Method that creates and returns a NoteElement from String d passed in
+         * @param d
+>>>>>>> US_44/comments-to-util-package
          * @return NoteElement
          */
         public NoteElement createNote(String d) {
@@ -470,7 +484,11 @@ public class NoteListImpl implements NoteList {
         }
 
         /**
+<<<<<<< HEAD
          * Getter that returns a vector of all the notes stored in the day
+=======
+         * Method returns Vector of Notes tied to the current Day
+>>>>>>> US_44/comments-to-util-package
          * @return Vector
          */
         public Vector getNotes() {
@@ -484,7 +502,11 @@ public class NoteListImpl implements NoteList {
         }
 
         /**
+<<<<<<< HEAD
          * getter that returns the main element used in the class
+=======
+         * Method that returns the current Day Element
+>>>>>>> US_44/comments-to-util-package
          * @return Element
          */
         public Element getElement() {

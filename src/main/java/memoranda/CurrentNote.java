@@ -39,7 +39,7 @@ public class CurrentNote {
 
     /**
      * Adds a new listener to the vectors
-     * @param nl NoteListener object
+     * @param nl NoteListener object]
      */
     public static void addNoteListener(NoteListener nl) {
         noteListeners.add(nl);
