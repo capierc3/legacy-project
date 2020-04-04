@@ -173,7 +173,7 @@ public class ProjectImpl implements Project {
     }
 
     /**
-     * Method to set Description for Project
+     * Method to set Description for current Project
      * @param s
      */
     public void setDescription(String s) {
