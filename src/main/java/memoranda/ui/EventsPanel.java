@@ -38,8 +38,8 @@ import main.java.memoranda.util.Util;
 /*$Id: EventsPanel.java,v 1.25 2005/02/19 10:06:25 rawsushi Exp $*/
 public class EventsPanel extends JPanel {
     BorderLayout borderLayout1 = new BorderLayout();
-    JButton historyBackB = new JButton();
     JToolBar eventsToolBar = new JToolBar();
+    JButton historyBackB = new JButton();
     JButton historyForwardB = new JButton();
     JButton newEventB = new JButton();
     JButton editEventB = new JButton();
@@ -138,31 +138,19 @@ public class EventsPanel extends JPanel {
         eventPPMenu.setFont(new java.awt.Font("Dialog", 1, 10));
         ppEditEvent.setFont(new java.awt.Font("Dialog", 1, 11));
         ppEditEvent.setText(Local.getString("Edit Class") + "...");
-        ppEditEvent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ppEditEvent_actionPerformed(e);
-            }
-        });
+        ppEditEvent.addActionListener(this::ppEditEvent_actionPerformed);
         ppEditEvent.setEnabled(false);
         ppEditEvent.setIcon(
             new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_edit.png")));
         ppRemoveEvent.setFont(new java.awt.Font("Dialog", 1, 11));
         ppRemoveEvent.setText(Local.getString("Remove Class"));
-        ppRemoveEvent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ppRemoveEvent_actionPerformed(e);
-            }
-        });
+        ppRemoveEvent.addActionListener(this::ppRemoveEvent_actionPerformed);
         ppRemoveEvent.setIcon(
             new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_remove.png")));
         ppRemoveEvent.setEnabled(false);
         ppNewEvent.setFont(new java.awt.Font("Dialog", 1, 11));
         ppNewEvent.setText(Local.getString("New Class") + "...");
-        ppNewEvent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ppNewEvent_actionPerformed(e);
-            }
-        });
+        ppNewEvent.addActionListener(this::ppNewEvent_actionPerformed);
         ppNewEvent.setIcon(
             new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_new.png")));
         scrollPane.getViewport().add(eventsTable, null);
@@ -195,14 +183,12 @@ public class EventsPanel extends JPanel {
             }
         });
 
-        eventsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent e) {
-                boolean enbl = eventsTable.getSelectedRow() > -1;
-                editEventB.setEnabled(enbl);
-                ppEditEvent.setEnabled(enbl);
-                removeEventB.setEnabled(enbl);
-                ppRemoveEvent.setEnabled(enbl);
-            }
+        eventsTable.getSelectionModel().addListSelectionListener(e -> {
+            boolean enbl = eventsTable.getSelectedRow() > -1;
+            editEventB.setEnabled(enbl);
+            ppEditEvent.setEnabled(enbl);
+            removeEventB.setEnabled(enbl);
+            ppRemoveEvent.setEnabled(enbl);
         });
         editEventB.setEnabled(false);
         removeEventB.setEnabled(false);
@@ -243,7 +229,7 @@ public class EventsPanel extends JPanel {
             if (rep == EventsManager.REPEAT_DAILY) {
                 dlg.dailyRepeatRB.setSelected(true);
                 dlg.dailyRepeatRB_actionPerformed(null);
-                dlg.daySpin.setValue(new Integer(ev.getPeriod()));
+                dlg.daySpin.setValue(ev.getPeriod());
             }
             else if (rep == EventsManager.REPEAT_WEEKLY) {
                 dlg.weeklyRepeatRB.setSelected(true);
@@ -258,7 +244,7 @@ public class EventsPanel extends JPanel {
             else if (rep == EventsManager.REPEAT_MONTHLY) {
                 dlg.monthlyRepeatRB.setSelected(true);
                 dlg.monthlyRepeatRB_actionPerformed(null);
-                dlg.dayOfMonthSpin.setValue(new Integer(ev.getPeriod()));
+                dlg.dayOfMonthSpin.setValue(ev.getPeriod());
             }
 	    else if (rep == EventsManager.REPEAT_YEARLY) {
 		dlg.yearlyRepeatRB.setSelected(true);
@@ -369,7 +355,7 @@ public class EventsPanel extends JPanel {
             ed = new CalendarDate((Date) dlg.endDate.getModel().getValue());
         if (dlg.dailyRepeatRB.isSelected()) {
             rtype = EventsManager.REPEAT_DAILY;
-            period = ((Integer) dlg.daySpin.getModel().getValue()).intValue();
+            period = (Integer) dlg.daySpin.getModel().getValue();
         }
         else if (dlg.weeklyRepeatRB.isSelected()) {
             rtype = EventsManager.REPEAT_WEEKLY;
@@ -386,7 +372,7 @@ public class EventsPanel extends JPanel {
 	}
         else {
             rtype = EventsManager.REPEAT_MONTHLY;
-            period = ((Integer) dlg.dayOfMonthSpin.getModel().getValue()).intValue();
+            period = (Integer) dlg.dayOfMonthSpin.getModel().getValue();
         }
         EventsManager.createRepeatableEvent(rtype, sd, ed, period, hh, mm, text, dlg.workingDaysOnlyCB.isSelected());
     }
