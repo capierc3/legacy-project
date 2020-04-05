@@ -28,11 +28,17 @@ public class ProjectManager {
 
     public static Document _doc = null;
     static Element _root = null;
-    
+
+    /**
+     * Initialization of ProjectManager
+     */
     static {
     	init();
     }
 
+    /**
+     * Method to initialize and open ProjectManager from CurrentStorage and set variables
+     */
     public static void init() {
         CurrentStorage.get().openProjectManager();
         if (_doc == null) {
@@ -46,6 +52,11 @@ public class ProjectManager {
             _root = _doc.getRootElement();
     }
 
+    /**
+     * Method to get a Project based on project id
+     * @param id
+     * @return Project
+     */
     public static Project getProject(String id) {
         Elements prjs = _root.getChildElements("project");
         for (int i = 0; i < prjs.size(); i++) {
@@ -57,6 +68,10 @@ public class ProjectManager {
         return null;
     }
 
+    /**
+     * Method to return a Vector of all Projects from current ProjectManager
+     * @return Vector
+     */
     public static Vector getAllProjects() {
         Elements prjs = _root.getChildElements("project");
         Vector v = new Vector();
@@ -65,6 +80,10 @@ public class ProjectManager {
         return v;
     }
 
+    /**
+     * Method to return an int with the number of Projects in ProjectManager
+     * @return int
+     */
     public static int getAllProjectsNumber() {
 		int i;
         try {
@@ -76,6 +95,10 @@ public class ProjectManager {
 		return i;
     }
 
+    /**
+     * Method to return all active Projects tied to current ProjectManager
+     * @return Vector
+     */
     public static Vector getActiveProjects() {
         Elements prjs = _root.getChildElements("project");
         Vector v = new Vector();
@@ -86,7 +109,11 @@ public class ProjectManager {
         }
         return v;
     }
-		
+
+    /**
+     * Method to return number of active Projects in current ProjectManager
+     * @return int
+     */
     public static int getActiveProjectsNumber() {
         Elements prjs = _root.getChildElements("project");
         int count = 0;
@@ -98,6 +125,15 @@ public class ProjectManager {
         return count;
     }
 
+    /**
+     * Method to create and return a Project based on parameters passed in (along with project Id), and ties it to
+     * current ProjectManager
+     * @param id
+     * @param title
+     * @param startDate
+     * @param endDate
+     * @return Project
+     */
     public static Project createProject(String id, String title, CalendarDate startDate, CalendarDate endDate) {
         Element el = new Element("project");
         el.addAttribute(new Attribute("id", id));
@@ -110,10 +146,21 @@ public class ProjectManager {
         return prj;
     }
 
+    /**
+     * Method to create and return a Project based on parameters passed in, and generates Project Id
+     * @param title
+     * @param startDate
+     * @param endDate
+     * @return Project
+     */
     public static Project createProject(String title, CalendarDate startDate, CalendarDate endDate) {
         return createProject(Util.generateId(), title, startDate, endDate);
     }
-    
+
+    /**
+     * Method to remove Project from ProjectManager and Project storage
+     * @param id
+     */
     public static void removeProject(String id) {
         Project prj = getProject(id);
         if (prj == null)

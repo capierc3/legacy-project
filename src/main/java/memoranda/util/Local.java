@@ -21,6 +21,9 @@ public class Local {
     static LoadableProperties messages = new LoadableProperties();
     static boolean disabled = false;
 
+    /**
+     * Initializer for Local configurations
+     */
     static {
     	if (!Configuration.get("DISABLE_L10N").equals("yes")) {
 	    	String fn = "messages_"
@@ -75,14 +78,25 @@ public class Local {
         /**********************/
     }
 
+    /**
+     * Method returning the Hashtable of current LoadableProperties
+     * @return Hashtable
+     */
     public static Hashtable getMessages() {
         return messages;
     }
 
+    /**
+     * Method to return the current Locale
+     * @return Locale
+     */
     public static Locale getCurrentLocale() {
         return currentLocale;
     }
 
+    /**
+     * Initializing MonthNames String[]
+     */
     static String monthnames[] =
         {
             "Jan",
@@ -101,6 +115,11 @@ public class Local {
     static String weekdaynames[] =
         { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 
+    /**
+     * Method to return String from Hashtable of LoadableProperties based on key passed in
+     * @param key
+     * @return String
+     */
     public static String getString(String key) {
         if ((messages == null) || (disabled)) {
             return key;
@@ -114,6 +133,10 @@ public class Local {
         }
     }
 
+    /**
+     * Method to get Month Names based on locale
+     * @return String[]
+     */
     public static String[] getMonthNames() {
         String[] localmonthnames = new String[12];
         for (int i = 0; i < 12; i++) {
@@ -122,6 +145,10 @@ public class Local {
         return localmonthnames;
     }
 
+    /**
+     * Method to get Weekday Names based on locale
+     * @return String[]
+     */
     public static String[] getWeekdayNames() {
         String[] localwdnames = new String[7];
         String[] localnames = weekdaynames;
@@ -143,18 +170,41 @@ public class Local {
         return localwdnames;
     }
 
+    /**
+     * Method to return the name of the Month for int passed in
+     * @param m
+     * @return String
+     */
     public static String getMonthName(int m) {
         return getString(monthnames[m]);
     }
 
+    /**
+     * Method to return the Weekday name based on int passed in
+     * @param wd
+     * @return String
+     */
     public static String getWeekdayName(int wd) {
         return getString(weekdaynames[wd - 1]);
     }
 
+    /**
+     * Method to get the Date passed in as a String
+     * @param d
+     * @param f
+     * @return String
+     */
     public static String getDateString(Date d, int f) {
         DateFormat dateFormat = DateFormat.getDateInstance(f, currentLocale);
         return dateFormat.format(d);
     }
+
+    /**
+     * Method to get the Date as String based on Calendar passed in
+     * @param cal
+     * @param f
+     * @return String
+     */
     public static String getDateString(Calendar cal, int f) {
         /*@todo: Get date string format from locale*/
         /*String s =
@@ -170,10 +220,24 @@ public class Local {
         return getDateString(cal.getTime(), f);
     }
 
+    /**
+     * Method to get Date as a String based on CalendarDate passed in
+     * @param date
+     * @param f
+     * @return String
+     */
     public static String getDateString(CalendarDate date, int f) {
         return getDateString(date.getDate(), f);
     }
 
+    /**
+     * Method to get Date as a String based on month, day, year, and format passed in
+     * @param m
+     * @param d
+     * @param y
+     * @param f
+     * @return String
+     */
     public static String getDateString(int m, int d, int y, int f) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.MONTH, m);
@@ -184,12 +248,22 @@ public class Local {
         return getDateString(cal.getTime(), f);
     }
 
+    /**
+     * Method to get Time as String based on Date passed in
+     * @param d
+     * @return String
+     */
     public static String getTimeString(Date d) {
         DateFormat dateFormat =
             DateFormat.getTimeInstance(DateFormat.SHORT, currentLocale);
         return dateFormat.format(d);
     }
 
+    /**
+     * Method to get Time as String based on Calendar passed in
+     * @param cal
+     * @return String
+     */
     public static String getTimeString(Calendar cal) {
         /*String h = String.valueOf(cal.get(Calendar.HOUR_OF_DAY));
         if (h.length() < 2) {
@@ -203,6 +277,12 @@ public class Local {
         return getTimeString(cal.getTime());
     }
 
+    /**
+     * Method to get Time as a String based on hour and minutes passed in
+     * @param hh
+     * @param mm
+     * @return String
+     */
     public static String getTimeString(int hh, int mm) {
         /*String h = String.valueOf(hh);
         if (h.length() < 2) {
@@ -219,6 +299,11 @@ public class Local {
         return getTimeString(cal.getTime());
     }
 
+    /**
+     * Method to parse Time String passed in into an int[]
+     * @param s
+     * @return int[]
+     */
     public static int[] parseTimeString(String s) {
         s = s.trim();
         String h = "";

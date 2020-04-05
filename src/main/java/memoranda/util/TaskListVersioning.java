@@ -22,20 +22,35 @@ import nu.xom.Elements;
  * Upgrades data files from older versions to new versions
  */
 public class TaskListVersioning {
-    
+    /**
+     * Initialization of VERSIONS constant
+     */
     public static final String[] VERSIONS = new String[]{
             "-//Memoranda//DTD Tasklist 1.0//EN",
             "-//Memoranda//DTD Tasklist 1.1d1//EN"
     };
 
+    /**
+     * Method to return the current Documents DocType
+     * @return DocType
+     */
     public static DocType getCurrentDocType() {
         return new DocType("tasklist",TaskListVersioning.getCurrentVersionPublicId(),"tasklist.dtd");
     }
-    
+
+    /**
+     * Method to return the Current Version
+     * @return String
+     */
     public static String getCurrentVersionPublicId() {
         return VERSIONS[VERSIONS.length - 1];
     }
-        
+
+    /**
+     * Method to return the index of current version
+     * @param publicId
+     * @return int
+     */
     public static int getIndexOfVersion(String publicId) {
         if (publicId == null) {
             // earlier versions do not have public ID, it is version 1.0 which is the first entry
@@ -49,7 +64,12 @@ public class TaskListVersioning {
         Util.debug("Version " + publicId + " not found");
         return -1;
     }
-    
+
+    /**
+     * Method to check if the TaskList needs to be upgraded based on version
+     * @param publicId
+     * @return boolean
+     */
     public static boolean upgradeTaskList(String publicId) {
         int vid = getIndexOfVersion(publicId);
         
@@ -77,7 +97,11 @@ public class TaskListVersioning {
             return true;
         }
     }
-    
+
+    /**
+     * Method to update the TaskList for the Projects for String[] passed in if the version had changed
+     * @param projectIds
+     */
     private static void upgrade1_1d1(String[] projectIds) {
         for (int i = 0; i < projectIds.length; i++) {
             Util.debug("Upgrading project " + projectIds[i] + " from version 1.0 to version 1.1d1");

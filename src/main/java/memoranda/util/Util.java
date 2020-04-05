@@ -32,7 +32,11 @@ import java.util.Random;
 public class Util {
 
 	static long seed = 0;
-	
+
+    /**
+     * Method to generate Id
+     * @return String
+     */
     public static String generateId() {
         long seed1 = System.currentTimeMillis();
         while (seed1 == seed) 
@@ -46,6 +50,11 @@ public class Util {
                     
     }
 
+    /**
+     * Method to return the DateStamp from Calendar passed in
+     * @param cal
+     * @return String
+     */
     public static String getDateStamp(Calendar cal) {
         return cal.get(Calendar.DAY_OF_MONTH)
             + "/"
@@ -55,10 +64,20 @@ public class Util {
 
     }
 
+    /**
+     * Method to return the DateStamp from a CalendarDate passed in
+     * @param date
+     * @return String
+     */
     public static String getDateStamp(CalendarDate date) {
         return Util.getDateStamp(date.getCalendar());
     }
 
+    /**
+     * Method to parse a DateStamp passed into int[] for day, month, and year
+     * @param s
+     * @return int[]
+     */
     public static int[] parseDateStamp(String s) {
         s = s.trim();
         int i1 = s.indexOf("/");
@@ -80,6 +99,10 @@ public class Util {
         return ret;*/
     }
 
+    /**
+     * Method to get the environment director
+     * @return String
+     */
     public static String getEnvDir() {
     	// Changed static building of getEnvDir
     	// Now system-related path-separator is used
@@ -90,10 +113,19 @@ public class Util {
         	+ ".memoranda" + File.separator;
     }
 
+    /**
+     * Method to get CDATA with String passed in
+     * @param s
+     * @return String
+     */
     public static String getCDATA(String s) {
       return "<![CDATA["+s+"]]>";
     }
-    
+
+    /**
+     * Method to run browser using the url string passed in
+     * @param url
+     */
     public static void runBrowser(String url) {
         if (!checkBrowser())
             return;
@@ -109,7 +141,11 @@ public class Util {
                     		"(File-&gt;Preferences-&gt;Resource types).");
         }
     }
-    
+
+    /**
+     * Method to check the browser executable
+     * @return boolean
+     */
     public static boolean checkBrowser() {
         AppList appList = MimeTypesList.getAppList();
         String bpath = appList.getBrowserExec();
@@ -130,12 +166,22 @@ public class Util {
         CurrentStorage.get().storeMimeTypesList();
         return true;
     }
-    
+
+    /**
+     * Method to convert milliseconds to hours and return a String
+     * @param ms
+     * @return String
+     */
     public static String getHoursFromMillis(long ms) {
     	double numSeconds = (((double) ms) / 1000d);
     	return String.valueOf(numSeconds / 3600);
     }
-    
+
+    /**
+     * Method to convert hours to milliseconds
+     * @param hours
+     * @return String
+     */
     public static long getMillisFromHours(String hours) {
     	try {
         	double numHours = Double.parseDouble(hours);
@@ -146,29 +192,46 @@ public class Util {
     		return 0;
     	}
     }
-    
+
     static Set tempFiles = new HashSet();
-    
+
+    /**
+     * Initializer of AppFrame and adding ExitListener
+     */
     static {
     	AppFrame.addExitListener(new ActionListener() {
 
+            /**
+             * Method to clean up when the program exits
+             * @param arg0
+             */
 			public void actionPerformed(ActionEvent arg0) {
 				for (Iterator i = tempFiles.iterator(); i.hasNext();) 
 					((File)i.next()).delete();				}
 			});
     }
-    
+
+    /**
+     * Method to get the TempFile
+     * @return File
+     * @throws IOException
+     */
     public static File getTempFile() throws IOException {
     	File f = File.createTempFile("tmp", ".html", null);
     	tempFiles.add(f);
     	return f;
     }
-    
+
+    /**
+     * Method to print line in the console a debug statement
+     * @param str
+     */
     public static void debug(String str) {
     	System.out.println("[DEBUG] " + str);
     }
 
     /**
+     * Method to print out an error in the console
      * @param e
      */
     public static void error(Exception e) {
