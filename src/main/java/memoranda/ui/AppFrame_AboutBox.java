@@ -68,30 +68,30 @@ public class AppFrame_AboutBox extends JDialog implements ActionListener {
     setSize(400, 500);
   }
   //Component initialization
-  private void jbInit() throws Exception  {    
-    String text = "<html>";
-    text += "<b>"+product+"</b><br><br>";
-    text += copyright + "<br>" + url + "<br><br>";
-    text += "<b>" + developersHead + "</b><br>";    
-    for (int i = 0; i < developers.length; i++)
-        text += developers[i]+"<br>";    
-    text += "<br><b>" + othersHead + "</b><br>";    
-    for (int i = 0; i < others.length; i++)
-        text += others[i]+"<br>"; 
-    
-    text += "</html>";
-    
-    image = new ImageIcon(AppFrame_AboutBox.class.getResource("/ui/memoranda.png"));
-    this.setTitle(Local.getString("About Memoranda"));
-    setResizable(false);
-    // Initialize Objects
-    lblText.setFont(new java.awt.Font("Dialog", 0, 11));
-    lblText.setText(text);
-    lblText.setBounds(10, 55, 300, 400);
+  private void jbInit() throws Exception  {
+      //old about text
+//    String text = "<html>";
+//    text += "<b>"+product+"</b><br><br>";
+//    text += copyright + "<br>" + url + "<br><br>";
+//    text += "<b>" + developersHead + "</b><br>";
+//    for (int i = 0; i < developers.length; i++)
+//        text += developers[i]+"<br>";
+//    text += "<br><b>" + othersHead + "</b><br>";
+//    for (int i = 0; i < others.length; i++)
+//        text += others[i]+"<br>";
+//    text += "</html>";
+      //lblText.setFont(new java.awt.Font("Dialog", 0, 11));
+      //lblText.setText(text);
+      //lblText.setBounds(10, 55, 300, 400);
+
+      image = new ImageIcon(AppFrame_AboutBox.class.getResource("/ui/kaese-splash.png"));
+      this.setTitle(Local.getString("About Kaesekuchen"));
+      setResizable(false);
+      // Initialize Objects
 
     
-    button1.setText(Local.getString("Ok"));
-    button1.setBounds(150, 415, 95, 30);
+    button1.setText(Local.getString("Grate"));
+    button1.setBounds(150, 430, 95, 30);
     button1.addActionListener(this);
     button1.setPreferredSize(new Dimension(95, 30));
     button1.setBackground(new Color(69, 125, 186));
@@ -99,10 +99,10 @@ public class AppFrame_AboutBox extends JDialog implements ActionListener {
     layeredPane = getLayeredPane();
     //layeredPane.setPreferredSize(new Dimension(300, 300));
     imgLabel = new JLabel(image);
-    imgLabel.setBounds(0, 0, image.getIconWidth(), image.getIconHeight());
-    layeredPane.add(imgLabel, new Integer(1));
-    layeredPane.add(lblText, new Integer(2));    
-    layeredPane.add(button1, new Integer(2));
+    imgLabel.setBounds(12, 10, image.getIconWidth(), image.getIconHeight());
+    layeredPane.add(imgLabel, Integer.valueOf(1));
+    layeredPane.add(lblText, Integer.valueOf(2));
+    layeredPane.add(button1, Integer.valueOf(2));
     this.getContentPane().setBackground(new Color(251, 197, 63));
   }
   //Overridden so we can exit when window is closed
