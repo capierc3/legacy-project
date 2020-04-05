@@ -256,8 +256,9 @@ public class AppFrame extends JFrame {
      * sets up all the menu items.
      */
     private void jbInit() {
+        //windows toolbar icon
         this.setIconImage(new ImageIcon(AppFrame.class.getResource(
-                "/ui/icons/jnotes16.png"))
+                "/ui/icons/agenda.png"))
                 .getImage());
         contentPane = (JPanel) this.getContentPane();
         contentPane.setLayout(borderLayout1);
@@ -285,7 +286,7 @@ public class AppFrame extends JFrame {
             }
         });
         
-        jMenuHelpWeb.setText(Local.getString("Memoranda web site"));
+        jMenuHelpWeb.setText(Local.getString("Kaesekuchen web site"));
         jMenuHelpWeb.setIcon(new ImageIcon(AppFrame.class.getResource(
                 "/ui/icons/web.png")));
         jMenuHelpWeb.addActionListener(new ActionListener() {
@@ -301,7 +302,7 @@ public class AppFrame extends JFrame {
             }
         });        
         
-        jMenuHelpAbout.setText(Local.getString("About Memoranda"));
+        jMenuHelpAbout.setText(Local.getString("About Kaesekuchen"));
         jMenuHelpAbout.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 jMenuHelpAbout_actionPerformed(e);
@@ -473,7 +474,7 @@ public class AppFrame extends JFrame {
         menuBar.add(jMenuInsert);
         menuBar.add(jMenuFormat);
         menuBar.add(jMenuGo);
-        menuBar.add(jMenuHelp);
+        //menuBar.add(jMenuHelp);
         this.setJMenuBar(menuBar);
         //contentPane.add(toolBar, BorderLayout.NORTH);
         contentPane.add(statusBar, BorderLayout.SOUTH);

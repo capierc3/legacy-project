@@ -265,7 +265,7 @@ public class WorkPanel extends JPanel {
 		myCalendar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		myCalendar.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				upcomingClasses_actionPerformed(e);
+				myCalendar_actionPerformed(e);
 			}
 		});
 		myCalendar.setVerticalAlignment(SwingConstants.TOP);
@@ -518,10 +518,14 @@ public class WorkPanel extends JPanel {
 	}
 
 	public void myCalendar_actionPerformed(ActionEvent e) {
+//		cardLayout1.show(panel, "DAILYITEMS");
+//		dailyItemsPanel.selectPanel("TASKS");
+//		setCurrentButton(myCalendar);
+//		Context.put("CURRENT_PANEL", "TASKS");
 		cardLayout1.show(panel, "DAILYITEMS");
-		dailyItemsPanel.selectPanel("TASKS");
+		dailyItemsPanel.selectPanel("EVENTS");
 		setCurrentButton(myCalendar);
-		Context.put("CURRENT_PANEL", "TASKS");
+		Context.put("CURRENT_PANEL", "EVENTS");
 	}
 
 	public void upcomingClasses_actionPerformed(ActionEvent e) {
