@@ -42,19 +42,44 @@ I would also advise you to already fill out the Contributions section (End of sp
 ### Meeting minutes of your Daily Scrums (3 per week, should not take longer than 10 minutes):
 > Add as many rows as needed and fill out the table. (Burndown starts with Sprint 2 and Travis CI starts with Sprint 3, not needed before that)
 
-| Date  | Attendees  |Minutes   | Burndown Info | TravisCI info | Additional Info  |
-|---|---|---|---|--|--|
-|   |   |   |   |  |  |
-|   |   |   |   |  |  |
-|   |   |   |   |  |  |
+| Date      | Attendees                              |Minutes                                                                             | Burndown Info | TravisCI info | Additional Info  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
+| March 26  | Justin, Nancy, Daimi, Chase, Stephen   |Sprint starts on Sunday. Everyone added user stories additions to product backlog.  |               |               |                  |
+|           |                                        |User stories selected for upcoming sprint moved from product backlog to sprint      |               |               |                  |
+|           |                                        |backlog. Everone got their branches enviornemnt set up                              |               |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
+| March 29  | Justin, Nancy, Daimi, Chase, Stephen   |Work began on  multiple user stories, including 25, 17, 18, 14, 5, 12.              |               |               |                  |
+|           |                                        |Found out a group member was withdrawing, could cause potential issue in the future.|               |               |                  |
+|           |                                        |Small issue with one person's enviornment, but looks like it got fixed.             |               |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
+| March 31  | Justin, Nancy, Daimi, Chase, Stephen   |Work continues flowing on sprint tasks from the user stories posted in last scrum.  |               |               |                  |
+|           |                                        |Some blockers appeared: workload from other courses, one member has coronavirus     |               |               |                  |
+|           |                                        |And others are just feeling the pressure of the crazy pandemic world                |               |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
+| April 2   | Justin, Nancy, Daimi, Chase, Stephen   | User stories are being completed and tested and merged into dev branch.            |               |               |                  |
+|           |                                        | Some lag due to multiple outside factors of life, but overall things are getting   |               |               |                  |
+|           |                                        | accomplished. New stories being added to product backlog. Most tasks are completed |               |               |                  |
+|           |                                        | as this sprint is nearing an end.                                                  |               |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
 
 ### Meeting Summary:
 
-> Add rows as needed and add the number how many meetings they attended:
+   Justin Oliver : 4
 
-   Name1 : Num Meetings
+   Nancy Bellinger : 4
 
-   Name2 : Num Meetings
+   Daimi Mussey : 4
+
+   Chase Pierce : 4
+
+   Stephen Wilson : 4       
 
 
 ## 3: After the Sprint
