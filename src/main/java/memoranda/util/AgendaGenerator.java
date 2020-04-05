@@ -46,6 +46,13 @@ public class AgendaGenerator {
 					+ "<tr>\n";
 	static String FOOTER = "</td></tr></table></body></html>";
 
+	/**
+	 * Method to generate details for Task based on Project, CalendarDate and Collection of Tasks passed in
+	 * @param p
+	 * @param date
+	 * @param expandedTasks
+	 * @return String
+	 */
 	static String generateTasksInfo(Project p, CalendarDate date, Collection expandedTasks) {    	    	
 		TaskList tl;
 		if (p.getID().equals(CurrentProject.get().getID())) {
@@ -97,8 +104,10 @@ public class AgendaGenerator {
 	}
 
 	/**
+	 * Private method to expand TaskList recursively for the Agenda
 	 * @param t
 	 * @param expandedTasks
+	 * @return String
 	 */
 	private static String expandRecursively(Project p,CalendarDate date, TaskList tl,Task t, Collection expandedTasks, int level) {
 		Util.debug("Expanding task " + t.getText() + " level " + level);
@@ -126,6 +135,16 @@ public class AgendaGenerator {
 		return s;
 	}
 
+	/**
+	 * Method to render Task details
+	 * @param p
+	 * @param date
+	 * @param tl
+	 * @param t
+	 * @param level
+	 * @param expandedTasks
+	 * @return String
+	 */
 	private static String renderTask(Project p, CalendarDate date, TaskList tl, Task t, int level, Collection expandedTasks) {
 		String s = "";
 
@@ -234,6 +253,11 @@ public class AgendaGenerator {
 		return s;
 	}
 
+	/**
+	 * Method to return an int value based on the Progress of Tasks in the TaskList passed in
+	 * @param tl
+	 * @return int
+	 */
 	static int getProgress(TaskList tl) {
 		Vector v = (Vector) tl.getAllSubTasks(null);
 		if (v.size() == 0)
@@ -246,6 +270,11 @@ public class AgendaGenerator {
 		return (p * 100) / (v.size() * 100);
 	}
 
+	/**
+	 * Method to return a String with the Task's Priority Status, and uses Local settings to determine color of the font
+	 * @param p
+	 * @return String
+	 */
 	static String getPriorityString(int p) {
 		switch (p) {
 		case Task.PRIORITY_NORMAL :
@@ -262,6 +291,13 @@ public class AgendaGenerator {
 		return "";
 	}
 
+	/**
+	 * Method to generate a Project Information table with associated details
+	 * @param p
+	 * @param date
+	 * @param expandedTasks
+	 * @return String
+	 */
 	static String generateProjectInfo(Project p, CalendarDate date, Collection expandedTasks) {
 		String s = "<h2><a href=\"memoranda:project#"
 				+ p.getID()
@@ -276,6 +312,12 @@ public class AgendaGenerator {
 		return s + generateTasksInfo(p, date,expandedTasks);        
 	}
 
+	/**
+	 * Method to generate all Projects and their details
+	 * @param date
+	 * @param expandedTasks
+	 * @return String
+	 */
 	static String generateAllProjectsInfo(CalendarDate date, Collection expandedTasks) {
 		String s =
 				"<td width=\"66%\" valign=\"top\">"
@@ -293,6 +335,11 @@ public class AgendaGenerator {
 		return s + "</td>";
 	}
 
+	/**
+	 * Method to generate Events information for a CalenderDate passed in
+	 * @param date
+	 * @return String
+	 */
 	static String generateEventsInfo(CalendarDate date) {
 		String s =
 				"<td width=\"34%\" valign=\"top\">"
@@ -347,6 +394,12 @@ public class AgendaGenerator {
 		return s + "</table>";
 	}
 
+	/**
+	 * Method to generate Stickers table for CalendarDate date passed in. The stickers are displayed by the sorting from
+	 * the PriorityQueue
+	 * @param date
+	 * @return
+	 */
 	static String generateStickers(CalendarDate date) {
 		String iurl =
 				main.java.memoranda.ui
@@ -380,6 +433,10 @@ public class AgendaGenerator {
 		return s;
 	}
 
+	/**
+	 * Method to sort the Stickers by their priority and returns a PriorityQueue object
+	 * @return PriorityQueue
+	 */
     private static PriorityQueue sortStickers(){
         Map stickers = EventsManager.getStickers();
         PriorityQueue pQ = new PriorityQueue(stickers.size());
@@ -392,7 +449,13 @@ public class AgendaGenerator {
     	}
     	return pQ;
     }
-    
+
+	/**
+	 * Method to expand the sticker hyperlink
+	 * @param txt
+	 * @param id
+	 * @return String
+	 */
 	private static String addExpandHyperLink(String txt, String id) {
 		String ret="";
 		int first=txt.indexOf(">");
@@ -401,14 +464,28 @@ public class AgendaGenerator {
 				+"</a>"+txt.substring(last);
 		return ret;
 	}
+
+	/**
+	 * Method to edit a sticker's hyperlink
+	 * @param txt
+	 * @param id
+	 * @return String
+	 */
 	private static String addEditHyperLink(String txt, String id) {
 		String ret="";
 		int first=txt.indexOf(">");
 		int last=txt.lastIndexOf("<");
 		ret=txt.substring(0, first+1)+"<a href=\"memoranda:editsticker#"+id+"\">"+txt.substring(first+1, last)+"</a>"+txt.substring(last);
 		 return ret;
-		 }
-	
+	}
+
+	/**
+	 * Method to get the Agenda based on CalendarDate passed in along with a Collection of expandedTasks tied to the
+	 * Projects
+	 * @param date
+	 * @param expandedTasks
+	 * @return String
+	 */
 	public static String getAgenda(CalendarDate date, Collection expandedTasks) {
 		String s = HEADER;
 		s += generateAllProjectsInfo(date, expandedTasks);
