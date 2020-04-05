@@ -22,20 +22,35 @@ public class MimeType {
 
     public Element _root = null;
 
+    /**
+     * Constructor setting _root Element to the Element passed in
+     * @param root
+     */
     public MimeType(Element root) {
         _root = root;
     }
 
+    /**
+     * Constructor for MimeType.
+     */
     public MimeType() {
       _root = new Element("default-type");
       _root.addAttribute(new Attribute("id", "__UNKNOWN"));
       _root.addAttribute(new Attribute("label", "Unknown"));
     }
 
+    /**
+     * Method to get MimeTypeId
+     * @return String
+     */
     public String getMimeTypeId() {
         return _root.getAttribute("id").getValue();
     }
 
+    /**
+     * Method to get the Extension
+     * @return String
+     */
     public String getExtension() {
         Elements exts = _root.getChildElements("ext");
         if (exts.size() > 0)
@@ -43,6 +58,10 @@ public class MimeType {
         return null;
     }
 
+    /**
+     * Method to get Extensions of the MimeType as a String[]
+     * @return String[]
+     */
     public String[] getExtensions() {
         Vector v = new Vector();
         String[] ss = {};
@@ -52,12 +71,20 @@ public class MimeType {
         return (String[]) v.toArray(ss);
     }
 
+    /**
+     * Method to add Extension to the list of MimeTypes
+     * @param ext
+     */
     public void addExtension(String ext) {
         Element exe = new Element("ext");
         exe.appendChild(ext);
         _root.appendChild(exe);
     }
 
+    /**
+     * Method to return the Label of the MimeType
+     * @return String
+     */
     public String getLabel() {
         if ((_root.getAttribute("label") != null) && (_root.getAttribute("label").getValue().length() >0))
           return _root.getAttribute("label").getValue();
@@ -65,6 +92,10 @@ public class MimeType {
            return _root.getAttribute("id").getValue();
     }
 
+    /**
+     * Method to set the Label of the MimeType
+     * @param label
+     */
     public void setLabel(String label) {
         if (_root.getAttribute("label") != null)
          _root.getAttribute("label").setValue(label);
@@ -72,6 +103,11 @@ public class MimeType {
         _root.addAttribute(new Attribute("label", label));
     }
 
+    /**
+     * Method to get AppId for the platform code passed in
+     * @param plafCode
+     * @return String
+     */
     public String getAppId(String plafCode) {
         Elements apps = _root.getChildElements("app");
         for (int i = 0; i < apps.size(); i++)
@@ -80,6 +116,11 @@ public class MimeType {
         return null;
     }
 
+    /**
+     * Method to set App based on platform code and AppId passed in
+     * @param plafCode
+     * @param appId
+     */
     public void setApp(String plafCode, String appId) {
         if (getAppId(plafCode) != null) {
             Elements apps = _root.getChildElements("app");
@@ -95,15 +136,27 @@ public class MimeType {
         }
     }
 
+    /**
+     * Method to set App based on AppId passed in
+     * @param appId
+     */
     public void setApp(String appId) {
         setApp(AppList.getPlafCode(System.getProperty("os.name")), appId);
     }
 
+    /**
+     * Method to get AppId
+     * @return String
+     */
     public String getAppId() {
         String plaf = AppList.getPlafCode(System.getProperty("os.name"));
         return getAppId(plaf);
     }
 
+    /**
+     * Method to get Icon path for MimeType
+     * @return String
+     */
     public String getIconPath() {
         if (_root.getAttribute("icon") != null)
           return _root.getAttribute("icon").getValue();
@@ -111,6 +164,10 @@ public class MimeType {
           return "";
     }
 
+    /**
+     * Method to set Icon path to String passed in for MimeType
+     * @param path
+     */
     public void setIconPath(String path) {
          if (_root.getAttribute("icon") != null)
           _root.getAttribute("icon").setValue(path);
@@ -118,6 +175,10 @@ public class MimeType {
         _root.addAttribute(new Attribute("icon", path));
     }
 
+    /**
+     * Method to get ImageIcon of MimeType
+     * @return
+     */
     public ImageIcon getIcon() {
        String ip = getIconPath();
        ImageIcon icon = null;

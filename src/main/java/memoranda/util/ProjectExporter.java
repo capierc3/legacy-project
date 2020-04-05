@@ -33,6 +33,18 @@ public class ProjectExporter {
     
     static String charsetString = "\n";
 
+    /**
+     * Method to export the project to a file passed in
+     * @param prj
+     * @param f
+     * @param charset
+     * @param xhtml
+     * @param chunked
+     * @param navigation
+     * @param num
+     * @param titlesAsHeaders
+     * @param copyImages
+     */
     public static void export(Project prj, File f, String charset,
             boolean xhtml, boolean chunked, boolean navigation, boolean num,
             boolean titlesAsHeaders, boolean copyImages) {
@@ -95,6 +107,11 @@ public class ProjectExporter {
         }
     }
 
+    /**
+     * Method to generate a Toc based on the Writer and Vector of Notes passed in
+     * @param w
+     * @param notes
+     */
     private static void generateToc(Writer w, Vector notes) {
         write(w, "<div class=\"toc\"><ul>\n");
         for (Iterator i = notes.iterator(); i.hasNext(); ) {
@@ -113,6 +130,11 @@ public class ProjectExporter {
         write(w, "</ul></div>\n");
     }
 
+    /**
+     * Method to get the Note as an HTML string based on the Note passed in
+     * @param note
+     * @return String
+     */
     private static String getNoteHTML(Note note) {
         String text = "";
         StringWriter sw = new StringWriter();
@@ -153,6 +175,12 @@ public class ProjectExporter {
         return text;
     }
 
+    /**
+     * Method to generate the Navigation class and navItems for previous Note and next Note passed in
+     * @param prev
+     * @param next
+     * @return String
+     */
     private static String generateNav(Note prev, Note next) {
         String s = "<hr></hr><div class=\"navigation\"><table border=\"0\" width=\"100%\" cellpadding=\"2\"><tr><td width=\"33%\">";
         if (prev != null)   
@@ -178,6 +206,11 @@ public class ProjectExporter {
         return s;
     }
 
+    /**
+     * Method to generate Chunks based on Writer and Vector of Notes passed in
+     * @param w
+     * @param notes
+     */
     private static void generateChunks(Writer w, Vector notes) {
         Object[] n = notes.toArray();
         for (int i = 0; i < n.length; i++) {
@@ -219,6 +252,11 @@ public class ProjectExporter {
         }
     }
 
+    /**
+     * Method to Write the String passed in to the Writer passed in
+     * @param w
+     * @param s
+     */
     private static void write(Writer w, String s) {
         try {
             w.write(s);

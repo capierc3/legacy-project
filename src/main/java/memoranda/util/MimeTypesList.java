@@ -21,11 +21,18 @@ public class MimeTypesList {
     public static Document _doc = null;
     static Element _root = null;
 
+    /**
+     * Initializer of MimeTypesList
+     */
     static {
         CurrentStorage.get().openMimeTypesList();
         _root = _doc.getRootElement();
     }
 
+    /**
+     * Method to build a vector with MimeTypes and return the Vector
+     * @return Vector
+     */
     public static Vector getAllMimeTypes() {
         Vector v = new Vector();
         Elements els = _root.getChildElements("mime-type");
@@ -34,10 +41,20 @@ public class MimeTypesList {
         return v;
     }
 
+    /**
+     * Method to get MimeType for file based on the path passed in
+     * @param path
+     * @return MimeType
+     */
     public static MimeType getMimeTypeForFile(String path) {
         return getMimeTypeByExt(getExtension(path));
     }
 
+    /**
+     * Method to get MimeType based on MimeId passed in
+     * @param mimeId
+     * @return MimeType
+     */
     public static MimeType getMimeType(String mimeId) {
         Elements els = _root.getChildElements("mime-type");
         for (int i = 0; i < els.size(); i++)
@@ -46,6 +63,11 @@ public class MimeTypesList {
         return new MimeType();
     }
 
+    /**
+     * Method to get MimeType by extension type String passed in
+     * @param ext
+     * @return MimeType
+     */
     public static MimeType getMimeTypeByExt(String ext) {
         Elements els = _root.getChildElements("mime-type");
         for (int i = 0; i < els.size(); i++) {
@@ -58,6 +80,11 @@ public class MimeTypesList {
         return new MimeType();
     }
 
+    /**
+     * Method to add and return MimeType based on MimeId passed in
+     * @param mimeId
+     * @return
+     */
     public static MimeType addMimeType(String mimeId) {
         Element el = new Element("mime-type");
         el.addAttribute(new Attribute("id", mimeId));
@@ -65,6 +92,10 @@ public class MimeTypesList {
         return new MimeType(el);
     }
 
+    /**
+     * Method to remove MimeType of MimeId passed in
+     * @param mimeId
+     */
     public static void removeMimeType(String mimeId) {
         Elements els = _root.getChildElements("mime-type");
         for (int i = 0; i < els.size(); i++)
@@ -74,10 +105,19 @@ public class MimeTypesList {
             }
     }
 
+    /**
+     * Method to get the Applications
+     * @return AppList
+     */
     public static AppList getAppList() {
         return new AppList(_root.getChildElements("applications").get(0));
     }
 
+    /**
+     * Method to get and return a String with the document's extension type
+     * @param s
+     * @return String
+     */
     public static String getExtension(String s) {
         String ext = null;
         int i = s.lastIndexOf('.');
