@@ -67,6 +67,10 @@ public class App {
 		//Shows the splash screen
 		if (!Configuration.get("SHOW_SPLASH").equals("no"))
 			showSplash();
+		// make the splash screen last a few extra seconds?
+		try
+		{ Thread.sleep(4000); } catch (Exception e){
+		}
 		//sets the look and feel of the App
 		try {
 			if (Configuration.get("LOOK_AND_FEEL").equals("system"))

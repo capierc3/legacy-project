@@ -1,11 +1,3 @@
-/**
- * EventsTable.java
- * Created on 09.03.2003, 9:52:02 Alex
- * Package: net.sf.memoranda.ui
- *
- * @author Alex V. Alishevskikh, alex@openmechanics.net
- * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
- */
 package main.java.memoranda.ui;
 
 import java.awt.Component;
@@ -23,10 +15,10 @@ import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
 import main.java.memoranda.date.DateListener;
 import main.java.memoranda.util.Local;
-/**
- *
- */
 /*$Id: EventsTable.java,v 1.6 2004/10/11 08:48:20 alexeya Exp $*/
+/**
+ *  Class for the main table that displays the Classes/Events for the software
+ */
 public class EventsTable extends JTable {
 
     public static final int EVENT = 100;
@@ -41,29 +33,30 @@ public class EventsTable extends JTable {
         setModel(new EventsTableModel());
         initTable(CurrentDate.get());
         this.setShowGrid(false);
-        CurrentDate.addDateListener(new DateListener() {
-            public void dateChange(CalendarDate d) {
-                //updateUI();
-                initTable(d);
-            }
-        });
+        CurrentDate.addDateListener(this::initTable);
     }
 
+    /**
+     * sets up the table
+     * @param d CalendarDate
+     */
     public void initTable(CalendarDate d) {
         events = (Vector)EventsManager.getEventsForDate(d);
-        getColumnModel().getColumn(0).setPreferredWidth(60);
-        getColumnModel().getColumn(0).setMaxWidth(60);
-	clearSelection();
+        getColumnModel().getColumn(0).setPreferredWidth(75);
+        getColumnModel().getColumn(0).setMaxWidth(75);
+        clearSelection();
         updateUI();
     }
 
+    /**
+     * refreshes the table
+     */
     public void refresh() {
         initTable(CurrentDate.get());
     }
 
      public TableCellRenderer getCellRenderer(int row, int column) {
         return new javax.swing.table.DefaultTableCellRenderer() {
-
             public Component getTableCellRendererComponent(
                 JTable table,
                 Object value,
@@ -93,22 +86,37 @@ public class EventsTable extends JTable {
 
     }
 
+    /**
+     * Nested class for the table to be used
+     */
     class EventsTableModel extends AbstractTableModel {
-
+        //Can be used to add new columns
         String[] columnNames = {
-            //Local.getString("Task name"),
-            Local.getString("Time"),
-                Local.getString("Text")
+                Local.getString("Start Time"),
+                Local.getString("Name"),
+                Local.getString("Instructor"),
+                Local.getString("Spots Remaining")
         };
 
+        /**
+         * Constructor for the table
+         */
         EventsTableModel() {
             super();
         }
 
+        /**
+         * returns the amount of columns, hard coded '4'
+         * @return int
+         */
         public int getColumnCount() {
-            return 2;
+            return 4;
         }
 
+        /**
+         * gets the amount of rows in the table
+         * @return int
+         */
         public int getRowCount() {
 			int i;
 			try {
@@ -120,18 +128,30 @@ public class EventsTable extends JTable {
 			return i;
         }
 
+        /**
+         * gets the value displayed in a given row and col
+         * @param row int
+         * @param col int
+         * @return Object
+         */
         public Object getValueAt(int row, int col) {
            Event ev = (Event)events.get(row);
            if (col == 0)
-                //return ev.getHour()+":"+ev.getMinute();
                 return ev.getTimeString();
            else if (col == 1)
                 return ev.getText();
+           else if (col == 2) return "TBD";
+           else if (col == 3) return "TBD";
            else if (col == EVENT_ID)
                 return ev.getId();
            else return ev;
         }
 
+        /**
+         * returns the columnName at a given column number, starts at 0
+         * @param col int
+         * @return String
+         */
         public String getColumnName(int col) {
             return columnNames[col];
         }
