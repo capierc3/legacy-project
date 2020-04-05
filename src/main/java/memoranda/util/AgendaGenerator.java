@@ -12,18 +12,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
-import main.java.memoranda.CurrentProject;
-import main.java.memoranda.Event;
-import main.java.memoranda.EventsManager;
-import main.java.memoranda.EventsScheduler;
-import main.java.memoranda.Project;
-import main.java.memoranda.ProjectManager;
-import main.java.memoranda.Task;
-import main.java.memoranda.TaskList;
+import main.java.memoranda.*;
 import main.java.memoranda.date.CalendarDate;
 
 import java.util.Collections;
 
+import main.java.memoranda.ui.NotesList;
 import nu.xom.Element;
 /**
  *  
@@ -280,7 +274,7 @@ public class AgendaGenerator {
 		String s =
 				"<td width=\"66%\" valign=\"top\">"
 						+ "<h1>"
-						+ Local.getString("Projects and tasks")
+						+ Local.getString("Belt goals")
 						+ "</h1>\n";
 		s += generateProjectInfo(CurrentProject.get(), date, expandedTasks);
 		for (Iterator i = ProjectManager.getActiveProjects().iterator();
@@ -295,42 +289,12 @@ public class AgendaGenerator {
 
 	/**
 	 * Add Notes table to My Info panel
-	 * TODO
+	 * TODO figure out how to access notes by date from a static context
 	 */
-	static String generateAllNotesInfo(CalendarDate date, Collection expandedTasks) {
-		String s =
-				"<td width=\"66%\" valign=\"top\">"
-						+ "<h1>"
-						+ Local.getString("Notes")
-						+ "</h1>\n";
-		s += generateNotesInfo(CurrentProject.get(), date, expandedTasks);
-		for (Iterator i = ProjectManager.getActiveProjects().iterator();
-			 i.hasNext();
-		) {
-			Project p = (Project) i.next();
-			if (!p.getID().equals(CurrentProject.get().getID()))
-				s += generateProjectInfo(p, date, expandedTasks);
-		}
-		return s + "</td>";
-	}
-
-	/**
-	 * Add Notes table to My Info panel
-	 * TODO
-	 */
-	static String generateNotesInfo(Project p, CalendarDate date, Collection expandedTasks) {
-		String s = "<h2><a href=\"kaesekuchen:project#"
-				+ p.getID()
-				+ "\">"
-				+ p.getTitle()
-				+ "</a></h2>\n"
-				+ "<table border=\"0\" width=\"100%\" cellpadding=\"2\" bgcolor=\"#EFEFEF\"><tr><td>"
-				+ Local.getString("Start date")+": <i>"+p.getStartDate().getMediumDateString()+"</i>\n";
-		if (p.getEndDate() != null)
-			s += "<br>" + Local.getString("End date")+": <i>"+p.getEndDate().getMediumDateString()
-					+"</i>\n";
-		return s + generateTasksInfo(p, date,expandedTasks);
-	}
+	//static String generateNotesInfo(CalendarDate date) {
+	//	String s = "";
+	//	return s;
+	//}
 
 	static String generateEventsInfo(CalendarDate date) {
 		String s =
