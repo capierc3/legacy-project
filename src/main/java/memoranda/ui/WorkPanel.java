@@ -436,7 +436,7 @@ public class WorkPanel extends JPanel {
 				main.java.memoranda.ui.AppFrame.class.getResource(
 					"/ui/icons/notes.png")));
 		notesB.setMargin(new Insets(0, 0, 0, 0));
-		notesB.setSelected(false);
+		notesB.setSelected(true);
 		
 		
 	
@@ -551,9 +551,11 @@ public class WorkPanel extends JPanel {
 	
 	public void resources_actionPerformed(ActionEvent e) {
 		cardLayout1.show(panel, "FILES");
-		setCurrentButton(myStuff);
+		setCurrentButton(resources);
 		Context.put("CURRENT_PANEL", "FILES");
 	}
+	
+	
 
 	void setCurrentButton(JButton cb) {
 		currentB.setBackground(Color.white);
