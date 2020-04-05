@@ -265,7 +265,7 @@ public class WorkPanel extends JPanel {
 		myCalendar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		myCalendar.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				myCalendar_actionPerformed(e);
+				upcomingClasses_actionPerformed(e);
 			}
 		});
 		myCalendar.setVerticalAlignment(SwingConstants.TOP);
@@ -487,7 +487,7 @@ public class WorkPanel extends JPanel {
 		if (pan != null) {
 			if (pan.equals("NOTES"))
 				notesB_actionPerformed(null);
-			
+
 			else if (pan.equals("TASKS"))
 				myCalendar_actionPerformed(null);
 			else if (pan.equals("EVENTS"))
