@@ -153,6 +153,12 @@ public class App {
 		System.exit(0);
 	}
 
+	public static void minimizeWindow(){
+		if (frame == null)
+			return;
+
+	}
+
 	/**
 	 * Creates and shows the splash screen.
 	 */
