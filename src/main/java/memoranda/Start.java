@@ -1,11 +1,3 @@
-/**
- * Start.java
- * Created on 19.08.2003, 20:40:08 Alex
- * Package: net.sf.memoranda
- *
- * @author Alex V. Alishevskikh, alex@openmechanics.net
- * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
- */
 package main.java.memoranda;
 
 import java.net.ServerSocket;
@@ -14,10 +6,10 @@ import java.net.Socket;
 import main.java.memoranda.ui.*;
 import main.java.memoranda.util.Configuration;
 
-/**
- *
- */
 /*$Id: Start.java,v 1.7 2004/11/22 10:02:37 alexeya Exp $*/
+/**
+ *Main startup class for the software.
+ */
 public class Start {
     
     static App app = null;

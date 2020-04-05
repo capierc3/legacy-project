@@ -40,6 +40,11 @@ public class ProjectPackager {
     private static String JN_DOCPATH = Util.getEnvDir(); 
     // for compatibility with previous installations (jnotes2) [alexeyA]
 
+    /**
+     * Method to pack a project into a zip file
+     * @param prj
+     * @param zipfile
+     */
     public static void pack(Project prj, File zipfile) {
         ZipOutputStream zip = null;
         
@@ -67,6 +72,10 @@ public class ProjectPackager {
         }
     }
 
+    /**
+     * Method to unpack zipfile passed in
+     * @param zipfile
+     */
     public static void unpack(File zipfile) {
         try {
             ZipFile zip = new ZipFile(zipfile);

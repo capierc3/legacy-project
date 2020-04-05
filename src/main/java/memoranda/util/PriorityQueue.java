@@ -10,11 +10,20 @@ public class PriorityQueue {
         
         private Pair[] a;
         private int n;
-        
+
+        /**
+         * Constructor to build a PriorityQueue based on size passed in
+         * @param size
+         */
         public PriorityQueue(int size){
                 a = new Pair[size+2];
                 n = 0;
         }
+
+        /**
+         * Method to insert Pair passed in to the set the priority int
+         * @param x
+         */
         public void insert(Pair x){
                 ++n;
                 a[n]=x;
@@ -25,7 +34,11 @@ public class PriorityQueue {
                         a[j/2] = t;
                 }
         }
-        
+
+        /**
+         * Method to remove Element from the PriorityQueue and return the Element
+         * @return Element
+         */
         public Element remove(){
                 if(!this.Empty()){
                         Element m = a[1].getElement();  
@@ -49,7 +62,11 @@ public class PriorityQueue {
                 else 
                         return null;
         }
-        
+
+        /**
+         * Method to check if the PriorityQueue is empty or not.
+         * @return boolean
+         */
         public boolean Empty(){
                 return n==0;
         }

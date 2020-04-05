@@ -21,6 +21,9 @@ public class Configuration {
     static LoadableProperties config  = new LoadableProperties();
     static String configPath = getConfigPath();
 
+    /**
+     * Initializing configuration
+     */
     static {
     try {
      config.load(new FileInputStream(configPath));
@@ -40,7 +43,11 @@ public class Configuration {
       }
     }
   }
-  
+
+    /**
+     * Method to return a string with the Config's file path
+     * @return String
+     */
   static String getConfigPath() {
     String p = Util.getEnvDir()+"memoranda.properties";
     if (new File(p).exists()) 
@@ -53,6 +60,9 @@ public class Configuration {
     return p;
   }
 
+    /**
+     * Method to save config to the config's file path
+     */
   public static void saveConfig() {
     try {
     config.save(new FileOutputStream(configPath));
@@ -62,6 +72,11 @@ public class Configuration {
     }
   }
 
+    /**
+     * Method to return object based on the key passed in
+     * @param key
+     * @return Object
+     */
   public static Object get(String key) {
     if ((config.get(key)) == null) {
         /*DEBUG*///System.out.println("Configuration: Key '"+key+"' not found.");
@@ -71,7 +86,10 @@ public class Configuration {
   }
 
   @SuppressWarnings("unchecked")
-public static void put(String key, Object value) {
+  /**
+   * Method to put a key and Object into the config map
+   */
+  public static void put(String key, Object value) {
     config.put(key, value);
   }
 }

@@ -16,7 +16,10 @@ import main.java.memoranda.ui.AppFrame;
 public class Context {
     
   public static LoadableProperties context = new LoadableProperties();
-  
+
+    /**
+     * Initializer for Context
+     */
   static {
     CurrentStorage.get().restoreContext();
     AppFrame.addExitListener(new ActionListener() {
@@ -25,11 +28,21 @@ public class Context {
             }
         });
   }
-  
+
+    /**
+     * Method to return Object from context map
+     * @param key
+     * @return Object
+     */
   public static Object get(Object key) {
     return context.get(key);
   }
 
+    /**
+     * Method to put an Object key and value into context map
+     * @param key
+     * @param value
+     */
   public static void put(Object key, Object value) {
     context.put(key, value);
   }

@@ -40,6 +40,12 @@ public class AppList {
         _root = root;
     }
 
+    /**
+     * Method to get CommandLine path and set it for the findPath attribute
+     * @param appId
+     * @param fPath
+     * @return String
+     */
     public String getCommandLine(String appId, String fPath) {
         Elements apps = _root.getChildElements("app");
         fPath = fPath.replaceAll("\\\\", "\\\\\\\\");        
@@ -54,7 +60,13 @@ public class AppList {
             }
         return null;
     }
-    
+
+    /**
+     * Method to get the command findPath attribute and executables
+     * @param appId
+     * @param fPath
+     * @return String[]
+     */
     public String[] getCommand(String appId, String fPath) {
         Elements apps = _root.getChildElements("app");
         //fPath = fPath.replaceAll("\\\\", "\\\\\\\\");        
@@ -78,6 +90,11 @@ public class AppList {
         return null;
     }
 
+    /**
+     * Method to return a String for FindPath of an App
+     * @param appId
+     * @return String
+     */
     public String getFindPath(String appId) {
         Elements apps = _root.getChildElements("app");
         for (int i = 0; i < apps.size(); i++)
@@ -86,6 +103,11 @@ public class AppList {
         return null;
     }
 
+    /**
+     * Method to set an App's FindPath to String p passed in
+     * @param appId
+     * @param p
+     */
     public void setFindPath(String appId, String p) {
         Elements apps = _root.getChildElements("app");
         for (int i = 0; i < apps.size(); i++)
@@ -98,6 +120,11 @@ public class AppList {
 
     }
 
+    /**
+     * Method to get the Executable for App
+     * @param appId
+     * @return String
+     */
     public String getExec(String appId) {
         Elements apps = _root.getChildElements("app");
         for (int i = 0; i < apps.size(); i++)
@@ -106,6 +133,11 @@ public class AppList {
         return null;
     }
 
+    /**
+     * Method to set an App's executable to String e passed in
+     * @param appId
+     * @param e
+     */
     public void setExec(String appId, String e) {
         Elements apps = _root.getChildElements("app");
         for (int i = 0; i < apps.size(); i++)
@@ -117,6 +149,11 @@ public class AppList {
             }
     }
 
+    /**
+     * Method to return String of the command attribute for app
+     * @param appId
+     * @return String
+     */
     public String getCommandLinePattern(String appId) {
         Elements apps = _root.getChildElements("app");
         for (int i = 0; i < apps.size(); i++)
@@ -125,6 +162,11 @@ public class AppList {
         return null;
     }
 
+    /**
+     * Method to set the command attribute for an app
+     * @param appId
+     * @param clp
+     */
     public void setCommandLinePattern(String appId, String clp) {
         Elements apps = _root.getChildElements("app");
         for (int i = 0; i < apps.size(); i++)
@@ -132,6 +174,13 @@ public class AppList {
                 apps.get(i).addAttribute(new Attribute("command", clp));
     }
 
+    /**
+     * Method to add an App to the _root appList
+     * @param appId
+     * @param fp
+     * @param exec
+     * @param clp
+     */
     public void addApp(String appId, String fp, String exec, String clp) {
         Element el = new Element("app");
         el.addAttribute(new Attribute("id", appId));
@@ -141,6 +190,13 @@ public class AppList {
         _root.appendChild(el);
     }
 
+    /**
+     * Method to add or replace app from _root appList with String variables passed in
+     * @param appId
+     * @param fp
+     * @param exec
+     * @param clp
+     */
     public void addOrReplaceApp(String appId, String fp, String exec, String clp) {
         Elements apps = _root.getChildElements("app");
         for (int i = 0; i < apps.size(); i++)
@@ -161,14 +217,22 @@ public class AppList {
             }
         addApp(appId, fp, exec, clp);
     }
-    
+
+    /**
+     * Method to get the browser executable path
+     * @return String
+     */
     public String getBrowserExec() {
         Elements els = _root.getChildElements("browser");        
         if (els.size() < 1) return null;
         Element el = els.get(0);
         return (el.getAttribute("path").getValue());
     }
-    
+
+    /**
+     * Method to set a browser's executable path
+     * @param path
+     */
     public void setBrowserExec(String path) {
         Element el = null;
         Elements els = _root.getChildElements("browser");    
