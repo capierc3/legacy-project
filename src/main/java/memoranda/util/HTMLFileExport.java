@@ -49,7 +49,10 @@ public class HTMLFileExport {
         this.xhtml = xhtml;
         doExport();
     }
-    
+
+    /**
+     * Method to export the HTML file
+     */
     private void doExport() {
         try {
                     //FileWriter fw = new FileWriter(f);
@@ -82,8 +85,12 @@ public class HTMLFileExport {
                     new ExceptionDialog(ex, "Cannot export file "+f.getPath(), null);
                 }
         }
-	 
-     
+
+    /**
+     * Method to return the default template from Configuration
+     * @param templF
+     * @return String
+     */
 	 private String getTemplateString(String templF) {		
 	    if ((templF != null) && (templF.length() >0)) {
     		File f = new File(templF);			
@@ -108,7 +115,11 @@ public class HTMLFileExport {
 	        return t;
 		return "<html>\n<head>\n@METACHARSET@\n<title>@TITLE@ - @PROJECT@</title>\n</head>\n<body>\n@CONTENT@\n</body>\n</html>";
 	 }
-     
+
+    /**
+     * Method to apply template to Note
+     * @return String
+     */
 	 private String applyTemplate() {
         String body = getNoteBody();        
 		String title = note != null? note.getTitle() : "";
@@ -130,8 +141,12 @@ public class HTMLFileExport {
 		    templ = convertToXHTML(templ);
 		return templ;
      }
-     
-     private String getNoteBody() {
+
+    /**
+     * Method to get the text body of a Note
+     * @return String
+     */
+    private String getNoteBody() {
         String text = "";
         StringWriter sw = new StringWriter();
         AltHTMLWriter writer = new AltHTMLWriter(sw, doc, charset, num);
@@ -152,7 +167,12 @@ public class HTMLFileExport {
                         + java.util.regex.Pattern.CASE_INSENSITIVE).split(text)[0];
         return text;
      }
-     
+
+    /**
+     * Method to convert String passed in to XHTML
+     * @param in
+     * @return String
+     */
      public static String convertToXHTML(String in) {       
         SAXParser parser = new SAXParser();
         InputSource source;

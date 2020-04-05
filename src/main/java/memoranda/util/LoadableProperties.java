@@ -14,10 +14,18 @@ import java.util.*;
 /*$Id: LoadableProperties.java,v 1.4 2004/01/30 12:17:42 alexeya Exp $*/
 public class LoadableProperties extends Hashtable {
 
+    /**
+     * Constructor for LoadableProperties
+     */
     public LoadableProperties() {
         super();
     }
 
+    /**
+     * Method to load the InputStream passed in
+     * @param inStream
+     * @throws IOException
+     */
     public void load(InputStream inStream) throws IOException {
 
         BufferedReader in = new BufferedReader(new InputStreamReader(inStream, "UTF-8"));
@@ -38,6 +46,12 @@ public class LoadableProperties extends Hashtable {
         }
     }
 
+    /**
+     * Method to save the sorted tree to the OutputStream passedi n
+     * @param outStream
+     * @param sorted
+     * @throws IOException
+     */
     public void save(OutputStream outStream, boolean sorted) throws IOException {
     	if (!sorted) {
     		save(outStream);
@@ -56,7 +70,12 @@ public class LoadableProperties extends Hashtable {
         out.flush();
         out.close();
     }
-    
+
+    /**
+     * Method to save OutputStream passed in
+     * @param outStream
+     * @throws IOException
+     */
     public void save(OutputStream outStream) throws IOException {
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(outStream, "UTF-8"));
         String aKey;
@@ -71,6 +90,11 @@ public class LoadableProperties extends Hashtable {
         out.close();
     }
 
+    /**
+     * Method to check if a string path is valid or not
+     * @param str
+     * @return boolean
+     */
     private boolean isValid(String str) {
         if (str == null)
             return false;
@@ -92,6 +116,11 @@ public class LoadableProperties extends Hashtable {
         }
     }
 
+    /**
+     * Method to get the next line in the file
+     * @param br
+     * @return String
+     */
     private String getNextLine(BufferedReader br) {
         try {
             return br.readLine();

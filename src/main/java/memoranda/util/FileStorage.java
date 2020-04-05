@@ -46,6 +46,9 @@ public class FileStorage implements Storage {
     public static String JN_DOCPATH = Util.getEnvDir();
     private HTMLEditorKit editorKit = new HTMLEditorKit();
 
+    /**
+     * Constructor for FileStorage
+     */
     public FileStorage() {
         /*The 'MEMORANDA_HOME' key is an undocumented feature for 
           hacking the default location (Util.getEnvDir()) of the memoranda 
@@ -60,6 +63,11 @@ public class FileStorage implements Storage {
         }
     }
 
+    /**
+     * Method to save a Document doc passed in to the filepath specified
+     * @param doc
+     * @param filePath
+     */
     public static void saveDocument(Document doc, String filePath) {
         /**
          * @todo: Configurable parameters
@@ -83,11 +91,22 @@ public class FileStorage implements Storage {
         }
     }
 
+    /**
+     * Method to open and return the Document from InputStream passed in
+     * @param in
+     * @return Document
+     * @throws Exception
+     */
     public static Document openDocument(InputStream in) throws Exception {
         Builder builder = new Builder();
         return builder.build(new InputStreamReader(in, "UTF-8"));
     }
 
+    /**
+     * Method to open and return the Document from filePath passed in
+     * @param filePath
+     * @return Document
+     */
     public static Document openDocument(String filePath) {
         try {
             return openDocument(new FileInputStream(filePath));
@@ -101,6 +120,11 @@ public class FileStorage implements Storage {
         return null;
     }
 
+    /**
+     * Method to check if a document exists at the filePath passed in
+     * @param filePath
+     * @return boolean
+     */
     public static boolean documentExists(String filePath) {
         return new File(filePath).exists();
     }
@@ -209,10 +233,20 @@ public class FileStorage implements Storage {
         return doc;*/
     }
 
+    /**
+     * Method to get the URL docpath for Note passed in
+     * @param note
+     * @return String
+     */
     public String getNoteURL(Note note) {        
         return "file:" + JN_DOCPATH + note.getProject().getID() + "/" + note.getId();
     }
 
+    /**
+     * Method to get a Note's file path for Note passed in
+     * @param note
+     * @return String
+     */
    public String getNotePath(Note note) {
         String filename = JN_DOCPATH + note.getProject().getID() + File.separator;
 //        CalendarDate d = note.getDate();
@@ -221,6 +255,10 @@ public class FileStorage implements Storage {
    }
 
 
+    /**
+     * Method to remove the note and file
+     * @param note
+     */
     public void removeNote(Note note) {
         File f = new File(getNotePath(note));
         /*DEBUG*/
@@ -262,6 +300,11 @@ public class FileStorage implements Storage {
         f.delete();
     }
 
+    /**
+     * Method to open TaskList for Project passed in
+     * @param prj
+     * @return TaskList
+     */
     public TaskList openTaskList(Project prj) {
         String fn = JN_DOCPATH + prj.getID() + File.separator + ".tasklist";
 
@@ -294,6 +337,11 @@ public class FileStorage implements Storage {
         }
     }
 
+    /**
+     * Method to store the TaskList document for TaskList and Project passed in
+     * @param tasklist
+     * @param prj
+     */
     public void storeTaskList(TaskList tasklist, Project prj) {
         /*DEBUG*/
         System.out.println(
