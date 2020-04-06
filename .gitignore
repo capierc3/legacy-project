@@ -22,3 +22,6 @@
 
 
 /bin/
+### intelliJ project files ###
+.idea
+/Kaesekuchen.iml

@@ -1,6 +1,7 @@
 package main.java.memoranda.ui;
 
 import java.awt.BorderLayout;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Insets;
@@ -22,6 +23,7 @@ import javax.swing.JToolBar;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.JLabel;
 
 import main.java.memoranda.CurrentNote;
 import main.java.memoranda.CurrentProject;
@@ -39,6 +41,7 @@ public class NotesControlPanel extends JPanel {
     BookmarksPanel bookmarksListPanel = new BookmarksPanel();
     JTabbedPane tabbedPane = new JTabbedPane();
     JToolBar toolBar = new JToolBar();
+    String introString = "\t \t Have a Grate Day!";
 
     NotesList notesList = null;
 
@@ -52,6 +55,7 @@ public class NotesControlPanel extends JPanel {
     JPopupMenu notesPPMenu = new JPopupMenu();
     JMenuItem ppOpenNote = new JMenuItem();
     JMenuItem ppRemoveBkmrk = new JMenuItem();
+    JLabel introLabel = new JLabel(introString);
 
 	
     public NotesControlPanel() {
@@ -71,6 +75,7 @@ public class NotesControlPanel extends JPanel {
                 tabbedPane_stateChanged(e);
             }
         });
+        tabbedPane.add(introLabel);
         tabbedPane.setTabPlacement(JTabbedPane.BOTTOM);
         this.setLayout(borderLayout1);
         toolBar.setRequestFocusEnabled(false);

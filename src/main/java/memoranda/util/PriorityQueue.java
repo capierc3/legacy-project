@@ -4,18 +4,27 @@ import nu.xom.Element;
 
 public class PriorityQueue {
         
-        /* Cola de Prioridad implementada con Estructura de Datos Heap,
-         * para ordenar las anotaciones por prioridad 
+        /* Priority queue implemented with Heap Data Structure,
+         * sorts annotations by priority
          */
         
         private Pair[] a;
         private int n;
-        
+
+        /**
+         * Constructor to build a PriorityQueue based on size passed in
+         * @param size
+         */
         public PriorityQueue(int size){
                 a = new Pair[size+2];
                 n = 0;
         }
-        public void insertar(Pair x){
+
+        /**
+         * Method to insert Pair passed in to the set the priority int
+         * @param x
+         */
+        public void insert(Pair x){
                 ++n;
                 a[n]=x;
                 for(int j=n; j>1 && a[j].getPriority() < a[j/2].getPriority(); j/=2)
@@ -25,9 +34,13 @@ public class PriorityQueue {
                         a[j/2] = t;
                 }
         }
-        
-        public Element extraer(){
-                if(!this.Vacia()){
+
+        /**
+         * Method to remove Element from the PriorityQueue and return the Element
+         * @return Element
+         */
+        public Element remove(){
+                if(!this.Empty()){
                         Element m = a[1].getElement();  
                         a[1] = a[n];
                         --n;
@@ -49,8 +62,12 @@ public class PriorityQueue {
                 else 
                         return null;
         }
-        
-        public boolean Vacia(){
+
+        /**
+         * Method to check if the PriorityQueue is empty or not.
+         * @return boolean
+         */
+        public boolean Empty(){
                 return n==0;
         }
 

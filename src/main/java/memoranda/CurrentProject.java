@@ -30,7 +30,9 @@ public class CurrentProject {
     private static ResourcesList _resources = null;
     private static Vector projectListeners = new Vector();
 
-        
+    /**
+     *  Initializing current project variables
+     */
     static {
         String prjId = (String)Context.get("LAST_OPENED_PROJECT_ID");
         if (prjId == null) {
@@ -59,24 +61,43 @@ public class CurrentProject {
             }
         });
     }
-        
 
+    /**
+     * Method to current Project
+     * @return Project
+     */
     public static Project get() {
         return _project;
     }
 
+    /**
+     * Method to get TaskList tied to Project
+     * @return TaskList
+     */
     public static TaskList getTaskList() {
             return _tasklist;
     }
 
+    /**
+     * Method to get NoteList tied to Project
+     * @return NoteList
+     */
     public static NoteList getNoteList() {
             return _notelist;
     }
-    
+
+    /**
+     * Method to get ResourcesList tied to Project
+     * @return ResourcesList
+     */
     public static ResourcesList getResourcesList() {
             return _resources;
     }
 
+    /**
+     * Method to Set details and variables of current Project
+     * @param project
+     */
     public static void set(Project project) {
         if (project.getID().equals(_project.getID())) return;
         TaskList newtasklist = CurrentStorage.get().openTaskList(project);
@@ -91,27 +112,48 @@ public class CurrentProject {
         Context.put("LAST_OPENED_PROJECT_ID", project.getID());
     }
 
+    /**
+     * Method to add ProjectListener to list of ProjectListeners
+     * @param pl
+     */
     public static void addProjectListener(ProjectListener pl) {
         projectListeners.add(pl);
     }
 
+    /**
+     * Method returning the Collection of ProjectListeners
+     * @return Collection
+     */
     public static Collection getChangeListeners() {
         return projectListeners;
     }
 
+    /**
+     * Method to notify ProjectListeners of any project changes before changes occur
+     * @param project
+     * @param nl
+     * @param tl
+     * @param rl
+     */
     private static void notifyListenersBefore(Project project, NoteList nl, TaskList tl, ResourcesList rl) {
         for (int i = 0; i < projectListeners.size(); i++) {
             ((ProjectListener)projectListeners.get(i)).projectChange(project, nl, tl, rl);
             /*DEBUGSystem.out.println(projectListeners.get(i));*/
         }
     }
-    
+
+    /**
+     * Method that notify all of the ProjectListeners after the project was changed
+     */
     private static void notifyListenersAfter() {
         for (int i = 0; i < projectListeners.size(); i++) {
             ((ProjectListener)projectListeners.get(i)).projectWasChanged();            
         }
     }
 
+    /**
+     * Method to save the Project and Project details to Storage
+     */
     public static void save() {
         Storage storage = CurrentStorage.get();
 
@@ -120,7 +162,10 @@ public class CurrentProject {
         storage.storeResourcesList(_resources, _project);
         storage.storeProjectManager();
     }
-    
+
+    /**
+     * Method that frees Project detail variables and set to null
+     */
     public static void free() {
         _project = null;
         _tasklist = null;

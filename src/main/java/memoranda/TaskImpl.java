@@ -1,11 +1,3 @@
-/**
- * DefaultTask.java
- * Created on 12.02.2003, 15:30:40 Alex
- * Package: net.sf.memoranda
- *
- * @author Alex V. Alishevskikh, alex@openmechanics.net
- * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
- */
 package main.java.memoranda;
 
 import java.util.Collection;
@@ -21,38 +13,52 @@ import nu.xom.Element;
 import nu.xom.Elements;
 import nu.xom.Node;
 
-/**
- *
- */
 /*$Id: TaskImpl.java,v 1.15 2005/12/01 08:12:26 alexeya Exp $*/
+/**
+ *Class that implements the Task interface.
+ */
 public class TaskImpl implements Task, Comparable {
 
     private Element _element = null;
     private TaskList _tl = null;
 
     /**
-     * Constructor for DefaultTask.
+     * constructor for the implemented task
+     * @param taskElement Element
+     * @param tl TaskList
      */
     public TaskImpl(Element taskElement, TaskList tl) {
         _element = taskElement;
         _tl = tl;
     }
 
+    /**
+     * getter for the main element of the class
+     * @return Element
+     */
     public Element getContent() {
         return _element;
     }
 
+    /**
+     * @see Task#getStartDate()
+     */
     public CalendarDate getStartDate() {
         return new CalendarDate(_element.getAttribute("startDate").getValue());
     }
-
+    /**
+     * @see Task#setStartDate(CalendarDate)
+     */
     public void setStartDate(CalendarDate date) {
            setAttr("startDate", date.toString());
     }
 
+    /**
+     * @see Task#getEndDate()
+     */
     public CalendarDate getEndDate() {
 		String ed = _element.getAttribute("endDate").getValue();
-		if (ed != "")
+		if (!ed.equals(""))
 			return new CalendarDate(_element.getAttribute("endDate").getValue());
 		Task parent = this.getParentTask();
 		if (parent != null)
@@ -64,12 +70,18 @@ public class TaskImpl implements Task, Comparable {
         
     }
 
+    /**
+     * @see Task#setEndDate(CalendarDate)
+     */
     public void setEndDate(CalendarDate date) {
 		if (date == null)
 			setAttr("endDate", "");
 		setAttr("endDate", date.toString());
     }
 
+    /**
+     * @see Task#getEffort()
+     */
     public long getEffort() {
     	Attribute attr = _element.getAttribute("effort");
     	if (attr == null) {
@@ -85,13 +97,16 @@ public class TaskImpl implements Task, Comparable {
     	}
     }
 
+    /**
+     * @see Task#setEffort(long)
+     */
     public void setEffort(long effort) {
         setAttr("effort", String.valueOf(effort));
     }
-	
-	/* 
-	 * @see net.sf.memoranda.Task#getParentTask()
-	 */
+
+    /**
+     * @see Task#getParentTask()
+     */
 	public Task getParentTask() {
 		Node parentNode = _element.getParent();
     	if (parentNode instanceof Element) {
@@ -101,7 +116,10 @@ public class TaskImpl implements Task, Comparable {
     	}
     	return null;
 	}
-	
+
+    /**
+     * @see Task#getParentId()
+     */
 	public String getParentId() {
 		Task parent = this.getParentTask();
 		if (parent != null)
@@ -109,6 +127,9 @@ public class TaskImpl implements Task, Comparable {
 		return null;
 	}
 
+    /**
+     * @see Task#getDescription()
+     */
     public String getDescription() {
     	Element thisElement = _element.getFirstChildElement("description");
     	if (thisElement == null) {
@@ -119,6 +140,9 @@ public class TaskImpl implements Task, Comparable {
     	}
     }
 
+    /**
+     * @see Task#setDescription(String)
+     */
     public void setDescription(String s) {
     	Element desc = _element.getFirstChildElement("description");
     	if (desc == null) {
@@ -132,8 +156,8 @@ public class TaskImpl implements Task, Comparable {
     	}
     }
 
-    /**s
-     * @see main.java.memoranda.Task#getStatus()
+    /**
+     * @see Task#getStatus(CalendarDate)
      */
     public int getStatus(CalendarDate date) {
         CalendarDate start = getStartDate();
@@ -142,7 +166,6 @@ public class TaskImpl implements Task, Comparable {
             return Task.FROZEN;
         if (isCompleted())
                 return Task.COMPLETED;
-        
 		if (date.inPeriod(start, end)) {
             if (date.equals(end))
                 return Task.DEADLINE;
@@ -152,17 +175,12 @@ public class TaskImpl implements Task, Comparable {
 		else if(date.before(start)) {
 				return Task.SCHEDULED;
 		}
-		
 		if(start.after(end)) {
 			return Task.ACTIVE;
 		}
-
         return Task.FAILED;
     }
-    /**
-     * Method isDependsCompleted.
-     * @return boolean
-     */
+
 /*
     private boolean isDependsCompleted() {
         Vector v = (Vector) getDependsFrom();
@@ -175,10 +193,19 @@ public class TaskImpl implements Task, Comparable {
         return check;
     }
 */
+
+    /**
+     * returns if the task is frozen
+     * @return boolean
+     */
     private boolean isFrozen() {
         return _element.getAttribute("frozen") != null;
     }
 
+    /**
+     * checks to see if the progress is 100
+     * @return boolean
+     */
     private boolean isCompleted() {
         return getProgress() == 100;
     }
@@ -197,12 +224,16 @@ public class TaskImpl implements Task, Comparable {
         return _element.getFirstChildElement("text").getValue();
     }
 
+    /**
+     * ToString override
+     * @return String
+     */
     public String toString() {
         return getText();
     }
     
     /**
-     * @see main.java.memoranda.Task#setText()
+     * @see main.java.memoranda.Task#setText(String)
      */
     public void setText(String s) {
         _element.getFirstChildElement("text").removeChildren();
@@ -225,53 +256,20 @@ public class TaskImpl implements Task, Comparable {
     }
 
     /**
-     * @see main.java.memoranda.Task#getDependsFrom()
-     */
-    public Collection getDependsFrom() {
-        Vector v = new Vector();
-        Elements deps = _element.getChildElements("dependsFrom");
-        for (int i = 0; i < deps.size(); i++) {
-            String id = deps.get(i).getAttribute("idRef").getValue();
-            Task t = _tl.getTask(id);
-            if (t != null)
-                v.add(t);
-        }
-        return v;
-    }
-    /**
-     * @see main.java.memoranda.Task#addDependsFrom(main.java.memoranda.Task)
-     */
-    public void addDependsFrom(Task task) {
-        Element dep = new Element("dependsFrom");
-        dep.addAttribute(new Attribute("idRef", task.getID()));
-        _element.appendChild(dep);
-    }
-    /**
-     * @see main.java.memoranda.Task#removeDependsFrom(main.java.memoranda.Task)
-     */
-    public void removeDependsFrom(Task task) {
-        Elements deps = _element.getChildElements("dependsFrom");
-        for (int i = 0; i < deps.size(); i++) {
-            String id = deps.get(i).getAttribute("idRef").getValue();
-            if (id.equals(task.getID())) {
-                _element.removeChild(deps.get(i));
-                return;
-            }
-        }
-    }
-    /**
      * @see main.java.memoranda.Task#getProgress()
      */
     public int getProgress() {
-        return new Integer(_element.getAttribute("progress").getValue()).intValue();
+        return Integer.parseInt(_element.getAttribute("progress").getValue());
     }
+
     /**
      * @see main.java.memoranda.Task#setProgress(int)
      */
     public void setProgress(int p) {
         if ((p >= 0) && (p <= 100))
-            setAttr("progress", new Integer(p).toString());
+            setAttr("progress", Integer.toString(p));
     }
+
     /**
      * @see main.java.memoranda.Task#getPriority()
      */
@@ -279,8 +277,9 @@ public class TaskImpl implements Task, Comparable {
         Attribute pa = _element.getAttribute("priority");
         if (pa == null)
             return Task.PRIORITY_NORMAL;
-        return new Integer(pa.getValue()).intValue();
+        return Integer.parseInt(pa.getValue());
     }
+
     /**
      * @see main.java.memoranda.Task#setPriority(int)
      */
@@ -288,6 +287,11 @@ public class TaskImpl implements Task, Comparable {
         setAttr("priority", String.valueOf(p));
     }
 
+    /**
+     * sets a attribute "String" to the Task with a value "String"
+     * @param a String
+     * @param value String
+     */
     private void setAttr(String a, String value) {
         Attribute attr = _element.getAttribute(a);
         if (attr == null)
@@ -296,16 +300,14 @@ public class TaskImpl implements Task, Comparable {
             attr.setValue(value);
     }
 
-	/**
-	 * A "Task rate" is an informal index of importance of the task
-	 * considering priority, number of days to deadline and current 
-	 * progress. 
-	 * 
-	 * rate = (100-progress) / (numOfDays+1) * (priority+1)
-	 * @param CalendarDate
-	 * @return long
-	 */
-
+    /**
+     * A "Task rate" is an informal index of importance of the task
+     * considering priority, number of days to deadline and current
+     * progress.
+     * rate = (100-progress) / (numOfDays+1) * (priority+1)
+     * @param d CalendarDate
+     * @return long
+     */
 	private long calcTaskRate(CalendarDate d) {
 		Calendar endDateCal = getEndDate().getCalendar();
 		Calendar dateCal = d.getCalendar();
@@ -318,46 +320,40 @@ public class TaskImpl implements Task, Comparable {
     /**
      * @see main.java.memoranda.Task#getRate()
      */
-	 
      public long getRate() {
-/*	   Task t = (Task)task;
-	   switch (mode) {
-		   case BY_IMP_RATE: return -1*calcTaskRate(t, date);
-		   case BY_END_DATE: return t.getEndDate().getDate().getTime();
-		   case BY_PRIORITY: return 5-t.getPriority();
-		   case BY_COMPLETION: return 100-t.getProgress();
-	   }
-       return -1;
-*/
 		return -1*calcTaskRate(CurrentDate.get());
 	 }
 	   
-	 /*
+	 /**
 	  * Comparable interface
 	  */
-	  
 	 public int compareTo(Object o) {
 		 Task task = (Task) o;
-		 	if(getRate() > task.getRate())
-				return 1;
-			else if(getRate() < task.getRate())
-				return -1;
-			else 
-				return 0;
+         return Long.compare(getRate(), task.getRate());
 	 }
-	 
+
+    /**
+     * Checks to see if another class is a copy of this task.
+     * @param o Task
+     * @return boolean
+     */
 	 public boolean equals(Object o) {
 	     return ((o instanceof Task) && (((Task)o).getID().equals(this.getID())));
 	 }
 
-	/* 
-	 * @see net.sf.memoranda.Task#getSubTasks()
+	/**
+	 * @see Task#getSubTasks()
 	 */
 	public Collection getSubTasks() {
 		Elements subTasks = _element.getChildElements("task");
             return convertToTaskObjects(subTasks);
 	}
 
+    /**
+     * converts tasks elements to a vector of Task objects
+     * @param tasks Elements
+     * @return Vector
+     */
 	private Collection convertToTaskObjects(Elements tasks) {
         Vector v = new Vector();
         for (int i = 0; i < tasks.size(); i++) {
@@ -367,8 +363,8 @@ public class TaskImpl implements Task, Comparable {
         return v;
     }
 	
-	/* 
-	 * @see net.sf.memoranda.Task#getSubTask(java.lang.String)
+	/**
+	 * @see Task#getSubTask(java.lang.String)
 	 */
 	public Task getSubTask(String id) {
 		Elements subTasks = _element.getChildElements("task");
@@ -379,8 +375,8 @@ public class TaskImpl implements Task, Comparable {
 		return null;
 	}
 
-	/* 
-	 * @see net.sf.memoranda.Task#hasSubTasks()
+	/**
+	 * @see Task#hasSubTasks(String)
 	 */
 	public boolean hasSubTasks(String id) {
 		Elements subTasks = _element.getChildElements("task");
@@ -390,5 +386,32 @@ public class TaskImpl implements Task, Comparable {
 		return false;
 	}
 
+	//Unused interface methods
+    public Collection getDependsFrom() {
+        Vector v = new Vector();
+        Elements deps = _element.getChildElements("dependsFrom");
+        for (int i = 0; i < deps.size(); i++) {
+            String id = deps.get(i).getAttribute("idRef").getValue();
+            Task t = _tl.getTask(id);
+            if (t != null)
+                v.add(t);
+        }
+        return v;
+    }
+    public void addDependsFrom(Task task) {
+        Element dep = new Element("dependsFrom");
+        dep.addAttribute(new Attribute("idRef", task.getID()));
+        _element.appendChild(dep);
+    }
+    public void removeDependsFrom(Task task) {
+        Elements deps = _element.getChildElements("dependsFrom");
+        for (int i = 0; i < deps.size(); i++) {
+            String id = deps.get(i).getAttribute("idRef").getValue();
+            if (id.equals(task.getID())) {
+                _element.removeChild(deps.get(i));
+                return;
+            }
+        }
+    }
 	
 }

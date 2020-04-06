@@ -14,24 +14,24 @@
 ### Sprint Planning (For Sprint 1-4)
 Document your Sprint Planning here. Also check the kickoff document for more details on what needs to be done. This is just the documentation. 
 
-**Sprint Goal:** Your Sprint goal
+**Sprint Goal:** Restore and refresh application to a modern, useable state.  
 
-**How many User Stories did you add to the Product Backlog:**  Number
+**How many User Stories did you add to the Product Backlog:** 6
 
 **How many User Stories did you add to this Sprint:** 
-> Answer the questions below about your Sprint Planning?
+> 9
 
 **Why did you add exactly these US?**
 
-> Your Answer
+> 7 of the user stories were mandated.  Additionally, he team voted on the top two user stories from that backlog that were deemed the most essential to add to the sprint.
 
 **Why do you think you will get them done? (details)**
 
-> Your Answer
+> The team has discussed the areas they feel most comfortable working in and have agreed to split out the work based on skillset and comfort level.
 
 **Do you have a rough idea what you need to do? (if the answer is no then please let me know on Slack)**
 
-> Your Answer
+> Yes, each member of the team has reviewed the project requirements in detail and understand what is expected of us.
 
 
 
@@ -42,19 +42,44 @@ I would also advise you to already fill out the Contributions section (End of sp
 ### Meeting minutes of your Daily Scrums (3 per week, should not take longer than 10 minutes):
 > Add as many rows as needed and fill out the table. (Burndown starts with Sprint 2 and Travis CI starts with Sprint 3, not needed before that)
 
-| Date  | Attendees  |Minutes   | Burndown Info | TravisCI info | Additional Info  |
-|---|---|---|---|--|--|
-|   |   |   |   |  |  |
-|   |   |   |   |  |  |
-|   |   |   |   |  |  |
+| Date      | Attendees                              |Minutes                                                                             | Burndown Info | TravisCI info | Additional Info  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
+| March 26  | Justin, Nancy, Daimi, Chase, Stephen   |Sprint starts on Sunday. Everyone added user stories additions to product backlog.  |               |               |                  |
+|           |                                        |User stories selected for upcoming sprint moved from product backlog to sprint      |               |               |                  |
+|           |                                        |backlog. Everone got their branches enviornemnt set up                              |               |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
+| March 29  | Justin, Nancy, Daimi, Chase, Stephen   |Work began on  multiple user stories, including 25, 17, 18, 14, 5, 12.              |               |               |                  |
+|           |                                        |Found out a group member was withdrawing, could cause potential issue in the future.|               |               |                  |
+|           |                                        |Small issue with one person's enviornment, but looks like it got fixed.             |               |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
+| March 31  | Justin, Nancy, Daimi, Chase, Stephen   |Work continues flowing on sprint tasks from the user stories posted in last scrum.  |               |               |                  |
+|           |                                        |Some blockers appeared: workload from other courses, one member has coronavirus     |               |               |                  |
+|           |                                        |And others are just feeling the pressure of the crazy pandemic world                |               |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
+| April 2   | Justin, Nancy, Daimi, Chase, Stephen   | User stories are being completed and tested and merged into dev branch.            |               |               |                  |
+|           |                                        | Some lag due to multiple outside factors of life, but overall things are getting   |               |               |                  |
+|           |                                        | accomplished. New stories being added to product backlog. Most tasks are completed |               |               |                  |
+|           |                                        | as this sprint is nearing an end.                                                  |               |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
 
 ### Meeting Summary:
 
-> Add rows as needed and add the number how many meetings they attended:
+   Justin Oliver : 4
 
-   Name1 : Num Meetings
+   Nancy Bellinger : 4
 
-   Name2 : Num Meetings
+   Daimi Mussey : 4
+
+   Chase Pierce : 4
+
+   Stephen Wilson : 4       
 
 
 ## 3: After the Sprint

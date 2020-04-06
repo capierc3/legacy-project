@@ -19,10 +19,10 @@ import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Elements;
 
-/**
- *
- */
 /*$Id: ResourcesListImpl.java,v 1.5 2007/03/20 06:21:46 alexeya Exp $*/
+/**
+ * Class that implements the ResourceList interface
+ */
 public class ResourcesListImpl implements ResourcesList {
     
 	private Project _project = null;
@@ -31,6 +31,8 @@ public class ResourcesListImpl implements ResourcesList {
 
     /**
      * Constructor for TaskListImpl.
+     * @param doc Document
+     * @param prj Project
      */
     public ResourcesListImpl(Document doc, Project prj) {
         _doc = doc;
@@ -38,12 +40,19 @@ public class ResourcesListImpl implements ResourcesList {
         _project = prj;
     }
 
+    /**
+     * constructor without an existing document
+     * @param prj Project
+     */
     public ResourcesListImpl(Project prj) {
             _root = new Element("resources-list");
             _doc = new Document(_root);
             _project = prj;
     }
 
+    /**
+     * @see ResourcesList#getAllResources()
+     */
     public Vector getAllResources() {
         Vector v = new Vector();
         Elements rs = _root.getChildElements("resource");
@@ -63,9 +72,6 @@ public class ResourcesListImpl implements ResourcesList {
         return null;
     }
 
-    /**
-     * @see net.sf.memoranda.ResourcesList#addResource(java.lang.String, java.lang.String)
-     */
     /*public void addResource(String path, String taskId) {
         Element el = new Element("resource");
         el.addAttribute(new Attribute("id", Util.generateId()));
@@ -75,7 +81,7 @@ public class ResourcesListImpl implements ResourcesList {
     }*/
     
     /**
-     * @see main.java.memoranda.ResourcesList#addResource(java.lang.String, boolean)
+     * @see main.java.memoranda.ResourcesList#addResource(String, boolean, boolean)
      */
     public void addResource(String path, boolean isInternetShortcut, boolean isProjectFile) {
         Element el = new Element("resource");
@@ -88,6 +94,9 @@ public class ResourcesListImpl implements ResourcesList {
         _root.appendChild(el);
     }
 
+    /**
+     * @see ResourcesList#addResource(String)
+     */
     public void addResource(String path) {
         addResource(path, false, false);
     }
@@ -107,7 +116,6 @@ public class ResourcesListImpl implements ResourcesList {
             	_root.removeChild(rs.get(i));
             }
     }
-        
 
     /**
      * @see main.java.memoranda.ResourcesList#getAllResourcesCount()
@@ -115,16 +123,14 @@ public class ResourcesListImpl implements ResourcesList {
     public int getAllResourcesCount() {
         return _root.getChildElements("resource").size();
     }
+
     /**
      * @see main.java.memoranda.ResourcesList#getXMLContent()
      */
     public Document getXMLContent() {
         return _doc;
     }
-    
-    /**
-     * @see net.sf.memoranda.ResourcesList#getResourcesForTask(java.lang.String)
-     */
+
     /*public Vector getResourcesForTask(String taskId) {
         Vector v = new Vector();
         Elements rs = _root.getChildElements("resource");

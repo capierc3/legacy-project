@@ -22,7 +22,7 @@ import javax.swing.KeyStroke;
 
 import main.java.memoranda.util.Local;
 /**
- * 
+ *
  */
 /*$Id: History.java,v 1.7 2006/10/31 15:34:14 hglas Exp $*/
 public class History {
@@ -31,8 +31,12 @@ public class History {
     static int p = -1;
     static Vector historyListeners = new Vector();
     static Object next = null;
-    static Object prev = null;     
-    
+    static Object prev = null;
+
+    /**
+     * Method to add HistoryItem to Vector _list
+     * @param item
+     */
     public static void add(HistoryItem item) {
         if (prev != null)   
             if (item.equals(prev)) return;
@@ -55,6 +59,10 @@ public class History {
             _list.remove(0);     
     }
 
+    /**
+     * Method to roll back the HistoryItem and return the previous HistoryItem in the _list
+     * @return HistoryItem
+     */
     public static HistoryItem rollBack() {        
         Object n = prev;        
         if (p > 1) {                          
@@ -74,6 +82,10 @@ public class History {
         return (HistoryItem)n;
     }
 
+    /**
+     * Method to roll forward and return the next HistoryItem in the _list
+     * @return HistoryItem
+     */
     public static HistoryItem rollForward() {
         Object n = next;        
         if (p < _list.size() - 1) {
@@ -91,18 +103,34 @@ public class History {
         return (HistoryItem)n;    
     }
 
+    /**
+     * Method to check if there is a previous HistoryItem to roll back to, and returns a boolean
+     * @return boolean
+     */
     public static boolean canRollBack() {
         return prev != null;
     }
 
+    /**
+     * Method to check if there is a next HistoryItem to roll forward to and returns a boolean
+     * @return boolean
+     */
     public static boolean canRollForward() {
         return next != null;
     }
 
+    /**
+     * Method to add a HistoryListener to the vector of historyListeners
+     * @param hl
+     */
     public static void addHistoryListener(HistoryListener hl) {
         historyListeners.add(hl);
     }
-    
+
+    /**
+     * Method to remove Project from Project History and historyListeners
+     * @param prj
+     */
     public static void removeProjectHistory(Project prj) {
         Vector list = new Vector();
         String id;
@@ -130,16 +158,33 @@ public class History {
         }
     }
 
+    /**
+     * Method to notify historyListeners of a HistoryItem
+     * @param n
+     */
     private static void notifyListeners(HistoryItem n) {
         for (int i = 0; i < historyListeners.size(); i++)            
                  ((HistoryListener) historyListeners.get(i)).historyWasRolledTo(n);
     }
 
+    /**
+     * HistoryBackAction declared and initialized
+     */
     public static HistoryBackAction historyBackAction = new HistoryBackAction();
+
+    /**
+     * HistoryForwardAction declared and initialized
+     */
     public static HistoryForwardAction historyForwardAction = new HistoryForwardAction();
 
+    /**
+     * Inner class HistoryBackAction
+     */
     static class HistoryBackAction extends AbstractAction {
 
+        /**
+         * Constructor for HistoryBackAction object
+         */
         public HistoryBackAction() {
             super(Local.getString("History back"), 
             new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/hist_back.png")));
@@ -147,6 +192,10 @@ public class History {
             setEnabled(false);
         }
 
+        /**
+         * Method to notify historyListeners that an action is performed on a Project and update HistoryForwardAction
+         * @param e
+         */
         public void actionPerformed(ActionEvent e) {            
             notifyListeners(rollBack());
             update();
@@ -157,6 +206,9 @@ public class History {
             return canRollBack();
         }*/
 
+        /**
+         * Method to update HistoryBackAction
+         */
         void update() {
             if (canRollBack()) {
                 setEnabled(true);
@@ -177,8 +229,14 @@ public class History {
         }
     }
 
+    /**
+     * Inner class HistoryForwardAction
+     */
     static class HistoryForwardAction extends AbstractAction {
 
+        /**
+         * Constructor to  create HistoryForwardAction object
+         */
         public HistoryForwardAction() {
             super(Local.getString("History forward"), 
             new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/hist_forward.png")));
@@ -186,6 +244,10 @@ public class History {
             setEnabled(false);
         }
 
+        /**
+         * Method to notify historyListeners that an action  is performed on a Project, and update the HistoryBackAction
+         * @param e
+         */
         public void actionPerformed(ActionEvent e) {            
             notifyListeners(rollForward());
             update();
@@ -196,6 +258,9 @@ public class History {
             return canRollForward();
         }*/
 
+        /**
+         * Method to update HistoryBackAction
+         */
         void update() {
             if (canRollForward()) {
                 setEnabled(true);

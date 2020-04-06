@@ -57,89 +57,69 @@ import nu.xom.Element;
 import nu.xom.Elements;
 
 
-/**
- * 
- * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
- */
+
 
 /*$Id: AppFrame.java,v 1.33 2005/07/05 08:17:24 alexeya Exp $*/
-
+/**
+ * Holds the information for the main fram of the app.
+ * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
+ */
 public class AppFrame extends JFrame {
 
+    //panels
     JPanel contentPane;
-    JMenuBar menuBar = new JMenuBar();
-    JMenu jMenuFile = new JMenu();
-    JMenuItem jMenuFileExit = new JMenuItem();
-
-    JToolBar toolBar = new JToolBar();
-    JButton jButton3 = new JButton();
-    ImageIcon image1;
-    ImageIcon image2;
-    ImageIcon image3;
-    JLabel statusBar = new JLabel();
-    BorderLayout borderLayout1 = new BorderLayout();
-    JSplitPane splitPane = new JSplitPane();
-    ProjectsPanel projectsPanel = new ProjectsPanel();
-    boolean prPanelExpanded = false;
-
-    JMenu jMenuEdit = new JMenu();
-    JMenu jMenuFormat = new JMenu();
-    JMenu jMenuInsert = new JMenu();
-
     public WorkPanel workPanel = new WorkPanel();
+
     HTMLEditor editor = workPanel.dailyItemsPanel.editorPanel.editor;
-
-    static Vector exitListeners = new Vector();
-
+    //actions
     public Action prjPackAction = new AbstractAction("Pack current project") {
         public void actionPerformed(ActionEvent e) {
             doPrjPack();
         }
     };
-
     public Action prjUnpackAction = new AbstractAction("Unpack project") {
         public void actionPerformed(ActionEvent e) {
             doPrjUnPack();
         }
     };
-
     public Action minimizeAction = new AbstractAction("Close the window") {
         public void actionPerformed(ActionEvent e) {
             doMinimize();
         }
     };
-
     public Action preferencesAction = new AbstractAction("Preferences") {
         public void actionPerformed(ActionEvent e) {
             showPreferences();
         }
     };
-    
     public Action exportNotesAction =
-                new AbstractAction(Local.getString("Export notes") + "...") {
+            new AbstractAction(Local.getString("Export notes") + "...") {
 
                 public void actionPerformed(ActionEvent e) {
-                        ppExport_actionPerformed(e);
+                    ppExport_actionPerformed(e);
                 }
-        };
-        
-        public Action importNotesAction =
-                        new AbstractAction(Local.getString("Import multiple notes")) {
-
-                        public void actionPerformed(ActionEvent e) {
-                                ppImport_actionPerformed(e);
-                        }
-                };
-        public Action importOneNoteAction =
-                new AbstractAction(Local.getString("Import one note")) {
+            };
+    public Action importNotesAction =
+            new AbstractAction(Local.getString("Import multiple notes")) {
 
                 public void actionPerformed(ActionEvent e) {
-                        p1Import_actionPerformed(e);
+                    ppImport_actionPerformed(e);
                 }
-        };
-    
+            };
+    public Action importOneNoteAction =
+            new AbstractAction(Local.getString("Import one note")) {
+
+                public void actionPerformed(ActionEvent e) {
+                    p1Import_actionPerformed(e);
+                }
+            };
+    //main bar object
+    JMenuBar menuBar = new JMenuBar();
+    //file tab
+    JMenu jMenuFile = new JMenu();
+    JMenuItem jMenuFileExit = new JMenuItem();
     JMenuItem jMenuFileNewPrj = new JMenuItem();
-        JMenuItem jMenuFileNewNote = new JMenuItem(workPanel.dailyItemsPanel.editorPanel.newAction);
+    JMenuItem jMenuFileNewNote = new JMenuItem(workPanel.dailyItemsPanel.editorPanel.newAction);
     JMenuItem jMenuFilePackPrj = new JMenuItem(prjPackAction);
     JMenuItem jMenuFileUnpackPrj = new JMenuItem(prjUnpackAction);
     JMenuItem jMenuFileExportPrj = new JMenuItem(exportNotesAction);
@@ -148,8 +128,8 @@ public class AppFrame extends JFrame {
     JMenuItem jMenuFileExportNote = new JMenuItem(
             workPanel.dailyItemsPanel.editorPanel.exportAction);
     JMenuItem jMenuFileMin = new JMenuItem(minimizeAction);
-
-    JMenuItem jMenuItem1 = new JMenuItem();
+    //edit tab
+    JMenu jMenuEdit = new JMenu();
     JMenuItem jMenuEditUndo = new JMenuItem(editor.undoAction);
     JMenuItem jMenuEditRedo = new JMenuItem(editor.redoAction);
     JMenuItem jMenuEditCut = new JMenuItem(editor.cutAction);
@@ -158,8 +138,9 @@ public class AppFrame extends JFrame {
     JMenuItem jMenuEditPasteSpec = new JMenuItem(editor.stylePasteAction);
     JMenuItem jMenuEditSelectAll = new JMenuItem(editor.selectAllAction);
     JMenuItem jMenuEditFind = new JMenuItem(editor.findAction);
-
-    JMenu jMenuGo = new JMenu();
+    JMenuItem jMenuEditPref = new JMenuItem(preferencesAction);
+    //insert tab
+    JMenu jMenuInsert = new JMenu();
     JMenuItem jMenuInsertImage = new JMenuItem(editor.imageAction);
     JMenuItem jMenuInsertTable = new JMenuItem(editor.tableAction);
     JMenuItem jMenuInsertLink = new JMenuItem(editor.linkAction);
@@ -172,10 +153,12 @@ public class AppFrame extends JFrame {
     JMenuItem jMenuInsertDate = new JMenuItem(
             workPanel.dailyItemsPanel.editorPanel.insertDateAction);
     JMenuItem jMenuInsertTime = new JMenuItem(
-    		workPanel.dailyItemsPanel.editorPanel.insertTimeAction);
+            workPanel.dailyItemsPanel.editorPanel.insertTimeAction);
     JMenuItem jMenuInsertFile = new JMenuItem(
             workPanel.dailyItemsPanel.editorPanel.importAction);
-
+    JMenu jMenuInsertSpecial = new JMenu();
+    //menu tab
+    JMenu jMenuFormat = new JMenu();
     JMenu jMenuFormatPStyle = new JMenu();
     JMenuItem jMenuFormatP = new JMenuItem(editor.new BlockAction(editor.T_P,
             ""));
@@ -223,6 +206,8 @@ public class AppFrame extends JFrame {
     JMenuItem jMenuFormatTableInsR = new JMenuItem(editor.insertTableRowAction);
     JMenuItem jMenuFormatTableInsC = new JMenuItem(editor.insertTableCellAction);
     JMenuItem jMenuFormatProperties = new JMenuItem(editor.propsAction);
+    //Go tab
+    JMenu jMenuGo = new JMenu();
     JMenuItem jMenuGoHBack = new JMenuItem(History.historyBackAction);
     JMenuItem jMenuGoFwd = new JMenuItem(History.historyForwardAction);
 
@@ -232,19 +217,31 @@ public class AppFrame extends JFrame {
             workPanel.dailyItemsPanel.calendar.dayForwardAction);
     JMenuItem jMenuGoToday = new JMenuItem(
             workPanel.dailyItemsPanel.calendar.todayAction);
-
-    JMenuItem jMenuEditPref = new JMenuItem(preferencesAction);
-
-    JMenu jMenuInsertSpecial = new JMenu();
-    
+    //help tab
     JMenu jMenuHelp = new JMenu();
-    
     JMenuItem jMenuHelpGuide = new JMenuItem();
     JMenuItem jMenuHelpWeb = new JMenuItem();
     JMenuItem jMenuHelpBug = new JMenuItem();
     JMenuItem jMenuHelpAbout = new JMenuItem();
 
-    //Construct the frame
+    JToolBar toolBar = new JToolBar();
+    JButton jButton3 = new JButton();
+    ImageIcon image1;
+    ImageIcon image2;
+    ImageIcon image3;
+    JLabel statusBar = new JLabel();
+    BorderLayout borderLayout1 = new BorderLayout();
+    JSplitPane splitPane = new JSplitPane();
+    ProjectsPanel projectsPanel = new ProjectsPanel();
+    boolean prPanelExpanded = false;
+
+    static Vector exitListeners = new Vector();
+
+    //JMenuItem jMenuItem1 = new JMenuItem();
+
+    /**
+     * Constructs the frame
+     */
     public AppFrame() {
         enableEvents(AWTEvent.WINDOW_EVENT_MASK);
         try {
@@ -254,15 +251,19 @@ public class AppFrame extends JFrame {
             new ExceptionDialog(e);
         }
     }
-    //Component initialization
-    private void jbInit() throws Exception {
+
+    /**
+     * sets up all the menu items.
+     */
+    private void jbInit() {
+        //windows toolbar icon
         this.setIconImage(new ImageIcon(AppFrame.class.getResource(
-                "/ui/icons/jnotes16.png"))
+                "/ui/icons/agenda.png"))
                 .getImage());
         contentPane = (JPanel) this.getContentPane();
         contentPane.setLayout(borderLayout1);
         //this.setSize(new Dimension(800, 500));
-        this.setTitle("Memoranda - " + CurrentProject.get().getTitle());
+        this.setTitle("Kaesekuchen Gym - " + CurrentProject.get().getTitle());
         //Added a space to App.VERSION_INFO to make it look some nicer
         statusBar.setText(" Version:" + App.VERSION_INFO + " (Build "
                 + App.BUILD_INFO + " )");
@@ -285,7 +286,7 @@ public class AppFrame extends JFrame {
             }
         });
         
-        jMenuHelpWeb.setText(Local.getString("Memoranda web site"));
+        jMenuHelpWeb.setText(Local.getString("Kaesekuchen web site"));
         jMenuHelpWeb.setIcon(new ImageIcon(AppFrame.class.getResource(
                 "/ui/icons/web.png")));
         jMenuHelpWeb.addActionListener(new ActionListener() {
@@ -301,7 +302,7 @@ public class AppFrame extends JFrame {
             }
         });        
         
-        jMenuHelpAbout.setText(Local.getString("About Memoranda"));
+        jMenuHelpAbout.setText(Local.getString("About Kaesekuchen"));
         jMenuHelpAbout.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 jMenuHelpAbout_actionPerformed(e);
@@ -473,7 +474,7 @@ public class AppFrame extends JFrame {
         menuBar.add(jMenuInsert);
         menuBar.add(jMenuFormat);
         menuBar.add(jMenuGo);
-        menuBar.add(jMenuHelp);
+        //menuBar.add(jMenuHelp);
         this.setJMenuBar(menuBar);
         //contentPane.add(toolBar, BorderLayout.NORTH);
         contentPane.add(statusBar, BorderLayout.SOUTH);
@@ -583,17 +584,30 @@ public class AppFrame extends JFrame {
         this.workPanel.dailyItemsPanel.alarmB.addActionListener(
                 setMenusDisabled);
 
-        this.workPanel.tasksB.addActionListener(setMenusDisabled);
-        this.workPanel.eventsB.addActionListener(setMenusDisabled);
-        this.workPanel.filesB.addActionListener(setMenusDisabled);
-        this.workPanel.agendaB.addActionListener(setMenusDisabled);
+        this.workPanel.myStuff.addActionListener(setMenusDisabled);
+        this.workPanel.myCalendar.addActionListener(setMenusDisabled);
+        this.workPanel.upcomingClasses.addActionListener(setMenusDisabled);
+        this.workPanel.trainerProfiles.addActionListener(setMenusDisabled);        
+        this.workPanel.roomInfo.addActionListener(setMenusDisabled);
+        this.workPanel.bookTrainer.addActionListener(setMenusDisabled);
+        this.workPanel.resources.addActionListener(setMenusDisabled);
+      
+        
+        
 
-        this.workPanel.notesB.addActionListener(
+        /*
+         * Not currently using notes, if we are, add this back in
+         * 
+         * this.workPanel.notesB.addActionListener(
                 new java.awt.event.ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         setEnabledEditorMenus(true);
                     }
-                });
+                });*/
+
+
+        
+        
 
         Object fwo = Context.get("FRAME_WIDTH");
         Object fho = Context.get("FRAME_HEIGHT");
@@ -667,6 +681,7 @@ public class AppFrame extends JFrame {
     public void doMinimize() {
         exitNotify();
         App.closeWindow();
+
     }
 
     //Help | About action performed
@@ -681,17 +696,14 @@ public class AppFrame extends JFrame {
     }
 
     protected void processWindowEvent(WindowEvent e) {
+
         if (e.getID() == WindowEvent.WINDOW_CLOSING) {
             if (Configuration.get("ON_CLOSE").equals("exit"))
                 doExit();
             else
                 doMinimize();
         }
-        else if ((e.getID() == WindowEvent.WINDOW_ICONIFIED)) {
-            super.processWindowEvent(new WindowEvent(this,
-                    WindowEvent.WINDOW_CLOSING));
-            doMinimize();
-        }
+        
         else
             super.processWindowEvent(e);
     }
@@ -993,7 +1005,7 @@ public class AppFrame extends JFrame {
                             notesName.put(id,name);
                     }
                     System.out.println("id: "+id+" name: "+name);
-                    
+
                     Elements contlist = body.getChildElements("a");
                     for(int i = 0;i<(contlist.size()-1);i++){
                             item = contlist.get(i);

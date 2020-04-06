@@ -158,6 +158,10 @@ public class ProjectImpl implements Project {
             _root.removeAttribute(a);
     }
 
+    /**
+     * Method to get the Description from current Project first child Element
+     * @return String
+     */
 	public String getDescription() {
     	Element thisElement = _root.getFirstChildElement("description");
     	if (thisElement == null) {
@@ -168,6 +172,10 @@ public class ProjectImpl implements Project {
     	}
     }
 
+    /**
+     * Method to set Description for current Project
+     * @param s
+     */
     public void setDescription(String s) {
     	Element desc = _root.getFirstChildElement("description");
     	if (desc == null) {
