@@ -44,31 +44,31 @@ I would also advise you to already fill out the Contributions section (End of sp
 
 | Date      | Attendees                              |Minutes                                                                             | Burndown Info | TravisCI info | Additional Info  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
-| March 26  | Justin, Nancy, Daimi, Chase, Stephen   |Sprint starts on Sunday. Everyone added user stories additions to product backlog.  |               |               |                  |
+| March 26  | Justin, Kyp, Daimi, Chase, Stephen   |Sprint starts on Sunday. Everyone added user stories additions to product backlog.  |               |               |                  |
 |           |                                        |User stories selected for upcoming sprint moved from product backlog to sprint      |               |               |                  |
 |           |                                        |backlog. Everyone got their branches environment set up                             |               |               |                  |
 |           |                                        |                                                                                    |               |               |                  |
 |           |                                        |                                                                                    |               |               |                  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
-| March 29  | Justin, Nancy, Daimi, Chase, Stephen   |Work began on  multiple user stories, including 25, 17, 18, 14, 5, 12.              |               |               |                  |
+| March 29  | Justin, Kyp, Daimi, Chase, Stephen   |Work began on  multiple user stories, including 25, 17, 18, 14, 5, 12.              |               |               |                  |
 |           |                                        |Found out a group member was withdrawing, could cause potential issue in the future.|               |               |                  |
 |           |                                        |Small issue with one person's environment, but looks like it got fixed.             |               |               |                  |
 |           |                                        |                                                                                    |               |               |                  |
 |           |                                        |                                                                                    |               |               |                  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
-| March 31  | Justin, Nancy, Daimi, Chase, Stephen   |Work continues flowing on sprint tasks from the user stories posted in last scrum.  |               |               |                  |
+| March 31  | Justin, Kyp, Daimi, Chase, Stephen   |Work continues flowing on sprint tasks from the user stories posted in last scrum.  |               |               |                  |
 |           |                                        |Some blockers appeared: workload from other courses, one member has coronavirus     |               |               |                  |
 |           |                                        |And others are just feeling the pressure of the crazy pandemic world                |               |               |                  |
 |           |                                        |                                                                                    |               |               |                  |
 |           |                                        |                                                                                    |               |               |                  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
-| April 2   | Justin, Nancy, Daimi, Chase, Stephen   | User stories are being completed and tested and merged into dev branch.            |               |               |                  |
+| April 2   | Justin, Kyp, Daimi, Chase, Stephen   | User stories are being completed and tested and merged into dev branch.            |               |               |                  |
 |           |                                        | Some lag due to multiple outside factors of life, but overall things are getting   |               |               |                  |
 |           |                                        | accomplished. New stories being added to product backlog. Most tasks are completed |               |               |                  |
 |           |                                        | as this sprint is nearing an end.                                                  |               |               |                  |
 |           |                                        |                                                                                    |               |               |                  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
-| April 5   | Justin, Nancy, Daimi, Chase, Stephen   | All user stories are completed, and Chase as Git Master has been merging those     |               |               |                  |
+| April 5   | Justin, Kyp, Daimi, Chase, Stephen   | All user stories are completed, and Chase as Git Master has been merging those     |               |               |                  |
 |           |                                        | branches into the sprint1 branch. There were a couple bugs found while going over  |               |               |                  |
 |           |                                        | the branch as a team, and made fixes for those quickly. New stories being added to |               |               |                  |
 |           |                                        | product backlog. Our team finished everything for this sprint and are building out |               |               |                  |
@@ -79,7 +79,7 @@ I would also advise you to already fill out the Contributions section (End of sp
 
    Justin Oliver : 5
 
-   Nancy Bellinger : 5
+   Kyp Bellinger : 5
 
    Daimi Mussey : 5
 
@@ -237,27 +237,26 @@ I would also advise you to already fill out the Contributions section (End of sp
 #### Team member Kyp Bellinger:
   **Links to GitHub commits with main code contribution (up to 5 links):
 
-    - link1
-    - link2
+    -https://github.com/amehlhase316/Kaesekuchen/commit/f6db98eec811a82b5626efa616535ec3915d1db0
+    - https://github.com/amehlhase316/Kaesekuchen/commit/5540ea0eb93e6fede837be4ec4f2615d7e9d51ca
+	-
+	https://github.com/amehlhase316/Kaesekuchen/commit/f5051569f485158103bddfd211c01529cc51e1e2
 
    **GitHub links to your Unit Tests (up to 3 links):
 
-    - link1
-    - link2
+    - N/A
 
   **GitHub links to your Code Reviews (up to 3 links):
 
-    - link1
-    - link2
+    - N/A
 
   **How did you contribute to Static Analysis:
 
-    - link1
-    - link2
+    - N/A
  
  **What was your main contribution to the Quality Policy documentation?:
 
-    - info
+    - We met collectively to go over the workflow and quality policy at the beginning of the sprint. My main contribution was accidentally naming things after the task number (most of us did this, to be fair), which led to an ad-hoc policy update mid-sprint.
 
 #### Team member Daimi Mussey:
   **Links to GitHub commits with main code contribution (up to 5 links):
