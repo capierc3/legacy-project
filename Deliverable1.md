@@ -186,8 +186,9 @@ I would also advise you to already fill out the Contributions section (End of sp
  #### Team member Justin Oliver:
    **Links to GitHub commits with main code contribution (up to 5 links):
  
-     - link1
-     - link2
+     - https://github.com/amehlhase316/Kaesekuchen/commit/c330596083049885ab3aea8b5421bc6426449dbb
+     - https://github.com/amehlhase316/Kaesekuchen/commit/1c1c65139e0023f037be3e52fae7089fdc5291b0
+     - https://github.com/amehlhase316/Kaesekuchen/commit/dee0eb72e9deb615e141af63abf23a8e0db40e1a
  
     **GitHub links to your Unit Tests (up to 3 links):
  
@@ -206,7 +207,7 @@ I would also advise you to already fill out the Contributions section (End of sp
   
   **What was your main contribution to the Quality Policy documentation?:
  
-     - info
+     - We had a phone call where we all talked through together what the quality policy document should look like. I made sure I read and understood the requirements of the project before the conversation and participated in the conversation that helped us all to align on a common github workflow. 
 
 #### Team member Stephen Wilson:
   **Links to GitHub commits with main code contribution (up to 5 links):
