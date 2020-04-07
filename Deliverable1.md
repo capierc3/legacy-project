@@ -261,27 +261,27 @@ I would also advise you to already fill out the Contributions section (End of sp
 #### Team member Daimi Mussey:
   **Links to GitHub commits with main code contribution (up to 5 links):
 
-    - link1
-    - link2
+    - https://github.com/amehlhase316/Kaesekuchen/commit/8ce08d258caa257a5bf6af23e391cc8fce87956f
+    - https://github.com/amehlhase316/Kaesekuchen/commit/08057db3f7a8d9551e5dec9e96f77270daf7c074
+    - https://github.com/amehlhase316/Kaesekuchen/commit/9898c3b753aa48629f7039e7a9d2590563c0b4cc
+    - https://github.com/amehlhase316/Kaesekuchen/commit/c76e1694a4bee3d5dee81f87334f9969d602a097
+    - https://github.com/amehlhase316/Kaesekuchen/commit/0b0810f55209b190b5854892aad11de87ae2d879
 
    **GitHub links to your Unit Tests (up to 3 links):
 
-    - link1
-    - link2
+    - N/A
 
   **GitHub links to your Code Reviews (up to 3 links):
 
-    - link1
-    - link2
+    - N/A
 
   **How did you contribute to Static Analysis:
 
-    - link1
-    - link2
+    - N/A
  
  **What was your main contribution to the Quality Policy documentation?:
 
-    - info
+    - We met as a group to cover the workflow at the beginning of the sprint. After our Sprint Review and Retrospective, I added in feedback on branch naming conventions for Tasks, and how we want to handle code deletion going forward (comment out first, then delete in the end with 'TODO' comments).
  
 ## 4: Checklist for you to see if you are done
 - [ ] Filled out the complete form from above, all fields are filled and written in full sentences
