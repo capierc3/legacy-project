@@ -161,27 +161,27 @@ I would also advise you to already fill out the Contributions section (End of sp
 #### Team member Chase Pierce:
   **Links to GitHub commits with main code contribution (up to 5 links):
 
-    - link1
-    - link2
+    - https://github.com/amehlhase316/Kaesekuchen/commit/533858d2b475f99cb76d315f166e366b8df270b5
+    - https://github.com/amehlhase316/Kaesekuchen/commit/600da6151202aced5b069c8d714f0729577b9bce
+    - https://github.com/amehlhase316/Kaesekuchen/commit/3438d8b0dfe18e91de6f924e00e6b4e22ab46a0e
+    - https://github.com/amehlhase316/Kaesekuchen/commit/19efbf3d715981c21bd1a709bd2cd4fe2f28a4bd
+    - https://github.com/amehlhase316/Kaesekuchen/commit/1dad43a63eb3cb6e05a99560159855da2cd96e6f
 
-   **GitHub links to your Unit Tests (up to 3 links):
+  **GitHub links to your Unit Tests (up to 3 links):
 
-    - link1
-    - link2
+    -
 
   **GitHub links to your Code Reviews (up to 3 links):
 
-    - link1
-    - link2
+    - 
 
   **How did you contribute to Static Analysis:
-
-    - link1
-    - link2
  
- **What was your main contribution to the Quality Policy documentation?:
+    -
 
-    - info
+  **What was your main contribution to the Quality Policy documentation?:
+
+    -Being the git master I was able to put in good information through seeing what was going well and what might cause issues in the future.  
  
  #### Team member Justin Oliver:
    **Links to GitHub commits with main code contribution (up to 5 links):
