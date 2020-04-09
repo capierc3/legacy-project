@@ -3,17 +3,25 @@
 
 **GitHub Workflow** (due Feb 2nd)
   > Each sprint will have a dedicated branch, pulled from the master branch.  It will be named 'sprintX' where X is the current sprint iteration number.
-  > Each user story will have an independent branch pulled from 'sprintX' and be named 'usX' where X is the user story number generated from Taiga
-  > If multiple developers are working on the same user story but different tasks, separate branches shall be generated (1 for each developer) and named 'usX_TaskName' where TaskName aligns with the task being worked
+  > Each user story will have an independent branch pulled from 'sprintX' and be named 'US_X' where X is the user story number generated from Taiga
+  > If multiple developers are working on the same user story but different tasks, separate branches shall be generated (1 for each developer) and named 'TASK_X' where TaskName aligns with the task being worked
   > Upon the completion of a user story, the sprintX branch shall be merged into the usX branch and any conflicts shall be resolved.  Upon successful testing, a pull request will be generated to have the changes merged into sprintX branch.
   > At the completion of the sprint, the sprintX branch will be thoroughly tested.  Upon completion of testing, the branch will be merged into master by the appointed Git Master
 
-  > Comments: All commit comments shall start with US:#-TASK:#, followed by a breief description of what the commit added or modified.  An example would be "US:123-TASK:456 Add init() method to Class.java"
+  > Commit Comments: All commit comments shall start with TASK# and action description of changes. Example: "45 - commenting out bad button"
 
-  > Conflicts: All conflits are to be handled by the developer responsible for generating the pull request.
+  > Conflicts: All conflicts are to be handled by the developer responsible for generating the pull request.
+
+  > Code Removal: Before removing code, comment out the lines of code no longer being used, and start with a //TODO comment header, Developer Name, and reason for removal for cleanup in last sprint
+
+  > New classes do need to include @author in Javadoc comments
+  > Submit pull request when moving a ticket over to Ready For Test, Tag @everyone in Git channel. Once tested and reviewed, Reviewer will add a comment in PR with feedback or approval.
+  > After pull request is approved by the Tester/Reviewer, Approver merges the ticket in, closes the ticket in Taiga
+
 
 **Unit Tests Blackbox** (due start Sprint 2)
-  > Your Blackbox testing policy 
+  > Whoever writes the Blackbox tests for the class is NOT the developer that created the class
+  > JavaDoc comments need to be extremely clear on parameters passed in, and general functionality to create these tests
 
  **Unit Tests Whitebox** (due Feb 25th)
   > Your Whitebox testing policy 
