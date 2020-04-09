@@ -22,16 +22,23 @@
 **Unit Tests Blackbox** (due start Sprint 2)
   > Whoever writes the Blackbox tests for the class is NOT the developer that created the class
   > JavaDoc comments need to be extremely clear on parameters passed in, and general functionality to create these tests
+  > At least one test class is created and ran if the pull request contains functionality. Must successfully pass all tests and test all equivalence partitions
 
  **Unit Tests Whitebox** (due Feb 25th)
-  > Your Whitebox testing policy 
+  > At least one test class is created and ran if the pull request contains functionality. 
+  > Code coverage must obtain 60% coverage of new code.
+  > Old code will be omitted from this requirement during sprint 2.
+  > If the addition is just a UI change, a code review should suffice. 
+  > Person who wrote the code will write and perform whitebox testing. 
 
 **Code Review** (due Feb 25th)
-  > Your Code Review policy   
-
-  > Include a checklist/questions list which every developer will need to fill out/answe when creating a Pull Request to the Dev branch. 
-
-  > Include a checklist/question list which every reviewer will need to fill out/anser when conducting a review, this checklist (and the answers of course) need to be put into the Pull Request review.
+  > When code is ready for review, the requester will complete the pull request checklist (listed below) then submit a pull request and attach the completed checklist to the pull request.
+  > Developer will mention in slack that a pull request has been submitted and is ready for review. 
+  > When reviewer is reviewing, reviewer should walk through reviewer checklist (listed below) and add any additional comments as a comment to the pull request. 
+  > If all boxes are checked on checklist and code looks good, then reviewer will approve pull request but will not merge, git master must do the merge.    
+  > If checklist is not complete, the reviewer should reject the pull request.
+  > Include a checklist/questions list which every developer will need to fill out/answer when creating a Pull Request to the Dev branch. 
+  > Include a checklist/question list which every reviewer will need to fill out/answer when conducting a review, this checklist (and the answers of course) need to be put into the Pull Request review.
 
 **Static Analysis**  (due start Sprint 3)
   > Your Static Analysis policy   
