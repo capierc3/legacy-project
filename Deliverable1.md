@@ -285,15 +285,19 @@ I would also advise you to already fill out the Contributions section (End of sp
     - We met as a group to cover the workflow at the beginning of the sprint. After our Sprint Review and Retrospective, I added in feedback on branch naming conventions for Tasks, and how we want to handle code deletion going forward (comment out first, then delete in the end with 'TODO' comments).
  
 ## 4: Checklist for you to see if you are done
-- [ ] Filled out the complete form from above, all fields are filled and written in full sentences
+- [X] Filled out the complete form from above, all fields are filled and written in full sentences
 - [X] Read the kickoff again to make sure you have all the details
 - [X] User Stories that were not completed, were left in the Sprint and a copy created
-- [ ] Your Quality Policies are accurate and up to date
-- [ ] **Individual** Survey was submitted **individually** (create checkboxes below -- see Canvas to get link)
-  - [ ] Team member 1
-  - [ ] Team member 2
-- [ ] The original of this file was copied for the next Sprint (needed for all but last Sprint where you do not need to copy it anymore)
-  - [ ] Basic information (part 1) for next Sprint was included (meaning Spring Planning is complete)
-  - [ ] All User Stories have acceptance tests
-  - [ ] User Stories in your new Sprint Backlog have initial tasks which are in New
-  - [ ] You know how to proceed
+- [X] Your Quality Policies are accurate and up to date
+- [X] **Individual** Survey was submitted **individually** (create checkboxes below -- see Canvas to get link)
+- [X] Daimi Mussey
+- [X] Kyp Bellinger
+- [X] Stephen Wilson
+- [X] Justin Oliver
+- [X] Chase Pierce
+        
+- [X] The original of this file was copied for the next Sprint (needed for all but last Sprint where you do not need to copy it anymore)
+  - [X] Basic information (part 1) for next Sprint was included (meaning Spring Planning is complete)
+  - [X] All User Stories have acceptance tests
+  - [X] User Stories in your new Sprint Backlog have initial tasks which are in New
+  - [X] You know how to proceed
