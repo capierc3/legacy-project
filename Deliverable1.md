@@ -212,27 +212,28 @@ I would also advise you to already fill out the Contributions section (End of sp
 #### Team member Stephen Wilson:
   **Links to GitHub commits with main code contribution (up to 5 links):
 
-    - link1
-    - link2
+    - https://github.com/amehlhase316/Kaesekuchen/commit/2ceaefd8bb3a7a739d03bbfd6c0bc5c1e0e34760
+    - https://github.com/amehlhase316/Kaesekuchen/commit/111a69e6b9f94ad7e96964bf2697e6d7ae31ac1b
+    - https://github.com/amehlhase316/Kaesekuchen/commit/0ddc1f6d9961c63d999bb486c233527ca0fd886c
+    - https://github.com/amehlhase316/Kaesekuchen/commit/25860c7b8ffdce69953a8ffe930a71349fdf028d
+    - https://github.com/amehlhase316/Kaesekuchen/commit/4ae48463a05cdcb6d164ca6c93cd07757e00d229
 
    **GitHub links to your Unit Tests (up to 3 links):
 
-    - link1
-    - link2
+    - NA
 
   **GitHub links to your Code Reviews (up to 3 links):
 
-    - link1
-    - link2
+    - NA
 
   **How did you contribute to Static Analysis:
 
-    - link1
-    - link2
+    - NA
  
  **What was your main contribution to the Quality Policy documentation?:
 
-    - info
+    - Drafted the original version at the beginning of Sprint 1.
+    - Participated in Sprint 1 retrospective meeting and provided proposals to GitHub workflow process based on observations made during Sprint 1.
 
 #### Team member Kyp Bellinger:
   **Links to GitHub commits with main code contribution (up to 5 links):
