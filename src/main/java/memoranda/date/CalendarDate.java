@@ -16,6 +16,11 @@ public class CalendarDate {
     private int _year;
     private int _month;
     private int _day;
+    private int _hour;
+    private int _min;
+    private boolean _isAM;
+    private boolean hourSet;
+
 
     /**
      * Returns a calender object with inputted date.
@@ -50,11 +55,20 @@ public class CalendarDate {
         cal.getTime();
         //checks to see if int of the day is valid
         int dmax = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-        if (day <= dmax)
-          _day = day;
-        else
-          _day = dmax;
+        if (day <= dmax) {
+            _day = day;
+        }else {
+            _day = dmax;
+        }
+        hourSet = false;
+    }
 
+    public CalendarDate(int day, int month, int year,int hour, int min, boolean isAM){
+        this(day,month,year);
+        _hour = hour;
+        _min = min;
+        _isAM = isAM;
+        hourSet = true;
     }
 
     /**
@@ -65,6 +79,14 @@ public class CalendarDate {
         _year = cal.get(Calendar.YEAR);
         _day = cal.get(Calendar.DAY_OF_MONTH);
         _month = cal.get(Calendar.MONTH);
+        _hour = cal.get(Calendar.HOUR);
+        _min = cal.get(Calendar.MINUTE);
+        if (cal.get(Calendar.AM_PM) == Calendar.AM){
+            _isAM = true;
+        } else {
+            _isAM = false;
+        }
+        hourSet = true;
     }
 
     /**
@@ -73,6 +95,7 @@ public class CalendarDate {
      */
     public CalendarDate(Date date) {
         this(dateToCalendar(date));
+        hourSet = false;
     }
 
     /**
@@ -84,7 +107,7 @@ public class CalendarDate {
         _day = d[0];
         _month = d[1];
         _year = d[2];
-
+        hourSet = false;
     }
 
     /**
@@ -131,6 +154,18 @@ public class CalendarDate {
         return cal;
     }
 
+    public static Calendar toCalendar(int day, int month, int year, int hour, int min,boolean AM){
+        Calendar cal = toCalendar(day,month,year);
+        cal.set(Calendar.HOUR,hour);
+        cal.set(Calendar.MINUTE,min);
+        if (AM){
+            cal.set(Calendar.AM_PM,Calendar.AM);
+        } else {
+            cal.set(Calendar.AM_PM,Calendar.PM);
+        }
+        return cal;
+    }
+
     /**
      * Takes ints of the day,month, and year and sets them to a new Calendar object to return a Date object
      * @param day int of the day value
@@ -146,12 +181,35 @@ public class CalendarDate {
         return cal.getTime();
     }
 
+    public static Date toDate(int day, int month, int year,int hour, int min, boolean isAM) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        cal.set(Calendar.HOUR,hour);
+        cal.set(Calendar.MINUTE,min);
+        if (isAM){
+            cal.set(Calendar.AM_PM,Calendar.AM);
+        } else {
+            cal.set(Calendar.AM_PM, Calendar.PM);
+        }
+        return cal.getTime();
+    }
+
     //Basic getters
     public Calendar getCalendar() {
-        return toCalendar(_day, _month, _year);
+        if (hourSet){
+            return toCalendar(_day,_month,_year,_hour,_min,_isAM);
+        } else {
+            return toCalendar(_day, _month, _year);
+        }
     }
     public Date getDate() {
-        return toDate(_day, _month, _year);
+        if (hourSet){
+            return toDate(_day,_month,_year,_hour,_min,_isAM);
+        } else {
+            return toDate(_day, _month, _year);
+        }
     }
     public int getDay() {
         return _day;
@@ -162,6 +220,9 @@ public class CalendarDate {
     public int getYear() {
         return _year;
     }
+    public int getHour(){return _hour;}
+    public int getMin(){return _min;}
+    public boolean isAM(){return _isAM;}
     public String getFullDateString() {
         return Local.getDateString(this, DateFormat.FULL);
     }
@@ -179,7 +240,8 @@ public class CalendarDate {
     public boolean equals(Object object) {
         if (object.getClass().isInstance(CalendarDate.class)) {
             CalendarDate d2 = (CalendarDate) object;
-            return ((d2.getDay() == getDay()) && (d2.getMonth() == getMonth()) && (d2.getYear() == getYear()));
+            return ((d2.getDay() == getDay()) && (d2.getMonth() == getMonth()) && (d2.getYear() == getYear())
+                    && (d2.getHour() == getHour()) && (d2.getMin() == getMin()) && (d2.isAM() == isAM()));
         }
         else if (object.getClass().isInstance(Calendar.class)) {
             Calendar cal = (Calendar) object;
@@ -193,7 +255,8 @@ public class CalendarDate {
     }
     public boolean equals(CalendarDate date) {
         if (date == null) return false;
-        return ((date.getDay() == getDay()) && (date.getMonth() == getMonth()) && (date.getYear() == getYear()));
+        return ((date.getDay() == getDay()) && (date.getMonth() == getMonth()) && (date.getYear() == getYear())
+        && (date.getHour() == getHour()) && (date.getMin() == getMin()) && (date.isAM() == isAM()));
     }
 
     /**
@@ -232,6 +295,7 @@ public class CalendarDate {
     public String toString() {
         return Util.getDateStamp(this);
     }
+
 
 
 }
