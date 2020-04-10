@@ -39,6 +39,15 @@
   > If checklist is not complete, the reviewer should reject the pull request.
   > Include a checklist/questions list which every developer will need to fill out/answer when creating a Pull Request to the Dev branch. 
   > Include a checklist/question list which every reviewer will need to fill out/answer when conducting a review, this checklist (and the answers of course) need to be put into the Pull Request review.
+  >
+  >####Reviewer checklist:
+  >- Use intention-revealing variable names
+  >- Classes are small and manageable
+  >- Methods only do one thing
+  >- Code is free of duplication
+  >- All Classes and methods contain clear and concise comments and javaDocs
+  >- Class variables are immutable
+    
 
 **Static Analysis**  (due start Sprint 3)
   > Your Static Analysis policy   
