@@ -1,4 +1,6 @@
 /* 
+ * @author Justin 
+ * 
  * This is a class to help with testing
  * It is designed to be used as a template for either whitebox or blackbox testing
  * To use, create a copy of this file and name accordingly.
