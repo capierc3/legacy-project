@@ -30,25 +30,32 @@ public class AppLogin {
      * @return HashMap<String, Object>
      * @param file_path path of file containing appUser collection
      * */
-    private HashMap<String, Object> getFromFile(String file_path) {
+    private Object getFromFile(String file_path) {
 
-        HashMap<String, Object> map = new HashMap<>();
+        Object obj = null;
 
         try {
 
             FileInputStream fileInputStream = new FileInputStream(file_path);
             ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
 
-            map = (HashMap<String, Object>) inputStream.readObject();
+            obj = inputStream.readObject();
 
-        } catch(IOException | ClassNotFoundException ex) {
+        } catch(IOException ex) {
             ex.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
-        return map;
+        return obj;
 
     }
 
+    /**
+     * Purpose: Convert object to byte array and save to file
+     * @param object object to be saved to file
+     * @param file_path path of file containing appUser collection
+     * */
     private void saveToFile(Object object, String file_path) {
 
         try {
