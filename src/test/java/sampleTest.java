@@ -4,8 +4,15 @@
  * To use, create a copy of this file and name accordingly.
  * Modify/add any tests you need
  * Please do not modify this sample test file, it is to be used as a template
- * All possible imports should be included at time this sample was created, however 
+ * All possible imports are currently included at time this sample was created, however 
  * as this project develops, new directories may be created and this list will need to be updated.
+ * 
+ * To use junit in Gradle, run "gradle build" and "gradle test"
+ * Gradle Junit test reports should populate in Kaesekuchen/build/reports/tests/test...
+ * 
+ * To use jacoco for code coverage report, run "gradle jacocoTestReport"
+ * Gradle jacoco test report should populate in Kaesekuchen/build/reports/jacoco/test/html...
+ * 
  * 
  */
 package test.java;
@@ -73,11 +80,15 @@ public class sampleTest {
 	public void tearDown() throws Exception {
 	}
 	
-	
 	/*
 	 * Create the tests to use below. A few default samples are provided with info 
 	 * from our cart projects as a reminder on how they are used
 	 */
+	
+    @Test
+    public void ensuringNotNull() {        
+    	assertNotNull(tempDate);
+    }
 	
 	/*
 	@Test
@@ -91,12 +102,12 @@ public class sampleTest {
         assertEquals(0, amount, .01);
     }
     
- 	*/
+ 	
     @Test
     public void addItemTest() {        
     	assertNotNull(tempDate);
     }
-    /*
+    
 
     @Test
     public void removeItemTest() {
