@@ -15,6 +15,6 @@ public interface Student extends User{
     /**
      * Adds a class to the list of classes for the student
      */
-    void addClass();
+    void addClass(GymClass gymClass);
 
 }
