@@ -1,3 +1,10 @@
+/* 
+ * This class is designed to display a panel and show the appropriate info when the resources button is clicked. 
+ * This panel existed in the original version of memoranda that was used for this gym scheduling program
+ * 
+ * 
+ */
+
 package main.java.memoranda.ui;
 
 import java.awt.BorderLayout;
