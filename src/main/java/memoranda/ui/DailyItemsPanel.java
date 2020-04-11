@@ -112,7 +112,8 @@ public class DailyItemsPanel extends JPanel {
             new ExceptionDialog(ex);
         }
     }
-    void jbInit() throws Exception {
+
+	void jbInit() throws Exception {
         border1 = BorderFactory.createEtchedBorder(Color.white, Color.gray);
         border2 = BorderFactory.createEtchedBorder(Color.white, new Color(161, 161, 161));
         this.setLayout(borderLayout1);
