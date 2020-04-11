@@ -1,7 +1,9 @@
 package memoranda.gym;
 
 import java.util.Collection;
-
+import main.java.memoranda.gym.GymClass;
+import main.java.memoranda.gym.ClassList;
+import main.java.memoranda.date.CalendarDate;
 /**
  * Interface for the ClassList methods.
  * @author Daimi Mussey
@@ -66,7 +68,8 @@ public class ClassListImpl {
      * returns the entire list
      * @return Collection
      */
-    public ollection<GymClass> getAllClasses() {
+    public Collection<GymClass> getAllClasses() {
+
         return classes;
     }
 
@@ -76,7 +79,7 @@ public class ClassListImpl {
      * @return ClassList
      */
     public ClassList getListByRank(String rank) {
-        ClassList list = new ClassList();
+        ClassList list = null;
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
                 if (gymClass.getRank().equals(rank)) {
@@ -93,7 +96,7 @@ public class ClassListImpl {
      * @return ClassList
      */
     public ClassList getListByDate(CalendarDate date) {
-        ClassList list = new ClassList();
+        ClassList list = null;
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
                 if (gymClass.getDate().equals(date)) {
