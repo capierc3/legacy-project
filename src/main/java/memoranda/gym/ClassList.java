@@ -15,7 +15,7 @@ public interface ClassList{
      * @param id String
      * @return User
      */
-    User getClass(String id);
+    GymClass getClass(String id);
 
     /**
      * Adds a class to the list
@@ -39,7 +39,7 @@ public interface ClassList{
      * returns the entire list
      * @return Collection
      */
-    Collection<User> getAllClasses();
+    Collection<GymClass> getAllClasses();
 
     /**
      * returns a ClassList filled with classes of inputted rank
