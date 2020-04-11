@@ -60,8 +60,26 @@ public class Util {
             + "/"
             + (cal.get(Calendar.MONTH))
             + "/"
-            + new Integer(cal.get(Calendar.YEAR)).toString();
+            + (cal.get(Calendar.YEAR));
 
+    }
+
+    public static String getTimeStamp(Object cal){
+        String amPM = "PM";
+        if (cal instanceof Calendar){
+            Calendar calendar = (Calendar) cal;
+            if (calendar.get(Calendar.AM_PM) == Calendar.AM){
+                amPM = "AM";
+            }
+            return calendar.get(Calendar.HOUR)+":"+calendar.get(Calendar.MINUTE)+"_"+amPM;
+        } else if (cal instanceof CalendarDate){
+            CalendarDate calendarDate = (CalendarDate) cal;
+            if (calendarDate.isAM()){
+                amPM = "AM";
+            }
+            return calendarDate.getHour()+":"+calendarDate.getMin()+"_"+amPM;
+        }
+        return "Not Set";
     }
 
     /**
