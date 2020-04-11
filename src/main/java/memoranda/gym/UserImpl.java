@@ -8,27 +8,27 @@ import java.util.Collection;
  * @author Daimi Mussey
  */
 public class UserImpl {
-    String name;
-    String id;
-    String userName;
-    String password;
-    File picture;
-    String belt;
-    Collection<Note> noteList;
-    ClassList userClasses;
+    private String name;
+    private String id;
+    private String userName;
+    private String password;
+    private File picture;
+    private String belt;
+    private Collection<Note> noteList;
+    private ClassList userClasses;
 
     /**
      * Method to return name String
      * @return String
      */
-    String getName() {
+    public String getName() {
         return name;
     }
 
     /**
      * Method to set name String
      */
-    void setName(String newName) {
+    public void setName(String newName) {
         name = newName;
     }
 
@@ -36,7 +36,7 @@ public class UserImpl {
      * Method to get User Id
      * @return String
      */
-    String getID() {
+    public String getID() {
         return id;
     }
 
@@ -44,7 +44,7 @@ public class UserImpl {
      * Method to set new Id on a User
      * @param newId
      */
-    void setID(String newId) {
+    public void setID(String newId) {
         id = newId;
     }
 
@@ -52,7 +52,7 @@ public class UserImpl {
      * Method to get User's userName
      * @return String
      */
-    String getUserName() {
+    public String getUserName() {
         return userName;
     }
 
@@ -60,7 +60,7 @@ public class UserImpl {
      * Method to set User's userName
      * @param newUserName
      */
-    void setUserName(String newUserName) {
+    public void setUserName(String newUserName) {
         userName = newUserName;
     }
 
@@ -68,7 +68,7 @@ public class UserImpl {
      * Method to get User's password
      * @return String
      */
-    String getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -76,7 +76,7 @@ public class UserImpl {
      * Method to set a User's password to String passed in
      * @param newPassword
      */
-    void setPassword(String newPassword) {
+    public void setPassword(String newPassword) {
         password = newPassword;
     }
 
@@ -84,7 +84,7 @@ public class UserImpl {
      * Method to return User's belt
      * @return String
      */
-    String getBelt() {
+    public String getBelt() {
         return belt;
     }
 
@@ -92,7 +92,7 @@ public class UserImpl {
      * Method  to set a User's belt
      * @param newBelt
      */
-    void setBelt(String newBelt) {
+    public void setBelt(String newBelt) {
         belt = newBelt;
     }
 
@@ -100,7 +100,7 @@ public class UserImpl {
      * Method to return image file for User
      * @return File
      */
-    File getPic() {
+    public File getPic() {
         return picture;
     }
 
@@ -108,7 +108,7 @@ public class UserImpl {
      * Method to set the User's picture to file passed in
      * @param newPicture
      */
-    void setPic(File newPicture) {
+    public void setPic(File newPicture) {
         picture = newPicture;
     }
 
@@ -116,7 +116,7 @@ public class UserImpl {
      * Method to return collection of Notes tied to the User
      * @return Collection
      */
-    Collection getNotes() {
+    public Collection getNotes() {
         return noteList;
     }
 
@@ -124,7 +124,7 @@ public class UserImpl {
      * Method to add a Note to the noteList
      * @param note
      */
-    void addNote(Note note) {
+    public void addNote(Note note) {
         noteList.add(note);
     }
 
@@ -133,7 +133,7 @@ public class UserImpl {
      * Students see ones they are registered for.
      * @return ClassList
      */
-    ClassList getTodaysEvents() {
+    public ClassList getTodaysEvents() {
         ClassList result = null;
         CurrentDate todaysDate = new CurrentDate();
         if (userClasses != null) {
