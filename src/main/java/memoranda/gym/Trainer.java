@@ -19,13 +19,13 @@ public interface Trainer extends User {
      * sets the Availability of the trainer.
      * @param dates Collection
      */
-    void setAvailability(Collection<CalendarDate> dates );
+    void setAvailability(Collection<CalendarDate> dates);
 
     /**
      * Checks if thee trainer is available during a certain time and date
      * @return boolean
      */
-    boolean isAvailable();
+    boolean isAvailable(CalendarDate date);
 
     /**
      * Getter for the training rank of the trainer
