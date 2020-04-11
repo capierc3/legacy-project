@@ -1,7 +1,9 @@
 package memoranda.gym;
 
 import java.util.Collection;
-
+import main.java.memoranda.gym.GymClass;
+import main.java.memoranda.gym.ClassList;
+import main.java.memoranda.date.CalendarDate;
 /**
  * Interface for the ClassList methods.
  * @author Daimi Mussey
@@ -15,7 +17,7 @@ public class ClassListImpl {
      * @param id String
      * @return User
      */
-    GymClass getClass(String id) {
+    public GymClass getClass(String id) {
         GymClass result = null;
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
@@ -31,7 +33,7 @@ public class ClassListImpl {
      * Adds a class to the list
      * @param gymClass GymClass
      */
-    void addClass(GymClass gymClass) {
+    public void addClass(GymClass gymClass) {
         classes.add(gymClass);
     }
 
@@ -39,7 +41,7 @@ public class ClassListImpl {
      * removes a class from a list with matching ID number
      * @param id String
      */
-    void removeClass(String id) {
+    public void removeClass(String id) {
         GymClass classToRemove = null;
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
@@ -58,7 +60,7 @@ public class ClassListImpl {
      * finds the size of list.
      * @return int
      */
-    int getSize() {
+    public int getSize() {
         return classes.size();
     }
 
@@ -66,7 +68,8 @@ public class ClassListImpl {
      * returns the entire list
      * @return Collection
      */
-    Collection<GymClass> getAllClasses() {
+    public Collection<GymClass> getAllClasses() {
+
         return classes;
     }
 
@@ -75,8 +78,8 @@ public class ClassListImpl {
      * @param rank String
      * @return ClassList
      */
-    ClassList getListByRank(String rank) {
-        ClassList list = new ClassList();
+    public ClassList getListByRank(String rank) {
+        ClassList list = null;
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
                 if (gymClass.getRank().equals(rank)) {
@@ -92,8 +95,8 @@ public class ClassListImpl {
      * @param date CalendarDate
      * @return ClassList
      */
-    ClassList getListByDate(CalendarDate date) {
-        ClassList list = new ClassList();
+    public ClassList getListByDate(CalendarDate date) {
+        ClassList list = null;
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
                 if (gymClass.getDate().equals(date)) {
