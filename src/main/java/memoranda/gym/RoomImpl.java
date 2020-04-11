@@ -5,15 +5,15 @@ package memoranda.gym;
  * @author Daimi Mussey
  */
 public class RoomImpl {
-    ClassList list;
-    Collection<CalendarDate> classDates;
-    int roomNum;
+    private ClassList list;
+    private Collection<CalendarDate> classDates;
+    private int roomNum;
 
     /**
      * Gets a ClassList object of all the classes that are currently scheduled for the room
      * @return ClassList
      */
-    ClassList getClasses() {
+    public ClassList getClasses() {
         return list;
     }
 
@@ -21,7 +21,7 @@ public class RoomImpl {
      * Add a class to the room's ClassList
      * @param gymClass GymClass
      */
-    void addClass(GymClass gymClass) {
+    public void addClass(GymClass gymClass) {
         list.addClass(gymClass);
     }
 
@@ -29,7 +29,7 @@ public class RoomImpl {
      * Getter for the room number
      * @return int
      */
-    int getRoomNum() {
+    public int getRoomNum() {
         return roomNum;
     }
 
@@ -37,7 +37,7 @@ public class RoomImpl {
      * Setter for the room number
      * @param num int
      */
-    void setRoomNum(int num) {
+    public void setRoomNum(int num) {
         roomNum = num;
     }
 
@@ -46,7 +46,7 @@ public class RoomImpl {
      * @param date CalendarDate
      * @return boolean
      */
-    boolean isAvailable(CalendarDate date) {
+    public boolean isAvailable(CalendarDate date) {
         boolean result = false;
 
         if (!classDates.isEmpty()) {
