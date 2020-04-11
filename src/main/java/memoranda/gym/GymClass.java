@@ -18,7 +18,7 @@ public interface GymClass {
     Room getRoom();
     void setRoom(Room room);
     String getID();
-    void setID();
+    void setID(String id);
 
     /**
      * Getter for the length in time the class will run for in minutes
@@ -29,7 +29,7 @@ public interface GymClass {
     /**
      * Sets the length of the class in minutes
      */
-    void setClassLength();
+    void setClassLength(int length);
 
     /**
      * Returns a UserList object filled with trainers
