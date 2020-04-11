@@ -36,6 +36,6 @@ public interface Room {
      * @param date CalendarDate
      * @return boolean
      */
-    boolean isAvailible(CalendarDate date);
+    boolean isAvailable(CalendarDate date);
 
 }
