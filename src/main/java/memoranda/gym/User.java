@@ -5,24 +5,25 @@ import java.util.Collection;
 
 /**
  * Interface for the User methods which will be extended to Trainer, Student and Owner
+ * @author Chase
  */
 public interface User {
 
     //All pretty basic getters and setters
     String getName();
-    void setName();
+    void setName(String newName);
     String getID();
-    void setID();
+    void setID(String newId);
     String getUserName();
-    void setUserName();
+    void setUserName(String newUserName);
     String getPassword();
-    void setPassword();
+    void setPassword(String newPassword);
     String getBelt();
-    void setBelt();
+    void setBelt(String newBelt);
     File getPic();
-    void setPic();
+    void setPic(String newPicture);
     Collection getNotes();
-    void addNote();
+    void addNote(Note note);
 
     /**
      * Returns a ClassList filled with any events for that day, trainers and owners will see a list of classes they teach,
