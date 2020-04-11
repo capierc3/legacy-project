@@ -7,6 +7,8 @@ import java.util.Date;
 import main.java.memoranda.util.Local;
 import main.java.memoranda.util.Util;
 
+import javax.swing.text.Element;
+
 /*$Id: CalendarDate.java,v 1.3 2004/01/30 12:17:41 alexeya Exp $*/
 /**
  * Class that holds the information for dates; year,month,day.
@@ -114,11 +116,17 @@ public class CalendarDate {
      * @param date
      */
     public CalendarDate(String date) {
-        int[] d = Util.parseDateStamp(date);
+        int[] d = Util.parseDateStampNew(date);
         _day = d[0];
         _month = d[1];
         _year = d[2];
         hourSet = false;
+        if (d.length>3){
+            _hour = d[3];
+            _min = d[4];
+            _isAM = d[5] == 0;
+            hourSet = true;
+        }
     }
 
     /**
@@ -310,6 +318,8 @@ public class CalendarDate {
             return Util.getDateStamp(this);
         }
     }
+
+
 
 
 

@@ -1,6 +1,7 @@
 package main.java.memoranda.gym;
 
 import main.java.memoranda.date.CalendarDate;
+import main.java.memoranda.util.Util;
 import nu.xom.Attribute;
 import nu.xom.Element;
 import nu.xom.Elements;
@@ -155,15 +156,14 @@ public class GymClassImpl implements GymClass {
     public void setDate(CalendarDate date) {
         setAttr("StartTime",date.toString());
     }
-    //TODO need new CalendarDate methods
     @Override
     public CalendarDate getDate() {
-        return new CalendarDate();
+        return new CalendarDate(el.getAttributeValue("StartDate"));
     }
 
     @Override
     public String getStartTime() {
-        return getDate().toString();
+        return Util.getTimeStamp(getDate());
     }
 
     private void setAttr(String a, String value) {
