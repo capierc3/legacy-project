@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import static org.junit.Assert.*;
 
@@ -34,12 +35,28 @@ public class US_71Test {
     String calStamp;
     Calendar cal;
     CalendarDate now;
+    CalendarDate shorty;
 
+    Date toDate;
+    CalendarDate testingConstructors;
+    String stringDate;
+    CalendarDate stringTester;
+    CalendarDate maxDay;
+    Date compareOne;
+    Date compareTwo;
+    Date shortDate;
+    Boolean inPeriodTest;
+    Boolean beforeNull;
+    Boolean afterNull;
+    Boolean equalsNull;
+    CalendarDate nullBeforeDate;
+    CalendarDate nullAfterDate;
+    
 
     @Before
     public void setUp() throws Exception {
-        am = new CalendarDate(6,21,1987,6,30,true);
-        pm = new CalendarDate(6,21,1987,6,30,false);
+        am = new CalendarDate(21,6,1987,6,30,true);
+        pm = new CalendarDate(21,6,1987,6,30,false);
         before = new CalendarDate(10,4,2020,6,29,true);
         startTime = new CalendarDate(10,4,2020,6,30,true);
         endTime = new CalendarDate(10,4,2020,7,30,true);
@@ -54,6 +71,11 @@ public class US_71Test {
         noTimeStamp = "10/4/2020";
         now = new CalendarDate();
         cal = appt1.getCalendar();
+        compareOne = am.getDate();
+        compareTwo = pm.getDate();
+        shorty = new CalendarDate(7,7,1982);
+
+        
     }
 
 
@@ -135,6 +157,70 @@ public class US_71Test {
         assertTrue(CalendarDate.tomorrow().isHourSet());
         assertTrue(now.isHourSet());
     }
+    
+    /**
+     * Tests to ensure if date is over the max days for the month, it defaults to max day
+     */
+    @Test
+    public void maxDay() {
+    	maxDay = new CalendarDate(32, 11, 2024);
+    	assertNotEquals(maxDay, 32);
+    }
+    
+    /**
+     * Tests the compares object function (not the date one)
+     */
+    @Test
+    public void compareObjects() {
+    	assertTrue(compareOne.equals(compareOne));
+    	assertFalse(compareOne.equals(compareTwo));
+    }
+    
+    /**
+     * Tests the get date functionality
+     */
+    @Test
+    public void shortDateGetDate() {
+    	shortDate = shorty.getDate();
+    	assertNotNull(shortDate);
+    }
+    
+    /**
+     * Tests the functionality of returning false to see if date is in period
+     */
+    @Test
+    public void inPeriodReturn() {
+    	inPeriodTest = shorty.inPeriod(startTime, endTime);
+    	assertFalse(inPeriodTest);
+    }
+    
+    /**
+     * Testing the functionality of other getters in setters within the Calendar Date class
+     */
+    @Test
+    public void toDateTest() throws Exception{
+    	toDate = am.getDate();
+    	testingConstructors = new CalendarDate(toDate);
+    	stringDate = testingConstructors.toString();
+    	stringTester = new CalendarDate(stringDate); 
+    	assertNotNull(testingConstructors);
+    	assertNotNull(toDate);
+    	assertNotNull(stringDate);
+    	assertNotNull(stringTester);
 
+    }
+    
+    /**
+     * Checking to see if before and after null returns work
+     */
+    @Test
+    public void beforeAndAfterNull() {
+    	beforeNull = am.before(nullBeforeDate);
+    	afterNull = am.after(nullAfterDate);
+    	equalsNull = am.equals(nullBeforeDate);
+    	assertFalse(equalsNull);
+    	assertTrue(beforeNull);
+    	assertTrue(afterNull);
+    }
 
 }
