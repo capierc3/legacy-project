@@ -15,7 +15,7 @@ public class ClassListImpl {
      * @param id String
      * @return User
      */
-    GymClass getClass(String id) {
+    public GymClass getClass(String id) {
         GymClass result = null;
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
@@ -31,7 +31,7 @@ public class ClassListImpl {
      * Adds a class to the list
      * @param gymClass GymClass
      */
-    void addClass(GymClass gymClass) {
+    public void addClass(GymClass gymClass) {
         classes.add(gymClass);
     }
 
@@ -39,7 +39,7 @@ public class ClassListImpl {
      * removes a class from a list with matching ID number
      * @param id String
      */
-    void removeClass(String id) {
+    public void removeClass(String id) {
         GymClass classToRemove = null;
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
@@ -58,7 +58,7 @@ public class ClassListImpl {
      * finds the size of list.
      * @return int
      */
-    int getSize() {
+    public int getSize() {
         return classes.size();
     }
 
@@ -66,7 +66,7 @@ public class ClassListImpl {
      * returns the entire list
      * @return Collection
      */
-    Collection<GymClass> getAllClasses() {
+    public ollection<GymClass> getAllClasses() {
         return classes;
     }
 
@@ -75,7 +75,7 @@ public class ClassListImpl {
      * @param rank String
      * @return ClassList
      */
-    ClassList getListByRank(String rank) {
+    public ClassList getListByRank(String rank) {
         ClassList list = new ClassList();
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
@@ -92,7 +92,7 @@ public class ClassListImpl {
      * @param date CalendarDate
      * @return ClassList
      */
-    ClassList getListByDate(CalendarDate date) {
+    public ClassList getListByDate(CalendarDate date) {
         ClassList list = new ClassList();
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
