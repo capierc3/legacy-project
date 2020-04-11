@@ -1,7 +1,8 @@
 package main.java.memoranda.gym;
-
+import main.java.memoranda.gym.ClassList;
 import java.io.File;
 import java.util.Collection;
+import main.java.memoranda.Note;
 
 /**
  * Interface for the User methods which will be extended to Trainer, Student and Owner

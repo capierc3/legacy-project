@@ -2,6 +2,9 @@ package memoranda.gym;
 
 import java.io.File;
 import java.util.Collection;
+import main.java.memoranda.gym.ClassList;
+import main.java.memoranda.Note;
+import main.java.memoranda.date.CurrentDate;
 
 /**
  * Interface for the User methods which will be extended to Trainer, Student and Owner
