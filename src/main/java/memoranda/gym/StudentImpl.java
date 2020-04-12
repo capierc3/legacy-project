@@ -1,10 +1,14 @@
 package memoranda.gym;
 
+import main.java.memoranda.gym.ClassList;
+import main.java.memoranda.gym.GymClass;
+import main.java.memoranda.gym.Student;
+
 /**
  * Interface for the methods used for the Student class
  * @author Daimi Mussey
  */
-public class StudentImpl implements Student {
+abstract public class StudentImpl implements Student {
     private ClassList list;
 
     /**
