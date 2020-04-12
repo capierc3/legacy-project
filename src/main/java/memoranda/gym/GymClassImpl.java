@@ -9,6 +9,10 @@ import nu.xom.Elements;
 /**
  * Class that implements the GymClass Interface
  *
+ * BlackBox notes:
+ * All main methods should work that are found in the GymClass interface. Currently as of 4/11 the add/get students and
+ * add/get trainers don't work since those codes are not available yet. also get and set room don't work for the same reason.
+ *
  * @author Chase
  */
 public class GymClassImpl implements GymClass {

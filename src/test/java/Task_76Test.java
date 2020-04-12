@@ -13,6 +13,8 @@ import static org.junit.Assert.*;
 
 /**
  * Tests the GymClassImpl class is working. should be able to pull the information stored in the Element
+ *
+ * tests the basic building of a gymClass object and testing if returning the information is correct.
  */
 public class Task_76Test {
 
