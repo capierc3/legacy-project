@@ -1,6 +1,9 @@
 package main.java.memoranda.gym;
 
 import main.java.memoranda.date.CalendarDate;
+import java.util.Collection;
+import main.java.memoranda.gym.ClassList;
+import main.java.memoranda.gym.GymClass;
 
 /**
  * Interface for the Room methods
