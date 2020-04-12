@@ -2,12 +2,13 @@ package memoranda.gym;
 
 import java.util.Collection;
 import main.java.memoranda.date.CalendarDate;
+import main.java.memoranda.gym.Trainer;
 
 /**
  * Interface for the trainer methods to be used
  * @author Chase
  */
-public class TrainerImpl implements Trainer{
+public abstract class TrainerImpl implements Trainer{
     private String beltLevel;
     private String trainingRank;
     private String description;
