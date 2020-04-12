@@ -1,6 +1,7 @@
 package main.java.memoranda.gym;
 
 import main.java.memoranda.date.CalendarDate;
+import nu.xom.Element;
 
 /**
  * Interface for the GymClass methods
@@ -78,12 +79,28 @@ public interface GymClass {
      */
     void setClassType(String type);
 
-    //Ideally once we retool the CalendarDate class we will have a CalendarDate object hold the following information.
-    //Year, Month, Day, Hour, Minute.
+    /**
+     * Sets the CalendarDate for the class.
+     * @param date CalendarDate
+     */
     void setDate(CalendarDate date);
+
+    /**
+     * returns a CalendarDate Object
+     * @return CalendarDate
+     */
     CalendarDate getDate();
+
+    /**
+     * returns a string of the start time 00:00_AM/PM
+     * @return String
+     */
     String getStartTime();
 
+    /**
+     * returns the main Element used for the class.
+     */
+    Element getContent();
 
 
 

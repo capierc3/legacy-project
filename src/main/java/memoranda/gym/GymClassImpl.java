@@ -13,16 +13,6 @@ import nu.xom.Elements;
  */
 public class GymClassImpl implements GymClass {
 
-    private String name;
-    private String rank;
-    private String maxSize;
-    private Room room;
-    private String id;
-    private int length;
-    private UserList trainers;
-    private UserList students;
-    private String type;
-    private CalendarDate date;
     private Element el;
 
     /**
@@ -30,10 +20,11 @@ public class GymClassImpl implements GymClass {
      * @param name String
      * @param type String
      */
-    GymClassImpl(String name,String type){
+    public GymClassImpl(String name,String type){
         el = new Element("Class");
         setName(name);
         setClassType(type);
+        setID(Util.generateId());
     }
 
     /**
@@ -42,7 +33,7 @@ public class GymClassImpl implements GymClass {
      * @param type String
      * @param rank String
      */
-    GymClassImpl(String name,String type,String rank){
+    public GymClassImpl(String name,String type,String rank){
         this(name,type);
         setRank(rank);
     }
@@ -109,7 +100,7 @@ public class GymClassImpl implements GymClass {
 
     @Override
     public void setClassLength(int length) {
-        setAttr("length",Integer.toString(length));
+        setAttr("Length",Integer.toString(length));
     }
 
     @Override
@@ -158,12 +149,17 @@ public class GymClassImpl implements GymClass {
     }
     @Override
     public CalendarDate getDate() {
-        return new CalendarDate(el.getAttributeValue("StartDate"));
+        return new CalendarDate(el.getAttributeValue("StartTime"));
     }
 
     @Override
     public String getStartTime() {
         return Util.getTimeStamp(getDate());
+    }
+
+    @Override
+    public Element getContent() {
+        return el;
     }
 
     private void setAttr(String a, String value) {
@@ -173,6 +169,8 @@ public class GymClassImpl implements GymClass {
         else
             attr.setValue(value);
     }
+
+
 
 
     //TODO Need room class to write methods or should be public static methods in RoomImpl
