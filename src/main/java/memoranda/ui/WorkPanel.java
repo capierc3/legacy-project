@@ -535,18 +535,11 @@ public class WorkPanel extends JPanel {
 	
 
 	public void myInfo_actionPerformed(ActionEvent e) {
-		cardLayout1.show(panel, "MYINFO");
+		cardLayout1.show(panel, "DAILYITEMS");
 		dailyItemsPanel.selectPanel("MYINFO");
 		setCurrentButton(myInfo);
 		Context.put("CURRENT_PANEL", "MYINFO");
 	}
-	/*
-	public void notesB_actionPerformed(ActionEvent e) {
-		cardLayout1.show(panel, "DAILYITEMS");
-		dailyItemsPanel.selectPanel("NOTES");
-		setCurrentButton(notesB);
-		Context.put("CURRENT_PANEL", "NOTES");
-	}*/
 
 	public void mySchedule_actionPerformed(ActionEvent e) {
 //		cardLayout1.show(panel, "DAILYITEMS");
