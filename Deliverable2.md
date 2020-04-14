@@ -35,7 +35,7 @@ and that is what is pulled into the current sprint.
 
 > Yes, each member of the team has reviewed the project requirements in detail, we discussed the requirements again in the sprint planning session, and we understand what is expected of us.
 
-
+ 
 
 ## 2: During the Sprint
 > Fill out the Meeting minutes during your Sprint and keep track of things. Update your Quality policies when needed, as explained in the lectures and in the Quality Policy documents on Canvas. 
