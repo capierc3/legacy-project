@@ -46,25 +46,25 @@ I would also advise you to already fill out the Contributions section (End of sp
 
 | Date      | Attendees                              |Minutes                                                                             | Burndown Info | TravisCI info | Additional Info  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
-|  April 9  |                                        |                                                                                    |               |               |                  |
+|  April 9  | Justin Oliver, Daimi Mussey,           | First day of sprint so not much to report. Everyone seems to be set and ready to   | Sprint just   |               |                  |
+|           | Stephen Wilson, kyp Bellinger,         | go. Sprint planning went well as did the high level meeting we had right before.   | started so    |               |                  |
+|           | Chase Pierce,                          |                                                                                    | not a lot to  |               |                  |
+|           |                                        |                                                                                    | go off of.    |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
+| April 12  | Justin Oliver, Daimi Mussey,           | Looking at the burndown chart, we seem to be moving along pretty good.             | Seem to be    |               |                  |
+|           | Stephen Wilson, Chase Pierce           | Everyone seems to have accomplished their share of work. There are multiple        | right on track|               |                  |
+|           |                                        | outside factors impacting peoples ability to work and mildly impacting the project |               |               |                  |
+|           |                                        | but overall the project and our sprint seems manageable as a whole.                |               |               |                  |
+|           |                                        |                                                                                    |               |               |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
+| April 14  |                                        |                                                                                    |               |               |                  |
 |           |                                        |                                                                                    |               |               |                  |
 |           |                                        |                                                                                    |               |               |                  |
 |           |                                        |                                                                                    |               |               |                  |
 |           |                                        |                                                                                    |               |               |                  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
-| April 12  |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
-|           |                                        |                                                                                    |               |               |                  |
+| April 16  |                                        |                                                                                    |               |               |                  |
 |           |                                        |                                                                                    |               |               |                  |
 |           |                                        |                                                                                    |               |               |                  |
 |           |                                        |                                                                                    |               |               |                  |
