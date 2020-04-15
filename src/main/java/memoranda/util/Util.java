@@ -116,7 +116,7 @@ public class Util {
             date = new int[6];
             date[3] = Integer.parseInt(dateArray[3].split(":")[0]);
             date[4] = Integer.parseInt(dateArray[3].split(":")[1].split("_")[0]);
-            if (dateArray[3].split(":")[1].split("_")[0].equalsIgnoreCase("AM")) {
+            if (dateArray[3].split(":")[1].split("_")[1].equalsIgnoreCase("AM")) {
                 date[5] = 0;
             } else {
                 date[5] = 1;
