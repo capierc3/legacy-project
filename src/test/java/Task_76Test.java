@@ -19,15 +19,18 @@ import static org.junit.Assert.*;
 public class Task_76Test {
 
     GymClass class1;
-    CalendarDate date;
+    CalendarDate startDate;
+    CalendarDate endDate;
     Element el;
 
     @Before
     public void setUp() throws Exception {
 
-        date = new CalendarDate(11,4,2020,4,0,false);
+        startDate = new CalendarDate(11,4,2020,4,0,false);
+        endDate = new CalendarDate(11,4,2020,5,0,false);
         class1 = new GymClassImpl("Kicking 101","Public","White");
-        class1.setDate(date);
+        class1.setStartDate(startDate);
+        class1.setEndDate(endDate);
         class1.setClassLength(60);
         class1.setSize(20);
         el = class1.getContent();
@@ -42,9 +45,10 @@ public class Task_76Test {
         assertEquals("White",class1.getRank());
         assertEquals(60,class1.getClassLength());
         assertEquals(20,class1.getMaxSize());
-        assertEquals(date.toString(),class1.getDate().toString());
+        assertTrue(startDate.equals(class1.getStartDate()));
+        assertTrue(endDate.equals(class1.getEndDate()));
         assertEquals(0,class1.getSize());
-        assertEquals(Util.getTimeStamp(date),class1.getStartTime());
+        assertEquals(Util.getTimeStamp(startDate),class1.getStartTime());
         assertFalse(class1.isFull());
         assertEquals(el.getAttribute("Name").getValue(),class1.getName());
     }

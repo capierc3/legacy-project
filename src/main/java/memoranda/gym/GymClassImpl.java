@@ -148,17 +148,28 @@ public class GymClassImpl implements GymClass {
     }
 
     @Override
-    public void setDate(CalendarDate date) {
-        setAttr("StartTime",date.toString());
+    public void setStartDate(CalendarDate date) {
+        setAttr("StartDate",date.toString());
     }
+
     @Override
-    public CalendarDate getDate() {
-        return new CalendarDate(el.getAttributeValue("StartTime"));
+    public void setEndDate(CalendarDate date){
+        setAttr("EndDate",date.toString());
+    }
+
+    @Override
+    public CalendarDate getStartDate() {
+        return new CalendarDate(el.getAttributeValue("StartDate"));
+    }
+
+    @Override
+    public CalendarDate getEndDate(){
+        return new CalendarDate(el.getAttributeValue("EndDate"));
     }
 
     @Override
     public String getStartTime() {
-        return Util.getTimeStamp(getDate());
+        return Util.getTimeStamp(getStartDate());
     }
 
     @Override
