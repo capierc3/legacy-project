@@ -1,10 +1,3 @@
-/* 
- * This class is designed to display a panel and show the appropriate info when the My Schedule button is clicked. 
- * It used the events panel as an original Source
- * 
- * 
- * 
- */
 package main.java.memoranda.ui;
 
 import java.awt.BorderLayout;
@@ -28,12 +21,9 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import main.java.memoranda.EventsManager;
 import main.java.memoranda.EventsScheduler;
-import main.java.memoranda.History;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
 import main.java.memoranda.date.DateListener;
@@ -42,24 +32,38 @@ import main.java.memoranda.util.CurrentStorage;
 import main.java.memoranda.util.Local;
 import main.java.memoranda.util.Util;
 
-/*$Id: EventsPanel.java,v 1.25 2005/02/19 10:06:25 rawsushi Exp $*/
+/**
+ * This is the main class for the MySchedule display in the ui.
+ * @author Chase
+ *
+ */
 public class MySchedulePanel extends JPanel {
     BorderLayout borderLayout1 = new BorderLayout();
     JToolBar eventsToolBar = new JToolBar();
-    JButton historyBackB = new JButton();
-    JButton historyForwardB = new JButton();
-    JButton newEventB = new JButton();
-    JButton editEventB = new JButton();
-    JButton removeEventB = new JButton();
+    //JButton historyBackB = new JButton();
+    //JButton historyForwardB = new JButton();
+    JButton newClassB = new JButton();
+    JButton editClassB = new JButton();
+    JButton removeClassB = new JButton();
+    JButton addClassB = new JButton();
+    JButton dropClassB = new JButton();
     JScrollPane scrollPane = new JScrollPane();
     EventsTable eventsTable = new EventsTable();
-    JPopupMenu eventPPMenu = new JPopupMenu();
-    JMenuItem ppEditEvent = new JMenuItem();
-    JMenuItem ppRemoveEvent = new JMenuItem();
-    JMenuItem ppNewEvent = new JMenuItem();
+    JPopupMenu classPPMenu = new JPopupMenu();
+    JMenuItem ppEditClass = new JMenuItem();
+    JMenuItem ppRemoveClass = new JMenuItem();
+    JMenuItem ppNewClass = new JMenuItem();
+    JMenuItem ppAddClass = new JMenuItem();
+    JMenuItem ppDropClass = new JMenuItem();
     DailyItemsPanel parentPanel = null;
+    //Early setup for UI changes based on user
+    //User user;
+    boolean isOwner = false;
+    boolean isStudent = true;
+    boolean isTrainer = false;
 
     public MySchedulePanel(DailyItemsPanel _parentPanel) {
+
         try {
             parentPanel = _parentPanel;
             jbInit();
@@ -71,105 +75,144 @@ public class MySchedulePanel extends JPanel {
     void jbInit() throws Exception {
         eventsToolBar.setFloatable(false);
 
-        historyBackB.setAction(History.historyBackAction);
-        historyBackB.setFocusable(false);
-        historyBackB.setBorderPainted(false);
-        historyBackB.setToolTipText(Local.getString("History back"));
-        historyBackB.setRequestFocusEnabled(false);
-        historyBackB.setPreferredSize(new Dimension(24, 24));
-        historyBackB.setMinimumSize(new Dimension(24, 24));
-        historyBackB.setMaximumSize(new Dimension(24, 24));
-        historyBackB.setText("");
+//        historyBackB.setAction(History.historyBackAction);
+//        historyBackB.setFocusable(false);
+//        historyBackB.setBorderPainted(false);
+//        historyBackB.setToolTipText(Local.getString("History back"));
+//        historyBackB.setRequestFocusEnabled(false);
+//        historyBackB.setPreferredSize(new Dimension(24, 24));
+//        historyBackB.setMinimumSize(new Dimension(24, 24));
+//        historyBackB.setMaximumSize(new Dimension(24, 24));
+//        historyBackB.setText("");
+//
+//        historyForwardB.setAction(History.historyForwardAction);
+//        historyForwardB.setBorderPainted(false);
+//        historyForwardB.setFocusable(false);
+//        historyForwardB.setPreferredSize(new Dimension(24, 24));
+//        historyForwardB.setRequestFocusEnabled(false);
+//        historyForwardB.setToolTipText(Local.getString("History forward"));
+//        historyForwardB.setMinimumSize(new Dimension(24, 24));
+//        historyForwardB.setMaximumSize(new Dimension(24, 24));
+//        historyForwardB.setText("");
 
-        historyForwardB.setAction(History.historyForwardAction);
-        historyForwardB.setBorderPainted(false);
-        historyForwardB.setFocusable(false);
-        historyForwardB.setPreferredSize(new Dimension(24, 24));
-        historyForwardB.setRequestFocusEnabled(false);
-        historyForwardB.setToolTipText(Local.getString("History forward"));
-        historyForwardB.setMinimumSize(new Dimension(24, 24));
-        historyForwardB.setMaximumSize(new Dimension(24, 24));
-        historyForwardB.setText("");
+        //Set toolbar buttons
+        if (isOwner) {
+            newClassB.setIcon(
+                    new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_new.png")));
+            newClassB.setEnabled(true);
+            newClassB.setMaximumSize(new Dimension(24, 24));
+            newClassB.setMinimumSize(new Dimension(24, 24));
+            newClassB.setToolTipText(Local.getString("New Class"));
+            newClassB.setRequestFocusEnabled(false);
+            newClassB.setPreferredSize(new Dimension(24, 24));
+            newClassB.setFocusable(false);
+            newClassB.addActionListener(this::newEventB_actionPerformed);
+            newClassB.setBorderPainted(false);
 
-        newEventB.setIcon(
-            new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_new.png")));
-        newEventB.setEnabled(true);
-        newEventB.setMaximumSize(new Dimension(24, 24));
-        newEventB.setMinimumSize(new Dimension(24, 24));
-        newEventB.setToolTipText(Local.getString("New Class"));
-        newEventB.setRequestFocusEnabled(false);
-        newEventB.setPreferredSize(new Dimension(24, 24));
-        newEventB.setFocusable(false);
-        newEventB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                newEventB_actionPerformed(e);
-            }
-        });
-        newEventB.setBorderPainted(false);
+            editClassB.setBorderPainted(false);
+            editClassB.setFocusable(false);
+            editClassB.addActionListener(this::editEventB_actionPerformed);
+            editClassB.setPreferredSize(new Dimension(24, 24));
+            editClassB.setRequestFocusEnabled(false);
+            editClassB.setToolTipText(Local.getString("Edit Class"));
+            editClassB.setMinimumSize(new Dimension(24, 24));
+            editClassB.setMaximumSize(new Dimension(24, 24));
+            editClassB.setEnabled(true);
+            editClassB.setIcon(
+                    new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_edit.png")));
 
-        editEventB.setBorderPainted(false);
-        editEventB.setFocusable(false);
-        editEventB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                editEventB_actionPerformed(e);
-            }
-        });
-        editEventB.setPreferredSize(new Dimension(24, 24));
-        editEventB.setRequestFocusEnabled(false);
-        editEventB.setToolTipText(Local.getString("Edit Class"));
-        editEventB.setMinimumSize(new Dimension(24, 24));
-        editEventB.setMaximumSize(new Dimension(24, 24));
-        editEventB.setEnabled(true);
-        editEventB.setIcon(
-            new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_edit.png")));
+            removeClassB.setBorderPainted(false);
+            removeClassB.setFocusable(false);
+            removeClassB.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    removeEventB_actionPerformed(e);
+                }
+            });
+            removeClassB.setPreferredSize(new Dimension(24, 24));
+            removeClassB.setRequestFocusEnabled(false);
+            removeClassB.setToolTipText(Local.getString("Remove Class"));
+            removeClassB.setMinimumSize(new Dimension(24, 24));
+            removeClassB.setMaximumSize(new Dimension(24, 24));
+            removeClassB.setIcon(
+                    new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_remove.png")));
+        } else if (isStudent) {
 
-        removeEventB.setBorderPainted(false);
-        removeEventB.setFocusable(false);
-        removeEventB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                removeEventB_actionPerformed(e);
-            }
-        });
-        removeEventB.setPreferredSize(new Dimension(24, 24));
-        removeEventB.setRequestFocusEnabled(false);
-        removeEventB.setToolTipText(Local.getString("Remove Class"));
-        removeEventB.setMinimumSize(new Dimension(24, 24));
-        removeEventB.setMaximumSize(new Dimension(24, 24));
-        removeEventB.setIcon(
-            new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_remove.png")));
+            addClassB.setIcon(
+                    new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_new.png")));
+            addClassB.setEnabled(true);
+            addClassB.setMaximumSize(new Dimension(24, 24));
+            addClassB.setMinimumSize(new Dimension(24, 24));
+            addClassB.setToolTipText(Local.getString("Register"));
+            addClassB.setRequestFocusEnabled(false);
+            addClassB.setPreferredSize(new Dimension(24, 24));
+            addClassB.setFocusable(false);
+            addClassB.addActionListener(this::addClassB_actionPerformed);
+            addClassB.setBorderPainted(false);
 
+            dropClassB.setBorderPainted(false);
+            dropClassB.setFocusable(false);
+            dropClassB.addActionListener(this::dropClassB_actionPerformed);
+            dropClassB.setPreferredSize(new Dimension(24, 24));
+            dropClassB.setRequestFocusEnabled(false);
+            dropClassB.setToolTipText(Local.getString("Drop Class"));
+            dropClassB.setMinimumSize(new Dimension(24, 24));
+            dropClassB.setMaximumSize(new Dimension(24, 24));
+            dropClassB.setIcon(
+                    new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_remove.png")));
+        }
         this.setLayout(borderLayout1);
         scrollPane.getViewport().setBackground(Color.white);
         eventsTable.setMaximumSize(new Dimension(32767, 32767));
         eventsTable.setRowHeight(24);
-        eventPPMenu.setFont(new java.awt.Font("Dialog", 1, 10));
-        ppEditEvent.setFont(new java.awt.Font("Dialog", 1, 11));
-        ppEditEvent.setText(Local.getString("Edit Class") + "...");
-        ppEditEvent.addActionListener(this::ppEditEvent_actionPerformed);
-        ppEditEvent.setEnabled(false);
-        ppEditEvent.setIcon(
-            new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_edit.png")));
-        ppRemoveEvent.setFont(new java.awt.Font("Dialog", 1, 11));
-        ppRemoveEvent.setText(Local.getString("Remove Class"));
-        ppRemoveEvent.addActionListener(this::ppRemoveEvent_actionPerformed);
-        ppRemoveEvent.setIcon(
-            new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_remove.png")));
-        ppRemoveEvent.setEnabled(false);
-        ppNewEvent.setFont(new java.awt.Font("Dialog", 1, 11));
-        ppNewEvent.setText(Local.getString("New Class") + "...");
-        ppNewEvent.addActionListener(this::ppNewEvent_actionPerformed);
-        ppNewEvent.setIcon(
-            new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_new.png")));
+        classPPMenu.setFont(new java.awt.Font("Dialog", 1, 10));
+        //sets right click menu
+        if (isOwner) {
+            ppEditClass.setFont(new java.awt.Font("Dialog", 1, 11));
+            ppEditClass.setText(Local.getString("Edit Class") + "...");
+            ppEditClass.addActionListener(this::ppEditEvent_actionPerformed);
+            ppEditClass.setEnabled(false);
+            ppEditClass.setIcon(
+                    new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_edit.png")));
+            ppRemoveClass.setFont(new java.awt.Font("Dialog", 1, 11));
+            ppRemoveClass.setText(Local.getString("Remove Class"));
+            ppRemoveClass.addActionListener(this::ppRemoveEvent_actionPerformed);
+            ppRemoveClass.setIcon(
+                    new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_remove.png")));
+            ppRemoveClass.setEnabled(false);
+            ppNewClass.setFont(new java.awt.Font("Dialog", 1, 11));
+            ppNewClass.setText(Local.getString("New Class") + "...");
+            ppNewClass.addActionListener(this::ppNewEvent_actionPerformed);
+            ppNewClass.setIcon(
+                    new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_new.png")));
+        } else if (isStudent){
+            ppAddClass.setFont(new java.awt.Font("Dialog", 1, 11));
+            ppAddClass.setText(Local.getString("Register") + "...");
+            ppAddClass.addActionListener(this::ppAddClass_actionPerformed);
+            ppAddClass.setIcon(
+                    new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_new.png")));
+
+            ppDropClass.setFont(new java.awt.Font("Dialog", 1, 11));
+            ppDropClass.setText(Local.getString("Drop Class"));
+            ppDropClass.addActionListener(this::ppDropClass_actionPerformed);
+            ppDropClass.setIcon(
+                    new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_remove.png")));
+            ppDropClass.setEnabled(false);
+        }
         scrollPane.getViewport().add(eventsTable, null);
         this.add(scrollPane, BorderLayout.CENTER);
-        eventsToolBar.add(historyBackB, null);
-        eventsToolBar.add(historyForwardB, null);
+        //eventsToolBar.add(historyBackB, null);
+        //eventsToolBar.add(historyForwardB, null);
         eventsToolBar.addSeparator(new Dimension(8, 24));
-
-        eventsToolBar.add(newEventB, null);
-        eventsToolBar.add(removeEventB, null);
-        eventsToolBar.addSeparator(new Dimension(8, 24));
-        eventsToolBar.add(editEventB, null);
+        //fills the toolbar
+        if (isOwner) {
+            eventsToolBar.add(newClassB, null);
+            eventsToolBar.add(removeClassB, null);
+            eventsToolBar.addSeparator(new Dimension(8, 24));
+            eventsToolBar.add(editClassB, null);
+        } else if (isStudent){
+            eventsToolBar.add(addClassB,null);
+            eventsToolBar.add(dropClassB,null);
+        }
 
         this.add(eventsToolBar, BorderLayout.NORTH);
 
@@ -177,43 +220,60 @@ public class MySchedulePanel extends JPanel {
         scrollPane.addMouseListener(ppListener);
         eventsTable.addMouseListener(ppListener);
 
-        CurrentDate.addDateListener(new DateListener() {
-            public void dateChange(CalendarDate d) {
-                eventsTable.initTable(d);     
-                boolean enbl = d.after(CalendarDate.today()) || d.equals(CalendarDate.today());
-                newEventB.setEnabled(enbl);           
-                ppNewEvent.setEnabled(enbl);
-                editEventB.setEnabled(false);
-                ppEditEvent.setEnabled(false);
-                removeEventB.setEnabled(false);
-                ppRemoveEvent.setEnabled(false);
+        CurrentDate.addDateListener(d -> {
+            eventsTable.initTable(d);
+            boolean enbl = d.after(CalendarDate.today()) || d.equals(CalendarDate.today());
+            if (isOwner) {
+                newClassB.setEnabled(enbl);
+                ppNewClass.setEnabled(enbl);
+                editClassB.setEnabled(false);
+                ppEditClass.setEnabled(false);
+                removeClassB.setEnabled(false);
+                ppRemoveClass.setEnabled(false);
+            } else if (isStudent){
+                addClassB.setEnabled(enbl);
+                ppAddClass.setEnabled(enbl);
+                dropClassB.setEnabled(enbl);
+                ppDropClass.setEnabled(enbl);
             }
         });
-
         eventsTable.getSelectionModel().addListSelectionListener(e -> {
             boolean enbl = eventsTable.getSelectedRow() > -1;
-            editEventB.setEnabled(enbl);
-            ppEditEvent.setEnabled(enbl);
-            removeEventB.setEnabled(enbl);
-            ppRemoveEvent.setEnabled(enbl);
+            if (isOwner) {
+                editClassB.setEnabled(enbl);
+                ppEditClass.setEnabled(enbl);
+                removeClassB.setEnabled(enbl);
+                ppRemoveClass.setEnabled(enbl);
+            } else if (isStudent){
+                addClassB.setEnabled(enbl);
+                ppAddClass.setEnabled(enbl);
+                dropClassB.setEnabled(enbl);
+                ppDropClass.setEnabled(enbl);
+            }
         });
-        editEventB.setEnabled(false);
-        removeEventB.setEnabled(false);
-        eventPPMenu.add(ppEditEvent);
-        eventPPMenu.addSeparator();
-        eventPPMenu.add(ppNewEvent);
-        eventPPMenu.add(ppRemoveEvent);
+        editClassB.setEnabled(false);
+        removeClassB.setEnabled(false);
+        //fills the right click menu
+        if (isOwner) {
+            classPPMenu.add(ppEditClass);
+            classPPMenu.addSeparator();
+            classPPMenu.add(ppNewClass);
+            classPPMenu.add(ppRemoveClass);
+        } else if (isStudent){
+            classPPMenu.add(ppAddClass);
+            classPPMenu.add(ppDropClass);
+        }
 		
 		// remove events using the DEL key
-		eventsTable.addKeyListener(new KeyListener() {
-			public void keyPressed(KeyEvent e){
-				if(eventsTable.getSelectedRows().length>0 
-					&& e.getKeyCode()==KeyEvent.VK_DELETE)
-					ppRemoveEvent_actionPerformed(null);
-			}
-			public void	keyReleased(KeyEvent e){}
-			public void keyTyped(KeyEvent e){} 
-		});
+//		eventsTable.addKeyListener(new KeyListener() {
+//			public void keyPressed(KeyEvent e){
+//				if(eventsTable.getSelectedRows().length>0
+//					&& e.getKeyCode()==KeyEvent.VK_DELETE)
+//					ppRemoveEvent_actionPerformed(null);
+//			}
+//			public void	keyReleased(KeyEvent e){}
+//			public void keyTyped(KeyEvent e){}
+//		});
     }
 
     void editEventB_actionPerformed(ActionEvent e) {
@@ -304,6 +364,14 @@ public class MySchedulePanel extends JPanel {
         Util.debug("Default time is " + cdate);
         
     	newEventB_actionPerformed(e, null, cdate.getTime(), cdate.getTime());
+    }
+    //TODO add button click action
+    void addClassB_actionPerformed(ActionEvent e) {
+
+    }
+    //TODO add button click action
+    void dropClassB_actionPerformed(ActionEvent e) {
+
     }
     
     void newEventB_actionPerformed(ActionEvent e, String tasktext, Date startDate, Date endDate) {
@@ -438,7 +506,7 @@ public class MySchedulePanel extends JPanel {
 
         private void maybeShowPopup(MouseEvent e) {
             if (e.isPopupTrigger()) {
-                eventPPMenu.show(e.getComponent(), e.getX(), e.getY());
+                classPPMenu.show(e.getComponent(), e.getX(), e.getY());
             }
         }
 
@@ -451,5 +519,11 @@ public class MySchedulePanel extends JPanel {
     }
     void ppNewEvent_actionPerformed(ActionEvent e) {
         newEventB_actionPerformed(e);
+    }
+    void ppAddClass_actionPerformed(ActionEvent e){
+        addClassB_actionPerformed(e);
+    }
+    void ppDropClass_actionPerformed(ActionEvent e){
+        dropClassB_actionPerformed(e);
     }
 }
