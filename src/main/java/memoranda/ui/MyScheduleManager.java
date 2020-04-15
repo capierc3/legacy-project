@@ -7,14 +7,14 @@ import main.java.memoranda.gym.*;
  *
  * @author Chase
  */
-public class ScheduleManager {
+public class MyScheduleManager {
 
     private ClassList _allClasses;
     private ClassList _myStudentClasses;
     private ClassList _myTeachingClasses;
     private User _user;
 
-    ScheduleManager(User user){
+    MyScheduleManager(User user){
         _user = user;
         _myStudentClasses = fillStudentClasses();
         _myTeachingClasses = fillTeachingClasses();
