@@ -22,15 +22,10 @@ public interface GymClass {
     void setID(String id);
 
     /**
-     * Getter for the length in time the class will run for in minutes
+     * Finds the length in time the class will run for in minutes from the set start and end dates
      * @return double
      */
     int getClassLength();
-
-    /**
-     * Sets the length of the class in minutes
-     */
-    void setClassLength(int length);
 
     /**
      * Returns a UserList object filled with trainers
@@ -80,16 +75,28 @@ public interface GymClass {
     void setClassType(String type);
 
     /**
-     * Sets the CalendarDate for the class.
+     * Sets the CalendarDate for start of class.
      * @param date CalendarDate
      */
-    void setDate(CalendarDate date);
+    void setStartDate(CalendarDate date);
 
     /**
-     * returns a CalendarDate Object
+     * Sets the CalendarDate for the end of class.
+     * @param date CalendarDate
+     */
+    void setEndDate(CalendarDate date);
+
+    /**
+     * returns a CalendarDate Object for the start of the class
      * @return CalendarDate
      */
-    CalendarDate getDate();
+    CalendarDate getStartDate();
+
+    /**
+     * returns a CalendarDate Object for the end of the class
+     * @return CalendarDate
+     */
+    CalendarDate getEndDate();
 
     /**
      * returns a string of the start time 00:00_AM/PM

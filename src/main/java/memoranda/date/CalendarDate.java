@@ -94,11 +94,7 @@ public class CalendarDate {
         _month = cal.get(Calendar.MONTH);
         _hour = cal.get(Calendar.HOUR);
         _min = cal.get(Calendar.MINUTE);
-        if (cal.get(Calendar.AM_PM) == Calendar.AM){
-            _isAM = true;
-        } else {
-            _isAM = false;
-        }
+        _isAM = cal.get(Calendar.AM_PM) == Calendar.AM;
         hourSet = true;
     }
 

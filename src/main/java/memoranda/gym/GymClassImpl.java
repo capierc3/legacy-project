@@ -13,6 +13,8 @@ import nu.xom.Elements;
  * All main methods should work that are found in the GymClass interface. Currently as of 4/11 the add/get students and
  * add/get trainers don't work since those codes are not available yet. also get and set room don't work for the same reason.
  *
+ * getClassLength() does not work for overnight classes, PM->AM classes.
+ *
  * @author Chase
  */
 public class GymClassImpl implements GymClass {
@@ -41,6 +43,14 @@ public class GymClassImpl implements GymClass {
         this(name,type);
         setRank(rank);
     }
+
+    public GymClassImpl(String name, String type, String rank, CalendarDate startDate, CalendarDate endDate){
+        this(name,type,rank);
+        setStartDate(startDate);
+        setEndDate(endDate);
+    }
+
+
 
     @Override
     public String getName() {
@@ -99,12 +109,37 @@ public class GymClassImpl implements GymClass {
 
     @Override
     public int getClassLength() {
-        return Integer.parseInt(el.getAttributeValue("Length"));
-    }
+        String startDate = Util.getTimeStamp(getStartDate());
+        String endDate = Util.getTimeStamp(getEndDate());
+        int endHour = Integer.parseInt(endDate.split(":")[0]);
+        int startHour = Integer.parseInt(startDate.split(":")[0]);
+        int endMin, startMin;
+        if (!getEndDate().isAM()){
+            if (endHour!=12) {
+                endHour += 12;
+            }
+            endMin = Integer.parseInt(endDate.split(":")[1].replace("_PM",""));
+        } else {
+            endMin = Integer.parseInt(endDate.split(":")[1].replace("_AM",""));
+        }
+        if (!getStartDate().isAM()){
+            if (startHour!=12) {
+                startHour += 12;
+            }
+            startMin = Integer.parseInt(startDate.split(":")[1].replace("_PM",""));
+        } else {
+            startMin = Integer.parseInt(startDate.split(":")[1].replace("_AM", ""));
+        }
+        int hourLength = endHour-startHour;
+        int minLength;
+        if (startMin>endMin){
+            hourLength--;
+            minLength = (60-startMin)+endMin;
+        } else {
+            minLength = endMin-startMin;
+        }
 
-    @Override
-    public void setClassLength(int length) {
-        setAttr("Length",Integer.toString(length));
+        return (hourLength*60)+minLength;
     }
 
     @Override
@@ -148,17 +183,28 @@ public class GymClassImpl implements GymClass {
     }
 
     @Override
-    public void setDate(CalendarDate date) {
-        setAttr("StartTime",date.toString());
+    public void setStartDate(CalendarDate date) {
+        setAttr("StartDate",date.toString());
     }
+
     @Override
-    public CalendarDate getDate() {
-        return new CalendarDate(el.getAttributeValue("StartTime"));
+    public void setEndDate(CalendarDate date){
+        setAttr("EndDate",date.toString());
+    }
+
+    @Override
+    public CalendarDate getStartDate() {
+        return new CalendarDate(el.getAttributeValue("StartDate"));
+    }
+
+    @Override
+    public CalendarDate getEndDate(){
+        return new CalendarDate(el.getAttributeValue("EndDate"));
     }
 
     @Override
     public String getStartTime() {
-        return Util.getTimeStamp(getDate());
+        return Util.getTimeStamp(getStartDate());
     }
 
     @Override
