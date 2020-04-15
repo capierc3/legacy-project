@@ -14,6 +14,8 @@ import main.java.memoranda.EventsManager;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
 import main.java.memoranda.date.DateListener;
+import main.java.memoranda.gym.ClassList;
+import main.java.memoranda.gym.GymClass;
 import main.java.memoranda.util.Local;
 /*$Id: EventsTable.java,v 1.6 2004/10/11 08:48:20 alexeya Exp $*/
 /**
@@ -25,10 +27,11 @@ public class EventsTable extends JTable {
     public static final int EVENT_ID = 101;
 
     Vector events = new Vector();
+    ClassList classList;
     /**
      * Constructor for EventsTable.
      */
-    public EventsTable() {
+    EventsTable() {
         super();
         setModel(new EventsTableModel());
         initTable(CurrentDate.get());
@@ -40,7 +43,7 @@ public class EventsTable extends JTable {
      * sets up the table
      * @param d CalendarDate
      */
-    public void initTable(CalendarDate d) {
+    void initTable(CalendarDate d) {
         events = (Vector)EventsManager.getEventsForDate(d);
         getColumnModel().getColumn(0).setPreferredWidth(75);
         getColumnModel().getColumn(0).setMaxWidth(75);
@@ -92,8 +95,11 @@ public class EventsTable extends JTable {
     class EventsTableModel extends AbstractTableModel {
         //Can be used to add new columns
         String[] columnNames = {
-                Local.getString("Start Time"),
                 Local.getString("Name"),
+                Local.getString("Class Type"),
+                Local.getString("Belt Needed"),
+                Local.getString("Start Time"),
+                Local.getString("End Time"),
                 Local.getString("Instructor"),
                 Local.getString("Spots Remaining")
         };
@@ -110,7 +116,7 @@ public class EventsTable extends JTable {
          * @return int
          */
         public int getColumnCount() {
-            return 4;
+            return 7;
         }
 
         /**
@@ -135,16 +141,27 @@ public class EventsTable extends JTable {
          * @return Object
          */
         public Object getValueAt(int row, int col) {
-           Event ev = (Event)events.get(row);
-           if (col == 0)
-                return ev.getTimeString();
-           else if (col == 1)
-                return ev.getText();
-           else if (col == 2) return "TBD";
-           else if (col == 3) return "TBD";
-           else if (col == EVENT_ID)
-                return ev.getId();
-           else return ev;
+            GymClass gymClass = null;
+            if (col == 0) {
+                return "TBD";
+            } else if (col == 1) {
+                return "TBD";
+            } else if (col == 2) {
+                return "TBD";
+            } else if (col == 3) {
+                return "TBD";
+            } else if (col ==4) {
+
+            } else if (col ==5) {
+
+            } else if (col ==6) {
+
+            } else if (col ==7) {
+
+            } else if (col == EVENT_ID) {
+                return gymClass.getID();
+            }
+            return gymClass;
         }
 
         /**
