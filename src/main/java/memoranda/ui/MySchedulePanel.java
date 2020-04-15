@@ -276,7 +276,7 @@ public class MySchedulePanel extends JPanel {
 //		});
     }
 
-    void editEventB_actionPerformed(ActionEvent e) {
+    private void editEventB_actionPerformed(ActionEvent e) {
         EventDialog dlg = new EventDialog(App.getFrame(), Local.getString("Event"));
         main.java.memoranda.Event ev =
             (main.java.memoranda.Event) eventsTable.getModel().getValueAt(
@@ -357,7 +357,7 @@ public class MySchedulePanel extends JPanel {
 	saveEvents();
     }
 
-    void newEventB_actionPerformed(ActionEvent e) {
+    private void newEventB_actionPerformed(ActionEvent e) {
         Calendar cdate = CurrentDate.get().getCalendar();
         // round down to hour
         cdate.set(Calendar.MINUTE,0);  
@@ -366,11 +366,11 @@ public class MySchedulePanel extends JPanel {
     	newEventB_actionPerformed(e, null, cdate.getTime(), cdate.getTime());
     }
     //TODO add button click action
-    void addClassB_actionPerformed(ActionEvent e) {
+    private void addClassB_actionPerformed(ActionEvent e) {
 
     }
     //TODO add button click action
-    void dropClassB_actionPerformed(ActionEvent e) {
+    private void dropClassB_actionPerformed(ActionEvent e) {
 
     }
     
@@ -452,7 +452,7 @@ public class MySchedulePanel extends JPanel {
         EventsManager.createRepeatableEvent(rtype, sd, ed, period, hh, mm, text, dlg.workingDaysOnlyCB.isSelected());
     }
 
-    void removeEventB_actionPerformed(ActionEvent e) {
+    private void removeEventB_actionPerformed(ActionEvent e) {
 		String msg;
 		main.java.memoranda.Event ev;
 
@@ -511,19 +511,20 @@ public class MySchedulePanel extends JPanel {
         }
 
     }
-    void ppEditEvent_actionPerformed(ActionEvent e) {
+
+    private void ppEditEvent_actionPerformed(ActionEvent e) {
         editEventB_actionPerformed(e);
     }
-    void ppRemoveEvent_actionPerformed(ActionEvent e) {
+    private void ppRemoveEvent_actionPerformed(ActionEvent e) {
         removeEventB_actionPerformed(e);
     }
-    void ppNewEvent_actionPerformed(ActionEvent e) {
+    private void ppNewEvent_actionPerformed(ActionEvent e) {
         newEventB_actionPerformed(e);
     }
-    void ppAddClass_actionPerformed(ActionEvent e){
+    private void ppAddClass_actionPerformed(ActionEvent e){
         addClassB_actionPerformed(e);
     }
-    void ppDropClass_actionPerformed(ActionEvent e){
+    private void ppDropClass_actionPerformed(ActionEvent e){
         dropClassB_actionPerformed(e);
     }
 }
