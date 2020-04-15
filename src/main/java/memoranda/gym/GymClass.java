@@ -22,15 +22,10 @@ public interface GymClass {
     void setID(String id);
 
     /**
-     * Getter for the length in time the class will run for in minutes
+     * Finds the length in time the class will run for in minutes from the set start and end dates
      * @return double
      */
     int getClassLength();
-
-    /**
-     * Sets the length of the class in minutes
-     */
-    void setClassLength(int length);
 
     /**
      * Returns a UserList object filled with trainers
