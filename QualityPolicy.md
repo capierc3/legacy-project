@@ -40,14 +40,19 @@
   > Include a checklist/questions list which every developer will need to fill out/answer when creating a Pull Request to the Dev branch. 
   > Include a checklist/question list which every reviewer will need to fill out/answer when conducting a review, this checklist (and the answers of course) need to be put into the Pull Request review.
   >
-  >####Reviewer checklist:
+  >####Developer checklist:
   >- Use intention-revealing variable names
   >- Classes are small and manageable
   >- Methods only do one thing
   >- Code is free of duplication
   >- All Classes and methods contain clear and concise comments and javaDocs
   >- Class variables are immutable
-    
+  >- Branch is a fast-forward of the parent branch (merge parent branch into child to verify)
+  
+   >####Reviewer checklist:
+  >- All criteria in Developer checklist has been met
+  >- A peer review of the code is performed
+  >- Unit tests are written on appropriate methods
 
 **Static Analysis**  (due start Sprint 3)
   > Your Static Analysis policy   
