@@ -41,6 +41,9 @@ public class WorkPanel extends JPanel {
 	*/
 	public DailyItemsPanel dailyItemsPanel = new DailyItemsPanel(this);
 	public ResourcesPanel filesPanel = new ResourcesPanel();
+	public TrainerProfilesPanel trainerPanel = new TrainerProfilesPanel();
+	public RoomInfoPanel roomPanel = new RoomInfoPanel();
+	public StudentListPanel studentPanel = new StudentListPanel();
 	
 	// previously agenda, agenda panel
 	public JButton myInfo = new JButton();
@@ -470,6 +473,9 @@ public class WorkPanel extends JPanel {
 		this.add(panel, BorderLayout.CENTER);
 		panel.add(dailyItemsPanel, "DAILYITEMS");
 		panel.add(filesPanel, "FILES");
+		panel.add(trainerPanel, "TRAINERPROFILES");
+		panel.add(studentPanel, "STUDENTLIST");
+		panel.add(roomPanel, "ROOMLIST");
 		toolBar.add(myInfo, null);
 		toolBar.add(mySchedule, null);
 		toolBar.add(trainerProfiles, null);
@@ -522,7 +528,7 @@ public class WorkPanel extends JPanel {
 				mySchedule_actionPerformed(null);
 			else if (pan.equals("TRAINERPROFILES"))
 				trainerProfiles_actionPerformed(null);
-			else if (pan.equals("ROOMINFO"))
+			else if (pan.equals("ROOMLIST"))
 				roomInfo_actionPerformed(null);	
 			else if (pan.equals("STUDENTLIST"))
 				studentList_actionPerformed(null);
@@ -531,7 +537,7 @@ public class WorkPanel extends JPanel {
 		}
 	} 	
 
-	
+
 	
 
 	public void myInfo_actionPerformed(ActionEvent e) {
@@ -553,21 +559,21 @@ public class WorkPanel extends JPanel {
 	}
 
 	public void trainerProfiles_actionPerformed(ActionEvent e) {
-		cardLayout1.show(panel, "FILES");
+		cardLayout1.show(panel, "TRAINERPROFILES");
 		setCurrentButton(trainerProfiles);
-		Context.put("CURRENT_PANEL", "FILES");
+		Context.put("CURRENT_PANEL", "TRAINERPROFILES");
 	}
 	
 	public void roomInfo_actionPerformed(ActionEvent e) {
-		cardLayout1.show(panel, "FILES");
+		cardLayout1.show(panel, "ROOMLIST");
 		setCurrentButton(roomInfo);
-		Context.put("CURRENT_PANEL", "FILES");
+		Context.put("CURRENT_PANEL", "ROOMLIST");
 	}	
 
 	public void studentList_actionPerformed(ActionEvent e) {
-		cardLayout1.show(panel, "FILES");
+		cardLayout1.show(panel, "STUDENTLIST");
 		setCurrentButton(studentList);
-		Context.put("CURRENT_PANEL", "FILES");
+		Context.put("CURRENT_PANEL", "STUDENTLIST");
 	}
 	
 	public void resources_actionPerformed(ActionEvent e) {
