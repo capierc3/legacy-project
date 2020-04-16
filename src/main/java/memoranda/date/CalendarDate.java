@@ -91,7 +91,7 @@ public class CalendarDate {
     public CalendarDate(Calendar cal) {
         _year = cal.get(Calendar.YEAR);
         _day = cal.get(Calendar.DAY_OF_MONTH);
-        _month = cal.get(Calendar.MONTH);
+        _month = cal.get(Calendar.MONTH)+1;
         _hour = cal.get(Calendar.HOUR);
         _min = cal.get(Calendar.MINUTE);
         _isAM = cal.get(Calendar.AM_PM) == Calendar.AM;
