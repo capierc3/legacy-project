@@ -1,6 +1,7 @@
 package test.java;
 
 import main.java.memoranda.date.CalendarDate;
+import main.java.memoranda.gym.Belt;
 import main.java.memoranda.gym.GymClass;
 import main.java.memoranda.gym.GymClassImpl;
 import main.java.memoranda.util.Util;
@@ -35,17 +36,17 @@ public class Task_76Test {
 
         startDate = new CalendarDate(11, 4, 2020, 4, 0, false);
         endDate = new CalendarDate(11, 4, 2020, 5, 0, false);
-        class1 = new GymClassImpl("Kicking 101", "Public", "White");
+        class1 = new GymClassImpl("Kicking 101", "Public", Belt.WHITE);
         class1.setStartDate(startDate);
         class1.setEndDate(endDate);
         class1.setSize(20);
-        class2 = new GymClassImpl("Kicking 102", "Public", "White",
+        class2 = new GymClassImpl("Kicking 102", "Public", Belt.WHITE,
                 new CalendarDate(11, 4, 2020, 4, 45, false),
                 new CalendarDate(11, 4, 2020, 5, 0, false));
-        class3 = new GymClassImpl("Kicking 102", "Public", "White",
+        class3 = new GymClassImpl("Kicking 102", "Public", Belt.WHITE,
                 new CalendarDate(11, 4, 2020, 11, 45, true),
                 new CalendarDate(11, 4, 2020, 1, 45, false));
-        class4 =  new GymClassImpl("Kicking 102", "Public", "White",
+        class4 =  new GymClassImpl("Kicking 102", "Public", Belt.WHITE,
                 new CalendarDate(11, 4, 2020, 11, 45, true),
                 new CalendarDate(11, 4, 2020, 12, 15, false));
         el = class1.getContent();
@@ -60,7 +61,7 @@ public class Task_76Test {
         class1.setName("Kicking 202");
         assertEquals("Kicking 202",class1.getName());
         assertEquals("Public",class1.getClassType());
-        assertEquals("White",class1.getRank());
+        assertEquals(Belt.WHITE,class1.getRank());
         assertEquals(20,class1.getMaxSize());
         assertTrue(startDate.equals(class1.getStartDate()));
         assertTrue(endDate.equals(class1.getEndDate()));

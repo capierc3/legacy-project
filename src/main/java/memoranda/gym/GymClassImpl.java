@@ -39,12 +39,12 @@ public class GymClassImpl implements GymClass {
      * @param type String
      * @param rank String
      */
-    public GymClassImpl(String name,String type,String rank){
+    public GymClassImpl(String name,String type,Belt rank){
         this(name,type);
         setRank(rank);
     }
 
-    public GymClassImpl(String name, String type, String rank, CalendarDate startDate, CalendarDate endDate){
+    public GymClassImpl(String name, String type, Belt rank, CalendarDate startDate, CalendarDate endDate){
         this(name,type,rank);
         setStartDate(startDate);
         setEndDate(endDate);
@@ -63,13 +63,13 @@ public class GymClassImpl implements GymClass {
     }
 
     @Override
-    public String getRank() {
-        return el.getAttributeValue("Rank");
+    public Belt getRank() {
+        return Belt.getBelt(Integer.parseInt(el.getAttributeValue("Rank")));
     }
 
     @Override
-    public void setRank(String rank) {
-        setAttr("Rank",rank);
+    public void setRank(Belt rank) {
+        setAttr("Rank",String.valueOf(rank.getValue()));
     }
 
     @Override
