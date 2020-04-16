@@ -38,6 +38,13 @@ checkstyle {
   toolVersion = "8.8"
 }
 
+
+spotbugs {
+  effort = "max"
+  reportLevel = "low"
+  ignoreFailures = true
+}
+
 tasks.withType(com.github.spotbugs.SpotBugsTask) {
   reports {
     xml.enabled = false
