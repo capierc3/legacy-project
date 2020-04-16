@@ -1,7 +1,6 @@
 package main.java.memoranda.ui;
 
-import java.awt.Component;
-import java.awt.Font;
+import java.awt.*;
 import java.util.Date;
 import java.util.Vector;
 
@@ -16,6 +15,7 @@ import main.java.memoranda.date.CurrentDate;
 import main.java.memoranda.date.DateListener;
 import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.gym.GymClass;
+import main.java.memoranda.gym.GymClassImpl;
 import main.java.memoranda.util.Local;
 /*$Id: EventsTable.java,v 1.6 2004/10/11 08:48:20 alexeya Exp $*/
 /**
@@ -45,8 +45,8 @@ public class EventsTable extends JTable {
      */
     void initTable(CalendarDate d) {
         events = (Vector)EventsManager.getEventsForDate(d);
-        getColumnModel().getColumn(0).setPreferredWidth(75);
-        getColumnModel().getColumn(0).setMaxWidth(75);
+//        getColumnModel().getColumn(0).setPreferredWidth(75);
+//        getColumnModel().getColumn(0).setMaxWidth(75);
         clearSelection();
         updateUI();
     }
@@ -69,19 +69,23 @@ public class EventsTable extends JTable {
                 int column) {
                 Component comp;
                 comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                Event ev = (Event)getModel().getValueAt(row, EVENT);
+                GymClass gymClass = (GymClass)getModel().getValueAt(row, EVENT);
                 comp.setForeground(java.awt.Color.gray);
-                if (ev.isRepeatable())
-                    comp.setFont(comp.getFont().deriveFont(Font.ITALIC));
+//                if (ev.isRepeatable())
+//                    comp.setFont(comp.getFont().deriveFont(Font.ITALIC));
                 if (CurrentDate.get().after(CalendarDate.today())) {
                   comp.setForeground(java.awt.Color.black);
-                }                
+                }
                 else if (CurrentDate.get().equals(CalendarDate.today())) {
-                  if (ev.getTime().after(new Date())) {
-                    comp.setForeground(java.awt.Color.black);
-                    //comp.setFont(new java.awt.Font("Dialog", 1, 12));
-                    comp.setFont(comp.getFont().deriveFont(Font.BOLD));
-                  }
+                    if (gymClass.getStartDate().after(new CalendarDate())) {
+                        comp.setForeground(java.awt.Color.black);
+                        comp.setFont(comp.getFont().deriveFont(Font.BOLD));
+                    }
+                    else if (gymClass.getStartDate().before(new CalendarDate())){
+                        comp.setForeground(Color.lightGray);
+                    }
+                    System.out.println(gymClass.getStartDate().toString());
+                    System.out.println(new CalendarDate().toString());
                 }
                 return comp;
             }
@@ -99,7 +103,7 @@ public class EventsTable extends JTable {
                 Local.getString("Class Type"),
                 Local.getString("Belt Needed"),
                 Local.getString("Start Time"),
-                Local.getString("End Time"),
+                Local.getString("Class Length"),
                 Local.getString("Instructor"),
                 Local.getString("Spots Remaining")
         };
@@ -126,7 +130,8 @@ public class EventsTable extends JTable {
         public int getRowCount() {
 			int i;
 			try {
-				i = events.size();
+				//i = classList.getSize();
+				i = 2;
 			}
 			catch(NullPointerException e) {
 				i = 1;
@@ -141,23 +146,33 @@ public class EventsTable extends JTable {
          * @return Object
          */
         public Object getValueAt(int row, int col) {
-            GymClass gymClass = null;
+            GymClass gymClass;
+            if (row == 0) {
+                gymClass = new GymClassImpl("Kicking 101", "Public", "White Belt",
+                        new CalendarDate(15, 3, 2020, 8, 30, true),
+                        new CalendarDate(15, 3, 2020, 9, 0, true));
+                gymClass.setSize(25);
+            } else {
+                gymClass = new GymClassImpl("One on One with Mac", "Private", "Green and Under",
+                        new CalendarDate(15, 3, 2020, 6, 30, false),
+                        new CalendarDate(15, 3, 2020, 7, 30, false));
+                gymClass.setSize(1);
+            }
             if (col == 0) {
-                return "TBD";
+                return gymClass.getName();
             } else if (col == 1) {
-                return "TBD";
+                return gymClass.getClassType();
             } else if (col == 2) {
-                return "TBD";
+                return gymClass.getRank();
             } else if (col == 3) {
-                return "TBD";
+                return gymClass.getStartTime().replace("_"," ");
             } else if (col ==4) {
-
+                return gymClass.getClassLength()+" minutes";
             } else if (col ==5) {
-
+                //return gymClass.getTrainers().get(0);
+                return "TBD";
             } else if (col ==6) {
-
-            } else if (col ==7) {
-
+                return gymClass.getMaxSize()-gymClass.getSize();
             } else if (col == EVENT_ID) {
                 return gymClass.getID();
             }
