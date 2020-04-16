@@ -64,134 +64,96 @@ public class TrainerProfilesPanel extends JPanel {
         }
     }
     void jbInit() throws Exception {
-        toolBar.setFloatable(false);
-        this.setLayout(borderLayout1);
-        newResB.setIcon(
-            new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/addresource.png")));
-        newResB.setEnabled(true);
-        newResB.setMaximumSize(new Dimension(24, 24));
-        newResB.setMinimumSize(new Dimension(24, 24));
-        newResB.setToolTipText(Local.getString("New resource"));
-        newResB.setRequestFocusEnabled(false);
-        newResB.setPreferredSize(new Dimension(24, 24));
-        newResB.setFocusable(false);
-        newResB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                newResB_actionPerformed(e);
-            }
-        });
-        newResB.setBorderPainted(false);
-        resourcesTable.setMaximumSize(new Dimension(32767, 32767));
-        resourcesTable.setRowHeight(24);
-        removeResB.setBorderPainted(false);
-        removeResB.setFocusable(false);
-        removeResB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                removeResB_actionPerformed(e);
-            }
-        });
-        removeResB.setPreferredSize(new Dimension(24, 24));
-        removeResB.setRequestFocusEnabled(false);
-        removeResB.setToolTipText(Local.getString("Remove resource"));
-        removeResB.setMinimumSize(new Dimension(24, 24));
-        removeResB.setMaximumSize(new Dimension(24, 24));
-        removeResB.setIcon(
-            new ImageIcon(
-                main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/removeresource.png")));
-        removeResB.setEnabled(false);
-        scrollPane.getViewport().setBackground(Color.white);
-        toolBar.addSeparator(new Dimension(8, 24));
-        toolBar.addSeparator(new Dimension(8, 24));
-
-
-        PopupListener ppListener = new PopupListener();
-        scrollPane.addMouseListener(ppListener);
-        resourcesTable.addMouseListener(ppListener);
-
-        resourcesTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent e) {
-                boolean enbl = (resourcesTable.getRowCount() > 0) && (resourcesTable.getSelectedRow() > -1);
-
-                removeResB.setEnabled(enbl); ppRemoveRes.setEnabled(enbl);
-                ppRun.setEnabled(enbl);
-            }
-        });
-        refreshB.setBorderPainted(false);
-        refreshB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                refreshB_actionPerformed(e);
-            }
-        });
-        refreshB.setFocusable(false);
-        refreshB.setPreferredSize(new Dimension(24, 24));
-        refreshB.setRequestFocusEnabled(false);
-        refreshB.setToolTipText(Local.getString("Refresh"));
-        refreshB.setMinimumSize(new Dimension(24, 24));
-        refreshB.setMaximumSize(new Dimension(24, 24));
-        refreshB.setEnabled(true);
-        refreshB.setIcon(
-            new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/refreshres.png")));
-        resPPMenu.setFont(new java.awt.Font("Dialog", 1, 10));
-    ppRun.setFont(new java.awt.Font("Dialog", 1, 11));
-    ppRun.setText(Local.getString("Open resource")+"...");
-    ppRun.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ppRun_actionPerformed(e);
-            }
-        });
-    ppRun.setEnabled(false);
-
-    ppRemoveRes.setFont(new java.awt.Font("Dialog", 1, 11));
-    ppRemoveRes.setText(Local.getString("Remove resource"));
-    ppRemoveRes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ppRemoveRes_actionPerformed(e);
-            }
-        });
-    ppRemoveRes.setIcon(new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/removeresource.png")));
-    ppRemoveRes.setEnabled(false);
-    ppNewRes.setFont(new java.awt.Font("Dialog", 1, 11));
-    ppNewRes.setText(Local.getString("New resource")+"...");
-    ppNewRes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ppNewRes_actionPerformed(e);
-            }
-        });
-    ppNewRes.setIcon(new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/addresource.png")));
-
-    ppRefresh.setFont(new java.awt.Font("Dialog", 1, 11));
-    ppRefresh.setText(Local.getString("Refresh"));
-    ppRefresh.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        ppRefresh_actionPerformed(e);
-      }
-    });
-    ppRefresh.setIcon(new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/refreshres.png")));
-
-    toolBar.add(newResB, null);
-        toolBar.add(removeResB, null);
-        toolBar.addSeparator();
-        toolBar.add(refreshB, null);
-        this.add(scrollPane, BorderLayout.CENTER);
-        scrollPane.getViewport().add(resourcesTable, null);
-        this.add(toolBar, BorderLayout.NORTH);
-    resPPMenu.add(ppRun);
-    resPPMenu.addSeparator();
-    resPPMenu.add(ppNewRes);
-    resPPMenu.add(ppRemoveRes);
-    resPPMenu.addSeparator();
-    resPPMenu.add(ppRefresh);
-	
-		// remove resources using the DEL key
-		resourcesTable.addKeyListener(new KeyListener() {
-			public void keyPressed(KeyEvent e){
-				if(resourcesTable.getSelectedRows().length>0 
-					&& e.getKeyCode()==KeyEvent.VK_DELETE)
-					ppRemoveRes_actionPerformed(null);
-			}
-			public void	keyReleased(KeyEvent e){}
-			public void keyTyped(KeyEvent e){} 
-		});
+        /*
+         * toolBar.setFloatable(false); this.setLayout(borderLayout1);
+         * ProjectsTablePanel testPanel = new ProjectsTablePanel(); newResB.setIcon( new
+         * ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource(
+         * "/ui/icons/addresource.png"))); newResB.setEnabled(true);
+         * newResB.setMaximumSize(new Dimension(24, 24)); newResB.setMinimumSize(new
+         * Dimension(24, 24)); newResB.setToolTipText(Local.getString("New resource"));
+         * newResB.setRequestFocusEnabled(false); newResB.setPreferredSize(new
+         * Dimension(24, 24)); newResB.setFocusable(false);
+         * newResB.addActionListener(new java.awt.event.ActionListener() { public void
+         * actionPerformed(ActionEvent e) { newResB_actionPerformed(e); } });
+         * newResB.setBorderPainted(false); resourcesTable.setMaximumSize(new
+         * Dimension(32767, 32767)); resourcesTable.setRowHeight(24);
+         * removeResB.setBorderPainted(false); removeResB.setFocusable(false);
+         * removeResB.addActionListener(new java.awt.event.ActionListener() { public
+         * void actionPerformed(ActionEvent e) { removeResB_actionPerformed(e); } });
+         * removeResB.setPreferredSize(new Dimension(24, 24));
+         * removeResB.setRequestFocusEnabled(false);
+         * removeResB.setToolTipText(Local.getString("Remove resource"));
+         * removeResB.setMinimumSize(new Dimension(24, 24));
+         * removeResB.setMaximumSize(new Dimension(24, 24)); removeResB.setIcon( new
+         * ImageIcon( main.java.memoranda.ui.AppFrame.class.getResource(
+         * "/ui/icons/removeresource.png"))); removeResB.setEnabled(false);
+         * scrollPane.getViewport().setBackground(Color.white); toolBar.addSeparator(new
+         * Dimension(8, 24)); toolBar.addSeparator(new Dimension(8, 24));
+         * 
+         * 
+         * PopupListener ppListener = new PopupListener();
+         * scrollPane.addMouseListener(ppListener);
+         * resourcesTable.addMouseListener(ppListener);
+         * 
+         * resourcesTable.getSelectionModel().addListSelectionListener(new
+         * ListSelectionListener() { public void valueChanged(ListSelectionEvent e) {
+         * boolean enbl = (resourcesTable.getRowCount() > 0) &&
+         * (resourcesTable.getSelectedRow() > -1);
+         * 
+         * removeResB.setEnabled(enbl); ppRemoveRes.setEnabled(enbl);
+         * ppRun.setEnabled(enbl); } }); refreshB.setBorderPainted(false);
+         * refreshB.addActionListener(new java.awt.event.ActionListener() { public void
+         * actionPerformed(ActionEvent e) { refreshB_actionPerformed(e); } });
+         * refreshB.setFocusable(false); refreshB.setPreferredSize(new Dimension(24,
+         * 24)); refreshB.setRequestFocusEnabled(false);
+         * refreshB.setToolTipText(Local.getString("Refresh"));
+         * refreshB.setMinimumSize(new Dimension(24, 24)); refreshB.setMaximumSize(new
+         * Dimension(24, 24)); refreshB.setEnabled(true); refreshB.setIcon( new
+         * ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource(
+         * "/ui/icons/refreshres.png"))); resPPMenu.setFont(new java.awt.Font("Dialog",
+         * 1, 10)); ppRun.setFont(new java.awt.Font("Dialog", 1, 11));
+         * ppRun.setText(Local.getString("Open resource")+"...");
+         * ppRun.addActionListener(new java.awt.event.ActionListener() { public void
+         * actionPerformed(ActionEvent e) { ppRun_actionPerformed(e); } });
+         * ppRun.setEnabled(false);
+         * 
+         * ppRemoveRes.setFont(new java.awt.Font("Dialog", 1, 11));
+         * ppRemoveRes.setText(Local.getString("Remove resource"));
+         * ppRemoveRes.addActionListener(new java.awt.event.ActionListener() { public
+         * void actionPerformed(ActionEvent e) { ppRemoveRes_actionPerformed(e); } });
+         * ppRemoveRes.setIcon(new
+         * ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource(
+         * "/ui/icons/removeresource.png"))); ppRemoveRes.setEnabled(false);
+         * ppNewRes.setFont(new java.awt.Font("Dialog", 1, 11));
+         * ppNewRes.setText(Local.getString("New Trainer")+"..."); // Set this to create
+         * new Trainer ppNewRes.addActionListener(new java.awt.event.ActionListener() {
+         * public void actionPerformed(ActionEvent e) { ppNewRes_actionPerformed(e); }
+         * }); ppNewRes.setIcon(new
+         * ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource(
+         * "/ui/icons/addresource.png")));
+         * 
+         * ppRefresh.setFont(new java.awt.Font("Dialog", 1, 11));
+         * ppRefresh.setText(Local.getString("Refresh"));
+         * ppRefresh.addActionListener(new java.awt.event.ActionListener() { public void
+         * actionPerformed(ActionEvent e) { ppRefresh_actionPerformed(e); } });
+         * ppRefresh.setIcon(new
+         * ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource(
+         * "/ui/icons/refreshres.png")));
+         * 
+         * toolBar.add(newResB, null); toolBar.add(removeResB, null);
+         * toolBar.addSeparator(); toolBar.add(refreshB, null); this.add(scrollPane,
+         * BorderLayout.CENTER); scrollPane.getViewport().add(resourcesTable, null);
+         * //this.add(toolBar, BorderLayout.NORTH); this.add(testPanel,
+         * BorderLayout.SOUTH); resPPMenu.add(ppRun); resPPMenu.addSeparator();
+         * resPPMenu.add(ppNewRes); resPPMenu.add(ppRemoveRes);
+         * resPPMenu.addSeparator(); resPPMenu.add(ppRefresh);
+         * 
+         * // remove resources using the DEL key resourcesTable.addKeyListener(new
+         * KeyListener() { public void keyPressed(KeyEvent e){
+         * if(resourcesTable.getSelectedRows().length>0 &&
+         * e.getKeyCode()==KeyEvent.VK_DELETE) ppRemoveRes_actionPerformed(null); }
+         * public void keyReleased(KeyEvent e){} public void keyTyped(KeyEvent e){} });
+         */
     }
 
     void newResB_actionPerformed(ActionEvent e) {
@@ -316,8 +278,6 @@ public class TrainerProfilesPanel extends JPanel {
             f.getName().replace('\\', '/'),
             dlg.appPanel.argumentsField.getText());
         mt.setApp(appId);
-        /*appList.setFindPath(appId, chooser.getSelectedFile().getParent().replace('\\','/'));
-        appList.setExec(appId, chooser.getSelectedFile().getName().replace('\\','/'));*/
         CurrentStorage.get().storeMimeTypesList();
         return true;
     }
