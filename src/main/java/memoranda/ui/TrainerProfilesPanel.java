@@ -54,7 +54,8 @@ public class TrainerProfilesPanel extends JPanel {
     JMenuItem ppRemoveRes = new JMenuItem();
     JMenuItem ppNewRes = new JMenuItem();
     JMenuItem ppRefresh = new JMenuItem();
-    TrainerCardPanel testCard = new TrainerCardPanel();
+    TrainerCardPanel testCard = new TrainerCardPanel("Justin", "blue");
+    TrainerCardPanel testCard2 = new TrainerCardPanel("Oliver", "red");
 
     public TrainerProfilesPanel() {
         try {
@@ -100,6 +101,8 @@ public class TrainerProfilesPanel extends JPanel {
         scrollPane.getViewport().setBackground(Color.white);
         toolBar.addSeparator(new Dimension(8, 24));
         toolBar.addSeparator(new Dimension(8, 24));
+        this.add(testCard, BorderLayout.SOUTH); 
+        this.add(testCard2, BorderLayout.NORTH); 
 
         /*
          * PopupListener ppListener = new PopupListener();
@@ -209,86 +212,43 @@ public class TrainerProfilesPanel extends JPanel {
      * ResourcesTable._RESOURCE)).getPath()); } resourcesTable.tableChanged(); }
      */
 
-    MimeType addResourceType(String fpath) {
-        ResourceTypeDialog dlg = new ResourceTypeDialog(App.getFrame(), Local.getString("Resource type"));
-        Dimension dlgSize = new Dimension(420, 300);
-        dlg.setSize(dlgSize);
-        Dimension frmSize = App.getFrame().getSize();
-        Point loc = App.getFrame().getLocation();
-        dlg.setLocation((frmSize.width - dlgSize.width) / 2 + loc.x, (frmSize.height - dlgSize.height) / 2 + loc.y);
-        dlg.ext = MimeTypesList.getExtension(fpath);
-        dlg.setVisible(true);
-        if (dlg.CANCELLED)
-            return null;
-        int ix = dlg.getTypesList().getSelectedIndex();
-        MimeType mt = (MimeType) MimeTypesList.getAllMimeTypes().toArray()[ix];
-        mt.addExtension(MimeTypesList.getExtension(fpath));
-        CurrentStorage.get().storeMimeTypesList();
-        return mt;
-    }
+    /*
+     * MimeType addResourceType(String fpath) { ResourceTypeDialog dlg = new
+     * ResourceTypeDialog(App.getFrame(), Local.getString("Resource type"));
+     * Dimension dlgSize = new Dimension(420, 300); dlg.setSize(dlgSize); Dimension
+     * frmSize = App.getFrame().getSize(); Point loc = App.getFrame().getLocation();
+     * dlg.setLocation((frmSize.width - dlgSize.width) / 2 + loc.x, (frmSize.height
+     * - dlgSize.height) / 2 + loc.y); dlg.ext = MimeTypesList.getExtension(fpath);
+     * dlg.setVisible(true); if (dlg.CANCELLED) return null; int ix =
+     * dlg.getTypesList().getSelectedIndex(); MimeType mt = (MimeType)
+     * MimeTypesList.getAllMimeTypes().toArray()[ix];
+     * mt.addExtension(MimeTypesList.getExtension(fpath));
+     * CurrentStorage.get().storeMimeTypesList(); return mt; }
+     * 
+     * boolean checkApp(MimeType mt) { String appId = mt.getAppId(); AppList appList
+     * = MimeTypesList.getAppList(); File d; if (appId == null) { appId =
+     * Util.generateId(); d = new File("/"); } else { File exe = new
+     * File(appList.getFindPath(appId) + "/" + appList.getExec(appId)); if
+     * (exe.isFile()) return true; d = new File(exe.getParent()); while
+     * (!d.exists()) d = new File(d.getParent()); } SetAppDialog dlg = new
+     * SetAppDialog(App.getFrame(), Local.getString(
+     * Local.getString("Select the application to open files of type") + " '" +
+     * mt.getLabel() + "'")); Dimension dlgSize = new Dimension(420, 300);
+     * dlg.setSize(dlgSize); Dimension frmSize = App.getFrame().getSize(); Point loc
+     * = App.getFrame().getLocation(); dlg.setLocation((frmSize.width -
+     * dlgSize.width) / 2 + loc.x, (frmSize.height - dlgSize.height) / 2 + loc.y);
+     * dlg.setDirectory(d); dlg.appPanel.argumentsField.setText("$1");
+     * dlg.setVisible(true); if (dlg.CANCELLED) return false; File f = new
+     * File(dlg.appPanel.applicationField.getText());
+     * 
+     * appList.addOrReplaceApp(appId, f.getParent().replace('\\', '/'),
+     * f.getName().replace('\\', '/'), dlg.appPanel.argumentsField.getText());
+     * mt.setApp(appId); CurrentStorage.get().storeMimeTypesList(); return true; }
+     */
 
-    boolean checkApp(MimeType mt) {
-        String appId = mt.getAppId();
-        AppList appList = MimeTypesList.getAppList();
-        File d;
-        if (appId == null) {
-            appId = Util.generateId();
-            d = new File("/");
-        } else {
-            File exe = new File(appList.getFindPath(appId) + "/" + appList.getExec(appId));
-            if (exe.isFile())
-                return true;
-            d = new File(exe.getParent());
-            while (!d.exists())
-                d = new File(d.getParent());
-        }
-        SetAppDialog dlg = new SetAppDialog(App.getFrame(), Local.getString(
-                Local.getString("Select the application to open files of type") + " '" + mt.getLabel() + "'"));
-        Dimension dlgSize = new Dimension(420, 300);
-        dlg.setSize(dlgSize);
-        Dimension frmSize = App.getFrame().getSize();
-        Point loc = App.getFrame().getLocation();
-        dlg.setLocation((frmSize.width - dlgSize.width) / 2 + loc.x, (frmSize.height - dlgSize.height) / 2 + loc.y);
-        dlg.setDirectory(d);
-        dlg.appPanel.argumentsField.setText("$1");
-        dlg.setVisible(true);
-        if (dlg.CANCELLED)
-            return false;
-        File f = new File(dlg.appPanel.applicationField.getText());
 
-        appList.addOrReplaceApp(appId, f.getParent().replace('\\', '/'), f.getName().replace('\\', '/'),
-                dlg.appPanel.argumentsField.getText());
-        mt.setApp(appId);
-        CurrentStorage.get().storeMimeTypesList();
-        return true;
-    }
 
-    void runApp(String fpath) {
-        MimeType mt = MimeTypesList.getMimeTypeForFile(fpath);
-        if (mt.getMimeTypeId().equals("__UNKNOWN")) {
-            mt = addResourceType(fpath);
-            if (mt == null)
-                return;
-        }
-        if (!checkApp(mt))
-            return;
-        String[] command = MimeTypesList.getAppList().getCommand(mt.getAppId(), fpath);
-        if (command == null)
-            return;
-        /* DEBUG */
-        System.out.println("Run: " + command[0]);
-        try {
-            Runtime.getRuntime().exec(command);
-        } catch (Exception ex) {
-            new ExceptionDialog(ex, "Failed to run an external application <br><code>" + command[0] + "</code>",
-                    "Check the application path and command line parameters for this resource type "
-                            + "(File-&gt;Preferences-&gt;Resource types).");
-        }
-    }
 
-    void runBrowser(String url) {
-        Util.runBrowser(url);
-    }
 
     /*
      * class PopupListener extends MouseAdapter {
@@ -327,40 +287,26 @@ public class TrainerProfilesPanel extends JPanel {
      * @param destStr The destination path.
      * @return The new path of the file.
      */
-    String copyFileToProjectDir(String srcStr) {
-
-        String JN_DOCPATH = Util.getEnvDir();
-
-        String baseName;
-        int i = srcStr.lastIndexOf(File.separator);
-        if (i != -1) {
-            baseName = srcStr.substring(i + 1);
-        } else
-            baseName = srcStr;
-
-        String destStr = JN_DOCPATH + CurrentProject.get().getID() + File.separator + "_projectFiles" + File.separator
-                + baseName;
-
-        File f = new File(JN_DOCPATH + CurrentProject.get().getID() + File.separator + "_projectFiles");
-        if (!f.exists()) {
-            f.mkdirs();
-        }
-        System.out.println("[DEBUG] Copy file from: " + srcStr + " to: " + destStr);
-
-        try {
-            FileInputStream in = new FileInputStream(srcStr);
-            FileOutputStream out = new FileOutputStream(destStr);
-            byte[] buf = new byte[4096];
-            int len;
-            while ((len = in.read(buf)) > 0) {
-                out.write(buf, 0, len);
-            }
-            out.close();
-            in.close();
-        } catch (IOException e) {
-            System.err.println(e.toString());
-        }
-
-        return destStr;
-    }
+    /*
+     * String copyFileToProjectDir(String srcStr) {
+     * 
+     * String JN_DOCPATH = Util.getEnvDir();
+     * 
+     * String baseName; int i = srcStr.lastIndexOf(File.separator); if (i != -1) {
+     * baseName = srcStr.substring(i + 1); } else baseName = srcStr;
+     * 
+     * String destStr = JN_DOCPATH + CurrentProject.get().getID() + File.separator +
+     * "_projectFiles" + File.separator + baseName;
+     * 
+     * File f = new File(JN_DOCPATH + CurrentProject.get().getID() + File.separator
+     * + "_projectFiles"); if (!f.exists()) { f.mkdirs(); }
+     * System.out.println("[DEBUG] Copy file from: " + srcStr + " to: " + destStr);
+     * 
+     * try { FileInputStream in = new FileInputStream(srcStr); FileOutputStream out
+     * = new FileOutputStream(destStr); byte[] buf = new byte[4096]; int len; while
+     * ((len = in.read(buf)) > 0) { out.write(buf, 0, len); } out.close();
+     * in.close(); } catch (IOException e) { System.err.println(e.toString()); }
+     * 
+     * return destStr; }
+     */
 }

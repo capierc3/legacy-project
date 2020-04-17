@@ -39,30 +39,41 @@ import main.java.memoranda.util.CurrentStorage;
 import main.java.memoranda.util.Local;
 import main.java.memoranda.util.Util;
 
-/*$Id: EventsPanel.java,v 1.25 2005/02/19 10:06:25 rawsushi Exp $*/
+/*
+ * Creates an individual trainer "card" that displays information about the trainer
+ * Will be displayed in TrainerProfilesPanel
+ * 
+ */
 public class TrainerCardPanel extends JPanel {
-
+    JPanel thisPanel = new JPanel();
     JButton editUser = new JButton("Edit");
     JButton newUser = new JButton("New Trainer");
+    //String name;
+    //String belt;
 
     //BufferedImage previewImage = ImageIO.read(new URL(imageURL));
 
-    public TrainerCardPanel() {
+    public TrainerCardPanel(String name, String belt) {
         try {
-            jbInit();
+            jbInit(name, belt);
         } catch (Exception ex) {
             new ExceptionDialog(ex);
         }
     }
 
-    void jbInit() throws Exception {
+    void jbInit(String name, String belt) throws Exception {
+        
+        JLabel trainerName = new JLabel("Hello, my name is: " +name+ "\n");
+        JLabel trainerBelt = new JLabel("My belt level is: " + belt + "\n");
+        JLabel trainerInfo = new JLabel("Fun fact about me: I use ketchup on everything!");
+        
 
-        JButton newButton = new JButton("Hello, World");
-
-        BufferedImage image = ImageIO.read(this.getClass().getResource("/ui/icons/tasks.png"));
-        JLabel wIcon = new JLabel(new ImageIcon(image));
-        add(newButton);
-        add(wIcon);
+        BufferedImage trainerImage = ImageIO.read(this.getClass().getResource("/ui/icons/nunchuckNorris.png"));
+        JLabel trainerPicture = new JLabel(new ImageIcon(trainerImage));
+        add(trainerPicture);
+        add(trainerName);
+        add(trainerBelt);        
+        add(trainerInfo);
     }
 
     void editUser_actionPerformed(ActionEvent e) {
