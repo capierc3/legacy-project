@@ -2,7 +2,7 @@
  * This class is designed to display a panel and show the appropriate info when the Trainer Profiles button is clicked. 
  * It used the resources panel as an original Source
  * 
- * 
+ * @author Justin Oliver
  * 
  */
 package main.java.memoranda.ui;
@@ -10,6 +10,7 @@ package main.java.memoranda.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -18,6 +19,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
@@ -26,6 +28,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -40,22 +43,13 @@ import main.java.memoranda.util.Util;
 
 import java.io.*;
 
-/*$Id: ResourcesPanel.java,v 1.13 2007/03/20 08:22:41 alexeya Exp $*/
+
 public class TrainerProfilesPanel extends JPanel {
-    BorderLayout borderLayout1 = new BorderLayout();
-    JToolBar toolBar = new JToolBar();
-    JButton newResB = new JButton();
-    // ResourcesTable resourcesTable = new ResourcesTable();
-    JButton removeResB = new JButton();
-    JScrollPane scrollPane = new JScrollPane();
-    JButton refreshB = new JButton();
-    // JPopupMenu resPPMenu = new JPopupMenu();
-    JMenuItem ppRun = new JMenuItem();
-    JMenuItem ppRemoveRes = new JMenuItem();
-    JMenuItem ppNewRes = new JMenuItem();
-    JMenuItem ppRefresh = new JMenuItem();
-    TrainerCardPanel testCard = new TrainerCardPanel("Justin", "blue");
-    TrainerCardPanel testCard2 = new TrainerCardPanel("Oliver", "red");
+    TitledBorder title = BorderFactory.createTitledBorder("KAESEKUCHEN TRAINERS");
+    FlowLayout flowlayout = new FlowLayout();
+    //BorderLayout borderLayout1 = new BorderLayout();
+    TrainerCardPanel testCard = new TrainerCardPanel("Justin", "blue", "I use ketchup on everything!");
+    TrainerCardPanel testCard2 = new TrainerCardPanel("Oliver", "red", "All my training comes from the film Karate Kid");
 
     public TrainerProfilesPanel() {
         try {
@@ -66,44 +60,12 @@ public class TrainerProfilesPanel extends JPanel {
     }
 
     void jbInit() throws Exception {
-        toolBar.setFloatable(false);
-        this.setLayout(borderLayout1);
-        // ProjectsTablePanel testPanel = new ProjectsTablePanel();
-        newResB.setIcon(new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/addresource.png")));
-        newResB.setEnabled(true);
-        newResB.setMaximumSize(new Dimension(24, 24));
-        newResB.setMinimumSize(new Dimension(24, 24));
-        newResB.setToolTipText(Local.getString("New resource"));
-        newResB.setRequestFocusEnabled(false);
-        newResB.setPreferredSize(new Dimension(24, 24));
-        newResB.setFocusable(false);
-        /*
-         * newResB.addActionListener(new java.awt.event.ActionListener() { public void
-         * actionPerformed(ActionEvent e) { newResB_actionPerformed(e); } });
-         */
-        newResB.setBorderPainted(false);
-        // resourcesTable.setMaximumSize(new Dimension(32767, 32767));
-        // resourcesTable.setRowHeight(24);
-        removeResB.setBorderPainted(false);
-        removeResB.setFocusable(false);
-        /*
-         * removeResB.addActionListener(new java.awt.event.ActionListener() { public
-         * void actionPerformed(ActionEvent e) { removeResB_actionPerformed(e); } });
-         */
-        removeResB.setPreferredSize(new Dimension(24, 24));
-        removeResB.setRequestFocusEnabled(false);
-        removeResB.setToolTipText(Local.getString("Remove resource"));
-        removeResB.setMinimumSize(new Dimension(24, 24));
-        removeResB.setMaximumSize(new Dimension(24, 24));
-        removeResB.setIcon(
-                new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/removeresource.png")));
-        removeResB.setEnabled(false);
-        scrollPane.getViewport().setBackground(Color.white);
-        toolBar.addSeparator(new Dimension(8, 24));
-        toolBar.addSeparator(new Dimension(8, 24));
-        this.add(testCard, BorderLayout.SOUTH); 
-        this.add(testCard2, BorderLayout.NORTH); 
+        
+        this.setLayout(flowlayout);
 
+        this.add(testCard); 
+        this.add(testCard2); 
+        this.setBorder(title);
         /*
          * PopupListener ppListener = new PopupListener();
          * scrollPane.addMouseListener(ppListener);

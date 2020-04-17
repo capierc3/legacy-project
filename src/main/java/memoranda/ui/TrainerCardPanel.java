@@ -2,6 +2,7 @@ package main.java.memoranda.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -14,6 +15,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
@@ -22,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.image.BufferedImage;
@@ -45,35 +49,35 @@ import main.java.memoranda.util.Util;
  * 
  */
 public class TrainerCardPanel extends JPanel {
-    JPanel thisPanel = new JPanel();
     JButton editUser = new JButton("Edit");
     JButton newUser = new JButton("New Trainer");
-    //String name;
-    //String belt;
 
-    //BufferedImage previewImage = ImageIO.read(new URL(imageURL));
 
-    public TrainerCardPanel(String name, String belt) {
+    public TrainerCardPanel(String name, String belt, String fact) {
         try {
-            jbInit(name, belt);
+            jbInit(name, belt, fact);
         } catch (Exception ex) {
             new ExceptionDialog(ex);
         }
     }
 
-    void jbInit(String name, String belt) throws Exception {
+    void jbInit(String name, String belt, String funFact) throws Exception {
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        TitledBorder title = BorderFactory.createTitledBorder("KAESEKUCHEN TRAINERS");
         
-        JLabel trainerName = new JLabel("Hello, my name is: " +name+ "\n");
-        JLabel trainerBelt = new JLabel("My belt level is: " + belt + "\n");
-        JLabel trainerInfo = new JLabel("Fun fact about me: I use ketchup on everything!");
+        JLabel trainerName = new JLabel("Trainer Name: " +name+ "\n");
+        JLabel trainerBelt = new JLabel("Belt Level: " + belt + "\n");
+        JLabel trainerInfo = new JLabel("Fun fact about me: " + funFact +"\n");
         
 
         BufferedImage trainerImage = ImageIO.read(this.getClass().getResource("/ui/icons/nunchuckNorris.png"));
         JLabel trainerPicture = new JLabel(new ImageIcon(trainerImage));
-        add(trainerPicture);
-        add(trainerName);
-        add(trainerBelt);        
-        add(trainerInfo);
+        this.add(trainerName);
+        this.add(trainerPicture);
+        this.add(trainerBelt);        
+        this.add(trainerInfo);
+        this.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.yellow));
+        //this.setPreferredSize(new Dimension(250, 250));
     }
 
     void editUser_actionPerformed(ActionEvent e) {
