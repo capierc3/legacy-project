@@ -127,6 +127,10 @@ public class ClassListImpl implements ClassList {
         return list;
     }
 
+    /**
+     * Method to return ClassList as an Element.
+     * @return Element
+     */
     public Element getContent() {
         setClassList(classes);
         return element;

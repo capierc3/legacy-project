@@ -114,5 +114,13 @@ public class NoteImpl implements Note, Comparable {
 		else 
 			return 0;
 	}
+
+    /**
+     * Method to return element of Note
+     * @return Element
+     */
+    public Element getContent() {
+        return _el;
+    }
     
 }
