@@ -1,6 +1,7 @@
 package main.java.memoranda.ui;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
@@ -13,6 +14,7 @@ import main.java.memoranda.EventsManager;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
 import main.java.memoranda.date.DateListener;
+import main.java.memoranda.gym.Belt;
 import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.gym.GymClass;
 import main.java.memoranda.gym.GymClassImpl;
@@ -27,12 +29,14 @@ public class EventsTable extends JTable {
     public static final int EVENT_ID = 101;
 
     Vector events = new Vector();
-    ClassList classList;
+    MyScheduleManager manager;
+    ArrayList<GymClass> classList;
     /**
      * Constructor for EventsTable.
      */
-    EventsTable() {
+    EventsTable(MyScheduleManager manager) {
         super();
+        this.manager = manager;
         setModel(new EventsTableModel());
         initTable(CurrentDate.get());
         this.setShowGrid(false);
@@ -45,6 +49,7 @@ public class EventsTable extends JTable {
      */
     void initTable(CalendarDate d) {
         events = (Vector)EventsManager.getEventsForDate(d);
+        classList = manager.getClasses();
 //        getColumnModel().getColumn(0).setPreferredWidth(75);
 //        getColumnModel().getColumn(0).setMaxWidth(75);
         clearSelection();
@@ -84,8 +89,6 @@ public class EventsTable extends JTable {
                     else if (gymClass.getStartDate().before(new CalendarDate())){
                         comp.setForeground(Color.lightGray);
                     }
-                    System.out.println(gymClass.getStartDate().toString());
-                    System.out.println(new CalendarDate().toString());
                 }
                 return comp;
             }
@@ -130,8 +133,7 @@ public class EventsTable extends JTable {
         public int getRowCount() {
 			int i;
 			try {
-				//i = classList.getSize();
-				i = 2;
+				i = classList.size();
 			}
 			catch(NullPointerException e) {
 				i = 1;
@@ -146,18 +148,7 @@ public class EventsTable extends JTable {
          * @return Object
          */
         public Object getValueAt(int row, int col) {
-            GymClass gymClass;
-            if (row == 0) {
-                gymClass = new GymClassImpl("Kicking 101", "Public", "White Belt",
-                        new CalendarDate(15, 3, 2020, 8, 30, true),
-                        new CalendarDate(15, 3, 2020, 9, 0, true));
-                gymClass.setSize(25);
-            } else {
-                gymClass = new GymClassImpl("One on One with Mac", "Private", "Green and Under",
-                        new CalendarDate(15, 3, 2020, 6, 30, false),
-                        new CalendarDate(15, 3, 2020, 7, 30, false));
-                gymClass.setSize(1);
-            }
+            GymClass gymClass = classList.get(row);
             if (col == 0) {
                 return gymClass.getName();
             } else if (col == 1) {
@@ -172,7 +163,11 @@ public class EventsTable extends JTable {
                 //return gymClass.getTrainers().get(0);
                 return "TBD";
             } else if (col ==6) {
-                return gymClass.getMaxSize()-gymClass.getSize();
+                try {
+                    return gymClass.getMaxSize() - gymClass.getSize();
+                } catch (NumberFormatException e){
+                    return "Not Set";
+                }
             } else if (col == EVENT_ID) {
                 return gymClass.getID();
             }

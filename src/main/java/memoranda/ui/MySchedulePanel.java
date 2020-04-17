@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -20,6 +21,7 @@ import main.java.memoranda.EventsScheduler;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
 import main.java.memoranda.date.DateListener;
+import main.java.memoranda.gym.ClassListImpl;
 import main.java.memoranda.util.Configuration;
 import main.java.memoranda.util.CurrentStorage;
 import main.java.memoranda.util.Local;
@@ -31,6 +33,9 @@ import main.java.memoranda.util.Util;
  *
  */
 public class MySchedulePanel extends JPanel {
+    boolean isOwner = true;
+    boolean isStudent = false;
+    MyScheduleManager manager = new MyScheduleManager(new ClassListImpl(new ArrayList<>()),isOwner);
     BorderLayout borderLayout1 = new BorderLayout();
     JToolBar eventsToolBar = new JToolBar();
     //JButton historyBackB = new JButton();
@@ -41,7 +46,7 @@ public class MySchedulePanel extends JPanel {
     JButton addClassB = new JButton();
     JButton dropClassB = new JButton();
     JScrollPane scrollPane = new JScrollPane();
-    EventsTable eventsTable = new EventsTable();
+    EventsTable eventsTable = new EventsTable(manager);
     JPopupMenu classPPMenu = new JPopupMenu();
     JMenuItem ppEditClass = new JMenuItem();
     JMenuItem ppRemoveClass = new JMenuItem();
@@ -56,9 +61,6 @@ public class MySchedulePanel extends JPanel {
     JComboBox listTypeBox;
     //Early setup for UI changes based on user
     //User user;
-    boolean isOwner = true;
-    boolean isStudent = false;
-    boolean isTrainer = false;
 
 
     public MySchedulePanel(DailyItemsPanel _parentPanel) {
@@ -407,8 +409,12 @@ public class MySchedulePanel extends JPanel {
     private void dropClassB_actionPerformed(ActionEvent e) {
 
     }
-    //TODO add sort actions
     private void sortBox_actionPerformed(ActionEvent e) {
+        int sort = sortCombo.getSelectedIndex();
+        String dir =  sortDirB.getToolTipText();
+        String listName = (String) listTypeBox.getSelectedItem();
+        manager.updateLists(listName,sort,dir);
+        eventsTable.refresh();
 
     }
     //TODO add sort dir logic
@@ -417,10 +423,12 @@ public class MySchedulePanel extends JPanel {
             sortDirB.setIcon(
                     new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/Down.png")));
             sortDirB.setToolTipText(Local.getString("Ascending"));
+            sortBox_actionPerformed(e);
         } else {
             sortDirB.setIcon(
                     new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/Up.png")));
             sortDirB.setToolTipText(Local.getString("Descending"));
+            sortBox_actionPerformed(e);
         }
     }
     //TODO add logic

@@ -92,7 +92,6 @@ public class ClassListImpl implements ClassList {
      * @return Collection
      */
     public Collection<GymClass> getAllClasses() {
-
         return classes;
     }
 
