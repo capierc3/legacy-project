@@ -13,7 +13,7 @@ import nu.xom.Elements;
  * @author Daimi Mussey
  */
 
-public class ClassListImpl {
+public class ClassListImpl implements ClassList {
     private Collection<GymClass> classes;
     private Element element;
 
