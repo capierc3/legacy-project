@@ -1,5 +1,6 @@
 package main.java.memoranda.gym;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import main.java.memoranda.gym.GymClass;
 import main.java.memoranda.gym.ClassList;
@@ -25,7 +26,7 @@ public class ClassListImpl implements ClassList {
 
     public void setClassList(Collection<GymClass> classes) {
         for (GymClass gymClass : classes) {
-            element.appendChild(gymClass.getContent());
+            element.appendChild(gymClass.getContent().copy());
         }
     }
 
@@ -116,7 +117,7 @@ public class ClassListImpl implements ClassList {
      * @return ClassList
      */
     public ClassList getListByDate(CalendarDate date) {
-        ClassList list = null;
+        ClassList list = new ClassListImpl(new ArrayList<>());
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
                 if (gymClass.getStartDate().equals(date)) {

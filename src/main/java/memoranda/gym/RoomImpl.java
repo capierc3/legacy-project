@@ -32,7 +32,7 @@ public class RoomImpl implements Room{
     }
 
     public void setClassList(ClassList list) {
-        el.appendChild(list.getContent());
+        el.appendChild(list.getContent().copy());
     }
 
     public void setClassDates(Collection<CalendarDate> classDates) {
@@ -84,14 +84,12 @@ public class RoomImpl implements Room{
      * @return boolean
      */
     public boolean isAvailable(CalendarDate date) {
-        boolean result = false;
-
-        if (!classDates.isEmpty()) {
-            if(classDates.contains(date)) {
-                result = true;
+        for (CalendarDate d:classDates) {
+            if (d.equals(date)){
+                return false;
             }
         }
-        return result;
+        return true;
     }
 
     public Element getContent() {

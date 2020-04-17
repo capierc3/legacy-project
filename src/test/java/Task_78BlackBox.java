@@ -40,6 +40,6 @@ public class Task_78BlackBox {
         assertEquals(1,room1.getClasses().getSize());
         assertEquals(1,room1.getRoomNum());
         assertFalse(room1.isAvailable(startDate1));
-        assertTrue(room1.isAvailable(new CalendarDate(20,4,2020,4,30,false)));
+        assertTrue(room1.isAvailable(CalendarDate.tomorrow()));
     }
 }
