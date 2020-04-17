@@ -429,7 +429,7 @@ public class MySchedulePanel extends JPanel {
     }
     
     void newEventB_actionPerformed(ActionEvent e, String tasktext, Date startDate, Date endDate) {
-    	EventDialog dlg = new EventDialog(App.getFrame(), Local.getString("Create Class"));
+    	EventDialog dlg = new EventDialog(App.getFrame(), Local.getString("Create  Class"));
     	Dimension frmSize = App.getFrame().getSize();
     	Point loc = App.getFrame().getLocation();
     	if (tasktext != null) {
@@ -445,10 +445,18 @@ public class MySchedulePanel extends JPanel {
     	if (dlg.CANCELLED)
     		return;
     	Calendar calendar = new GregorianCalendar(Local.getCurrentLocale()); //Fix deprecated methods to get hours
+    	//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
     	calendar.setTime(((Date)dlg.timeSpin.getModel().getValue()));//Fix deprecated methods to get hours
-        int hh = calendar.get(Calendar.HOUR_OF_DAY);//Fix deprecated methods to get hours
+    	//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
+    	int hh = calendar.get(Calendar.HOUR_OF_DAY);//Fix deprecated methods to get hours
+    	//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
     	int mm = calendar.get(Calendar.MINUTE);//Fix deprecated methods to get hours
+    	//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
+
+    	//int hh = ((Date) dlg.timeSpin.getModel().getValue()).getHours();
+    	//int mm = ((Date) dlg.timeSpin.getModel().getValue()).getMinutes();
     	String text = dlg.textField.getText();
+
 		CalendarDate eventCalendarDate = new CalendarDate(dlg.getEventDate());
 		
     	if (dlg.noRepeatRB.isSelected())
