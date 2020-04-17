@@ -13,14 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
+import javax.swing.*;
 
 import main.java.memoranda.EventsManager;
 import main.java.memoranda.EventsScheduler;
@@ -56,11 +49,17 @@ public class MySchedulePanel extends JPanel {
     JMenuItem ppAddClass = new JMenuItem();
     JMenuItem ppDropClass = new JMenuItem();
     DailyItemsPanel parentPanel = null;
+    String[] sorts = new String[]{"Date","Rank","Trainer","Name"};
+    JComboBox sortCombo = new JComboBox(sorts);
+    JButton sortDirB = new JButton();
+    String[] listTypesA;
+    JComboBox listTypeBox;
     //Early setup for UI changes based on user
     //User user;
-    boolean isOwner = false;
-    boolean isStudent = true;
+    boolean isOwner = true;
+    boolean isStudent = false;
     boolean isTrainer = false;
+
 
     public MySchedulePanel(DailyItemsPanel _parentPanel) {
 
@@ -94,6 +93,7 @@ public class MySchedulePanel extends JPanel {
 //        historyForwardB.setMinimumSize(new Dimension(24, 24));
 //        historyForwardB.setMaximumSize(new Dimension(24, 24));
 //        historyForwardB.setText("");
+
 
         //Set toolbar buttons
         if (isOwner) {
@@ -135,6 +135,12 @@ public class MySchedulePanel extends JPanel {
             removeClassB.setMaximumSize(new Dimension(24, 24));
             removeClassB.setIcon(
                     new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_remove.png")));
+            listTypesA = new String[] {"All Classes","Teaching","Student"};
+            listTypeBox = new JComboBox(listTypesA);
+            listTypeBox.setSelectedIndex(0);
+            listTypeBox.addActionListener(this::listBox_actionPerformed);
+            listTypeBox.setMaximumSize(listTypeBox.getPreferredSize());
+
         } else if (isStudent) {
 
             addClassB.setIcon(
@@ -159,7 +165,27 @@ public class MySchedulePanel extends JPanel {
             dropClassB.setMaximumSize(new Dimension(24, 24));
             dropClassB.setIcon(
                     new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_remove.png")));
+            listTypesA = new String[] {"All Classes","My Classes"};
+            listTypeBox = new JComboBox(listTypesA);
+            listTypeBox.setSelectedIndex(0);
+            listTypeBox.addActionListener(this::listBox_actionPerformed);
+            listTypeBox.setMaximumSize(listTypeBox.getPreferredSize());
         }
+        sortCombo.setSelectedIndex(0);
+        sortCombo.addActionListener(this::sortBox_actionPerformed);
+        sortCombo.setMaximumSize(sortCombo.getPreferredSize());
+        sortDirB.setIcon(
+                new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/Down.png")));
+        sortDirB.setEnabled(true);
+        sortDirB.setMaximumSize(new Dimension(24, 24));
+        sortDirB.setMinimumSize(new Dimension(24, 24));
+        sortDirB.setToolTipText(Local.getString("Ascending"));
+        sortDirB.setRequestFocusEnabled(false);
+        sortDirB.setPreferredSize(new Dimension(24, 24));
+        sortDirB.setFocusable(false);
+        sortDirB.addActionListener(this::sortDirB_actionPerformed);
+        sortDirB.setBorderPainted(false);
+
         this.setLayout(borderLayout1);
         scrollPane.getViewport().setBackground(Color.white);
         eventsTable.setMaximumSize(new Dimension(32767, 32767));
@@ -213,6 +239,14 @@ public class MySchedulePanel extends JPanel {
             eventsToolBar.add(addClassB,null);
             eventsToolBar.add(dropClassB,null);
         }
+        eventsToolBar.addSeparator(new Dimension(8,24));
+        eventsToolBar.add(new JLabel("Show: "));
+        eventsToolBar.add(listTypeBox,null);
+        eventsToolBar.addSeparator(new Dimension(8,24));
+        eventsToolBar.add(new JLabel("Sort By: "),null);
+        eventsToolBar.add(sortCombo,null);
+        eventsToolBar.add(sortDirB,null);
+        eventsToolBar.addSeparator(new Dimension(8, 24));
 
         this.add(eventsToolBar, BorderLayout.NORTH);
 
@@ -373,9 +407,29 @@ public class MySchedulePanel extends JPanel {
     private void dropClassB_actionPerformed(ActionEvent e) {
 
     }
+    //TODO add sort actions
+    private void sortBox_actionPerformed(ActionEvent e) {
+
+    }
+    //TODO add sort dir logic
+    private void sortDirB_actionPerformed(ActionEvent e) {
+        if (sortDirB.getToolTipText().equalsIgnoreCase("Descending")) {
+            sortDirB.setIcon(
+                    new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/Down.png")));
+            sortDirB.setToolTipText(Local.getString("Ascending"));
+        } else {
+            sortDirB.setIcon(
+                    new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/Up.png")));
+            sortDirB.setToolTipText(Local.getString("Descending"));
+        }
+    }
+    //TODO add logic
+    private void listBox_actionPerformed(ActionEvent e) {
+
+    }
     
     void newEventB_actionPerformed(ActionEvent e, String tasktext, Date startDate, Date endDate) {
-    	EventDialog dlg = new EventDialog(App.getFrame(), Local.getString("New Class"));
+    	EventDialog dlg = new EventDialog(App.getFrame(), Local.getString("Create Class"));
     	Dimension frmSize = App.getFrame().getSize();
     	Point loc = App.getFrame().getLocation();
     	if (tasktext != null) {
@@ -391,18 +445,10 @@ public class MySchedulePanel extends JPanel {
     	if (dlg.CANCELLED)
     		return;
     	Calendar calendar = new GregorianCalendar(Local.getCurrentLocale()); //Fix deprecated methods to get hours
-    	//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
     	calendar.setTime(((Date)dlg.timeSpin.getModel().getValue()));//Fix deprecated methods to get hours
-    	//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
-    	int hh = calendar.get(Calendar.HOUR_OF_DAY);//Fix deprecated methods to get hours
-    	//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
+        int hh = calendar.get(Calendar.HOUR_OF_DAY);//Fix deprecated methods to get hours
     	int mm = calendar.get(Calendar.MINUTE);//Fix deprecated methods to get hours
-    	//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
-    	
-    	//int hh = ((Date) dlg.timeSpin.getModel().getValue()).getHours();
-    	//int mm = ((Date) dlg.timeSpin.getModel().getValue()).getMinutes();
     	String text = dlg.textField.getText();
-		
 		CalendarDate eventCalendarDate = new CalendarDate(dlg.getEventDate());
 		
     	if (dlg.noRepeatRB.isSelected())
@@ -526,5 +572,26 @@ public class MySchedulePanel extends JPanel {
     }
     private void ppDropClass_actionPerformed(ActionEvent e){
         dropClassB_actionPerformed(e);
+    }
+
+    private enum Lists {
+
+    }
+
+    public enum Sorts {
+        DATE(0),
+        RANK(1),
+        TRAINER(2),
+        NAME(3);
+
+        private int value;
+
+        private Sorts(int i){
+            value = i;
+        }
+
+        public int getValue(){
+            return value;
+        }
     }
 }
