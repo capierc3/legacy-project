@@ -1,16 +1,15 @@
 package main.java.memoranda.ui;
 
-import java.awt.Dimension;
-import java.awt.Frame;
-import java.awt.Toolkit;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.UIManager;
+import javax.swing.*;
 
 import main.java.memoranda.EventsScheduler;
+import main.java.memoranda.gym.AppUsers;
+import main.java.memoranda.gym.User;
 import main.java.memoranda.util.Configuration;
 
 /**
@@ -21,6 +20,10 @@ import main.java.memoranda.util.Configuration;
 
 /*$Id: App.java,v 1.28 2007/03/20 06:21:46 alexeya Exp $*/
 public class App {
+
+	//keep state of AppUser
+	AppUsers appUsers = new AppUsers();
+
 	// boolean packFrame = false;
 	/**Main App frame**/
 	static AppFrame frame = null;
@@ -108,6 +111,9 @@ public class App {
 		}
 		if (!Configuration.get("SHOW_SPLASH").equals("no"))
 			splash.dispose();
+
+		//show login frame
+		showLoginFrame();
 	}
 
 	/**
@@ -183,4 +189,79 @@ public class App {
 		splash.setUndecorated(true);
 		splash.setVisible(true);
 	}
+
+	/**
+	 * Display login pane and verify user authentication
+	 */
+	private void showLoginFrame() {
+		final int FRAME_WIDTH = 600;
+		final int FRAME_HEIGHT = 300;
+
+		final int ELEMENT_HEIGHT = 20;
+		final int ELEMENT_WIDTH = 50;
+
+		splash = new JFrame();
+
+		//create components
+		JLabel lblLogin = new JLabel("LOGIN:");
+		lblLogin.setSize(ELEMENT_WIDTH, ELEMENT_HEIGHT);
+
+		JTextField txtLogin = new JTextField();
+		txtLogin.setSize(ELEMENT_WIDTH, ELEMENT_HEIGHT);
+
+		JLabel lblPassword = new JLabel("PASSWORD:");
+		lblPassword.setSize(ELEMENT_WIDTH, ELEMENT_HEIGHT);
+
+		JTextField txtPassword = new JTextField();
+		txtPassword.setSize(ELEMENT_WIDTH, ELEMENT_HEIGHT);
+
+		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.setSize(ELEMENT_WIDTH, ELEMENT_HEIGHT);
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loginSubmitButton_clicked(txtLogin.getText(),txtPassword.getText());
+			}
+		});
+
+		//add components to frame
+		splash.getContentPane().add(lblLogin);
+		splash.getContentPane().add(txtLogin);
+		splash.getContentPane().add(lblPassword);
+		splash.getContentPane().add(txtPassword);
+		splash.getContentPane().add(btnSubmit);
+
+		//set layout
+		splash.setLayout(new GridLayout(3,2));
+
+		//set splash screen dimensions
+		splash.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		splash.setLocation(
+				(screenSize.width - FRAME_WIDTH) / 2,
+				(screenSize.height - FRAME_HEIGHT) / 2);
+		splash.setUndecorated(true);
+		splash.setVisible(true);
+	}
+
+	/**
+	 * On Click event for Submit button
+	 *
+	 * @param login User's login credentials
+	 * @param password User's password credentials
+	 */
+	private void loginSubmitButton_clicked(String login, String password){
+
+		Boolean verified = appUsers.verifyPassword(login, password);
+
+		if(verified) {
+			User user = appUsers.getUser(login);
+			appUsers.setActiveUser(user);
+			splash.dispose();
+		}else {
+			//notify user of incorrect credentials
+			//TODO: Change UI to reflect incorrect values
+		}
+
+	}
+
 }
