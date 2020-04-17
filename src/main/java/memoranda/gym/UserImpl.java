@@ -1,38 +1,81 @@
-package memoranda.gym;
+package main.java.memoranda.gym;
 
 import java.io.File;
 import java.util.Collection;
 import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.Note;
-import main.java.memoranda.date.CurrentDate;
+import main.java.memoranda.date.CalendarDate;
+import nu.xom.Attribute;
+import nu.xom.Element;
 
 /**
  * Interface for the User methods which will be extended to Trainer, Student and Owner
  * @author Daimi Mussey
  */
 public class UserImpl {
-    private String name;
-    private String id;
-    private String userName;
-    private String password;
     private File picture;
-    private String belt;
     private Collection<Note> noteList;
     private ClassList userClasses;
+
+    private Element element;
+
+    public UserImpl(String name, String id, String userName, String password,
+                    Belt belt, File newPicture, Collection<Note> newNoteList, ClassList newUserClasses) {
+        element = new Element("User");
+        setAttr("Name", name);
+        setAttr("Id", id);
+        setAttr("UserName", userName);
+        setAttr("Password", password);
+        setAttr("Rank", String.valueOf(belt.getValue()));
+        picture = newPicture;
+        setPicture(picture);
+        noteList = newNoteList;
+        setNoteList(noteList);
+        userClasses = newUserClasses;
+        setClassList(userClasses);
+    }
+
+    /**
+     * Method to set NotesList in Element.
+     * @param noteList
+     */
+    public void setNoteList(Collection<Note> noteList) {
+        Element notes = new Element("NoteList");
+        for (Note note : noteList) {
+            notes.appendChild(note.getContent());
+        }
+        element.appendChild(notes);
+    }
+
+    /**
+     * Method to set ClassList in Element.
+     * @param classList
+     */
+    public void setClassList(ClassList classList) {
+        element.appendChild(userClasses.getContent());
+    }
+
+    /**
+     * Method to set the file for picture in Element.
+     */
+    public void setPicture(File fileName) {
+        picture = fileName;
+        setAttr("Picture", fileName.getPath());
+    }
 
     /**
      * Method to return name String
      * @return String
      */
     public String getName() {
-        return name;
+        return element.getAttributeValue("Name");
     }
 
     /**
      * Method to set name String
      */
     public void setName(String newName) {
-        name = newName;
+        setAttr("Name", newName);
     }
 
     /**
@@ -40,7 +83,7 @@ public class UserImpl {
      * @return String
      */
     public String getID() {
-        return id;
+        return element.getAttributeValue("Id");
     }
 
     /**
@@ -48,7 +91,7 @@ public class UserImpl {
      * @param newId
      */
     public void setID(String newId) {
-        id = newId;
+        setAttr("Id", newId);
     }
 
     /**
@@ -56,7 +99,7 @@ public class UserImpl {
      * @return String
      */
     public String getUserName() {
-        return userName;
+        return element.getAttributeValue("UserName");
     }
 
     /**
@@ -64,7 +107,7 @@ public class UserImpl {
      * @param newUserName
      */
     public void setUserName(String newUserName) {
-        userName = newUserName;
+        setAttr("UserName", newUserName);
     }
 
     /**
@@ -72,7 +115,7 @@ public class UserImpl {
      * @return String
      */
     public String getPassword() {
-        return password;
+        return element.getAttributeValue("Password");
     }
 
     /**
@@ -80,7 +123,7 @@ public class UserImpl {
      * @param newPassword
      */
     public void setPassword(String newPassword) {
-        password = newPassword;
+        setAttr("Password", newPassword);
     }
 
     /**
@@ -88,15 +131,15 @@ public class UserImpl {
      * @return String
      */
     public String getBelt() {
-        return belt;
+        return Belt.getBelt(Integer.parseInt(element.getAttributeValue("Rank")));
     }
 
     /**
      * Method  to set a User's belt
      * @param newBelt
      */
-    public void setBelt(String newBelt) {
-        belt = newBelt;
+    public void setBelt(Belt rank) {
+        setAttr("Rank",String.valueOf(rank.getValue()));
     }
 
     /**
@@ -113,6 +156,7 @@ public class UserImpl {
      */
     public void setPic(File newPicture) {
         picture = newPicture;
+        setPicture(picture);
     }
 
     /**
@@ -129,6 +173,7 @@ public class UserImpl {
      */
     public void addNote(Note note) {
         noteList.add(note);
+        setNoteList(noteList);
     }
 
     /**
@@ -138,10 +183,22 @@ public class UserImpl {
      */
     public ClassList getTodaysEvents() {
         ClassList result = null;
-        CurrentDate todaysDate = new CurrentDate();
+        CalendarDate todaysDate = new CalendarDate();
         if (userClasses != null) {
-            result = userClasses.getListByDate(todaysDate.get());
+            result = userClasses.getListByDate(todaysDate);
         }
         return result;
+    }
+
+    public Element getContent() {
+        return element;
+    }
+
+    private void setAttr(String a, String value) {
+        Attribute attr = element.getAttribute(a);
+        if (attr == null)
+            element.addAttribute(new Attribute(a, value));
+        else
+            attr.setValue(value);
     }
 }

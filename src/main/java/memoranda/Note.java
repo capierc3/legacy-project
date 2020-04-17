@@ -53,4 +53,9 @@ public interface Note {
      * @return Project
      */
     Project getProject();
+
+    /**
+     * Get Element for Note
+     */
+    Element getContent();
 }
