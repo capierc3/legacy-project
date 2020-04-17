@@ -3,15 +3,40 @@ import main.java.memoranda.date.CalendarDate;
 import java.util.Collection;
 import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.gym.GymClass;
+import main.java.memoranda.gym.Room;
+import nu.xom.Attribute;
+import nu.xom.Element;
+import nu.xom.Elements;
 
 /**
  * Interface for the Room methods
  * @author Daimi Mussey
  */
-public class RoomImpl {
+public class RoomImpl implements Room{
     private ClassList list;
     private Collection<CalendarDate> classDates;
-    private int roomNum;
+
+    private Element el;
+
+    /**
+     * Constructor for Room Element
+     */
+    public RoomImpl(int roomNum, ClassList list, Collection<CalendarDate> classDates) {
+        el = new Element("Room");
+        setAttr("RoomNumber", String.valueOf(roomNum));
+        setAttr("ClassList", null);
+        setAttr();
+    }
+
+    public void setClassList(ClassList list) {
+
+    }
+
+    public void setClassDates(Collection<CalendarDate> classDates) {
+        for (CalendarDate date : classDates) {
+
+        }
+    }
 
     /**
      * Gets a ClassList object of all the classes that are currently scheduled for the room
@@ -34,7 +59,7 @@ public class RoomImpl {
      * @return int
      */
     public int getRoomNum() {
-        return roomNum;
+        return Integer.parseInt(el.getAttributeValue("RoomNumber"));
     }
 
     /**
@@ -42,7 +67,7 @@ public class RoomImpl {
      * @param num int
      */
     public void setRoomNum(int num) {
-        roomNum = num;
+        setAttr("RoomNumber", String.valueOf(num));
     }
 
     /**
@@ -61,4 +86,23 @@ public class RoomImpl {
         return result;
     }
 
+
+    public Element getContent() {
+        return el;
+    }
+
+    private void setAttr(String a, String value) {
+        Attribute attr = el.getAttribute(a);
+        if (attr == null)
+            el.addAttribute(new Attribute(a, value));
+        else
+            attr.setValue(value);
+    }
+
+    private Room attrToRoom(Element room){
+        return null;
+    }
+    private Element roomToElm(Room room){
+        return null;
+    }
 }
