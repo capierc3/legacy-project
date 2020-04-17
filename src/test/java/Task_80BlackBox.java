@@ -126,7 +126,6 @@ public class Task_80BlackBox {
         assertNull(classList.getClass("not class1's id"));
         classList.addClass(gymClass1);
         assertEquals(1,classList.getSize());
-
     }
 
 

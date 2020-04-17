@@ -52,8 +52,10 @@ public class ClassListImpl implements ClassList {
      * @param gymClass GymClass
      */
     public void addClass(GymClass gymClass) {
-        classes.add(gymClass);
-        element.appendChild(gymClass.getContent());
+        if (getClass(gymClass.getID())==null){
+            classes.add(gymClass);
+            element.appendChild(gymClass.getContent().copy());
+        }
     }
 
     /**
@@ -100,7 +102,7 @@ public class ClassListImpl implements ClassList {
      * @return ClassList
      */
     public ClassList getListByRank(Belt rank) {
-        ClassList list = null;
+        ClassList list = new ClassListImpl(new ArrayList<>());
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
                 if (gymClass.getRank().getValue() == rank.getValue()) {
