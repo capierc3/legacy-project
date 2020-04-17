@@ -30,6 +30,7 @@ public class MyScheduleManager {
      */
     MyScheduleManager(ClassList list,boolean isOwner){
         _isOwner = isOwner;
+        _allClasses = new ClassListImpl(new ArrayList<>());
         fillAllClasses(0,"Ascending");
         if (!isOwner) {
             _myStudentClasses = fillStudentClasses(0, "Ascending");
@@ -90,19 +91,7 @@ public class MyScheduleManager {
      * @return ClassList
      */
     private void fillAllClasses(int sort,String dir){
-        CalendarDate sDate = new CalendarDate(17,3,2020,5,30,true);
-        CalendarDate eDate = new CalendarDate(17,3,2020,6,30,true);
-        CalendarDate sDate2 = new CalendarDate(21,3,2020,5,30,false);
-        CalendarDate eDate2 = new CalendarDate(21,3,2020,6,30,false);
-        CalendarDate sDate3 = new CalendarDate(17,3,2020,7,30,false);
-        CalendarDate eDate3 = new CalendarDate(17,3,2020,8,30,false);
-        GymClass gymClass = new GymClassImpl("Test _01","Public",Belt.BLUE,sDate,eDate);
-        GymClass gymClass2 = new GymClassImpl("A Test _02","Public",Belt.WHITE,sDate2,eDate2);
-        GymClass gymClass3 = new GymClassImpl("Test _03","Public",Belt.BLACK1,sDate3,eDate3);
-        _allClasses = new ClassListImpl(new ArrayList<>());
-        _allClasses.addClass(gymClass);
-        _allClasses.addClass(gymClass2);
-        _allClasses.addClass(gymClass3);
+        //need some way to pull saved classes
         sortList(_allClasses,sort,dir);
     }
 
