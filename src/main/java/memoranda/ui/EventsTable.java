@@ -49,7 +49,7 @@ public class EventsTable extends JTable {
      */
     void initTable(CalendarDate d) {
         events = (Vector)EventsManager.getEventsForDate(d);
-        classList = manager.getClasses();
+        classList = manager.getDaysClasses(d);
 //        getColumnModel().getColumn(0).setPreferredWidth(75);
 //        getColumnModel().getColumn(0).setMaxWidth(75);
         clearSelection();
@@ -80,14 +80,14 @@ public class EventsTable extends JTable {
 //                    comp.setFont(comp.getFont().deriveFont(Font.ITALIC));
                 if (CurrentDate.get().after(CalendarDate.today())) {
                   comp.setForeground(java.awt.Color.black);
-                }
-                else if (CurrentDate.get().equals(CalendarDate.today())) {
-                    if (gymClass.getStartDate().after(new CalendarDate())) {
+                } else if (CurrentDate.get().equals(CalendarDate.today())) {
+                    if (gymClass.getStartDate().after(CalendarDate.today())) {
                         comp.setForeground(java.awt.Color.black);
                         comp.setFont(comp.getFont().deriveFont(Font.BOLD));
-                    }
-                    else if (gymClass.getStartDate().before(new CalendarDate())){
+                    } else if (gymClass.getStartDate().before(CalendarDate.today())){
                         comp.setForeground(Color.lightGray);
+                    } else {
+                        comp.setForeground(Color.black);
                     }
                 }
                 return comp;

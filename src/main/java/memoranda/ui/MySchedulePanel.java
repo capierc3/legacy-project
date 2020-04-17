@@ -417,7 +417,6 @@ public class MySchedulePanel extends JPanel {
         eventsTable.refresh();
 
     }
-    //TODO add sort dir logic
     private void sortDirB_actionPerformed(ActionEvent e) {
         if (sortDirB.getToolTipText().equalsIgnoreCase("Descending")) {
             sortDirB.setIcon(
@@ -431,7 +430,6 @@ public class MySchedulePanel extends JPanel {
             sortBox_actionPerformed(e);
         }
     }
-    //TODO add logic
     private void listBox_actionPerformed(ActionEvent e) {
 
     }

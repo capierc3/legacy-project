@@ -90,12 +90,12 @@ public class MyScheduleManager {
      * @return ClassList
      */
     private void fillAllClasses(int sort,String dir){
-        CalendarDate sDate = new CalendarDate(17,4,2020,5,30,false);
-        CalendarDate eDate = new CalendarDate(17,4,2020,6,30,false);
-        CalendarDate sDate2 = new CalendarDate(21,4,2020,5,30,false);
-        CalendarDate eDate2 = new CalendarDate(21,4,2020,6,30,false);
-        CalendarDate sDate3 = new CalendarDate(17,4,2020,7,30,false);
-        CalendarDate eDate3 = new CalendarDate(17,4,2020,8,30,false);
+        CalendarDate sDate = new CalendarDate(17,3,2020,5,30,true);
+        CalendarDate eDate = new CalendarDate(17,3,2020,6,30,true);
+        CalendarDate sDate2 = new CalendarDate(21,3,2020,5,30,false);
+        CalendarDate eDate2 = new CalendarDate(21,3,2020,6,30,false);
+        CalendarDate sDate3 = new CalendarDate(17,3,2020,7,30,false);
+        CalendarDate eDate3 = new CalendarDate(17,3,2020,8,30,false);
         GymClass gymClass = new GymClassImpl("Test _01","Public",Belt.BLUE,sDate,eDate);
         GymClass gymClass2 = new GymClassImpl("A Test _02","Public",Belt.WHITE,sDate2,eDate2);
         GymClass gymClass3 = new GymClassImpl("Test _03","Public",Belt.BLACK1,sDate3,eDate3);
@@ -167,6 +167,17 @@ public class MyScheduleManager {
         } else {
             return (ArrayList<GymClass>) _myStudentClasses.getAllClasses();
         }
+    }
+
+    public ArrayList<GymClass> getDaysClasses(CalendarDate d){
+        ArrayList<GymClass> classes = getClasses();
+        ArrayList<GymClass> dayClasses = new ArrayList<>();
+        for (GymClass gymClass :classes) {
+            if (d.equalsDay(gymClass.getStartDate())){
+                dayClasses.add(gymClass);
+            }
+        }
+        return dayClasses;
     }
 
     /**
