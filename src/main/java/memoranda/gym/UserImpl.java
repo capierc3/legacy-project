@@ -128,9 +128,9 @@ public class UserImpl {
 
     /**
      * Method to return User's belt
-     * @return String
+     * @return Belt
      */
-    public String getBelt() {
+    public Belt getBelt() {
         return Belt.getBelt(Integer.parseInt(element.getAttributeValue("Rank")));
     }
 

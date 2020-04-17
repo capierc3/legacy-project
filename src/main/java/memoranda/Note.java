@@ -1,6 +1,7 @@
 package main.java.memoranda;
 
 import main.java.memoranda.date.CalendarDate;
+import nu.xom.Element;
 /*$Id: Note.java,v 1.4 2004/09/30 17:19:52 ivanrise Exp $*/
 /**
  * Interface for note Objects

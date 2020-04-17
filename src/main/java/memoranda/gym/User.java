@@ -38,7 +38,7 @@ public interface User {
     void setUserName(String newUserName);
     String getPassword();
     void setPassword(String newPassword);
-    String getBelt();
+    Belt getBelt();
     void setBelt(String newBelt);
     File getPic();
     void setPic(String newPicture);
