@@ -1,3 +1,7 @@
+plugins {
+  id "com.github.spotbugs" version "3.0.0"
+  id "checkstyle"
+}
 apply plugin: 'application'
 apply plugin: 'jacoco'
 
@@ -15,5 +19,36 @@ dependencies {
   compile 'com.io7m.xom:xom:1.2.+'
   compile 'net.sourceforge.nekohtml:nekohtml:1.9.+'
   compile "junit:junit:4.12"
+}
+
+apply plugin: 'checkstyle'
+checkstyle {
+  // Keep checkstyle a little quieter
+  ignoreFailures = true
+  showViolations = false
+}
+
+tasks.withType(Checkstyle) {
+  reports {
+    html.enabled = true
+    xml.enabled = false
+  }
+}
+checkstyle {
+  toolVersion = "8.8"
+}
+
+
+spotbugs {
+  effort = "max"
+  reportLevel = "low"
+  ignoreFailures = true
+}
+
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+  reports {
+    xml.enabled = false
+    html.enabled = true
+  }
 }
 

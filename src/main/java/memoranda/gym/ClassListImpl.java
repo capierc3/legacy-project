@@ -1,9 +1,13 @@
-package memoranda.gym;
+package main.java.memoranda.gym;
 
 import java.util.Collection;
 import main.java.memoranda.gym.GymClass;
 import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.date.CalendarDate;
+import main.java.memoranda.gym.Belt;
+import nu.xom.Attribute;
+import nu.xom.Element;
+import nu.xom.Elements;
 /**
  * Interface for the ClassList methods.
  * @author Daimi Mussey
@@ -11,6 +15,19 @@ import main.java.memoranda.date.CalendarDate;
 
 public class ClassListImpl {
     private Collection<GymClass> classes;
+    private Element element;
+
+    public ClassListImpl(Collection<GymClass> newClasses) {
+        element = new Element("ClassList");
+        classes = newClasses;
+        setClassList(classes);
+    }
+
+    public void setClassList(Collection<GymClass> classes) {
+        for (GymClass gymClass : classes) {
+            element.appendChild(gymClass.getContent());
+        }
+    }
 
     /**
      * Searches the list for a gym class by using the inputted ID
@@ -35,6 +52,7 @@ public class ClassListImpl {
      */
     public void addClass(GymClass gymClass) {
         classes.add(gymClass);
+        element.appendChild(gymClass.getContent());
     }
 
     /**
@@ -54,6 +72,8 @@ public class ClassListImpl {
                 classes.remove(classToRemove);
             }
         }
+        element.removeChildren();
+        setClassList(classes);
     }
 
     /**
@@ -78,11 +98,11 @@ public class ClassListImpl {
      * @param rank String
      * @return ClassList
      */
-    public ClassList getListByRank(String rank) {
+    public ClassList getListByRank(Belt rank) {
         ClassList list = null;
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
-                if (gymClass.getRank().equals(rank)) {
+                if (gymClass.getRank().getValue() == rank.getValue()) {
                     list.addClass(gymClass);
                 }
             }
@@ -99,11 +119,16 @@ public class ClassListImpl {
         ClassList list = null;
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
-                if (gymClass.getDate().equals(date)) {
+                if (gymClass.getStartDate().equals(date)) {
                     list.addClass(gymClass);
                 }
             }
         }
         return list;
+    }
+
+    public Element getContent() {
+        setClassList(classes);
+        return element;
     }
 }
