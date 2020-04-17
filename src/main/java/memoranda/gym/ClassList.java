@@ -1,4 +1,7 @@
 package main.java.memoranda.gym;
+import main.java.memoranda.gym.GymClass;
+import main.java.memoranda.gym.ClassList;
+import main.java.memoranda.date.CalendarDate;
 
 import main.java.memoranda.date.CalendarDate;
 
