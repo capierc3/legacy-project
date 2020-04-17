@@ -378,6 +378,7 @@ public class MySchedulePanel extends JPanel {
     private void dropClassB_actionPerformed(ActionEvent e) {
 
     }
+
     private void sortBox_actionPerformed(ActionEvent e) {
         int sort = sortCombo.getSelectedIndex();
         String dir =  sortDirB.getToolTipText();
@@ -432,13 +433,6 @@ public class MySchedulePanel extends JPanel {
         //gymClass.addTrainer();
         manager.addClass(gymClass);
         classTable.refresh();
-		
-//    	if (dlg.noRepeatRB.isSelected())
-//    		EventsManager.createEvent(eventCalendarDate, hh, mm, text);
-//    	else {
-//    		updateEvents(dlg,hh,mm,text);
-//    	}
-//    	saveEvents();
     }
 
     private CalendarDate comboValueToDate(String s){
@@ -471,50 +465,19 @@ public class MySchedulePanel extends JPanel {
         parentPanel.updateIndicators();
     }
 
-    private void updateEvents(ClassDialog dlg, int hh, int mm, String text) {
-	int rtype;
-        int period;
-        CalendarDate sd = new CalendarDate((Date) dlg.startDate.getModel().getValue());
-        CalendarDate ed = null;
-        if (dlg.enableEndDateCB.isSelected())
-            ed = new CalendarDate((Date) dlg.endDate.getModel().getValue());
-        if (dlg.dailyRepeatRB.isSelected()) {
-            rtype = EventsManager.REPEAT_DAILY;
-            period = (Integer) dlg.daySpin.getModel().getValue();
-        }
-        else if (dlg.weeklyRepeatRB.isSelected()) {
-            rtype = EventsManager.REPEAT_WEEKLY;
-            period = dlg.weekdaysCB.getSelectedIndex() + 1;
-	    if (Configuration.get("FIRST_DAY_OF_WEEK").equals("mon")) {
-		if(period==7) period=1;
-		else period++;
-	    }
-        }
-	else if (dlg.yearlyRepeatRB.isSelected()) {
-	    rtype = EventsManager.REPEAT_YEARLY;
-	    period = sd.getCalendar().get(Calendar.DAY_OF_YEAR);
-	    if((sd.getYear() % 4) == 0 && sd.getCalendar().get(Calendar.DAY_OF_YEAR) > 60) period--;
-	}
-        else {
-            rtype = EventsManager.REPEAT_MONTHLY;
-            period = (Integer) dlg.dayOfMonthSpin.getModel().getValue();
-        }
-        EventsManager.createRepeatableEvent(rtype, sd, ed, period, hh, mm, text, dlg.workingDaysOnlyCB.isSelected());
-    }
-
     private void removeEventB_actionPerformed(ActionEvent e) {
 		String msg;
-		main.java.memoranda.Event ev;
+		GymClass gymClass;
 
 		if(classTable.getSelectedRows().length > 1)
 			msg = Local.getString("Remove") + " " + classTable.getSelectedRows().length
-				+ " " + Local.getString("events") + "\n" + Local.getString("Are you sure?");
+				+ " " + Local.getString("Classes") + "\n" + Local.getString("Are you sure?");
 		else {
-			ev = (main.java.memoranda.Event) classTable.getModel().getValueAt(
+			gymClass = (GymClass) classTable.getModel().getValueAt(
                 classTable.getSelectedRow(),
-                EventsTable.EVENT);
+                MyScheduleTable.EVENT);
 			msg = Local.getString("Remove Class") + "\n'"
-				+ ev.getText() + "'\n" + Local.getString("Are you sure?");
+				+ gymClass.getName() + "'\n" + Local.getString("Are you sure?");
 		}
 
         int n =
@@ -526,12 +489,12 @@ public class MySchedulePanel extends JPanel {
         if (n != JOptionPane.YES_OPTION) return;
 
         for(int i = 0; i< classTable.getSelectedRows().length; i++) {
-			ev = (main.java.memoranda.Event) classTable.getModel().getValueAt(
-                  classTable.getSelectedRows()[i], EventsTable.EVENT);
-        EventsManager.removeEvent(ev);
+			gymClass = (GymClass) classTable.getModel().getValueAt(
+                  classTable.getSelectedRows()[i], MyScheduleTable.EVENT);
+        manager.removeClass(gymClass);
 		}
         classTable.getSelectionModel().clearSelection();
-        saveEvents();
+        classTable.refresh();
     }
 
     class PopupListener extends MouseAdapter {
