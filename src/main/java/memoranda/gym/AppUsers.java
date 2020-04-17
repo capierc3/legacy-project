@@ -1,5 +1,6 @@
 package main.java.memoranda.gym;
 
+import java.io.*;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -131,4 +132,46 @@ public class AppUsers implements UserList {
     public void setActiveUser(User user) {
         activeUser = user;
     }
+
+    /**
+     * Saves hashMap to file
+     *
+     * @param obj object to be saved to file
+     * @param file_path file path to save file to
+     */
+    private void saveToFile(Object obj, String file_path) {
+
+        try {
+            FileOutputStream fileOut = new FileOutputStream(file_path);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(obj);
+            out.close();
+            fileOut.close();
+            System.out.printf("Saved object to " + file_path);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Load object from file
+     *
+     * @param file_path file location
+     */
+    private void loadFromFile(String file_path){
+
+        try{
+            FileInputStream fileInputStream = new FileInputStream(file_path);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            Object obj = objectInputStream.readObject();
+
+            appUsers = (HashMap<String, User>) obj;
+
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+
+
+    }
+
 }
