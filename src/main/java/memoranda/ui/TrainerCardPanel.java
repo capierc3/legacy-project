@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -50,7 +51,7 @@ import main.java.memoranda.util.Util;
  */
 public class TrainerCardPanel extends JPanel {
     JButton editUser = new JButton("Edit");
-    JButton newUser = new JButton("New Trainer");
+    
 
 
     public TrainerCardPanel(String name, String belt, String fact) {
@@ -67,18 +68,39 @@ public class TrainerCardPanel extends JPanel {
         
         JLabel trainerName = new JLabel("Trainer Name: " +name+ "\n");
         JLabel trainerBelt = new JLabel("Belt Level: " + belt + "\n");
-        JLabel trainerInfo = new JLabel("Fun fact about me: " + funFact +"\n");
+        JLabel trainerInfo = new JLabel("<html>About Me: " + funFact +"\n</html>");
+        BufferedImage trainerImage;
+        int imageWidth=200;
+        int imageHeight=200;
         
-
-        BufferedImage trainerImage = ImageIO.read(this.getClass().getResource("/ui/icons/nunchuckNorris.png"));
-        JLabel trainerPicture = new JLabel(new ImageIcon(trainerImage));
+        if(name.equalsIgnoreCase("Cameron Howe")) {
+            trainerImage = ImageIO.read(this.getClass().getResource("/ui/icons/howe.jpg"));
+        } else if(name.equalsIgnoreCase("Joe MacMillan")) {
+            trainerImage = ImageIO.read(this.getClass().getResource("/ui/icons/joe.jpg"));
+        } else if(name.equalsIgnoreCase("Gordon Clark")) {
+            trainerImage = ImageIO.read(this.getClass().getResource("/ui/icons/gordon.jpg"));
+        } else if(name.equalsIgnoreCase("Donna Clark")) {
+            trainerImage = ImageIO.read(this.getClass().getResource("/ui/icons/donna.jpg"));
+        } else if(name.equalsIgnoreCase("John Bosworth")) {
+            trainerImage = ImageIO.read(this.getClass().getResource("/ui/icons/john.jpg"));
+        } else {
+            trainerImage = ImageIO.read(this.getClass().getResource("/ui/icons/nunchuckNorris.png"));
+        }
+        Image scaledImage = trainerImage.getScaledInstance(imageWidth,imageHeight,trainerImage.SCALE_SMOOTH);
+        JLabel trainerPicture = new JLabel(new ImageIcon(scaledImage));
+        this.setPreferredSize(new Dimension(300, 300));
+        this.setMinimumSize(new Dimension(300, 300));
+        this.setMaximumSize(new Dimension(300, 300));
         this.add(trainerName);
         this.add(trainerPicture);
         this.add(trainerBelt);        
         this.add(trainerInfo);
+        this.add(editUser);
         this.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.yellow));
         //this.setPreferredSize(new Dimension(250, 250));
     }
+    
+    
 
     void editUser_actionPerformed(ActionEvent e) {
         /*

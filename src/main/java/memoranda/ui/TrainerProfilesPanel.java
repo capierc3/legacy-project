@@ -47,9 +47,13 @@ import java.io.*;
 public class TrainerProfilesPanel extends JPanel {
     TitledBorder title = BorderFactory.createTitledBorder("KAESEKUCHEN TRAINERS");
     FlowLayout flowlayout = new FlowLayout();
-    //BorderLayout borderLayout1 = new BorderLayout();
-    TrainerCardPanel testCard = new TrainerCardPanel("Justin", "blue", "I use ketchup on everything!");
-    TrainerCardPanel testCard2 = new TrainerCardPanel("Oliver", "red", "All my training comes from the film Karate Kid");
+    TrainerCardPanel testCard = new TrainerCardPanel("Justin Oliver", "Blue", "I use ketchup on everything!");
+    TrainerCardPanel testCard2 = new TrainerCardPanel("Cameron Howe", "Green Stripe", "What the hell is this Yahoo");
+    TrainerCardPanel testCard3 = new TrainerCardPanel("Joe MacMillan", "Orange", "The thing that gets you to the thing");
+    TrainerCardPanel testCard4 = new TrainerCardPanel("Gordon Clark", "Black2", "We had a problem. Now we have a product.");
+    TrainerCardPanel testCard5 = new TrainerCardPanel("Donna Clark", "Black3", "Software comes and goes. Hardware is forever.");
+    TrainerCardPanel testCard6 = new TrainerCardPanel("John Bosworth", "White", "Innovation is a risk.");
+    JButton newUser = new JButton("New Trainer");
 
     public TrainerProfilesPanel() {
         try {
@@ -65,6 +69,11 @@ public class TrainerProfilesPanel extends JPanel {
 
         this.add(testCard); 
         this.add(testCard2); 
+        this.add(testCard3); 
+        this.add(testCard4); 
+        this.add(testCard5); 
+        this.add(testCard6); 
+        this.add(newUser);
         this.setBorder(title);
         /*
          * PopupListener ppListener = new PopupListener();
