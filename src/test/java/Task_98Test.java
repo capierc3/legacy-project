@@ -10,7 +10,8 @@ import static org.junit.Assert.assertEquals;
  * Tests the Belt enums and their values
  */
 public class Task_98Test {
-
+    Belt testBelt1;
+    Belt testBelt2;
 
     /**
      * Anything that should happen before any test is ran
@@ -41,6 +42,22 @@ public class Task_98Test {
         assertEquals(Belt.BLUE,Belt.getBelt(4));
         assertEquals(Belt.GREEN,Belt.getBelt(6));
         assertEquals(Belt.BLACK3,Belt.getBelt(13));
+    }
+
+    /**
+    *Blackbox testing for Belts
+    *
+    */
+    /*
+     * Tests to ensure belts iterate through enum values starting at 0
+     */
+    @Test
+    public void beltsEnumValues(){
+        int i = 0;
+        for(Belt belt : Belt.values()) {
+            assertEquals(i, belt.getValue());
+            i++;
+        }
     }
 
 }
