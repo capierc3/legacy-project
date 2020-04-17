@@ -4,6 +4,9 @@ import java.util.Collection;
 import main.java.memoranda.gym.GymClass;
 import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.date.CalendarDate;
+import nu.xom.Attribute;
+import nu.xom.Element;
+import nu.xom.Elements;
 /**
  * Interface for the ClassList methods.
  * @author Daimi Mussey
@@ -11,6 +14,18 @@ import main.java.memoranda.date.CalendarDate;
 
 public class ClassListImpl {
     private Collection<GymClass> classes;
+    private Element element;
+
+    public ClassListImpl(Collection<GymClass> classes) {
+        element = new Element("ClassList");
+        setClassList(classes);
+    }
+
+    public void setClassList(Collection<GymClass> classes) {
+        for (GymClass gymClass : classes) {
+            element.appendChild(gymClass.getContent());
+        }
+    }
 
     /**
      * Searches the list for a gym class by using the inputted ID
@@ -35,6 +50,7 @@ public class ClassListImpl {
      */
     public void addClass(GymClass gymClass) {
         classes.add(gymClass);
+        element.appendChild(gymClass.getContent());
     }
 
     /**
@@ -54,6 +70,8 @@ public class ClassListImpl {
                 classes.remove(classToRemove);
             }
         }
+        element.removeChildren();
+        setClassList(classes);
     }
 
     /**
@@ -105,5 +123,10 @@ public class ClassListImpl {
             }
         }
         return list;
+    }
+
+    public Element getContent() {
+        setClassList(classes);
+        return element;
     }
 }
