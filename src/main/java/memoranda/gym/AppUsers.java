@@ -12,6 +12,7 @@ public class AppUsers implements UserList {
 
     private final String APP_USER_FILE_PATH = "/appusers.dat";
     private HashMap<String, User> appUsers;
+    private User activeUser;
 
     /**
      * Class constructor.  Initiates appUser collection
@@ -98,4 +99,36 @@ public class AppUsers implements UserList {
 
     }
 
+    /**
+     *
+     * @param login User's login name
+     * @param password User's super-not-so-encrypted password
+     * @return true if password & login match.
+     */
+    public Boolean verifyPassword(String login, String password){
+
+        User user = getUser(login);
+
+        if(user != null && user.getPassword().contentEquals(password)){
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns active user
+     * @return active User
+     */
+    public User getActiveUser(){
+        return activeUser;
+    }
+
+    /**
+     * Sets active user
+     * @param user User object to set as active user
+     */
+    public void setActiveUser(User user) {
+        activeUser = user;
+    }
 }
