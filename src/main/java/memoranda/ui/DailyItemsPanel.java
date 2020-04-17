@@ -65,6 +65,7 @@ public class DailyItemsPanel extends JPanel {
     TaskPanel tasksPanel = new TaskPanel(this);
     EventsPanel eventsPanel = new EventsPanel(this);
     AgendaPanel agendaPanel = new AgendaPanel(this);
+    MyInfoPanel myInfoPanel = new MyInfoPanel(this);
     ImageIcon expIcon = new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/exp_right.png"));
     ImageIcon collIcon = new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/exp_left.png"));
     ImageIcon bookmarkIcon = new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/star8.png"));
@@ -111,7 +112,8 @@ public class DailyItemsPanel extends JPanel {
             new ExceptionDialog(ex);
         }
     }
-    void jbInit() throws Exception {
+
+	void jbInit() throws Exception {
         border1 = BorderFactory.createEtchedBorder(Color.white, Color.gray);
         border2 = BorderFactory.createEtchedBorder(Color.white, new Color(161, 161, 161));
         this.setLayout(borderLayout1);
@@ -207,6 +209,7 @@ public class DailyItemsPanel extends JPanel {
         editorsPanel.add(eventsPanel, "EVENTS");
         editorsPanel.add(tasksPanel, "TASKS");
         editorsPanel.add(editorPanel, "NOTES");
+        editorsPanel.add(myInfoPanel, "MYINFO");
         
         splitPane.add(mainPanel, JSplitPane.RIGHT);
         splitPane.add(controlPanel, JSplitPane.LEFT);
@@ -461,10 +464,10 @@ public class DailyItemsPanel extends JPanel {
             calendar.jnCalendar.renderer.setTask(t);
        //     calendar.jnCalendar.updateUI();
         }
-        boolean isAg = pan.equals("AGENDA");
-        agendaPanel.setActive(isAg);
+        boolean isAg = pan.equals("MYINFO");
+        myInfoPanel.setActive(isAg);
         if (isAg)
-        	agendaPanel.refresh(CurrentDate.get());
+        	myInfoPanel.refresh(CurrentDate.get());
         cardLayout1.show(editorsPanel, pan);
         cardLayout2.show(mainTabsPanel, pan + "TAB");
 		calendar.jnCalendar.updateUI();
@@ -480,6 +483,6 @@ public class DailyItemsPanel extends JPanel {
     }*/
 
     void alarmB_actionPerformed(ActionEvent e) {
-        parentPanel.myCalendar_actionPerformed(null);
+        parentPanel.mySchedule_actionPerformed(null);
     }
 }
