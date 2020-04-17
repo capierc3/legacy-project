@@ -4,6 +4,7 @@ import main.java.memoranda.date.CalendarDate;
 import java.util.Collection;
 import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.gym.GymClass;
+import nu.xom.Element;
 
 /**
  * Interface for the Room methods
@@ -15,6 +16,18 @@ public interface Room {
      * @return ClassList
      */
     ClassList getClasses();
+
+    /**
+     * Sets ClassList in Room Element
+     * @param list
+     */
+    void setClassList(ClassList list);
+
+    /**
+     * Sets ClassDates list in Room Element
+     * @param classDates
+     */
+    void setClassDates(Collection<CalendarDate> classDates);
 
     /**
      * Add a class to the room's ClassList
@@ -41,4 +54,9 @@ public interface Room {
      */
     boolean isAvailable(CalendarDate date);
 
+    /**
+     * Returns Room as an Element
+     * @return Element
+     */
+    Element getContent();
 }

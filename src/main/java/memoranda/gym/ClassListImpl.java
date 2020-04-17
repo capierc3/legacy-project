@@ -1,9 +1,10 @@
-package memoranda.gym;
+package main.java.memoranda.gym;
 
 import java.util.Collection;
 import main.java.memoranda.gym.GymClass;
 import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.date.CalendarDate;
+import main.java.memoranda.gym.Belt;
 import nu.xom.Attribute;
 import nu.xom.Element;
 import nu.xom.Elements;
@@ -16,8 +17,9 @@ public class ClassListImpl {
     private Collection<GymClass> classes;
     private Element element;
 
-    public ClassListImpl(Collection<GymClass> classes) {
+    public ClassListImpl(Collection<GymClass> newClasses) {
         element = new Element("ClassList");
+        classes = newClasses;
         setClassList(classes);
     }
 
@@ -96,11 +98,11 @@ public class ClassListImpl {
      * @param rank String
      * @return ClassList
      */
-    public ClassList getListByRank(String rank) {
+    public ClassList getListByRank(Belt rank) {
         ClassList list = null;
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
-                if (gymClass.getRank().equals(rank)) {
+                if (gymClass.getRank().getValue() == rank.getValue()) {
                     list.addClass(gymClass);
                 }
             }
@@ -117,7 +119,7 @@ public class ClassListImpl {
         ClassList list = null;
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
-                if (gymClass.getDate().equals(date)) {
+                if (gymClass.getStartDate().equals(date)) {
                     list.addClass(gymClass);
                 }
             }

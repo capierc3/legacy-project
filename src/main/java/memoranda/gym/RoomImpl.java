@@ -1,4 +1,4 @@
-package memoranda.gym;
+package main.java.memoranda.gym;
 import main.java.memoranda.date.CalendarDate;
 import java.util.Collection;
 import main.java.memoranda.gym.ClassList;
@@ -21,21 +21,26 @@ public class RoomImpl implements Room{
     /**
      * Constructor for Room Element
      */
-    public RoomImpl(int roomNum, ClassList list, Collection<CalendarDate> classDates) {
+    public RoomImpl(int roomNum, ClassList newList, Collection<CalendarDate> newClassDates) {
         el = new Element("Room");
         setAttr("RoomNumber", String.valueOf(roomNum));
-        setAttr("ClassList", null);
-        setAttr();
+        list = newList;
+        classDates = newClassDates;
+        setClassList(list);
+        setClassDates(classDates);
+
     }
 
     public void setClassList(ClassList list) {
-
+        el.appendChild(list.getContent());
     }
 
     public void setClassDates(Collection<CalendarDate> classDates) {
+        Element classList = new Element("ClassDates");
         for (CalendarDate date : classDates) {
-
+            classList.appendChild(date.toString());
         }
+        el.appendChild(classList);
     }
 
     /**
@@ -52,6 +57,9 @@ public class RoomImpl implements Room{
      */
     public void addClass(GymClass gymClass) {
         list.addClass(gymClass);
+        classDates.add(gymClass.getStartDate());
+        setClassList(list);
+        setClassDates(classDates);
     }
 
     /**
@@ -86,7 +94,6 @@ public class RoomImpl implements Room{
         return result;
     }
 
-
     public Element getContent() {
         return el;
     }
@@ -99,10 +106,4 @@ public class RoomImpl implements Room{
             attr.setValue(value);
     }
 
-    private Room attrToRoom(Element room){
-        return null;
-    }
-    private Element roomToElm(Room room){
-        return null;
-    }
 }
