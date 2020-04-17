@@ -12,6 +12,8 @@ import nu.xom.Elements;
  * BlackBox notes:
  * All main methods should work that are found in the GymClass interface. Currently as of 4/11 the add/get students and
  * add/get trainers don't work since those codes are not available yet. also get and set room don't work for the same reason.
+ * Static Analysis done by Justin.
+ * Blackbox and Whitebox testing done in Task76Test.java
  *
  * getClassLength() does not work for overnight classes, PM->AM classes.
  *

@@ -27,6 +27,10 @@ public class Task_76Test {
     CalendarDate endDate;
     Element el;
 
+    GymClass constructor1;
+    GymClass constructor2;
+    GymClass constructor3;
+
     /**
      * sets up the vars for testing
      * @throws Exception
@@ -50,6 +54,13 @@ public class Task_76Test {
                 new CalendarDate(11, 4, 2020, 11, 45, true),
                 new CalendarDate(11, 4, 2020, 12, 15, false));
         el = class1.getContent();
+
+        /*
+        * Blackbox Setup
+        */
+        constructor1 = new GymClassImpl("Kung Foo Fighting Advanced", "private");
+        constructor2 = new GymClassImpl("Kung Foo Fighting Intro", "public", Belt.BLUE);
+        constructor3 = new GymClassImpl("Kung Foo Fighting Double Advanced", "public", Belt.BLACK1, startDate, endDate);
     }
 
     /**
@@ -80,6 +91,34 @@ public class Task_76Test {
         assertEquals(15,class2.getClassLength());
         assertEquals(120,class3.getClassLength());
         assertEquals(30,class4.getClassLength());
+    }
+
+    /**
+    *Blackbox testing
+    * Most of this is tested above, but I'll test again just for the practice of blackbox testing
+    */
+    @Test
+    public void classExists(){
+        assertNotNull(constructor1);
+        assertNotNull(constructor2);
+        assertNotNull(constructor3);
+    }
+
+    @Test
+    public void correctName(){
+        assertEquals("Kung Foo Fighting Advanced",constructor1.getName());
+        assertEquals("Kung Foo Fighting Intro",constructor2.getName());
+        assertEquals("Kung Foo Fighting Double Advanced",constructor3.getName());
+
+    }
+
+    public void setName(){
+        constructor1.setName("KFFA");
+        constructor2.setName("KFFI");
+        constructor3.setName("KFFDA");
+        assertEquals("KFFA",constructor1.getName());
+        assertEquals("KFFI",constructor2.getName());
+        assertEquals("KFFDA",constructor3.getName());
     }
 
 }
