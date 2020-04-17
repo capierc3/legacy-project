@@ -12,8 +12,8 @@ public interface GymClass {
     //Basic getters and setters
     String getName();
     void setName(String name);
-    String getRank();
-    void setRank(String rank);
+    Belt getRank();
+    void setRank(Belt rank);
     int getMaxSize();
     void setSize(int size);
     Room getRoom();

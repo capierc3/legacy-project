@@ -12,6 +12,8 @@ import nu.xom.Elements;
  * BlackBox notes:
  * All main methods should work that are found in the GymClass interface. Currently as of 4/11 the add/get students and
  * add/get trainers don't work since those codes are not available yet. also get and set room don't work for the same reason.
+ * Static Analysis done by Justin.
+ * Blackbox and Whitebox testing done in Task76Test.java
  *
  * getClassLength() does not work for overnight classes, PM->AM classes.
  *
@@ -39,12 +41,12 @@ public class GymClassImpl implements GymClass {
      * @param type String
      * @param rank String
      */
-    public GymClassImpl(String name,String type,String rank){
+    public GymClassImpl(String name,String type,Belt rank){
         this(name,type);
         setRank(rank);
     }
 
-    public GymClassImpl(String name, String type, String rank, CalendarDate startDate, CalendarDate endDate){
+    public GymClassImpl(String name, String type, Belt rank, CalendarDate startDate, CalendarDate endDate){
         this(name,type,rank);
         setStartDate(startDate);
         setEndDate(endDate);
@@ -63,13 +65,13 @@ public class GymClassImpl implements GymClass {
     }
 
     @Override
-    public String getRank() {
-        return el.getAttributeValue("Rank");
+    public Belt getRank() {
+        return Belt.getBelt(Integer.parseInt(el.getAttributeValue("Rank")));
     }
 
     @Override
-    public void setRank(String rank) {
-        setAttr("Rank",rank);
+    public void setRank(Belt rank) {
+        setAttr("Rank",String.valueOf(rank.getValue()));
     }
 
     @Override
