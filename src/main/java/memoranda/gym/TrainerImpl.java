@@ -15,12 +15,12 @@ import nu.xom.Element;
  * Interface for the trainer methods to be used
  * @author Chase
  */
-public abstract class TrainerImpl extends UserImpl implements Trainer{
+public class TrainerImpl extends UserImpl implements Trainer{
     private Collection<CalendarDate> availabilityDates;
 
 
     public TrainerImpl(String name, String id, String userName, String password, Belt belt, File newPicture,
-                       Collection<Note> newNoteList, ClassList newUserClasses, String userType) {
+                       Collection<Note> newNoteList, ClassList newUserClasses) {
         super(name, id, userName, password, belt, newPicture, newNoteList, newUserClasses, "Trainer");
     }
 

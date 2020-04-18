@@ -15,7 +15,7 @@ import java.util.Collection;
  * Interface for the methods used for the Student class
  * @author Daimi Mussey
  */
-abstract public class StudentImpl extends UserImpl implements Student {
+public class StudentImpl extends UserImpl implements Student {
 
     private ClassList list;
 

@@ -12,7 +12,7 @@ import nu.xom.Element;
  * Interface for the User methods which will be extended to Trainer, Student and Owner
  * @author Daimi Mussey
  */
-public class UserImpl {
+public class UserImpl implements User {
     private File picture;
     private Collection<Note> noteList;
     private ClassList userClasses;
@@ -52,7 +52,7 @@ public class UserImpl {
      * @param classList
      */
     public void setClassList(ClassList classList) {
-        element.appendChild(userClasses.getContent());
+        element.appendChild(userClasses.getContent().copy());
     }
 
     /**
@@ -136,7 +136,7 @@ public class UserImpl {
 
     /**
      * Method  to set a User's belt
-     * @param newBelt
+     * @param rank Belt
      */
     public void setBelt(Belt rank) {
         setAttr("Rank",String.valueOf(rank.getValue()));
@@ -188,6 +188,16 @@ public class UserImpl {
             result = userClasses.getListByDate(todaysDate);
         }
         return result;
+    }
+
+    @Override
+    public ClassList getAllClasses() {
+        return userClasses;
+    }
+
+    @Override
+    public void addClass(GymClass gymClass) {
+        userClasses.addClass(gymClass);
     }
 
     public Element getContent() {
