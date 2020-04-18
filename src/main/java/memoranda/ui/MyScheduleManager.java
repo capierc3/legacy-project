@@ -16,6 +16,7 @@ public class MyScheduleManager {
     private ClassList _allClasses;
     private ClassList _myStudentClasses;
     private ClassList _myTeachingClasses;
+    private ClassList _ShownList;
     private User _user;
 
     /**
@@ -30,6 +31,7 @@ public class MyScheduleManager {
         } else if (_user instanceof Trainer) {
             fillTeachingClasses(0, "Ascending");
         }
+        _ShownList = _allClasses;
 
     }
 
@@ -106,6 +108,21 @@ public class MyScheduleManager {
      */
     private void fillAllClasses(int sort,String dir){
         //need some way to pull saved classes
+        GymClass gymClass1 = new GymClassImpl("Kicking 101","Public",Belt.WHITE,
+                new CalendarDate(18,3,2020,7,0,false),
+                new CalendarDate(18,3,2020,7,30,false));
+        gymClass1.setSize(3);
+        GymClass gymClass2 = new GymClassImpl("Kicking 202","Public",Belt.YELLOW,
+                new CalendarDate(18,3,2020,8,0,false),
+                new CalendarDate(18,3,2020,8,30,false));
+        gymClass2.setSize(20);
+        GymClass gymClass3 = new GymClassImpl("One on One with Matt","Private",Belt.WHITE,
+                new CalendarDate(18,3,2020,9,0,false),
+                new CalendarDate(18,3,2020,9,30,false));
+        gymClass3.setSize(0);
+        _allClasses.addClass(gymClass1);
+        _allClasses.addClass(gymClass2);
+        _allClasses.addClass(gymClass3);
         sortList(_allClasses,sort,dir);
     }
 
@@ -116,12 +133,18 @@ public class MyScheduleManager {
      * @return boolean
      */
     public boolean addClass(GymClass gymClass) {
-        if (_user instanceof Student || _user instanceof Trainer){
-            _myStudentClasses.addClass(gymClass);
+        if (_user instanceof Student){
+            if (!gymClass.isFull()) {
+                _myStudentClasses.addClass(gymClass);
+                //gymClass.getStudents().addUser(_user);
+                return true;
+            } else {
+                return false;
+            }
         } else {
             _allClasses.addClass(gymClass);
+            return true;
         }
-        return false;
     }
 
     /**
@@ -135,9 +158,14 @@ public class MyScheduleManager {
         if (_allClasses.getClass(gymClass.getID()) == null) {
             return false;
         } else {
-            if (_user instanceof Student || _user instanceof Trainer) {
-                _user.removeClass(gymClass);
-                return true;
+            if (_user instanceof Student) {
+                if (_user.getAllClasses().getClass(gymClass.getID())!=null) {
+                    _user.removeClass(gymClass);
+                    //gymClass.getStudents().removeUser(_user.getID());
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 _allClasses.removeClass(gymClass.getID());
                 //Todo: needs userList implemented before use.
@@ -183,7 +211,7 @@ public class MyScheduleManager {
     }
 
     ArrayList<GymClass> getDaysClasses(CalendarDate d){
-        ArrayList<GymClass> classes = getClasses();
+        ArrayList<GymClass> classes = (ArrayList<GymClass>) _ShownList.getAllClasses();
         ArrayList<GymClass> dayClasses = new ArrayList<>();
         for (GymClass gymClass :classes) {
             if (d.equalsDay(gymClass.getStartDate())){

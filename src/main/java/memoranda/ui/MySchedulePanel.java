@@ -11,17 +11,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-
 import javax.swing.*;
-
-import main.java.memoranda.EventsManager;
-import main.java.memoranda.EventsScheduler;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
 import main.java.memoranda.gym.*;
-import main.java.memoranda.util.Configuration;
-import main.java.memoranda.util.CurrentStorage;
 import main.java.memoranda.util.Local;
 import main.java.memoranda.util.Util;
 
@@ -32,7 +25,8 @@ import main.java.memoranda.util.Util;
  */
 public class MySchedulePanel extends JPanel {
     User user = new OwnerImpl("Owner","Owner","Owner","Owner",Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
-    MyScheduleManager manager = new MyScheduleManager(new ClassListImpl(new ArrayList<>()),user);
+    User student = new StudentImpl("Student","Student","Student","Student",Belt.WHITE,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
+    MyScheduleManager manager = new MyScheduleManager(new ClassListImpl(new ArrayList<>()),student);
     BorderLayout borderLayout1 = new BorderLayout();
     JToolBar eventsToolBar = new JToolBar();
     //JButton historyBackB = new JButton();
@@ -56,7 +50,6 @@ public class MySchedulePanel extends JPanel {
     JButton sortDirB = new JButton();
     String[] listTypesA;
     JComboBox listTypeBox;
-    public static GymClass gymClass;
     //Early setup for UI changes based on user
     //User user;
 
@@ -73,7 +66,6 @@ public class MySchedulePanel extends JPanel {
     }
     void jbInit() throws Exception {
         eventsToolBar.setFloatable(false);
-
         //Set toolbar buttons
         if (manager.getUser() instanceof Owner) {
             newClassB.setIcon(
@@ -372,16 +364,75 @@ public class MySchedulePanel extends JPanel {
         GymClass gymClass = (GymClass) classTable.getModel().getValueAt(
                 classTable.getSelectedRow(),
                 MyScheduleTable.EVENT);
-        setGymClass(gymClass);
         editEventB_actionPerformed(e,gymClass);
     }
-    //TODO add button click action
     private void addClassB_actionPerformed(ActionEvent e) {
+        String msg;
+        GymClass gymClass;
 
+        if(classTable.getSelectedRows().length > 1)
+            msg = Local.getString("Register for") + " " + classTable.getSelectedRows().length
+                    + " " + Local.getString("classes") + "\n" + Local.getString("Are you sure?");
+        else {
+            gymClass = (GymClass) classTable.getModel().getValueAt(
+                    classTable.getSelectedRow(),
+                    MyScheduleTable.EVENT);
+            msg = Local.getString("Register for class") + "\n'"
+                    + gymClass.getName() + "'\n" + Local.getString("Are you sure?");
+        }
+
+        int n =
+                JOptionPane.showConfirmDialog(
+                        App.getFrame(),
+                        msg,
+                        Local.getString("Register for class"),
+                        JOptionPane.YES_NO_OPTION);
+        if (n != JOptionPane.YES_OPTION) return;
+
+        for(int i = 0; i< classTable.getSelectedRows().length; i++) {
+            gymClass = (GymClass) classTable.getModel().getValueAt(
+                    classTable.getSelectedRows()[i], MyScheduleTable.EVENT);
+            if (gymClass.isFull()){
+                addError(gymClass,0);
+            } else if (gymClass.getRank().getValue()>manager.getUser().getBelt().getValue()){
+                addError(gymClass,1);
+            }
+            manager.addClass(gymClass);
+            Util.debug("Class added: "+ gymClass.getName());
+        }
+        classTable.getSelectionModel().clearSelection();
+        classTable.refresh();
     }
-    //TODO add button click action
     private void dropClassB_actionPerformed(ActionEvent e) {
+        String msg;
+        GymClass gymClass;
 
+        if(classTable.getSelectedRows().length > 1)
+            msg = Local.getString("Drop") + " " + classTable.getSelectedRows().length
+                    + " " + Local.getString("Classes") + "\n" + Local.getString("Are you sure?");
+        else {
+            gymClass = (GymClass) classTable.getModel().getValueAt(
+                    classTable.getSelectedRow(),
+                    MyScheduleTable.EVENT);
+            msg = Local.getString("Drop ") + "\n'"
+                    + gymClass.getName() + "'\n" + Local.getString("Are you sure?");
+        }
+
+        int n =
+                JOptionPane.showConfirmDialog(
+                        App.getFrame(),
+                        msg,
+                        Local.getString("Drop Class"),
+                        JOptionPane.YES_NO_OPTION);
+        if (n != JOptionPane.YES_OPTION) return;
+
+        for(int i = 0; i< classTable.getSelectedRows().length; i++) {
+            gymClass = (GymClass) classTable.getModel().getValueAt(
+                    classTable.getSelectedRows()[i], MyScheduleTable.EVENT);
+            manager.removeClass(gymClass);
+        }
+        classTable.getSelectionModel().clearSelection();
+        classTable.refresh();
     }
     private void sortBox_actionPerformed(ActionEvent e) {
         int sort = sortCombo.getSelectedIndex();
@@ -426,7 +477,7 @@ public class MySchedulePanel extends JPanel {
         manager.addClass(gymClass);
         classTable.refresh();
     }
-    void editEventB_actionPerformed(ActionEvent e,GymClass gymClass) {
+    private void editEventB_actionPerformed(ActionEvent e, GymClass gymClass) {
         ClassDialog dlg = new ClassDialog(App.getFrame(), Local.getString("Edit Class"));
         Dimension frmSize = App.getFrame().getSize();
         Point loc = App.getFrame().getLocation();
@@ -565,11 +616,17 @@ public class MySchedulePanel extends JPanel {
         return date;
     }
 
-    public static void setGymClass(GymClass gymClassIn){
-        gymClass = gymClassIn;
-    }
-    public static GymClass getGymClass(){
-        return gymClass;
+    private void addError(GymClass gymClass, int errorNum){
+        String msg;
+        String msg2;
+        if (errorNum == 0){
+            msg = "Sorry, "+gymClass.getName()+" is full.";
+            msg2 = "Class Full";
+        } else {
+            msg = "Sorry, "+gymClass.getRank().name() + " belt needed for this class";
+            msg2 = "Not high enough Belt";
+        }
+        JOptionPane.showMessageDialog(null,msg,msg2,JOptionPane.INFORMATION_MESSAGE);
     }
 
     private enum Lists {
