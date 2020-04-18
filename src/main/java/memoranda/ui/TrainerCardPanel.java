@@ -48,10 +48,20 @@ import main.java.memoranda.util.Util;
 /*
  * Creates an individual trainer "card" that displays information about the trainer
  * Will be displayed in TrainerProfilesPanel
+ * @author Justin Oliver
  * 
  */
 public class TrainerCardPanel extends JPanel {
     JButton editUser = new JButton("Edit");
+    JLabel trainerName;
+    JLabel trainerBelt;
+    JLabel trainerInfo;
+    BufferedImage trainerImage;
+    Image scaledImage;
+    JLabel trainerPicture;
+    
+    int imageWidth=200;
+    int imageHeight=200;
     
 
 
@@ -67,13 +77,10 @@ public class TrainerCardPanel extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         
-        JLabel trainerName = new JLabel("Trainer Name: " +name+ "\n");
-        JLabel trainerBelt = new JLabel("Belt Level: " + belt + "\n");
-        JLabel trainerInfo = new JLabel("<html>About Me: " + funFact +"\n</html>");
-        BufferedImage trainerImage;
-        int imageWidth=200;
-        int imageHeight=200;
-        
+        trainerName = new JLabel("Trainer Name: " +name+ "\n");
+        trainerBelt = new JLabel("Belt Level: " + belt + "\n");
+        trainerInfo = new JLabel("<html>About Me: " + funFact +"\n</html>");
+
         if(name.equalsIgnoreCase("Cameron Howe")) {
             trainerImage = ImageIO.read(this.getClass().getResource("/ui/icons/howe.jpg"));
         } else if(name.equalsIgnoreCase("Joe MacMillan")) {
@@ -87,8 +94,8 @@ public class TrainerCardPanel extends JPanel {
         } else {
             trainerImage = ImageIO.read(this.getClass().getResource("/ui/icons/nunchuckNorris.png"));
         }
-        Image scaledImage = trainerImage.getScaledInstance(imageWidth,imageHeight,trainerImage.SCALE_SMOOTH);
-        JLabel trainerPicture = new JLabel(new ImageIcon(scaledImage));
+        scaledImage = trainerImage.getScaledInstance(imageWidth,imageHeight,trainerImage.SCALE_SMOOTH);
+        trainerPicture = new JLabel(new ImageIcon(scaledImage));
         this.setPreferredSize(new Dimension(300, 300));
         this.setMinimumSize(new Dimension(300, 300));
         this.setMaximumSize(new Dimension(300, 300));
@@ -108,17 +115,29 @@ public class TrainerCardPanel extends JPanel {
         });
 
     }
-    
-    
 
     /*
      * Method to add edit this users card
+     * Removes all items first so that when it revalidates they display in the correct order
      */
     
     void editUser() {
         //TrainerCardPanel testCard7 = new TrainerCardPanel("John Bosworth", "White", "Innovation is a risk.");
         //this.add(testCard7);
+        this.remove(trainerName);
+        this.remove(trainerPicture);
+        this.remove(trainerBelt);        
+        this.remove(trainerInfo);
+        this.remove(editUser);
         JOptionPane.showMessageDialog(null, "This worked");
+        trainerName = new JLabel("New Trainer name");
+        
+        this.add(trainerName);
+        this.add(trainerPicture);
+        this.add(trainerBelt);        
+        this.add(trainerInfo);
+        this.add(editUser);
+        repaint();
         revalidate();
     }
 
