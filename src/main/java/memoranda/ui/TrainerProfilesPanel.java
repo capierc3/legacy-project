@@ -1,10 +1,10 @@
 /* 
- * This class is designed to display a panel and show the appropriate info when the resources button is clicked. 
- * This panel existed in the original version of memoranda that was used for this gym scheduling program
+ * This class is designed to display a panel and show the appropriate info when the Trainer Profiles button is clicked. 
+ * It used the resources panel as an original Source
+ * 
  * 
  * 
  */
-
 package main.java.memoranda.ui;
 
 import java.awt.BorderLayout;
@@ -41,7 +41,7 @@ import main.java.memoranda.util.Util;
 import java.io.*;
 
 /*$Id: ResourcesPanel.java,v 1.13 2007/03/20 08:22:41 alexeya Exp $*/
-public class ResourcesPanel extends JPanel {
+public class TrainerProfilesPanel extends JPanel {
     BorderLayout borderLayout1 = new BorderLayout();
     JToolBar toolBar = new JToolBar();
     JButton newResB = new JButton();
@@ -55,7 +55,7 @@ public class ResourcesPanel extends JPanel {
   JMenuItem ppNewRes = new JMenuItem();
   JMenuItem ppRefresh = new JMenuItem();
 
-    public ResourcesPanel() {
+    public TrainerProfilesPanel() {
         try {
             jbInit();
         }

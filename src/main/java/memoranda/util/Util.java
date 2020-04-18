@@ -60,8 +60,26 @@ public class Util {
             + "/"
             + (cal.get(Calendar.MONTH))
             + "/"
-            + new Integer(cal.get(Calendar.YEAR)).toString();
+            + (cal.get(Calendar.YEAR));
 
+    }
+
+    public static String getTimeStamp(Object cal){
+        String amPM = "PM";
+        if (cal instanceof Calendar){
+            Calendar calendar = (Calendar) cal;
+            if (calendar.get(Calendar.AM_PM) == Calendar.AM){
+                amPM = "AM";
+            }
+            return calendar.get(Calendar.HOUR)+":"+calendar.get(Calendar.MINUTE)+"_"+amPM;
+        } else if (cal instanceof CalendarDate){
+            CalendarDate calendarDate = (CalendarDate) cal;
+            if (calendarDate.isAM()){
+                amPM = "AM";
+            }
+            return calendarDate.getHour()+":"+calendarDate.getMin()+"_"+amPM;
+        }
+        return "Not Set";
     }
 
     /**
@@ -83,20 +101,32 @@ public class Util {
         int i1 = s.indexOf("/");
         int i2 = s.indexOf("/", i1 + 1);
         int[] date = new int[3];
-        date[0] = new Integer(s.substring(0, i1)).intValue();
-        date[1] = new Integer(s.substring(i1 + 1, i2)).intValue();
-        date[2] = new Integer(s.substring(i2 + 1)).intValue();
+        date[0] = Integer.parseInt(s.substring(0, i1));
+        date[1] = Integer.parseInt(s.substring(i1 + 1, i2));
+        date[2] = Integer.parseInt(s.substring(i2 + 1));
         return date;
-        /*DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, currentLocale);
-        Date d = null;
-        try {
-            d = dateFormat.parse(s);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return new int[3];
+    }
+
+    public static int[] parseDateStampNew(String s){
+        String[] dateArray = s.split("/");
+        int[] date;
+        if (dateArray.length==3){
+            date = new int[3];
+        } else {
+            date = new int[6];
+            date[3] = Integer.parseInt(dateArray[3].split(":")[0]);
+            date[4] = Integer.parseInt(dateArray[3].split(":")[1].split("_")[0]);
+            if (dateArray[3].split(":")[1].split("_")[1].equalsIgnoreCase("AM")) {
+                date[5] = 0;
+            } else {
+                date[5] = 1;
+            }
         }
-        int[] ret = {d.getDay(), d.getMonth(), d.getYear()};
-        return ret;*/
+        date[0] = Integer.parseInt(dateArray[0]);
+        date[1] = Integer.parseInt(dateArray[1]);
+        date[2] = Integer.parseInt(dateArray[2]);
+        return date;
+
     }
 
     /**
