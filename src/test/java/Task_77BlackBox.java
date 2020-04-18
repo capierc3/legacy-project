@@ -49,6 +49,9 @@ public class Task_77BlackBox {
         trainer1.addClass(gymClass2);
         assertEquals(1,trainer1.getTodaysEvents().getSize());
         assertEquals(2,trainer1.getAllClasses().getSize());
+        trainer1.removeClass(gymClass1);
+        assertEquals(0,trainer1.getTodaysEvents().getSize());
+        assertEquals(1,trainer1.getAllClasses().getSize());
     }
 
     @Test
@@ -64,6 +67,9 @@ public class Task_77BlackBox {
         student1.addClass(gymClass2);
         assertEquals(1,student1.getTodaysEvents().getSize());
         assertEquals(2,student1.getAllClasses().getSize());
+        student1.removeClass(gymClass1);
+        assertEquals(0,student1.getTodaysEvents().getSize());
+        assertEquals(1,student1.getAllClasses().getSize());
     }
 
 }

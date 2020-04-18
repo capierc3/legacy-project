@@ -53,6 +53,7 @@ public interface User {
     ClassList getTodaysEvents();
     ClassList getAllClasses();
     void addClass(GymClass gymClass);
+    void removeClass(GymClass gymClass);
     Element getContent();
 
 }

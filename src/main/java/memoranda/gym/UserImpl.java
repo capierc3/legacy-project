@@ -200,6 +200,11 @@ public class UserImpl implements User {
         userClasses.addClass(gymClass);
     }
 
+    @Override
+    public void removeClass(GymClass gymClass) {
+        userClasses.removeClass(gymClass.getID());
+    }
+
     public Element getContent() {
         return element;
     }
