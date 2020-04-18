@@ -1,4 +1,4 @@
-package memoranda.gym;
+package main.java.memoranda.gym;
 
 import main.java.memoranda.Note;
 import main.java.memoranda.gym.ClassList;

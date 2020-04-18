@@ -1,18 +1,53 @@
-package memoranda.gym;
+package main.java.memoranda.gym;
 
+import java.io.File;
 import java.util.Collection;
+
+import main.java.memoranda.Note;
 import main.java.memoranda.date.CalendarDate;
+import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.gym.Trainer;
+import main.java.memoranda.gym.UserImpl;
+import nu.xom.Attribute;
+import nu.xom.Element;
 
 /**
  * Interface for the trainer methods to be used
  * @author Chase
  */
-public abstract class TrainerImpl implements Trainer{
-    private String beltLevel;
-    private String trainingRank;
-    private String description;
+public abstract class TrainerImpl extends UserImpl implements Trainer{
     private Collection<CalendarDate> availabilityDates;
+
+
+    public TrainerImpl(String name, String id, String userName, String password, Belt belt, File newPicture,
+                       Collection<Note> newNoteList, ClassList newUserClasses, String userType) {
+        super(name, id, userName, password, belt, newPicture, newNoteList, newUserClasses, "Trainer");
+    }
+
+    /**
+     * Method to set Description on Element.
+     * @param description
+     */
+    public void setDescription(String description) {
+        setAttr("Description", description);
+    }
+
+    /**
+     * Method to get Description of Trainer.
+     * @return String
+     */
+    public String getDescription() {
+        return element.getAttributeValue("Description");
+    }
+
+    /**
+     * Method to set Availability Dates in Element
+     */
+    public void setAvailabilityDates(Collection<CalendarDate> availableDates) {
+        for (CalendarDate date : availableDates) {
+            element.appendChild(date.toString());
+        }
+    }
 
     /**
      * Method that returns a Collection of CalendarDate objects that represent when the trainer is able to teach.
@@ -28,6 +63,7 @@ public abstract class TrainerImpl implements Trainer{
      */
     public void setAvailability(Collection<CalendarDate> dates) {
         availabilityDates = dates;
+        setAvailabilityDates(availabilityDates);
     }
 
     /**
@@ -49,7 +85,7 @@ public abstract class TrainerImpl implements Trainer{
      * @return String
      */
     public String getTrainingRank() {
-        return trainingRank;
+        return element.getAttributeValue("TrainingRank");
     }
 
     /**
@@ -57,7 +93,19 @@ public abstract class TrainerImpl implements Trainer{
      * @param rank String
      */
     public void setTrainingRank(String rank) {
-        trainingRank = rank;
+        setAttr("TrainingRank", rank);
+    }
+
+    public Element getContent() {
+        return element;
+    }
+
+    private void setAttr(String a, String value) {
+        Attribute attr = element.getAttribute(a);
+        if (attr == null)
+            element.addAttribute(new Attribute(a, value));
+        else
+            attr.setValue(value);
     }
 
 }

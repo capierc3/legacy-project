@@ -17,7 +17,7 @@ public class UserImpl {
     private Collection<Note> noteList;
     private ClassList userClasses;
 
-    private Element element;
+    protected Element element;
 
     public UserImpl(String name, String id, String userName, String password,
                     Belt belt, File newPicture, Collection<Note> newNoteList, ClassList newUserClasses, String userType) {
