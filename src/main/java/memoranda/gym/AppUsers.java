@@ -1,10 +1,13 @@
 package main.java.memoranda.gym;
 
+
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
+
 
 /**
  * The AppUsers class is a data model that houses information on all application users.
@@ -12,7 +15,7 @@ import java.util.LinkedList;
 
 public class AppUsers implements UserList {
 
-    private final String APP_USER_FILE_PATH = "/appusers.dat";
+    private final String APP_USER_FILE_PATH = "appusers.dat";
     private HashMap<String, User> appUsers;
     private User activeUser;
 
@@ -24,17 +27,24 @@ public class AppUsers implements UserList {
         User user = new StudentImpl("Chase","CP","1","1",Belt.BLACK3,
                 new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
         appUsers.put(user.getUserName(),user);
+        UserImpl user1 = new UserImpl("Fancy Nancy","admin001","admin","Password",
+                Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()), "User");
+        appUsers.put(user.getUserName(),user1);
+
+
     }
 
     /**
      * Simple getter method for User
      *
-     * @param id String value of user ID
+     * @param login String value of user's login
      * @return User object from collection.  Returns null if id does not exist in collection.
      */
-    public User getUser(String id) {
-        if(appUsers.containsKey(id)) {
-            return appUsers.get(id);
+
+    public User getUser(String login) {
+
+        if(appUsers.containsKey(login)) {
+            return appUsers.get(login);
         }
 
         return null;
@@ -49,10 +59,14 @@ public class AppUsers implements UserList {
      */
     public void addUser(User user) {
 
-        String userName = user.getUserName();
+        String login = user.getUserName();
 
-        if(!appUsers.containsKey(userName)){
-            appUsers.put(userName, user);
+        if(!appUsers.containsKey(login)){
+            appUsers.put(login, user);
+
+            //TODO: Implement in Sprint 3
+            //save to file
+            //saveToFile(appUsers, APP_USER_FILE_PATH);
         }
 
     }
@@ -60,16 +74,12 @@ public class AppUsers implements UserList {
     /**
      * Removed user from collection
      *
-     * @param id User object to be removed from collection
+     * @param login User object to be removed from collection
      * @return void
      */
-    public void removeUser(String id) {
+    public void removeUser(String login) {
 
-        if(appUsers.containsKey(id)) {
-
-            appUsers.remove(id);
-
-        }
+        appUsers.remove(login);
 
     }
 
@@ -142,15 +152,18 @@ public class AppUsers implements UserList {
     private void saveToFile(Object obj, String file_path) {
 
         try {
-            FileOutputStream fileOut = new FileOutputStream(file_path);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(obj);
-            out.close();
-            fileOut.close();
-            System.out.printf("Saved object to " + file_path);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("Saving object to file...");
+            FileOutputStream fileOutputStream = new FileOutputStream(file_path);
+            ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
+            outputStream.writeObject(obj);
+            outputStream.close();
+
+            System.out.println("Object saved to " + file_path);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
     /**
@@ -159,17 +172,8 @@ public class AppUsers implements UserList {
      * @param file_path file location
      */
     private void loadFromFile(String file_path){
+        //read from file
 
-        try{
-            FileInputStream fileInputStream = new FileInputStream(file_path);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            Object obj = objectInputStream.readObject();
-
-            appUsers = (HashMap<String, User>) obj;
-
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
 
 
     }
