@@ -378,7 +378,6 @@ public class MySchedulePanel extends JPanel {
     private void dropClassB_actionPerformed(ActionEvent e) {
 
     }
-
     private void sortBox_actionPerformed(ActionEvent e) {
         int sort = sortCombo.getSelectedIndex();
         String dir =  sortDirB.getToolTipText();
@@ -434,37 +433,9 @@ public class MySchedulePanel extends JPanel {
         manager.addClass(gymClass);
         classTable.refresh();
     }
+    void editEventB_actionPerformed(ActionEvent e,GymClass gymClass) {
 
-    private CalendarDate comboValueToDate(String s){
-        CalendarDate date = new CalendarDate();
-        Calendar date1 = date.getCalendar();
-        String[] timeString = s.split(":");
-        int hour = Integer.parseInt(timeString[0]);
-        int mins = Integer.parseInt(timeString[1].split(" ")[0]);
-        int amPm;
-        if (timeString[1].split(" ")[1].equalsIgnoreCase("AM")){
-            amPm = Calendar.AM;
-        } else {
-            amPm = Calendar.PM;
-        }
-        if (hour == 12){
-            hour = 0;
-        }
-        date1.set(Calendar.HOUR,hour);
-        date1.set(Calendar.MINUTE, mins);
-        date1.set(Calendar.AM_PM,amPm);
-        date = new CalendarDate(date1);
-        return date;
     }
-
-    private void saveEvents() {
-	CurrentStorage.get().storeEventsManager();
-        classTable.refresh();
-        EventsScheduler.init();
-        parentPanel.calendar.jnCalendar.updateUI();
-        parentPanel.updateIndicators();
-    }
-
     private void removeEventB_actionPerformed(ActionEvent e) {
 		String msg;
 		GymClass gymClass;
@@ -504,15 +475,12 @@ public class MySchedulePanel extends JPanel {
                 //editEventB_actionPerformed(null);
             }
         }
-
         public void mousePressed(MouseEvent e) {
             maybeShowPopup(e);
         }
-
         public void mouseReleased(MouseEvent e) {
             maybeShowPopup(e);
         }
-
         private void maybeShowPopup(MouseEvent e) {
             if (e.isPopupTrigger()) {
                 classPPMenu.show(e.getComponent(), e.getX(), e.getY());
@@ -535,6 +503,28 @@ public class MySchedulePanel extends JPanel {
     }
     private void ppDropClass_actionPerformed(ActionEvent e){
         dropClassB_actionPerformed(e);
+    }
+
+    private CalendarDate comboValueToDate(String s){
+        CalendarDate date = new CalendarDate();
+        Calendar date1 = date.getCalendar();
+        String[] timeString = s.split(":");
+        int hour = Integer.parseInt(timeString[0]);
+        int mins = Integer.parseInt(timeString[1].split(" ")[0]);
+        int amPm;
+        if (timeString[1].split(" ")[1].equalsIgnoreCase("AM")){
+            amPm = Calendar.AM;
+        } else {
+            amPm = Calendar.PM;
+        }
+        if (hour == 12){
+            hour = 0;
+        }
+        date1.set(Calendar.HOUR,hour);
+        date1.set(Calendar.MINUTE, mins);
+        date1.set(Calendar.AM_PM,amPm);
+        date = new CalendarDate(date1);
+        return date;
     }
 
     private enum Lists {
