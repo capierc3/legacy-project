@@ -9,7 +9,7 @@ import nu.xom.Element;
 import java.io.File;
 import java.util.Collection;
 
-public class OwnerImpl extends TrainerImpl implements Owner {
+public class OwnerImpl extends UserImpl implements Owner {
 
     /**
      * Contructor for OwnerImpl.
@@ -23,6 +23,6 @@ public class OwnerImpl extends TrainerImpl implements Owner {
      * @param newUserClasses
      */
     public OwnerImpl(String name, String id, String userName, String password, Belt belt, File newPicture, Collection<Note> newNoteList, ClassList newUserClasses) {
-        super(name, id, userName, password, belt, newPicture, newNoteList, newUserClasses);
+        super(name, id, userName, password, belt, newPicture, newNoteList, newUserClasses,"Owner");
     }
 }
