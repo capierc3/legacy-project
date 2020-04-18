@@ -22,19 +22,19 @@ public class MyScheduleManager {
     private ClassList _allClasses;
     private ClassList _myStudentClasses;
     private ClassList _myTeachingClasses;
-    //private User _user;
-    boolean _isOwner; //only until User can be inputted
+    private User _user;
 
     /**
      * main constructor for the Manager
      */
-    MyScheduleManager(ClassList list,boolean isOwner){
-        _isOwner = isOwner;
-        _allClasses = new ClassListImpl(new ArrayList<>());
+    MyScheduleManager(ClassList list,User user){
+        _user = user;
+        _allClasses = list;
         fillAllClasses(0,"Ascending");
-        if (!isOwner) {
-            _myStudentClasses = fillStudentClasses(0, "Ascending");
-            _myTeachingClasses = fillTeachingClasses(0, "Ascending");
+        if (_user instanceof Student) {
+            fillStudentClasses(0, "Ascending");
+        } else if (_user instanceof Trainer) {
+            fillTeachingClasses(0, "Ascending");
         }
 
     }
@@ -45,7 +45,7 @@ public class MyScheduleManager {
      * @param sort int
      * @param dir String
      */
-    public void updateLists(String list, int sort, String dir){
+    void updateLists(String list, int sort, String dir){
         if (list.equalsIgnoreCase("All Classes")){
             fillAllClasses(sort, dir);
         } else if (list.equalsIgnoreCase("Teaching")){
@@ -67,10 +67,24 @@ public class MyScheduleManager {
      * @param dir String
      * @return ClassList
      */
-    private ClassList fillStudentClasses(int sort,String dir) {
-        //_myStudentClasses = (Student) _user.getClasses();
+    private void fillStudentClasses(int sort,String dir) {
+        if (_user instanceof Student) {
+            _myStudentClasses = _user.getAllClasses();
+        } else if (_user instanceof Trainer){
+            _myStudentClasses = new ClassListImpl(new ArrayList<>());
+            for (GymClass gymClass:_user.getAllClasses().getAllClasses()) {
+                boolean notTrainer = true;
+                for (User trainer:gymClass.getTrainers().getAllUsers()){
+                    if (trainer.getName().equalsIgnoreCase(_user.getName())){
+                        notTrainer = false;
+                    }
+                }
+                if (notTrainer){
+                    _myStudentClasses.addClass(gymClass);
+                }
+            }
+        }
         sortList(_myStudentClasses,sort,dir);
-        return null;
     }
 
     /**
@@ -79,10 +93,16 @@ public class MyScheduleManager {
      * @param dir String
      * @return ClassList
      */
-    private ClassList fillTeachingClasses(int sort,String dir) {
-        //_myTeachingClasses = (Trainer) _user.getAllClasses();
+    private void fillTeachingClasses(int sort,String dir) {
+        _myTeachingClasses = new ClassListImpl(new ArrayList<>());
+        for (GymClass gymClass:_user.getAllClasses().getAllClasses()) {
+            for (User trainer:gymClass.getTrainers().getAllUsers()){
+                if (trainer.getName().equalsIgnoreCase(_user.getName())){
+                    _myTeachingClasses.addClass(gymClass);
+                }
+            }
+        }
         sortList(_myTeachingClasses,sort,dir);
-        return null;
     }
     /**
      * fills and sorts the all classes list.
@@ -102,30 +122,36 @@ public class MyScheduleManager {
      * @return boolean
      */
     public boolean addClass(GymClass gymClass) {
-        if (_isOwner){
-            _allClasses.addClass(gymClass);
-        } else {
+        if (_user instanceof Student || _user instanceof Trainer){
             _myStudentClasses.addClass(gymClass);
+        } else {
+            _allClasses.addClass(gymClass);
         }
         return false;
     }
 
     /**
-     * Drops a class for the user.
+     * Removes the class from the schedule and drops the class for all students in the class.
+     * for a student it only drops them from the class nothing else.
      * True = dropped
      * @param gymClass GymClass
      * @return boolean
      */
-    public boolean dropClass(GymClass gymClass){
-        return false;
-    }
-
     public boolean removeClass(GymClass gymClass) {
         if (_allClasses.getClass(gymClass.getID()) == null) {
             return false;
         } else {
-            _allClasses.removeClass(gymClass.getID());
-            return true;
+            if (_user instanceof Student || _user instanceof Trainer) {
+                _user.removeClass(gymClass);
+                return true;
+            } else {
+                _allClasses.removeClass(gymClass.getID());
+                //Todo: needs userList implemented before use.
+//                for (User student:gymClass.getStudents().getAllUsers()) {
+//                    student.removeClass(gymClass);
+//                }
+                return true;
+            }
         }
     }
 
@@ -151,14 +177,18 @@ public class MyScheduleManager {
     }
 
     public ArrayList<GymClass> getClasses(){
-        if (_isOwner) {
-            return (ArrayList<GymClass>) _allClasses.getAllClasses();
-        } else {
+        if (_user instanceof Student) {
             return (ArrayList<GymClass>) _myStudentClasses.getAllClasses();
+        } else if (_user instanceof Trainer){
+            ArrayList<GymClass> classes = (ArrayList<GymClass>) _myStudentClasses.getAllClasses();
+            classes.addAll(_myTeachingClasses.getAllClasses());
+            return classes;
+        } else {
+            return (ArrayList<GymClass>) _allClasses.getAllClasses();
         }
     }
 
-    public ArrayList<GymClass> getDaysClasses(CalendarDate d){
+    ArrayList<GymClass> getDaysClasses(CalendarDate d){
         ArrayList<GymClass> classes = getClasses();
         ArrayList<GymClass> dayClasses = new ArrayList<>();
         for (GymClass gymClass :classes) {
@@ -167,6 +197,10 @@ public class MyScheduleManager {
             }
         }
         return dayClasses;
+    }
+
+    User getUser(){
+        return _user;
     }
 
     /**
@@ -220,7 +254,7 @@ public class MyScheduleManager {
         }
     }
     /**
-     * class to sort by Trainer Name
+     * class to sort by Class Name
      */
     private static class NameCompare implements Comparator<GymClass> {
 
@@ -241,4 +275,21 @@ public class MyScheduleManager {
             }
         }
     }
+//    /**
+//     * class to sort by Trainer Name
+//     */
+//    private static class TrainerCompare implements Comparator<GymClass> {
+//
+//        private boolean as;
+//
+//        TrainerCompare(boolean as){
+//            this.as = as;
+//        }
+//
+//        @Override
+//        public int compare(GymClass gymClass, GymClass t1) {
+//            return 0;
+//        }
+//    }
+
 }

@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,10 +19,7 @@ import main.java.memoranda.EventsManager;
 import main.java.memoranda.EventsScheduler;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
-import main.java.memoranda.gym.Belt;
-import main.java.memoranda.gym.ClassListImpl;
-import main.java.memoranda.gym.GymClass;
-import main.java.memoranda.gym.GymClassImpl;
+import main.java.memoranda.gym.*;
 import main.java.memoranda.util.Configuration;
 import main.java.memoranda.util.CurrentStorage;
 import main.java.memoranda.util.Local;
@@ -33,9 +31,8 @@ import main.java.memoranda.util.Util;
  *
  */
 public class MySchedulePanel extends JPanel {
-    boolean isOwner = true;
-    boolean isStudent = false;
-    MyScheduleManager manager = new MyScheduleManager(new ClassListImpl(new ArrayList<>()),isOwner);
+    User user = new OwnerImpl("Owner","Owner","Owner","Owner",Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
+    MyScheduleManager manager = new MyScheduleManager(new ClassListImpl(new ArrayList<>()),user);
     BorderLayout borderLayout1 = new BorderLayout();
     JToolBar eventsToolBar = new JToolBar();
     //JButton historyBackB = new JButton();
@@ -77,7 +74,7 @@ public class MySchedulePanel extends JPanel {
         eventsToolBar.setFloatable(false);
 
         //Set toolbar buttons
-        if (isOwner) {
+        if (manager.getUser() instanceof Owner) {
             newClassB.setIcon(
                     new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_new.png")));
             newClassB.setEnabled(true);
@@ -122,7 +119,7 @@ public class MySchedulePanel extends JPanel {
             listTypeBox.addActionListener(this::listBox_actionPerformed);
             listTypeBox.setMaximumSize(listTypeBox.getPreferredSize());
 
-        } else if (isStudent) {
+        } else if (manager.getUser() instanceof Student || manager.getUser() instanceof Trainer) {
 
             addClassB.setIcon(
                     new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_new.png")));
@@ -173,7 +170,7 @@ public class MySchedulePanel extends JPanel {
         classTable.setRowHeight(24);
         classPPMenu.setFont(new java.awt.Font("Dialog", 1, 10));
         //sets right click menu
-        if (isOwner) {
+        if (manager.getUser() instanceof Owner) {
             ppEditClass.setFont(new java.awt.Font("Dialog", 1, 11));
             ppEditClass.setText(Local.getString("Edit Class") + "...");
             ppEditClass.addActionListener(this::ppEditEvent_actionPerformed);
@@ -191,7 +188,7 @@ public class MySchedulePanel extends JPanel {
             ppNewClass.addActionListener(this::ppNewEvent_actionPerformed);
             ppNewClass.setIcon(
                     new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/event_new.png")));
-        } else if (isStudent){
+        } else if (manager.getUser() instanceof Student || manager.getUser() instanceof Trainer){
             ppAddClass.setFont(new java.awt.Font("Dialog", 1, 11));
             ppAddClass.setText(Local.getString("Register") + "...");
             ppAddClass.addActionListener(this::ppAddClass_actionPerformed);
@@ -209,12 +206,12 @@ public class MySchedulePanel extends JPanel {
         this.add(scrollPane, BorderLayout.CENTER);
         eventsToolBar.addSeparator(new Dimension(8, 24));
         //fills the toolbar
-        if (isOwner) {
+        if (manager.getUser() instanceof Owner) {
             eventsToolBar.add(newClassB, null);
             eventsToolBar.add(removeClassB, null);
             eventsToolBar.addSeparator(new Dimension(8, 24));
             eventsToolBar.add(editClassB, null);
-        } else if (isStudent){
+        } else if (manager.getUser() instanceof Student || manager.getUser() instanceof Trainer){
             eventsToolBar.add(addClassB,null);
             eventsToolBar.add(dropClassB,null);
         }
@@ -236,14 +233,14 @@ public class MySchedulePanel extends JPanel {
         CurrentDate.addDateListener(d -> {
             classTable.initTable(d);
             boolean enbl = d.after(CalendarDate.today()) || d.equals(CalendarDate.today());
-            if (isOwner) {
+            if (manager.getUser() instanceof Owner) {
                 newClassB.setEnabled(enbl);
                 ppNewClass.setEnabled(enbl);
                 editClassB.setEnabled(false);
                 ppEditClass.setEnabled(false);
                 removeClassB.setEnabled(false);
                 ppRemoveClass.setEnabled(false);
-            } else if (isStudent){
+            } else if (manager.getUser() instanceof Student || manager.getUser() instanceof Trainer){
                 addClassB.setEnabled(enbl);
                 ppAddClass.setEnabled(enbl);
                 dropClassB.setEnabled(enbl);
@@ -252,12 +249,12 @@ public class MySchedulePanel extends JPanel {
         });
         classTable.getSelectionModel().addListSelectionListener(e -> {
             boolean enbl = classTable.getSelectedRow() > -1;
-            if (isOwner) {
+            if (manager.getUser() instanceof Owner) {
                 editClassB.setEnabled(enbl);
                 ppEditClass.setEnabled(enbl);
                 removeClassB.setEnabled(enbl);
                 ppRemoveClass.setEnabled(enbl);
-            } else if (isStudent){
+            } else if (manager.getUser() instanceof Student || manager.getUser() instanceof Trainer){
                 addClassB.setEnabled(enbl);
                 ppAddClass.setEnabled(enbl);
                 dropClassB.setEnabled(enbl);
@@ -267,12 +264,12 @@ public class MySchedulePanel extends JPanel {
         editClassB.setEnabled(false);
         removeClassB.setEnabled(false);
         //fills the right click menu
-        if (isOwner) {
+        if (manager.getUser() instanceof Owner) {
             classPPMenu.add(ppEditClass);
             classPPMenu.addSeparator();
             classPPMenu.add(ppNewClass);
             classPPMenu.add(ppRemoveClass);
-        } else if (isStudent){
+        } else if (manager.getUser() instanceof Student || manager.getUser() instanceof Trainer){
             classPPMenu.add(ppAddClass);
             classPPMenu.add(ppDropClass);
         }

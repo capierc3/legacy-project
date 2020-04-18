@@ -151,7 +151,7 @@ public class GymClassImpl implements GymClass {
 
     @Override
     public void addTrainer(Trainer trainer) {
-        el.appendChild(trainerToElm(trainer));
+        el.appendChild(trainer.getContent().copy());
     }
 
     @Override
@@ -161,7 +161,7 @@ public class GymClassImpl implements GymClass {
 
     @Override
     public void addStudent(Student student) {
-        el.appendChild(studentToElm(student));
+        el.appendChild(student.getContent().copy());
     }
 
     @Override
@@ -235,10 +235,5 @@ public class GymClassImpl implements GymClass {
     private UserList elmsToUserList(Elements els){
         return null;
     }
-    private Element trainerToElm(Trainer trainer){
-        return null;
-    }
-    private Element studentToElm(Student student){
-        return null;
-    }
+
 }
