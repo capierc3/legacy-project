@@ -123,7 +123,7 @@ public class TrainerCardPanel extends JPanel {
         {
           public void actionPerformed(ActionEvent e)
           {
-              editUser();
+              editUser(e);
           }
         });
 
@@ -135,16 +135,28 @@ public class TrainerCardPanel extends JPanel {
      * repaint to clear old data and revalidate to display new
      */
     
-    void editUser() {
-        //TrainerCardPanel testCard7 = new TrainerCardPanel("John Bosworth", "White", "Innovation is a risk.");
-        //this.add(testCard7);
+    void editUser(ActionEvent e) {
+        
+        // Creates and renders an edit box
+        TrainerDialog dlg = new TrainerDialog(App.getFrame(), Local.getString("Edit Trainer"), name, belt, fact);
+        Dimension frmSize = App.getFrame().getSize();
+        Point loc = App.getFrame().getLocation();
+        dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x, (frmSize.height - dlg.getSize().height) / 2 + loc.y);
+        dlg.setVisible(true);
+        if (dlg.CANCELLED) return;
+        
+        // Set new values based on results from edit box
+        this.name = dlg.trainerNameText.getText();
+        this.belt = dlg.trainerBeltText.getText();
+        this.fact = dlg.trainerFactText.getText();
+  
+        // Removes old items and writes the new items
         this.remove(trainerName);
         this.remove(trainerPicture);
         this.remove(trainerBelt);        
         this.remove(trainerInfo);
         this.remove(editUser);
         JOptionPane.showMessageDialog(null, "This worked");
-        name = "Hello";
         trainerName = new JLabel("Trainer Name: " +name+ "\n");
         trainerBelt = new JLabel("Belt Level: " + belt + "\n");
         trainerInfo = new JLabel("<html>About Me: " + fact +"\n</html>");
