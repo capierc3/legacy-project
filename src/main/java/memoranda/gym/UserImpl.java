@@ -12,16 +12,16 @@ import nu.xom.Element;
  * Interface for the User methods which will be extended to Trainer, Student and Owner
  * @author Daimi Mussey
  */
-public class UserImpl {
+public class UserImpl implements User {
     private File picture;
     private Collection<Note> noteList;
     private ClassList userClasses;
 
-    private Element element;
+    protected Element element;
 
     public UserImpl(String name, String id, String userName, String password,
-                    Belt belt, File newPicture, Collection<Note> newNoteList, ClassList newUserClasses) {
-        element = new Element("User");
+                    Belt belt, File newPicture, Collection<Note> newNoteList, ClassList newUserClasses, String userType) {
+        element = new Element(userType);
         setAttr("Name", name);
         setAttr("Id", id);
         setAttr("UserName", userName);
@@ -52,7 +52,7 @@ public class UserImpl {
      * @param classList
      */
     public void setClassList(ClassList classList) {
-        element.appendChild(userClasses.getContent());
+        element.appendChild(userClasses.getContent().copy());
     }
 
     /**
@@ -136,7 +136,7 @@ public class UserImpl {
 
     /**
      * Method  to set a User's belt
-     * @param newBelt
+     * @param rank Belt
      */
     public void setBelt(Belt rank) {
         setAttr("Rank",String.valueOf(rank.getValue()));
@@ -188,6 +188,21 @@ public class UserImpl {
             result = userClasses.getListByDate(todaysDate);
         }
         return result;
+    }
+
+    @Override
+    public ClassList getAllClasses() {
+        return userClasses;
+    }
+
+    @Override
+    public void addClass(GymClass gymClass) {
+        userClasses.addClass(gymClass);
+    }
+
+    @Override
+    public void removeClass(GymClass gymClass) {
+        userClasses.removeClass(gymClass.getID());
     }
 
     public Element getContent() {

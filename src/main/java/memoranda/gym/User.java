@@ -39,9 +39,9 @@ public interface User {
     String getPassword();
     void setPassword(String newPassword);
     Belt getBelt();
-    void setBelt(String newBelt);
+    void setBelt(Belt newBelt);
     File getPic();
-    void setPic(String newPicture);
+    void setPic(File newPicture);
     Collection getNotes();
     void addNote(Note note);
 
@@ -51,6 +51,9 @@ public interface User {
      * @return ClassList
      */
     ClassList getTodaysEvents();
+    ClassList getAllClasses();
+    void addClass(GymClass gymClass);
+    void removeClass(GymClass gymClass);
     Element getContent();
 
 }
