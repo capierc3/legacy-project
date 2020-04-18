@@ -20,8 +20,8 @@ public class UserImpl {
     private Element element;
 
     public UserImpl(String name, String id, String userName, String password,
-                    Belt belt, File newPicture, Collection<Note> newNoteList, ClassList newUserClasses) {
-        element = new Element("User");
+                    Belt belt, File newPicture, Collection<Note> newNoteList, ClassList newUserClasses, String userType) {
+        element = new Element(userType);
         setAttr("Name", name);
         setAttr("Id", id);
         setAttr("UserName", userName);
