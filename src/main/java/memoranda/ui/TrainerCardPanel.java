@@ -59,6 +59,9 @@ public class TrainerCardPanel extends JPanel {
     BufferedImage trainerImage;
     Image scaledImage;
     JLabel trainerPicture;
+    String name;
+    String belt;
+    String fact;
     
     int imageWidth=200;
     int imageHeight=200;
@@ -67,19 +70,29 @@ public class TrainerCardPanel extends JPanel {
 
     public TrainerCardPanel(String name, String belt, String fact) {
         try {
-            jbInit(name, belt, fact);
+            this.name = name;
+            this.belt = belt;
+            this.fact = fact;
+            jbInit();
         } catch (Exception ex) {
             new ExceptionDialog(ex);
         }
     }
 
-    void jbInit(String name, String belt, String funFact) throws Exception {
+    
+    /*
+     * Initializes the code
+     * html tag is used in Jlabel to allow text to wrap
+     * 
+     * 
+     */
+    void jbInit() throws Exception {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         
         trainerName = new JLabel("Trainer Name: " +name+ "\n");
         trainerBelt = new JLabel("Belt Level: " + belt + "\n");
-        trainerInfo = new JLabel("<html>About Me: " + funFact +"\n</html>");
+        trainerInfo = new JLabel("<html>About Me: " + fact +"\n</html>");
 
         if(name.equalsIgnoreCase("Cameron Howe")) {
             trainerImage = ImageIO.read(this.getClass().getResource("/ui/icons/howe.jpg"));
@@ -119,6 +132,7 @@ public class TrainerCardPanel extends JPanel {
     /*
      * Method to add edit this users card
      * Removes all items first so that when it revalidates they display in the correct order
+     * repaint to clear old data and revalidate to display new
      */
     
     void editUser() {
@@ -130,8 +144,10 @@ public class TrainerCardPanel extends JPanel {
         this.remove(trainerInfo);
         this.remove(editUser);
         JOptionPane.showMessageDialog(null, "This worked");
-        trainerName = new JLabel("New Trainer name");
-        
+        name = "Hello";
+        trainerName = new JLabel("Trainer Name: " +name+ "\n");
+        trainerBelt = new JLabel("Belt Level: " + belt + "\n");
+        trainerInfo = new JLabel("<html>About Me: " + fact +"\n</html>");
         this.add(trainerName);
         this.add(trainerPicture);
         this.add(trainerBelt);        
