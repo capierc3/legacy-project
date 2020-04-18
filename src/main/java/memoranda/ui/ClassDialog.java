@@ -3,6 +3,7 @@ package main.java.memoranda.ui;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
 import main.java.memoranda.gym.Belt;
+import main.java.memoranda.gym.GymClass;
 import main.java.memoranda.util.Local;
 
 import javax.swing.*;
@@ -40,38 +41,29 @@ public class ClassDialog extends JDialog implements WindowListener {
     JLabel beltText = new JLabel();
     JComboBox beltBox;
     JLabel sizeText = new JLabel("Class Size: ");
-    JSpinner sizeSpin = new JSpinner(new SpinnerNumberModel(15,1,30,1));
+    JSpinner sizeSpin = new JSpinner(new SpinnerNumberModel(15, 1, 30, 1));
     JLabel trainLbl = new JLabel("Trainer: ");
     JComboBox trainerBox;
 
-    TitledBorder repeatBorder;
+
     JPanel repeatPanel = new JPanel(new GridBagLayout());
-    JRadioButton noRepeatRB = new JRadioButton();
-    JRadioButton dailyRepeatRB = new JRadioButton();
     JSpinner daySpin = new JSpinner(new SpinnerNumberModel(1,1,365,1));
-    JLabel lblDays = new JLabel();
     JLabel lblSince = new JLabel();
     public JSpinner startDate = new JSpinner(new SpinnerDateModel());
     JButton setStartDateB = new JButton();
-    JRadioButton weeklyRepeatRB = new JRadioButton();
     JComboBox weekdaysCB = new JComboBox(Local.getWeekdayNames());
     JCheckBox enableEndDateCB = new JCheckBox();
 	JCheckBox workingDaysOnlyCB = new JCheckBox();
     public JSpinner endDate = new JSpinner(new SpinnerDateModel());
     JButton setEndDateB = new JButton();
-    private JRadioButton monthlyRepeatRB = new JRadioButton();
     JSpinner dayOfMonthSpin = new JSpinner(new SpinnerNumberModel(1,1,31,1));
-    JLabel lblDoM = new JLabel();
-    public JRadioButton yearlyRepeatRB = new JRadioButton();
-    ButtonGroup repeatRBGroup = new ButtonGroup();
+
 
     JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
     JButton okB = new JButton();
     JButton cancelB = new JButton();
     CalendarFrame endCalFrame = new CalendarFrame();
     CalendarFrame startCalFrame = new CalendarFrame();
-    Date start;
-    Date end;
     private Date eventDate;
     JComboBox startTime;
     JComboBox endTime;
@@ -457,7 +449,7 @@ public class ClassDialog extends JDialog implements WindowListener {
 		workingDaysOnlyCB.setEnabled(false);
 		workingDaysOnlyCB.setSelected(false);		
     }
-    
+
     public void yearlyRepeatRB_actionPerformed(ActionEvent e) {
 		disableElements();
 		startDate.setEnabled(true);
@@ -549,11 +541,6 @@ public class ClassDialog extends JDialog implements WindowListener {
 		return eventDate;
 	}
 
-	public CalendarDate getStart(){
-        CalendarDate sDate = new CalendarDate(start);
-        System.out.println(sDate.toString());
-        return sDate;
-    }
     public CalendarDate getEnd(){
         return new CalendarDate((Date) endSpin.getValue());
     }

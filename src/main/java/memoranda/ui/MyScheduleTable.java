@@ -31,7 +31,7 @@ public class MyScheduleTable extends JTable {
     MyScheduleTable(MyScheduleManager manager) {
         super();
         this.manager = manager;
-        setModel(new EventsTableModel());
+        setModel(new ClassTableModel());
         initTable(CurrentDate.get());
         this.setShowGrid(false);
         CurrentDate.addDateListener(this::initTable);
@@ -57,7 +57,7 @@ public class MyScheduleTable extends JTable {
         initTable(CurrentDate.get());
     }
 
-     public TableCellRenderer getCellRenderer(int row, int column) {
+    public TableCellRenderer getCellRenderer(int row, int column) {
         return new javax.swing.table.DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(
                 JTable table,
@@ -93,7 +93,7 @@ public class MyScheduleTable extends JTable {
     /**
      * Nested class for the table to be used
      */
-    class EventsTableModel extends AbstractTableModel {
+    class ClassTableModel extends AbstractTableModel {
         //Can be used to add new columns
         String[] columnNames = {
                 Local.getString("Name"),
@@ -108,7 +108,7 @@ public class MyScheduleTable extends JTable {
         /**
          * Constructor for the table
          */
-        EventsTableModel() {
+        ClassTableModel() {
             super();
         }
 
@@ -188,5 +188,6 @@ public class MyScheduleTable extends JTable {
             }
             return dispSplit[0]+":"+amPMSplit[0]+" "+amPMSplit[1];
         }
+
     }
 }

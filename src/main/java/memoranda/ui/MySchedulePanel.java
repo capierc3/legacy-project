@@ -56,6 +56,7 @@ public class MySchedulePanel extends JPanel {
     JButton sortDirB = new JButton();
     String[] listTypesA;
     JComboBox listTypeBox;
+    public static GymClass gymClass;
     //Early setup for UI changes based on user
     //User user;
 
@@ -89,7 +90,7 @@ public class MySchedulePanel extends JPanel {
 
             editClassB.setBorderPainted(false);
             editClassB.setFocusable(false);
-            //editClassB.addActionListener(this::editEventB_actionPerformed);
+            editClassB.addActionListener(this::editClassB_actionPerformed);
             editClassB.setPreferredSize(new Dimension(24, 24));
             editClassB.setRequestFocusEnabled(false);
             editClassB.setToolTipText(Local.getString("Edit Class"));
@@ -365,7 +366,14 @@ public class MySchedulePanel extends JPanel {
         cdate2.add(Calendar.HOUR_OF_DAY,1);
         Util.debug("Default time is " + cdate1);
         
-    	newEventB_actionPerformed(e, null, cdate1.getTime(), cdate2.getTime());
+    	newEventB_actionPerformed(e, cdate1.getTime(), cdate2.getTime());
+    }
+    private void editClassB_actionPerformed(ActionEvent e){
+        GymClass gymClass = (GymClass) classTable.getModel().getValueAt(
+                classTable.getSelectedRow(),
+                MyScheduleTable.EVENT);
+        setGymClass(gymClass);
+        editEventB_actionPerformed(e,gymClass);
     }
     //TODO add button click action
     private void addClassB_actionPerformed(ActionEvent e) {
@@ -399,40 +407,73 @@ public class MySchedulePanel extends JPanel {
     private void listBox_actionPerformed(ActionEvent e) {
 
     }
-    
-    void newEventB_actionPerformed(ActionEvent e, String tasktext, Date startDate, Date endDate) {
+    void newEventB_actionPerformed(ActionEvent e, Date startDate, Date endDate) {
     	ClassDialog dlg = new ClassDialog(App.getFrame(), Local.getString("Create  Class"));
     	Dimension frmSize = App.getFrame().getSize();
     	Point loc = App.getFrame().getLocation();
-    	if (tasktext != null) {
-    		dlg.textField.setText(tasktext);
-    	}
-		dlg.start = startDate;
-    	dlg.end = endDate;
-
     	dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x, (frmSize.height - dlg.getSize().height) / 2 + loc.y);
     	dlg.setEventDate(startDate);
 		dlg.setVisible(true);
     	if (dlg.CANCELLED)
     		return;
-    	Calendar calendar = new GregorianCalendar(Local.getCurrentLocale());
-    	calendar.setTime(((Date)dlg.timeSpin.getModel().getValue()));
-    	int hh = calendar.get(Calendar.HOUR_OF_DAY);
-    	int mm = calendar.get(Calendar.MINUTE);
-
     	String name = dlg.textField.getText();
         Belt rank = Belt.getBelt(dlg.beltBox.getSelectedIndex());
         CalendarDate start = comboValueToDate((String) dlg.startTime.getSelectedItem());
         CalendarDate end = comboValueToDate((String) dlg.endTime.getSelectedItem());
         GymClass gymClass = new GymClassImpl(name,"Public",rank,start,end);
-        gymClass.setSize((Integer) dlg.sizeSpin.getValue());
+        gymClass.setSize((int) dlg.sizeSpin.getValue());
         //gymClass.addTrainer();
         manager.addClass(gymClass);
         classTable.refresh();
     }
     void editEventB_actionPerformed(ActionEvent e,GymClass gymClass) {
-
+        ClassDialog dlg = new ClassDialog(App.getFrame(), Local.getString("Edit Class"));
+        Dimension frmSize = App.getFrame().getSize();
+        Point loc = App.getFrame().getLocation();
+        dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x, (frmSize.height - dlg.getSize().height) / 2 + loc.y);
+        dlg.setEventDate(gymClass.getStartDate().getDate());
+        dlg.textField.setText(gymClass.getName());
+        dlg.beltBox.setSelectedIndex(gymClass.getRank().getValue());
+        dlg.startTime.setSelectedIndex(findIndexValue(gymClass.getStartDate()));
+        dlg.endTime.setSelectedIndex(findIndexValue(gymClass.getEndDate()));
+        dlg.sizeSpin.setValue(gymClass.getMaxSize());
+        dlg.setVisible(true);
+        if (dlg.CANCELLED) return;
+        CalendarDate start = comboValueToDate((String) dlg.startTime.getSelectedItem());
+        CalendarDate end = comboValueToDate((String) dlg.endTime.getSelectedItem());
+        gymClass.setName(dlg.textField.getText());
+        gymClass.setRank(Belt.getBelt(dlg.beltBox.getSelectedIndex()));
+        gymClass.setSize((Integer) dlg.sizeSpin.getValue());
+        gymClass.setStartDate(start);
+        gymClass.setEndDate(end);
+        //gymClass.addTrainer();
+        classTable.refresh();
     }
+
+    private int findIndexValue(CalendarDate date){
+        int value;
+        if (date.getHour()<12){
+            value = (date.getHour()-1)*4;
+            if (!date.isAM()) {
+                value += 48;
+            }
+        } else {
+            if (date.isAM()) {
+                value = 93;
+            } else {
+                value = 44;
+            }
+        }
+        if (date.getMin()==15){
+            value+=1;
+        } else if (date.getMin()==30){
+            value+=2;
+        } else if (date.getMin()==45){
+            value+=3;
+        }
+        return value;
+    }
+
     private void removeEventB_actionPerformed(ActionEvent e) {
 		String msg;
 		GymClass gymClass;
@@ -487,7 +528,7 @@ public class MySchedulePanel extends JPanel {
     }
 
     private void ppEditEvent_actionPerformed(ActionEvent e) {
-        //editEventB_actionPerformed(e);
+        editClassB_actionPerformed(e);
     }
     private void ppRemoveEvent_actionPerformed(ActionEvent e) {
         removeEventB_actionPerformed(e);
@@ -522,6 +563,13 @@ public class MySchedulePanel extends JPanel {
         date1.set(Calendar.AM_PM,amPm);
         date = new CalendarDate(date1);
         return date;
+    }
+
+    public static void setGymClass(GymClass gymClassIn){
+        gymClass = gymClassIn;
+    }
+    public static GymClass getGymClass(){
+        return gymClass;
     }
 
     private enum Lists {

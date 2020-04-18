@@ -1,15 +1,9 @@
 package main.java.memoranda.ui;
 
-import main.java.memoranda.EventImpl;
-import main.java.memoranda.EventsManager;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.gym.*;
-import main.java.memoranda.util.Util;
-import nu.xom.Attribute;
-import nu.xom.Element;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 /**
