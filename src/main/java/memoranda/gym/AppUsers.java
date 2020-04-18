@@ -34,13 +34,13 @@ public class AppUsers implements UserList {
     /**
      * Simple getter method for User
      *
-     * @param id String value of user ID
+     * @param login String value of user's login
      * @return User object from collection.  Returns null if id does not exist in collection.
      */
-    public User getUser(String id) {
+    public User getUser(String login) {
 
-        if(appUsers.containsKey(id)) {
-            return appUsers.get(id);
+        if(appUsers.containsKey(login)) {
+            return appUsers.get(login);
         }
 
         return null;
@@ -55,10 +55,10 @@ public class AppUsers implements UserList {
      */
     public void addUser(User user) {
 
-        String id = user.getID();
+        String login = user.getUserName();
 
-        if(!appUsers.containsKey(id)){
-            appUsers.put(id, user);
+        if(!appUsers.containsKey(login)){
+            appUsers.put(login, user);
 
             //TODO: Implement in Sprint 3
             //save to file
@@ -70,12 +70,12 @@ public class AppUsers implements UserList {
     /**
      * Removed user from collection
      *
-     * @param id User object to be removed from collection
+     * @param login User object to be removed from collection
      * @return void
      */
-    public void removeUser(String id) {
+    public void removeUser(String login) {
 
-        appUsers.remove(id);
+        appUsers.remove(login);
 
     }
 
