@@ -1,9 +1,9 @@
 package main.java.memoranda.gym;
 
+import main.java.memoranda.Note;
+
 import java.io.*;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * The AppUsers class is a data model that houses information on all application users.
@@ -11,7 +11,7 @@ import java.util.LinkedList;
 
 public class AppUsers implements UserList {
 
-    private final String APP_USER_FILE_PATH = "/appusers.dat";
+    private final String APP_USER_FILE_PATH = "appusers.dat";
     private HashMap<String, User> appUsers;
     private User activeUser;
 
@@ -20,7 +20,14 @@ public class AppUsers implements UserList {
      * */
     public AppUsers() {
 
+        //Deserialize HashMap from file
+        //loadFromFile(APP_USER_FILE_PATH);
+
+        //Temporary until Serialization is implemented
         appUsers = new HashMap<>();
+        UserImpl user = new UserImpl("Fancy Nancy","admin001","admin","Password",
+                Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()), "User");
+        appUsers.put(user.getUserName(),user);
 
     }
 
@@ -52,6 +59,10 @@ public class AppUsers implements UserList {
 
         if(!appUsers.containsKey(id)){
             appUsers.put(id, user);
+
+            //TODO: Implement in Sprint 3
+            //save to file
+            //saveToFile(appUsers, APP_USER_FILE_PATH);
         }
 
     }
@@ -64,11 +75,7 @@ public class AppUsers implements UserList {
      */
     public void removeUser(String id) {
 
-        if(appUsers.containsKey(id)) {
-
-            appUsers.remove(id);
-
-        }
+        appUsers.remove(id);
 
     }
 
@@ -142,15 +149,18 @@ public class AppUsers implements UserList {
     private void saveToFile(Object obj, String file_path) {
 
         try {
-            FileOutputStream fileOut = new FileOutputStream(file_path);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(obj);
-            out.close();
-            fileOut.close();
-            System.out.printf("Saved object to " + file_path);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("Saving object to file...");
+            FileOutputStream fileOutputStream = new FileOutputStream(file_path);
+            ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
+            outputStream.writeObject(obj);
+            outputStream.close();
+
+            System.out.println("Object saved to " + file_path);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
     /**
@@ -159,17 +169,8 @@ public class AppUsers implements UserList {
      * @param file_path file location
      */
     private void loadFromFile(String file_path){
+        //read from file
 
-        try{
-            FileInputStream fileInputStream = new FileInputStream(file_path);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            Object obj = objectInputStream.readObject();
-
-            appUsers = (HashMap<String, User>) obj;
-
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
 
 
     }
