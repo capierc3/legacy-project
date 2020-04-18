@@ -32,7 +32,7 @@ public class Task_81BlackBox {
         gymClass = new GymClassImpl("Test","Public",Belt.BLUE,new CalendarDate(),new CalendarDate());
         classList.addClass(gymClass);
         user1 = new UserImpl("Rex Kwon","RK001","RexKwon32","Password",
-                Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
+                Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()), "User");
     }
 
     @Test
