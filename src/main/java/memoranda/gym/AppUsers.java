@@ -24,14 +24,12 @@ public class AppUsers implements UserList {
      * */
     public AppUsers() {
         appUsers = new HashMap<>();
-        User user = new StudentImpl("Chase","CP","1","1",Belt.BLACK3,
+        User user = new StudentImpl("Johnny Karate","JK","1","1",Belt.BLACK3,
                 new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
-        appUsers.put(user.getUserName(),user);
         UserImpl user1 = new UserImpl("Fancy Nancy","admin001","admin","Password",
                 Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()), "User");
-        appUsers.put(user.getUserName(),user1);
-
-
+        appUsers.put(user.getUserName(),user);
+        appUsers.put(user1.getUserName(),user1);
     }
 
     /**
