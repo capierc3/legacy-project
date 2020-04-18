@@ -1,6 +1,7 @@
 package main.java.memoranda.gym;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -19,9 +20,10 @@ public class AppUsers implements UserList {
      * Class constructor.  Initiates appUser collection
      * */
     public AppUsers() {
-
         appUsers = new HashMap<>();
-
+        User user = new StudentImpl("Chase","CP","1","1",Belt.BLACK3,
+                new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
+        appUsers.put(user.getUserName(),user);
     }
 
     /**
@@ -31,7 +33,6 @@ public class AppUsers implements UserList {
      * @return User object from collection.  Returns null if id does not exist in collection.
      */
     public User getUser(String id) {
-
         if(appUsers.containsKey(id)) {
             return appUsers.get(id);
         }
@@ -48,10 +49,10 @@ public class AppUsers implements UserList {
      */
     public void addUser(User user) {
 
-        String id = user.getID();
+        String userName = user.getUserName();
 
-        if(!appUsers.containsKey(id)){
-            appUsers.put(id, user);
+        if(!appUsers.containsKey(userName)){
+            appUsers.put(userName, user);
         }
 
     }
@@ -109,7 +110,6 @@ public class AppUsers implements UserList {
     public Boolean verifyPassword(String login, String password){
 
         User user = getUser(login);
-
         if(user != null && user.getPassword().contentEquals(password)){
             return true;
         }

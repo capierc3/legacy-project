@@ -105,6 +105,7 @@ public class App {
 		//Starts the EventScheduler and set the frame to the main app frame
 		EventsScheduler.init();
 		frame = new AppFrame();
+		showLoginFrame();
 		//starts the app and kills the splash screen
 		if (fullmode) {
 			init();
@@ -113,7 +114,6 @@ public class App {
 			splash.dispose();
 
 		//show login frame
-		showLoginFrame();
 	}
 
 	/**
@@ -194,53 +194,11 @@ public class App {
 	 * Display login pane and verify user authentication
 	 */
 	private void showLoginFrame() {
-		final int FRAME_WIDTH = 600;
-		final int FRAME_HEIGHT = 300;
-
-		final int ELEMENT_HEIGHT = 20;
-		final int ELEMENT_WIDTH = 50;
-
-		splash = new JFrame();
-
-		//create components
-		JLabel lblLogin = new JLabel("LOGIN:");
-		lblLogin.setSize(ELEMENT_WIDTH, ELEMENT_HEIGHT);
-
-		JTextField txtLogin = new JTextField();
-		txtLogin.setSize(ELEMENT_WIDTH, ELEMENT_HEIGHT);
-
-		JLabel lblPassword = new JLabel("PASSWORD:");
-		lblPassword.setSize(ELEMENT_WIDTH, ELEMENT_HEIGHT);
-
-		JTextField txtPassword = new JTextField();
-		txtPassword.setSize(ELEMENT_WIDTH, ELEMENT_HEIGHT);
-
-		JButton btnSubmit = new JButton("Submit");
-		btnSubmit.setSize(ELEMENT_WIDTH, ELEMENT_HEIGHT);
-		btnSubmit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				loginSubmitButton_clicked(txtLogin.getText(),txtPassword.getText());
-			}
-		});
-
-		//add components to frame
-		splash.getContentPane().add(lblLogin);
-		splash.getContentPane().add(txtLogin);
-		splash.getContentPane().add(lblPassword);
-		splash.getContentPane().add(txtPassword);
-		splash.getContentPane().add(btnSubmit);
-
-		//set layout
-		splash.setLayout(new GridLayout(3,2));
-
-		//set splash screen dimensions
-		splash.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		splash.setLocation(
-				(screenSize.width - FRAME_WIDTH) / 2,
-				(screenSize.height - FRAME_HEIGHT) / 2);
-		splash.setUndecorated(true);
-		splash.setVisible(true);
+		LoginDialog dlg = new LoginDialog(splash,"Login",appUsers);
+		Dimension frmSize = splash.getSize();
+		Point loc = splash.getLocation();
+		dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x, (frmSize.height - dlg.getSize().height) / 2 + loc.y);
+		dlg.setVisible(true);
 	}
 
 	/**
