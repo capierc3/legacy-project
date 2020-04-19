@@ -25,10 +25,13 @@ public class RoomImpl implements Room{
         el = new Element("Room");
         setAttr("RoomNumber", String.valueOf(roomNum));
         list = newList;
+        if (list != null) {
+            setClassList(list);
+        }
         classDates = newClassDates;
-        setClassList(list);
-        setClassDates(classDates);
-
+        if (classDates != null) {
+            setClassDates(classDates);
+        }
     }
 
     public void setClassList(ClassList list) {
