@@ -1,14 +1,7 @@
 package main.java.memoranda.ui;
 
-
-
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import main.java.memoranda.util.Local;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -69,7 +62,7 @@ public class TrainerDialog extends JDialog implements WindowListener {
         super.addWindowListener(this);
     }
 
-    void jbInit() throws Exception {
+        void jbInit() throws Exception {
         this.setResizable(false);
         // Build headerPanel
         headerPanel.setBackground(Color.WHITE);
@@ -141,18 +134,16 @@ public class TrainerDialog extends JDialog implements WindowListener {
         this.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
     }
 
-    private void newGbc(int x, int y, int width){
+    private void newGbc(int x, int y, int width) {
         gbc = new GridBagConstraints();
-        gbc.gridx = x; gbc.gridy = y;
+        gbc.gridx = x; 
+        gbc.gridy = y;
         gbc.gridwidth = width;
         gbc.insets = new Insets(5, 10, 10, 10);
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
     }
 
-
-
-     
 
     void okB_actionPerformed(ActionEvent e) {
         this.dispose();
@@ -165,32 +156,28 @@ public class TrainerDialog extends JDialog implements WindowListener {
 
 
     
-    public void windowOpened( WindowEvent e ) {}
+    public void windowOpened(WindowEvent e) {
+        
+    }
 
-    public void windowClosing( WindowEvent e ) {
+    public void windowClosing(WindowEvent e) {
         CANCELLED = true;
         this.dispose();
     }
+
+    public String getTrainerName() { 
+        return this.name; 
+    }
+
     
-    
+    public void windowClosed(WindowEvent e) {}
 
-      
-      public String getTrainerName() { 
-          return this.name; 
-      }
-      
+    public void windowIconified(WindowEvent e) {}
 
+    public void windowDeiconified(WindowEvent e) {}
 
-     
-    
-    public void windowClosed( WindowEvent e ) {}
+    public void windowActivated(WindowEvent e) {}
 
-    public void windowIconified( WindowEvent e ) {}
-
-    public void windowDeiconified( WindowEvent e ) {}
-
-    public void windowActivated( WindowEvent e ) {}
-
-    public void windowDeactivated( WindowEvent e ) {}
+    public void windowDeactivated(WindowEvent e) {}
 
 }
