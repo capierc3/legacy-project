@@ -51,6 +51,12 @@ public interface GymClass {
     void addStudent(Student student);
 
     /**
+     * removes a student from the Gym Class element
+     * @param student Student
+     */
+    void removeStudent(Student student);
+
+    /**
      * Returns the amount of students in the class
      * @return int
      */

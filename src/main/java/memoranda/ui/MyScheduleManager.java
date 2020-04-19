@@ -2,6 +2,8 @@ package main.java.memoranda.ui;
 
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.gym.*;
+import main.java.memoranda.util.Local;
+import main.java.memoranda.util.Util;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -115,8 +117,8 @@ public class MyScheduleManager {
         gymClass2.setSize(20);
         gymClass2.addTrainer((Trainer) App.appUsers.getUser("trainer"));
         GymClass gymClass3 = new GymClassImpl("One on One with Mac","Private",Belt.WHITE,
-                new CalendarDate(18,3,2020,9,0,false),
-                new CalendarDate(18,3,2020,9,30,false));
+                new CalendarDate(18,3,2020,10,0,false),
+                new CalendarDate(18,3,2020,10,30,false));
         gymClass3.setSize(0);
         gymClass3.addTrainer((Trainer) App.appUsers.getUser("trainer"));
         _allClasses.addClass(gymClass1);
@@ -135,7 +137,7 @@ public class MyScheduleManager {
         if (_user instanceof Student){
             if (!gymClass.isFull()) {
                 _myStudentClasses.addClass(gymClass);
-                //gymClass.getStudents().addUser(_user);
+                gymClass.addStudent((Student) _user);
                 return true;
             } else {
                 return false;
@@ -160,7 +162,7 @@ public class MyScheduleManager {
             if (_user instanceof Student) {
                 if (_user.getAllClasses().getClass(gymClass.getID())!=null) {
                     _user.removeClass(gymClass);
-                    //gymClass.getStudents().removeUser(_user.getID());
+                    gymClass.removeStudent((Student) _user);
                     return true;
                 } else {
                     return false;

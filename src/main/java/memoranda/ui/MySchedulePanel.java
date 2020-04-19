@@ -385,7 +385,9 @@ public class MySchedulePanel extends JPanel {
                         msg,
                         Local.getString("Register for class"),
                         JOptionPane.YES_NO_OPTION);
-        if (n != JOptionPane.YES_OPTION) return;
+        if (n != JOptionPane.YES_OPTION){
+            return;
+        }
 
         for(int i = 0; i< classTable.getSelectedRows().length; i++) {
             gymClass = (GymClass) classTable.getModel().getValueAt(
@@ -396,7 +398,6 @@ public class MySchedulePanel extends JPanel {
                 addError(gymClass,1);
             }
             manager.addClass(gymClass);
-            Util.debug("Class added: "+ gymClass.getName());
         }
         classTable.getSelectionModel().clearSelection();
         classTable.refresh();

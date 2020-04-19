@@ -164,7 +164,20 @@ public class GymClassImpl implements GymClass {
 
     @Override
     public void addStudent(Student student) {
-        el.appendChild(student.getContent().copy());
+        Element element = new Element("Students");
+        element.addAttribute(new Attribute("Id",student.getID()));
+        element.appendChild(student.getContent().copy());
+        el.appendChild(element);
+    }
+
+    public void removeStudent(Student student){
+        for (int i = 0; i < el.getChildElements("Students").size(); i++) {
+            Element element = el.getChildElements("Students").get(i);
+            if (element.getAttributeValue("Id").equalsIgnoreCase(student.getID())){
+                element.detach();
+                break;
+            }
+        }
     }
 
     @Override
