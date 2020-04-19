@@ -145,6 +145,20 @@ public class TrainerCardPanel extends JPanel {
         repaint();
         revalidate();
     }
+    
+    public String getTrainerName() {
+        return this.name;
+    }
+    
+    public String getBelt() {
+        return this.belt;
+    }
+    
+    public String getFact() {
+        return this.fact;
+    }
+    
+    
 
 
 
