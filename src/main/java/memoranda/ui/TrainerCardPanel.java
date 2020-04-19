@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import main.java.memoranda.util.Local;
 
 
-/*
+/**
  * Creates an individual trainer "card" that displays information about the trainer
  * Will be displayed in TrainerProfilesPanel
  * @author Justin Oliver
@@ -38,9 +38,14 @@ public class TrainerCardPanel extends JPanel {
     
     int imageWidth = 200;
     int imageHeight = 200;
-    
 
 
+    /**
+     * Class constructor
+     * @param name Trainer's name
+     * @param belt Trainer's belt rank
+     * @param fact A fact about the trainer
+     */
     public TrainerCardPanel(String name, String belt, String fact) {
         try {
             this.name = name;
@@ -52,12 +57,11 @@ public class TrainerCardPanel extends JPanel {
         }
     }
 
-    
-    /*
+    /**
      * Initializes the code
      * html tag is used in Jlabel to allow text to wrap
-     * 
-     * 
+     *
+     * @throws Exception
      */
     void jbInit() throws Exception {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -102,12 +106,12 @@ public class TrainerCardPanel extends JPanel {
 
     }
 
-    /*
+    /**
      * Method to add edit this users card
      * Removes all items first so that when it revalidates they display in the correct order
      * repaint to clear old data and revalidate to display new
+     * @param e Action Event from button click
      */
-    
     void editUser(ActionEvent e) {
         
         // Creates and renders an edit box
@@ -145,21 +149,29 @@ public class TrainerCardPanel extends JPanel {
         repaint();
         revalidate();
     }
-    
+
+    /**
+     * Gets trainer's name
+     * @return String trainer's name
+     */
     public String getTrainerName() {
         return this.name;
     }
-    
+
+    /**
+     * Gets belt rank
+     * @return String belt rank
+     */
     public String getBelt() {
         return this.belt;
     }
-    
+
+    /**
+     * Gets fact
+     * @return String fact
+     */
     public String getFact() {
         return this.fact;
     }
-    
-    
-
-
 
 }
