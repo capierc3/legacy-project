@@ -1,6 +1,7 @@
 package main.java.memoranda.gym;
 
 import main.java.memoranda.date.CalendarDate;
+import nu.xom.Element;
 
 /**
  * Interface for the GymClass methods
@@ -11,25 +12,20 @@ public interface GymClass {
     //Basic getters and setters
     String getName();
     void setName(String name);
-    String getRank();
-    void setRank(String rank);
+    Belt getRank();
+    void setRank(Belt rank);
     int getMaxSize();
     void setSize(int size);
     Room getRoom();
     void setRoom(Room room);
     String getID();
-    void setID();
+    void setID(String id);
 
     /**
-     * Getter for the length in time the class will run for in minutes
+     * Finds the length in time the class will run for in minutes from the set start and end dates
      * @return double
      */
     int getClassLength();
-
-    /**
-     * Sets the length of the class in minutes
-     */
-    void setClassLength();
 
     /**
      * Returns a UserList object filled with trainers
@@ -78,12 +74,40 @@ public interface GymClass {
      */
     void setClassType(String type);
 
-    //Ideally once we retool the CalendarDate class we will have a CalendarDate object hold the following information.
-    //Year, Month, Day, Hour, Minute.
-    void setDate(CalendarDate date);
-    CalendarDate getDate();
+    /**
+     * Sets the CalendarDate for start of class.
+     * @param date CalendarDate
+     */
+    void setStartDate(CalendarDate date);
+
+    /**
+     * Sets the CalendarDate for the end of class.
+     * @param date CalendarDate
+     */
+    void setEndDate(CalendarDate date);
+
+    /**
+     * returns a CalendarDate Object for the start of the class
+     * @return CalendarDate
+     */
+    CalendarDate getStartDate();
+
+    /**
+     * returns a CalendarDate Object for the end of the class
+     * @return CalendarDate
+     */
+    CalendarDate getEndDate();
+
+    /**
+     * returns a string of the start time 00:00_AM/PM
+     * @return String
+     */
     String getStartTime();
 
+    /**
+     * returns the main Element used for the class.
+     */
+    Element getContent();
 
 
 
