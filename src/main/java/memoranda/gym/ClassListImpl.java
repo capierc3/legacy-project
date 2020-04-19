@@ -123,8 +123,10 @@ public class ClassListImpl implements ClassList {
         ClassList list = new ClassListImpl(new ArrayList<>());
         if (!classes.isEmpty()) {
             for (GymClass gymClass : classes) {
-                if (gymClass.getStartDate().equals(date)) {
-                    list.addClass(gymClass);
+                if(gymClass.getStartDate() != null) {
+                    if (gymClass.getStartDate().equals(date)) {
+                        list.addClass(gymClass);
+                    }
                 }
             }
         }

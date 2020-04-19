@@ -55,7 +55,8 @@
   >- Unit tests are written on appropriate methods
 
 **Static Analysis**  (due start Sprint 3)
-  > Your Static Analysis policy   
+  > Static analysis should be performed at the very least when a pull request is made that includes any major code changes. It would be more preferable to have static analysis of the code done
+  > after a task is complete when new code is written. If Static Analysis is done during a task, note that it was done in the class header to help speed up the process of the pull request and minimize rework of testing.    
 
 **Continuous Integration**  (due start Sprint 3)
-  > Your Continuous Integration policy
+  > No code should be pulled into the dev branch that will not build with Travis CI. It is a good idea after a task is performed to make sure the code will build during the "Ready for Test" review of a task.
