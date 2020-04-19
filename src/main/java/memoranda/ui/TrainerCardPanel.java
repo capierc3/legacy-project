@@ -156,7 +156,7 @@ public class TrainerCardPanel extends JPanel {
         this.remove(trainerBelt);        
         this.remove(trainerInfo);
         this.remove(editUser);
-        JOptionPane.showMessageDialog(null, "This worked");
+        JOptionPane.showMessageDialog(null, "User Details Updated!");
         trainerName = new JLabel("Trainer Name: " +name+ "\n");
         trainerBelt = new JLabel("Belt Level: " + belt + "\n");
         trainerInfo = new JLabel("<html>About Me: " + fact +"\n</html>");

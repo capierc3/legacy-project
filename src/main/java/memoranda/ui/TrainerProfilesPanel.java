@@ -7,43 +7,27 @@
  */
 package main.java.memoranda.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
-import java.io.File;
+
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JMenuItem;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
-import main.java.memoranda.CurrentProject;
-import main.java.memoranda.Resource;
-import main.java.memoranda.util.AppList;
-import main.java.memoranda.util.CurrentStorage;
+
+
 import main.java.memoranda.util.Local;
-import main.java.memoranda.util.MimeType;
-import main.java.memoranda.util.MimeTypesList;
-import main.java.memoranda.util.Util;
 
-import java.io.*;
+
+
 
 
 public class TrainerProfilesPanel extends JPanel {
@@ -100,11 +84,38 @@ public class TrainerProfilesPanel extends JPanel {
      */
     
     void addUser() {
-        TrainerCardPanel testCard7 = new TrainerCardPanel("John Bosworth", "White", "Innovation is a risk.");
-        this.add(testCard7);
-        JOptionPane.showMessageDialog(null, "This worked");
-        this.remove(newUser);
-        this.add(newUser);
+        String name = "";
+        String belt = "";
+        String fact = "";
+        JLabel trainerName;
+        JLabel trainerBelt;
+        JLabel trainerInfo;
+        
+        // Creates and renders an edit box
+        TrainerDialog dlg = new TrainerDialog(App.getFrame(), Local.getString("Add New Trainer"), name, belt, fact);
+        Dimension frmSize = App.getFrame().getSize();
+        Point loc = App.getFrame().getLocation();
+        dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x, (frmSize.height - dlg.getSize().height) / 2 + loc.y);
+        dlg.setVisible(true);
+        if (dlg.CANCELLED) return;
+        
+        // Set new values based on results from edit box
+        name = dlg.trainerNameText.getText();
+        belt = dlg.trainerBeltText.getText();
+        fact = dlg.trainerFactText.getText();
+  
+        // Add components to new card
+        JOptionPane.showMessageDialog(null, "New User Successfully Created!");
+        trainerName = new JLabel("Trainer Name: " +name+ "\n");
+        trainerBelt = new JLabel("Belt Level: " + belt + "\n");
+        trainerInfo = new JLabel("<html>About Me: " + fact +"\n</html>");
+        
+        TrainerCardPanel newTrainer = new TrainerCardPanel(name, belt, fact);
+        // Remove and readd button so it appears in correct spot
+        this.remove(this.newUser);
+        this.add(newTrainer);
+        this.add(this.newUser);
+        repaint();
         revalidate();
     }
 

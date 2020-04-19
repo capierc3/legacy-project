@@ -35,14 +35,15 @@ public class TrainerDialog extends JDialog implements WindowListener {
     String name; 
     String belt;
     String fact;
+    String title;
     
     // The three editable values, creating label and text field
     JLabel trainerName = new JLabel();
-    JTextField trainerNameText = new JTextField();
+    JTextField trainerNameText = new JTextField("", 20);
     JLabel trainerBelt = new JLabel();
-    JTextField trainerBeltText = new JTextField();
+    JTextField trainerBeltText = new JTextField("",20);
     JLabel trainerFact = new JLabel();
-    JTextField trainerFactText = new JTextField();
+    JTextField trainerFactText = new JTextField("",20);
 
 
 
@@ -58,6 +59,7 @@ public class TrainerDialog extends JDialog implements WindowListener {
             this.name = name;
             this.belt = belt;
             this.fact = fact;
+            this.title = title;
             jbInit();
             pack();
         }
@@ -74,7 +76,7 @@ public class TrainerDialog extends JDialog implements WindowListener {
         headerPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
         header.setFont(new java.awt.Font("Dialog", 0, 20));
         header.setForeground(new Color(0, 0, 124));
-        header.setText(Local.getString("Edit Trainer"));
+        header.setText(title);
         header.setIcon(new ImageIcon(TrainerDialog.class.getResource(
             "/ui/icons/trainer-profiles.png")));
         headerPanel.add(header);
