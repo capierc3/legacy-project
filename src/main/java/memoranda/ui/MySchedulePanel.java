@@ -473,7 +473,7 @@ public class MySchedulePanel extends JPanel {
         CalendarDate end = comboValueToDate((String) dlg.endTime.getSelectedItem());
         GymClass gymClass = new GymClassImpl(name,"Public",rank,start,end);
         gymClass.setSize((int) dlg.sizeSpin.getValue());
-        //gymClass.addTrainer();
+        //gymClass.addTrainer(dlg.trainerBox.getSelectedItem());
         manager.addClass(gymClass);
         classTable.refresh();
     }
@@ -488,6 +488,7 @@ public class MySchedulePanel extends JPanel {
         dlg.startTime.setSelectedIndex(findIndexValue(gymClass.getStartDate()));
         dlg.endTime.setSelectedIndex(findIndexValue(gymClass.getEndDate()));
         dlg.sizeSpin.setValue(gymClass.getMaxSize());
+        //dlg.trainerBox.setSelectedItem(gymClass.getTrainer().getName());
         dlg.setVisible(true);
         if (dlg.CANCELLED) return;
         CalendarDate start = comboValueToDate((String) dlg.startTime.getSelectedItem());

@@ -450,52 +450,6 @@ public class ClassDialog extends JDialog implements WindowListener {
 		workingDaysOnlyCB.setSelected(false);		
     }
 
-    public void yearlyRepeatRB_actionPerformed(ActionEvent e) {
-		disableElements();
-		startDate.setEnabled(true);
-		setStartDateB.setEnabled(true);
-		lblSince.setEnabled(true);
-		enableEndDateCB.setEnabled(true);
-		workingDaysOnlyCB.setEnabled(true);
-		startDate.getModel().setValue(
-			startCalFrame.cal.get().getCalendar().getTime());
-    }
-    public void monthlyRepeatRB_actionPerformed(ActionEvent e) {
-        disableElements();
-        dayOfMonthSpin.setEnabled(true);
-        startDate.setEnabled(true);
-        setStartDateB.setEnabled(true);
-        lblSince.setEnabled(true);
-        enableEndDateCB.setEnabled(true);
-		workingDaysOnlyCB.setEnabled(true);
-		startDate.getModel().setValue(
-			startCalFrame.cal.get().getCalendar().getTime());        
-    }
-    public void dailyRepeatRB_actionPerformed(ActionEvent e) {
-        disableElements();
-        daySpin.setEnabled(true);
-        startDate.setEnabled(true);
-        setStartDateB.setEnabled(true);
-        lblSince.setEnabled(true);
-        enableEndDateCB.setEnabled(true);
-		workingDaysOnlyCB.setEnabled(true);
-		startDate.getModel().setValue(
-			startCalFrame.cal.get().getCalendar().getTime());        
-    }
-    public void weeklyRepeatRB_actionPerformed(ActionEvent e) {
-        disableElements();
-        weekdaysCB.setEnabled(true);
-        startDate.setEnabled(true);
-        setStartDateB.setEnabled(true);
-        lblSince.setEnabled(true);
-        enableEndDateCB.setEnabled(true);
-		startDate.getModel().setValue(
-			startCalFrame.cal.get().getCalendar().getTime());        
-    }
-    public void noRepeatRB_actionPerformed(ActionEvent e) {
-        disableElements();
-    }
-
     void okB_actionPerformed(ActionEvent e) {
         this.dispose();
     }
