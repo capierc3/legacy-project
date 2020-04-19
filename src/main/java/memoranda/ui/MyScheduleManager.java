@@ -108,17 +108,17 @@ public class MyScheduleManager {
                 new CalendarDate(18,3,2020,7,0,false),
                 new CalendarDate(18,3,2020,7,30,false));
         gymClass1.setSize(3);
-        gymClass1.addTrainer((Trainer) App.appUsers.getUser("Mac"));
+        gymClass1.addTrainer((Trainer) App.appUsers.getUser("trainer"));
         GymClass gymClass2 = new GymClassImpl("Kicking 202","Public",Belt.YELLOW,
                 new CalendarDate(18,3,2020,8,0,false),
                 new CalendarDate(18,3,2020,8,30,false));
         gymClass2.setSize(20);
-        gymClass2.addTrainer((Trainer) App.appUsers.getUser("Mac"));
+        gymClass2.addTrainer((Trainer) App.appUsers.getUser("trainer"));
         GymClass gymClass3 = new GymClassImpl("One on One with Mac","Private",Belt.WHITE,
                 new CalendarDate(18,3,2020,9,0,false),
                 new CalendarDate(18,3,2020,9,30,false));
         gymClass3.setSize(0);
-        gymClass3.addTrainer((Trainer) App.appUsers.getUser("Mac"));
+        gymClass3.addTrainer((Trainer) App.appUsers.getUser("trainer"));
         _allClasses.addClass(gymClass1);
         _allClasses.addClass(gymClass2);
         _allClasses.addClass(gymClass3);
