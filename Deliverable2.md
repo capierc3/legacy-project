@@ -44,50 +44,49 @@ I would also advise you to already fill out the Contributions section (End of sp
 ### Meeting minutes of your Daily Scrums (3 per week, should not take longer than 10 minutes):
 > Add as many rows as needed and fill out the table. (Burndown starts with Sprint 2 and Travis CI starts with Sprint 3, not needed before that)
 
-| Date      | Attendees                              |Minutes                                                                             | Burndown Info | TravisCI info | Additional Info  |
-|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
-|  April 9  | Justin Oliver, Daimi Mussey,           | First day of sprint so not much to report. Everyone seems to be set and ready to   | Sprint just   |               |                  |
-|           | Stephen Wilson, kyp Bellinger,         | go. Sprint planning went well as did the high level meeting we had right before.   | started so    |               |                  |
-|           | Chase Pierce,                          |                                                                                    | not a lot to  |               |                  |
-|           |                                        |                                                                                    | go off of.    |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
-| April 12  | Justin Oliver, Daimi Mussey,           | Looking at the burndown chart, we seem to be moving along pretty good.             | Seem to be    |               |                  |
-|           | Stephen Wilson, Chase Pierce           | Everyone seems to have accomplished their share of work. There are multiple        | right on track|               |                  |
-|           |                                        | outside factors impacting peoples ability to work and mildly impacting the project |               |               |                  |
-|           |                                        | but overall the project and our sprint seems manageable as a whole.                |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
-| April 14  |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
-| April 16  |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|           |                                        |                                                                                    |               |               |                  |
-|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|---------------|------------------|
+| Date      | Attendees                              |Minutes                                                                             | Burndown Info | TravisCI info  | Additional Info  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
+|  April 9  | Justin Oliver, Daimi Mussey,           | First day of sprint so not much to report. Everyone seems to be set and ready to   | Sprint just   |                |                  |
+|           | Stephen Wilson, kyp Bellinger,         | go. Sprint planning went well as did the high level meeting we had right before.   | started so    |                |                  |
+|           | Chase Pierce,                          |                                                                                    | not a lot to  |                |                  |
+|           |                                        |                                                                                    | go off of.    |                |                  |
+|           |                                        |                                                                                    |               |                |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
+| April 12  | Justin Oliver, Daimi Mussey,           | Looking at the burndown chart, we seem to be moving along pretty good.             | Seem to be    |Dev branch      |                  |
+|           | Stephen Wilson, Chase Pierce           | Everyone seems to have accomplished their share of work. There are multiple        | right on track|Builds correctly|                  |
+|           |                                        | outside factors impacting peoples ability to work and mildly impacting the project |               |                |                  |
+|           |                                        | but overall the project and our sprint seems manageable as a whole.                |               |                |                  |
+|           |                                        |                                                                                    |               |                |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
+| April 14  | Justin Oliver, Daimi Mussey,           | Some of the tasks we took on seem to be a little tougher than anticipated          |Starting to    |Builds correctly|                  |
+|           | Stephen Wilson, Chase Pierce           | This is causing a flat spot in our burndown chart. The withdraw of our             | flatten out   |                |                  |
+|           |                                        | second team member seems to be impacting us quite a bit as well.                   |               |                |                  |
+|           |                                        |                                                                                    |               |                |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
+| April 16  | Justin Oliver, Daimi Mussey,           | Burndown is starting to get back on track. Some of the tasks that were originally  |had a flat spot|Dev branch      |                  |
+|           | Stephen Wilson, Chase Pierce           | harder than anticipated are being completed. Stuff is having to be reworked        |but looking to |Builds correctly|                  |
+|           |                                        | a little as memoranda is a bit complicated, but overall everything is pretty solid |get back on    |                |                  |
+|           |                                        |                                                                                    |track          |                |                  |
+|           |                                        |                                                                                    |               |                |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
+| April 19  | Justin Oliver, Daimi Mussey,           | Everyone is wrapping up the pushes and testing to ensure the sprint wraps up       |Everything came|Dev branch      |                  |
+|           | Stephen Wilson, Chase Pierce           | nicely, as it looks like it will. Unfortunately there were a couple US that weren't|together pretty|Builds correctly|                  |
+|           |                                        | touched. But the workload appears to be the amount or withdrawn team member would  |solid          |                |                  |
+|           |                                        | have commited, so that appears not to be an issue. It appears everyone was able to |               |                |                  |
+|           |                                        | complete what they set out to do                                                   |               |                |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
 
 ### Meeting Summary:
 
-   Justin Oliver : 
+   Justin Oliver : 5 
 
-   Kyp Bellinger : 
+   Kyp Bellinger : 1 (withdrew from course)
 
-   Daimi Mussey : 
+   Daimi Mussey : 5
 
-   Chase Pierce : 
+   Chase Pierce : 5
 
-   Stephen Wilson :       
+   Stephen Wilson : 5     
 
 
 ## 3: After the Sprint
@@ -209,26 +208,6 @@ I would also advise you to already fill out the Contributions section (End of sp
 
     - 
 
-#### Team member Kyp Bellinger:
-  **Links to GitHub commits with main code contribution (up to 5 links):
-
-    -
-
-   **GitHub links to your Unit Tests (up to 3 links):
-
-    - N/A
-
-  **GitHub links to your Code Reviews (up to 3 links):
-
-    - N/A
-
-  **How did you contribute to Static Analysis:
-
-    - N/A
- 
- **What was your main contribution to the Quality Policy documentation?:
-
-    - 
 
 #### Team member Daimi Mussey:
   **Links to GitHub commits with main code contribution (up to 5 links):
@@ -253,9 +232,9 @@ I would also advise you to already fill out the Contributions section (End of sp
  
 ## 4: Checklist for you to see if you are done
 - [] Filled out the complete form from above, all fields are filled and written in full sentences
-- [] Read the kickoff again to make sure you have all the details
+- [x] Read the kickoff again to make sure you have all the details
 - [] User Stories that were not completed, were left in the Sprint and a copy created
-- [] Your Quality Policies are accurate and up to date
+- [x] Your Quality Policies are accurate and up to date
 - [] **Individual** Survey was submitted **individually** (create checkboxes below -- see Canvas to get link)
 - [] Daimi Mussey
 - [] Kyp Bellinger
