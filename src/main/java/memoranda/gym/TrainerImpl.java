@@ -44,9 +44,12 @@ public class TrainerImpl extends UserImpl implements Trainer{
      * Method to set Availability Dates in Element
      */
     public void setAvailabilityDates(Collection<CalendarDate> availableDates) {
-        for (CalendarDate date : availableDates) {
-            element.appendChild(date.toString());
+        if (availableDates != null) {
+            for (CalendarDate date : availableDates) {
+                element.appendChild(date.toString());
+            }
         }
+
     }
 
     /**
