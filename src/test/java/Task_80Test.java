@@ -38,7 +38,9 @@ public class Task_80Test {
         classDates = new ArrayList<>();
         date1 = new CalendarDate(11, 4, 2020, 4, 0, false);
         classDates.add(date1);
-        class1 = new GymClassImpl("Kicking 101", "Public", Belt.BLUE_STRIPE);
+        class1 = new GymClassImpl("Kicking 102", "Public", Belt.WHITE,
+                date1,
+                new CalendarDate(11, 4, 2020, 1, 45, false));
         date2 = new CalendarDate(today);
         class2 = new GymClassImpl("Kicking 102", "Public", Belt.WHITE,
                 date2, date2);
@@ -62,8 +64,8 @@ public class Task_80Test {
         classList.removeClass(class3.getID());
         assertEquals(2, classList.getAllClasses().size());
         assertEquals(class2, classList.getClass(class2.getID()));
-        assertEquals(1, classList.getListByRank(Belt.WHITE).getSize());
-        //assertEquals(1, classList.getListByDate(date1));
+        assertEquals(2, classList.getListByRank(Belt.WHITE).getSize());
+        assertEquals(1, classList.getListByDate(date2).getSize());
         assertEquals(false, isAvailable);
     }
 
