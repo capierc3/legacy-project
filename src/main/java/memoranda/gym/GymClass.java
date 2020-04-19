@@ -31,7 +31,7 @@ public interface GymClass {
      * Returns a UserList object filled with trainers
      * @return UserList
      */
-    UserList getTrainers();
+    Trainer getTrainer();
 
     /**
      * Add trainer to the UserList

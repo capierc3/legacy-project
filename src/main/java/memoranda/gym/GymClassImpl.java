@@ -6,6 +6,9 @@ import nu.xom.Attribute;
 import nu.xom.Element;
 import nu.xom.Elements;
 
+import java.io.File;
+import java.util.ArrayList;
+
 /**
  * Class that implements the GymClass Interface
  *
@@ -145,8 +148,8 @@ public class GymClassImpl implements GymClass {
     }
 
     @Override
-    public UserList getTrainers() {
-        return elmsToUserList(el.getChildElements("Trainers"));
+    public Trainer getTrainer() {
+        return elmToTrainer(el.getFirstChildElement("Trainer"));
     }
 
     @Override
@@ -156,7 +159,7 @@ public class GymClassImpl implements GymClass {
 
     @Override
     public UserList getStudents() {
-        return elmsToUserList(el.getChildElements("Students"));
+        return elmsToStudentList(el.getChildElements("Students"));
     }
 
     @Override
@@ -232,7 +235,17 @@ public class GymClassImpl implements GymClass {
     private Element roomToElm(Room room){
         return null;
     }
-    private UserList elmsToUserList(Elements els){
+    private Trainer elmToTrainer(Element el){
+        return new TrainerImpl(el.getAttributeValue("Name"),
+                el.getAttributeValue("ID"),
+                el.getAttributeValue("UserName"),
+                el.getAttributeValue("Password"),
+                Belt.getBelt(Integer.parseInt(el.getAttributeValue("Rank"))),
+                new File(el.getAttributeValue("Picture")),
+                new ArrayList<>(),
+                new ClassListImpl(new ArrayList<>()));
+    }
+    private UserList elmsToStudentList(Elements els){
         return null;
     }
 
