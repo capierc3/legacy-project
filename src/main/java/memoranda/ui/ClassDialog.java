@@ -4,6 +4,8 @@ import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
 import main.java.memoranda.gym.Belt;
 import main.java.memoranda.gym.GymClass;
+import main.java.memoranda.gym.Trainer;
+import main.java.memoranda.gym.User;
 import main.java.memoranda.util.Local;
 
 import javax.swing.*;
@@ -18,8 +20,10 @@ import java.awt.event.WindowListener;
 import java.text.DateFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Vector;
 
 /*$Id: EventDialog.java,v 1.28 2005/02/19 10:06:25 rawsushi Exp $*/
 public class ClassDialog extends JDialog implements WindowListener {
@@ -160,7 +164,7 @@ public class ClassDialog extends JDialog implements WindowListener {
         newGbc(0,4,6);
         eventPanel.add(trainLbl,gbc);
         newGbc(1,4,6);
-        trainerBox = new JComboBox();
+        trainerBox = new JComboBox(getTrainerNames());
         eventPanel.add(trainerBox,gbc);
 
 //        // Build RepeatPanel
@@ -433,6 +437,16 @@ public class ClassDialog extends JDialog implements WindowListener {
         gbc.insets = new Insets(5, 10, 10, 10);
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
+    }
+
+    private Vector<User> getTrainerNames(){
+        Vector<User> trainers = new Vector<>();
+        for (User user:App.appUsers.getAllUsers()) {
+            if (user instanceof Trainer){
+                trainers.add(user);
+            }
+        }
+        return trainers;
     }
 
     void disableElements() {

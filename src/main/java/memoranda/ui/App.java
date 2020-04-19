@@ -22,7 +22,7 @@ import main.java.memoranda.util.Configuration;
 public class App {
 
 	//keep state of AppUser
-	AppUsers appUsers = new AppUsers();
+	static AppUsers appUsers = new AppUsers();
 
 	// boolean packFrame = false;
 	/**Main App frame**/
@@ -74,6 +74,7 @@ public class App {
 		try
 		{ Thread.sleep(4000); } catch (Exception e){
 		}
+		showLoginFrame();
 		//sets the look and feel of the App
 		try {
 			if (Configuration.get("LOOK_AND_FEEL").equals("system"))
@@ -105,7 +106,6 @@ public class App {
 		//Starts the EventScheduler and set the frame to the main app frame
 		EventsScheduler.init();
 		frame = new AppFrame();
-		showLoginFrame();
 		//starts the app and kills the splash screen
 		if (fullmode) {
 			init();

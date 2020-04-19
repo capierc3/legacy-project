@@ -237,11 +237,11 @@ public class GymClassImpl implements GymClass {
     }
     private Trainer elmToTrainer(Element el){
         return new TrainerImpl(el.getAttributeValue("Name"),
-                el.getAttributeValue("ID"),
+                el.getAttributeValue("Id"),
                 el.getAttributeValue("UserName"),
                 el.getAttributeValue("Password"),
                 Belt.getBelt(Integer.parseInt(el.getAttributeValue("Rank"))),
-                new File(el.getAttributeValue("Picture")),
+                new File(""),
                 new ArrayList<>(),
                 new ClassListImpl(new ArrayList<>()));
     }

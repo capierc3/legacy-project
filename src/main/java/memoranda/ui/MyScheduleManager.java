@@ -70,10 +70,8 @@ public class MyScheduleManager {
             _myStudentClasses = new ClassListImpl(new ArrayList<>());
             for (GymClass gymClass:_user.getAllClasses().getAllClasses()) {
                 boolean notTrainer = true;
-                for (User trainer:gymClass.getTrainers().getAllUsers()){
-                    if (trainer.getName().equalsIgnoreCase(_user.getName())){
-                        notTrainer = false;
-                    }
+                if (gymClass.getTrainer().getName().equalsIgnoreCase(_user.getName())) {
+                    notTrainer = false;
                 }
                 if (notTrainer){
                     _myStudentClasses.addClass(gymClass);
@@ -92,10 +90,8 @@ public class MyScheduleManager {
     private void fillTeachingClasses(int sort,String dir) {
         _myTeachingClasses = new ClassListImpl(new ArrayList<>());
         for (GymClass gymClass:_user.getAllClasses().getAllClasses()) {
-            for (User trainer:gymClass.getTrainers().getAllUsers()){
-                if (trainer.getName().equalsIgnoreCase(_user.getName())){
-                    _myTeachingClasses.addClass(gymClass);
-                }
+            if (gymClass.getTrainer().getName().equalsIgnoreCase(_user.getName())){
+                _myTeachingClasses.addClass(gymClass);
             }
         }
         sortList(_myTeachingClasses,sort,dir);
@@ -112,14 +108,17 @@ public class MyScheduleManager {
                 new CalendarDate(18,3,2020,7,0,false),
                 new CalendarDate(18,3,2020,7,30,false));
         gymClass1.setSize(3);
+        gymClass1.addTrainer((Trainer) App.appUsers.getUser("Mac"));
         GymClass gymClass2 = new GymClassImpl("Kicking 202","Public",Belt.YELLOW,
                 new CalendarDate(18,3,2020,8,0,false),
                 new CalendarDate(18,3,2020,8,30,false));
         gymClass2.setSize(20);
-        GymClass gymClass3 = new GymClassImpl("One on One with Matt","Private",Belt.WHITE,
+        gymClass2.addTrainer((Trainer) App.appUsers.getUser("Mac"));
+        GymClass gymClass3 = new GymClassImpl("One on One with Mac","Private",Belt.WHITE,
                 new CalendarDate(18,3,2020,9,0,false),
                 new CalendarDate(18,3,2020,9,30,false));
         gymClass3.setSize(0);
+        gymClass3.addTrainer((Trainer) App.appUsers.getUser("Mac"));
         _allClasses.addClass(gymClass1);
         _allClasses.addClass(gymClass2);
         _allClasses.addClass(gymClass3);

@@ -24,9 +24,7 @@ import main.java.memoranda.util.Util;
  *
  */
 public class MySchedulePanel extends JPanel {
-    User user = new OwnerImpl("Owner","Owner","Owner","Owner",Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
-    User student = new StudentImpl("Student","Student","Student","Student",Belt.WHITE,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
-    MyScheduleManager manager = new MyScheduleManager(new ClassListImpl(new ArrayList<>()),student);
+    MyScheduleManager manager = new MyScheduleManager(new ClassListImpl(new ArrayList<>()),App.appUsers.getActiveUser());
     BorderLayout borderLayout1 = new BorderLayout();
     JToolBar eventsToolBar = new JToolBar();
     //JButton historyBackB = new JButton();
@@ -473,7 +471,7 @@ public class MySchedulePanel extends JPanel {
         CalendarDate end = comboValueToDate((String) dlg.endTime.getSelectedItem());
         GymClass gymClass = new GymClassImpl(name,"Public",rank,start,end);
         gymClass.setSize((int) dlg.sizeSpin.getValue());
-        //gymClass.addTrainer(dlg.trainerBox.getSelectedItem());
+        gymClass.addTrainer((Trainer) dlg.trainerBox.getSelectedItem());
         manager.addClass(gymClass);
         classTable.refresh();
     }
@@ -488,7 +486,7 @@ public class MySchedulePanel extends JPanel {
         dlg.startTime.setSelectedIndex(findIndexValue(gymClass.getStartDate()));
         dlg.endTime.setSelectedIndex(findIndexValue(gymClass.getEndDate()));
         dlg.sizeSpin.setValue(gymClass.getMaxSize());
-        //dlg.trainerBox.setSelectedItem(gymClass.getTrainer().getName());
+        dlg.trainerBox.setSelectedItem(gymClass.getTrainer());
         dlg.setVisible(true);
         if (dlg.CANCELLED) return;
         CalendarDate start = comboValueToDate((String) dlg.startTime.getSelectedItem());
@@ -498,7 +496,7 @@ public class MySchedulePanel extends JPanel {
         gymClass.setSize((Integer) dlg.sizeSpin.getValue());
         gymClass.setStartDate(start);
         gymClass.setEndDate(end);
-        //gymClass.addTrainer();
+        gymClass.addTrainer((Trainer) dlg.trainerBox.getSelectedItem());
         classTable.refresh();
     }
 

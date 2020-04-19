@@ -154,8 +154,7 @@ public class MyScheduleTable extends JTable {
             } else if (col ==4) {
                 return gymClass.getClassLength()+" minutes";
             } else if (col ==5) {
-                //return gymClass.getTrainers().get(0);
-                return "TBD";
+                return gymClass.getTrainer().getName();
             } else if (col ==6) {
                 try {
                     return gymClass.getMaxSize() - gymClass.getSize();
