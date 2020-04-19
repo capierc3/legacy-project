@@ -264,9 +264,14 @@ public class AppFrame extends JFrame {
         contentPane.setLayout(borderLayout1);
         //this.setSize(new Dimension(800, 500));
         this.setTitle("Kaesekuchen Gym - " + CurrentProject.get().getTitle());
-        //Added a space to App.VERSION_INFO to make it look some nicer
-        statusBar.setText(" Version:" + App.VERSION_INFO + " (Build "
-                + App.BUILD_INFO + " )");
+
+
+        //The first section was the original version, I just commented it out
+        //and set a blank one until we can get around to it showing the correct info
+        //statusBar.setText(" Version:" + App.VERSION_INFO + " (Build "
+        //        + App.BUILD_INFO + " )");
+        
+        statusBar.setText(" Version: (Build  )");
 
         jMenuFile.setText(Local.getString("File"));
         jMenuFileExit.setText(Local.getString("Exit"));
