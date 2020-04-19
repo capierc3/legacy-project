@@ -89,16 +89,25 @@ public class GymClassImpl implements GymClass {
 
     @Override
     public Room getRoom() {
-        return attrToRoom(el.getFirstChildElement("Room"));
+        Element e = el.getFirstChildElement("Room");
+        if (e != null) {
+            return attrToRoom((Element) e.getChild(0));
+        }
+        return null;
     }
 
     @Override
     public void setRoom(Room room) {
         Element roomEl = el.getFirstChildElement("Room");
         if (roomEl == null) {
-            el.appendChild(roomToElm(room));
+            Element e = new Element("Room");
+            e.addAttribute(new Attribute("RoomNum",String.valueOf(room.getRoomNum())));
+            e.appendChild(room.getContent().copy());
+            el.appendChild(e);
         } else {
-            el.replaceChild(roomEl,roomToElm(room));
+            Element e = el.getFirstChildElement("Room");
+            e.removeChildren();
+            e.appendChild(room.getContent().copy());
         }
     }
 
@@ -157,9 +166,10 @@ public class GymClassImpl implements GymClass {
         el.appendChild(trainer.getContent().copy());
     }
 
+    //Todo: get all student elements and return a class list
     @Override
     public UserList getStudents() {
-        return elmsToStudentList(el.getChildElements("Students"));
+        return null;
     }
 
     @Override
@@ -243,23 +253,30 @@ public class GymClassImpl implements GymClass {
 
     //TODO Need room class to write methods or should be public static methods in RoomImpl
     private Room attrToRoom(Element room){
-        return null;
-    }
-    private Element roomToElm(Room room){
-        return null;
+        if (room == null){
+            return null;
+        }
+        return new RoomImpl(Integer.parseInt(room.getAttributeValue("RoomNumber")),
+                new ClassListImpl(new ArrayList<>()),
+                new ArrayList<>());
     }
     private Trainer elmToTrainer(Element el){
-        return new TrainerImpl(el.getAttributeValue("Name"),
-                el.getAttributeValue("Id"),
-                el.getAttributeValue("UserName"),
-                el.getAttributeValue("Password"),
-                Belt.getBelt(Integer.parseInt(el.getAttributeValue("Rank"))),
-                new File(""),
-                new ArrayList<>(),
-                new ClassListImpl(new ArrayList<>()));
+        if (el!=null) {
+            return new TrainerImpl(el.getAttributeValue("Name"),
+                    el.getAttributeValue("Id"),
+                    el.getAttributeValue("UserName"),
+                    el.getAttributeValue("Password"),
+                    Belt.getBelt(Integer.parseInt(el.getAttributeValue("Rank"))),
+                    new File(""),
+                    new ArrayList<>(),
+                    new ClassListImpl(new ArrayList<>()));
+        } else {
+            return null;
+        }
     }
-    private UserList elmsToStudentList(Elements els){
-        return null;
-    }
+    //Todo: need to turn elements into a ClassList
+//    private UserList elmsToStudentList(Elements els){
+//        return null;
+//    }
 
 }
