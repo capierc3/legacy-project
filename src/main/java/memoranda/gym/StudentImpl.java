@@ -38,10 +38,10 @@ public class StudentImpl extends UserImpl implements Student {
      */
     public void addClass(GymClass gymClass) {
         list.addClass(gymClass);
-        this.setClassList(list);
+        setClassList(list);
     }
 
     public Element getContent() {
-        return this.getContent();
+        return element;
     }
 }

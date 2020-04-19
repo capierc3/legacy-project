@@ -30,9 +30,13 @@ public class UserImpl implements User {
         picture = newPicture;
         setPicture(picture);
         noteList = newNoteList;
-        setNoteList(noteList);
+        if (noteList != null) {
+            setNoteList(noteList);
+        }
         userClasses = newUserClasses;
-        setClassList(userClasses);
+        if (userClasses != null) {
+            setClassList(userClasses);
+        }
     }
 
     /**
@@ -40,11 +44,14 @@ public class UserImpl implements User {
      * @param noteList
      */
     public void setNoteList(Collection<Note> noteList) {
-        Element notes = new Element("NoteList");
-        for (Note note : noteList) {
-            notes.appendChild(note.getContent());
+
+        if(!noteList.isEmpty() || noteList != null) {
+            Element notes = new Element("NoteList");
+            for (Note note : noteList) {
+                notes.appendChild(note.getContent().copy());
+            }
+            element.appendChild(notes);
         }
-        element.appendChild(notes);
     }
 
     /**
@@ -52,7 +59,9 @@ public class UserImpl implements User {
      * @param classList
      */
     public void setClassList(ClassList classList) {
-        element.appendChild(userClasses.getContent().copy());
+        if(classList != null) {
+            element.appendChild(userClasses.getContent().copy());
+        }
     }
 
     /**

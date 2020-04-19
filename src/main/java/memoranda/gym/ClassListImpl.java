@@ -21,7 +21,9 @@ public class ClassListImpl implements ClassList {
     public ClassListImpl(Collection<GymClass> newClasses) {
         element = new Element("ClassList");
         classes = newClasses;
-        setClassList(classes);
+        if (classes != null)  {
+            setClassList(classes);
+        }
     }
 
     public void setClassList(Collection<GymClass> classes) {
