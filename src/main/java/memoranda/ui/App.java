@@ -1,16 +1,15 @@
 package main.java.memoranda.ui;
 
-import java.awt.Dimension;
-import java.awt.Frame;
-import java.awt.Toolkit;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.UIManager;
+import javax.swing.*;
 
 import main.java.memoranda.EventsScheduler;
+import main.java.memoranda.gym.AppUsers;
+import main.java.memoranda.gym.User;
 import main.java.memoranda.util.Configuration;
 
 /**
@@ -21,6 +20,10 @@ import main.java.memoranda.util.Configuration;
 
 /*$Id: App.java,v 1.28 2007/03/20 06:21:46 alexeya Exp $*/
 public class App {
+
+	//keep state of AppUser
+	static AppUsers appUsers = new AppUsers();
+
 	// boolean packFrame = false;
 	/**Main App frame**/
 	static AppFrame frame = null;
@@ -71,6 +74,7 @@ public class App {
 		try
 		{ Thread.sleep(4000); } catch (Exception e){
 		}
+		showLoginFrame();
 		//sets the look and feel of the App
 		try {
 			if (Configuration.get("LOOK_AND_FEEL").equals("system"))
@@ -108,6 +112,8 @@ public class App {
 		}
 		if (!Configuration.get("SHOW_SPLASH").equals("no"))
 			splash.dispose();
+
+		//show login frame
 	}
 
 	/**
@@ -183,4 +189,37 @@ public class App {
 		splash.setUndecorated(true);
 		splash.setVisible(true);
 	}
+
+	/**
+	 * Display login pane and verify user authentication
+	 */
+	private void showLoginFrame() {
+		LoginDialog dlg = new LoginDialog(splash,"Login",appUsers);
+		Dimension frmSize = splash.getSize();
+		Point loc = splash.getLocation();
+		dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x, (frmSize.height - dlg.getSize().height) / 2 + loc.y);
+		dlg.setVisible(true);
+	}
+
+	/**
+	 * On Click event for Submit button
+	 *
+	 * @param login User's login credentials
+	 * @param password User's password credentials
+	 */
+	private void loginSubmitButton_clicked(String login, String password){
+
+		Boolean verified = appUsers.verifyPassword(login, password);
+
+		if(verified) {
+			User user = appUsers.getUser(login);
+			appUsers.setActiveUser(user);
+			splash.dispose();
+		}else {
+			//notify user of incorrect credentials
+			//TODO: Change UI to reflect incorrect values
+		}
+
+	}
+
 }

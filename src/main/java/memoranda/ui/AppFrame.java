@@ -264,9 +264,14 @@ public class AppFrame extends JFrame {
         contentPane.setLayout(borderLayout1);
         //this.setSize(new Dimension(800, 500));
         this.setTitle("Kaesekuchen Gym - " + CurrentProject.get().getTitle());
-        //Added a space to App.VERSION_INFO to make it look some nicer
-        statusBar.setText(" Version:" + App.VERSION_INFO + " (Build "
-                + App.BUILD_INFO + " )");
+
+
+        //The first section was the original version, I just commented it out
+        //and set a blank one until we can get around to it showing the correct info
+        //statusBar.setText(" Version:" + App.VERSION_INFO + " (Build "
+        //        + App.BUILD_INFO + " )");
+        
+        statusBar.setText(" Version: (Build  )");
 
         jMenuFile.setText(Local.getString("File"));
         jMenuFileExit.setText(Local.getString("Exit"));
@@ -584,12 +589,11 @@ public class AppFrame extends JFrame {
         this.workPanel.dailyItemsPanel.alarmB.addActionListener(
                 setMenusDisabled);
 
-        this.workPanel.myStuff.addActionListener(setMenusDisabled);
-        this.workPanel.myCalendar.addActionListener(setMenusDisabled);
-        this.workPanel.upcomingClasses.addActionListener(setMenusDisabled);
-        this.workPanel.trainerProfiles.addActionListener(setMenusDisabled);        
+        this.workPanel.myInfo.addActionListener(setMenusDisabled);
+        this.workPanel.mySchedule.addActionListener(setMenusDisabled);
+        this.workPanel.trainerProfiles.addActionListener(setMenusDisabled);     
         this.workPanel.roomInfo.addActionListener(setMenusDisabled);
-        this.workPanel.bookTrainer.addActionListener(setMenusDisabled);
+        this.workPanel.studentList.addActionListener(setMenusDisabled);
         this.workPanel.resources.addActionListener(setMenusDisabled);
       
         

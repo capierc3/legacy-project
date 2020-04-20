@@ -7,15 +7,33 @@ import java.util.Date;
 import main.java.memoranda.util.Local;
 import main.java.memoranda.util.Util;
 
+import javax.swing.text.Element;
+
 /*$Id: CalendarDate.java,v 1.3 2004/01/30 12:17:41 alexeya Exp $*/
 /**
  * Class that holds the information for dates; year,month,day.
+ *
+ * WhiteBox test notes:
+ * Added the ability to add hours and mins for a 12 hour clock; new CalendarDate(day,month,year,hour,min,isAM)
+ *      A all day event would just be new CalendarDate(day,month,year)
+ * Example: CalendarDate class1 = new CalendarDate(4,10,2020,3,30,false) = 4/10/2020 3:30 PM
+ *          CalendarDate availability = new CalendarDate(4,10,2020) = all day on 4/10/2020
+ * You should be able to find if one gym class is before or after another by comparing start times of the class.
+ * Example: class1.before(class2)     class1.after(class2)
+ * Or if a class is during another class;  class1.inPeriod(class2Start,class2End)
+ * All comparable should work with or without time of day set; if a class is before or after an all day date
+ *          class1.equals(availability) -> or if class is held on a given date.
  */
 public class CalendarDate {
 
     private int _year;
     private int _month;
     private int _day;
+    private int _hour;
+    private int _min;
+    private boolean _isAM;
+    private boolean hourSet;
+
 
     /**
      * Returns a calender object with inputted date.
@@ -50,11 +68,20 @@ public class CalendarDate {
         cal.getTime();
         //checks to see if int of the day is valid
         int dmax = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-        if (day <= dmax)
-          _day = day;
-        else
-          _day = dmax;
+        if (day <= dmax) {
+            _day = day;
+        }else {
+            _day = dmax;
+        }
+        hourSet = false;
+    }
 
+    public CalendarDate(int day, int month, int year,int hour, int min, boolean isAM){
+        this(day,month,year);
+        _hour = hour;
+        _min = min;
+        _isAM = isAM;
+        hourSet = true;
     }
 
     /**
@@ -65,6 +92,10 @@ public class CalendarDate {
         _year = cal.get(Calendar.YEAR);
         _day = cal.get(Calendar.DAY_OF_MONTH);
         _month = cal.get(Calendar.MONTH);
+        _hour = cal.get(Calendar.HOUR);
+        _min = cal.get(Calendar.MINUTE);
+        _isAM = cal.get(Calendar.AM_PM) == Calendar.AM;
+        hourSet = true;
     }
 
     /**
@@ -73,6 +104,7 @@ public class CalendarDate {
      */
     public CalendarDate(Date date) {
         this(dateToCalendar(date));
+        hourSet = false;
     }
 
     /**
@@ -80,11 +112,17 @@ public class CalendarDate {
      * @param date
      */
     public CalendarDate(String date) {
-        int[] d = Util.parseDateStamp(date);
+        int[] d = Util.parseDateStampNew(date);
         _day = d[0];
         _month = d[1];
         _year = d[2];
-
+        hourSet = false;
+        if (d.length>3){
+            _hour = d[3];
+            _min = d[4];
+            _isAM = d[5] == 0;
+            hourSet = true;
+        }
     }
 
     /**
@@ -131,6 +169,18 @@ public class CalendarDate {
         return cal;
     }
 
+    public static Calendar toCalendar(int day, int month, int year, int hour, int min,boolean AM){
+        Calendar cal = toCalendar(day,month,year);
+        cal.set(Calendar.HOUR,hour);
+        cal.set(Calendar.MINUTE,min);
+        if (AM){
+            cal.set(Calendar.AM_PM,Calendar.AM);
+        } else {
+            cal.set(Calendar.AM_PM,Calendar.PM);
+        }
+        return cal;
+    }
+
     /**
      * Takes ints of the day,month, and year and sets them to a new Calendar object to return a Date object
      * @param day int of the day value
@@ -146,12 +196,35 @@ public class CalendarDate {
         return cal.getTime();
     }
 
+    public static Date toDate(int day, int month, int year,int hour, int min, boolean isAM) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        cal.set(Calendar.HOUR,hour);
+        cal.set(Calendar.MINUTE,min);
+        if (isAM){
+            cal.set(Calendar.AM_PM,Calendar.AM);
+        } else {
+            cal.set(Calendar.AM_PM, Calendar.PM);
+        }
+        return cal.getTime();
+    }
+
     //Basic getters
     public Calendar getCalendar() {
-        return toCalendar(_day, _month, _year);
+        if (hourSet){
+            return toCalendar(_day,_month,_year,_hour,_min,_isAM);
+        } else {
+            return toCalendar(_day, _month, _year);
+        }
     }
     public Date getDate() {
-        return toDate(_day, _month, _year);
+        if (hourSet){
+            return toDate(_day,_month,_year,_hour,_min,_isAM);
+        } else {
+            return toDate(_day, _month, _year);
+        }
     }
     public int getDay() {
         return _day;
@@ -162,6 +235,10 @@ public class CalendarDate {
     public int getYear() {
         return _year;
     }
+    public int getHour(){return _hour;}
+    public int getMin(){return _min;}
+    public boolean isAM(){return _isAM;}
+    public boolean isHourSet(){return hourSet;}
     public String getFullDateString() {
         return Local.getDateString(this, DateFormat.FULL);
     }
@@ -177,11 +254,7 @@ public class CalendarDate {
 
     //Compare methods
     public boolean equals(Object object) {
-        if (object.getClass().isInstance(CalendarDate.class)) {
-            CalendarDate d2 = (CalendarDate) object;
-            return ((d2.getDay() == getDay()) && (d2.getMonth() == getMonth()) && (d2.getYear() == getYear()));
-        }
-        else if (object.getClass().isInstance(Calendar.class)) {
+        if (object.getClass().isInstance(Calendar.class)) {
             Calendar cal = (Calendar) object;
             return this.equals(new CalendarDate(cal));
         }
@@ -193,7 +266,19 @@ public class CalendarDate {
     }
     public boolean equals(CalendarDate date) {
         if (date == null) return false;
-        return ((date.getDay() == getDay()) && (date.getMonth() == getMonth()) && (date.getYear() == getYear()));
+        if (date.isHourSet() && this.isHourSet()) {
+            return ((date.getDay() == getDay()) && (date.getMonth() == getMonth()) && (date.getYear() == getYear())
+                    && (date.getHour() == getHour()) && (date.getMin() == getMin()) && (date.isAM() == isAM()));
+        } else {
+            return ((date.getDay() == getDay()) && (date.getMonth() == getMonth()) && (date.getYear() == getYear()));
+        }
+    }
+    public boolean equalsDay(CalendarDate date) {
+        if (date == null) {
+            return false;
+        } else {
+            return ((date.getDay() == getDay()) && (date.getMonth() == getMonth()) && (date.getYear() == getYear()));
+        }
     }
 
     /**
@@ -230,8 +315,15 @@ public class CalendarDate {
      * @return String
      */
     public String toString() {
-        return Util.getDateStamp(this);
+        if (isHourSet()) {
+            return Util.getDateStamp(this)+"/"+Util.getTimeStamp(this);
+        } else {
+            return Util.getDateStamp(this);
+        }
     }
+
+
+
 
 
 }

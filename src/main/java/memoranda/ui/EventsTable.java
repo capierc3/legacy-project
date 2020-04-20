@@ -1,7 +1,7 @@
 package main.java.memoranda.ui;
 
-import java.awt.Component;
-import java.awt.Font;
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
@@ -14,6 +14,10 @@ import main.java.memoranda.EventsManager;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
 import main.java.memoranda.date.DateListener;
+import main.java.memoranda.gym.Belt;
+import main.java.memoranda.gym.ClassList;
+import main.java.memoranda.gym.GymClass;
+import main.java.memoranda.gym.GymClassImpl;
 import main.java.memoranda.util.Local;
 /*$Id: EventsTable.java,v 1.6 2004/10/11 08:48:20 alexeya Exp $*/
 /**
@@ -25,11 +29,14 @@ public class EventsTable extends JTable {
     public static final int EVENT_ID = 101;
 
     Vector events = new Vector();
+    MyScheduleManager manager;
+    ArrayList<GymClass> classList;
     /**
      * Constructor for EventsTable.
      */
-    public EventsTable() {
+    EventsTable(MyScheduleManager manager) {
         super();
+        this.manager = manager;
         setModel(new EventsTableModel());
         initTable(CurrentDate.get());
         this.setShowGrid(false);
@@ -40,10 +47,11 @@ public class EventsTable extends JTable {
      * sets up the table
      * @param d CalendarDate
      */
-    public void initTable(CalendarDate d) {
+    void initTable(CalendarDate d) {
         events = (Vector)EventsManager.getEventsForDate(d);
-        getColumnModel().getColumn(0).setPreferredWidth(75);
-        getColumnModel().getColumn(0).setMaxWidth(75);
+        classList = manager.getDaysClasses(d);
+//        getColumnModel().getColumn(0).setPreferredWidth(75);
+//        getColumnModel().getColumn(0).setMaxWidth(75);
         clearSelection();
         updateUI();
     }
@@ -66,19 +74,21 @@ public class EventsTable extends JTable {
                 int column) {
                 Component comp;
                 comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                Event ev = (Event)getModel().getValueAt(row, EVENT);
+                GymClass gymClass = (GymClass)getModel().getValueAt(row, EVENT);
                 comp.setForeground(java.awt.Color.gray);
-                if (ev.isRepeatable())
-                    comp.setFont(comp.getFont().deriveFont(Font.ITALIC));
+//                if (ev.isRepeatable())
+//                    comp.setFont(comp.getFont().deriveFont(Font.ITALIC));
                 if (CurrentDate.get().after(CalendarDate.today())) {
                   comp.setForeground(java.awt.Color.black);
-                }                
-                else if (CurrentDate.get().equals(CalendarDate.today())) {
-                  if (ev.getTime().after(new Date())) {
-                    comp.setForeground(java.awt.Color.black);
-                    //comp.setFont(new java.awt.Font("Dialog", 1, 12));
-                    comp.setFont(comp.getFont().deriveFont(Font.BOLD));
-                  }
+                } else if (CurrentDate.get().equals(CalendarDate.today())) {
+                    if (gymClass.getStartDate().after(CalendarDate.today())) {
+                        comp.setForeground(java.awt.Color.black);
+                        comp.setFont(comp.getFont().deriveFont(Font.BOLD));
+                    } else if (gymClass.getStartDate().before(CalendarDate.today())){
+                        comp.setForeground(Color.lightGray);
+                    } else {
+                        comp.setForeground(Color.black);
+                    }
                 }
                 return comp;
             }
@@ -92,8 +102,11 @@ public class EventsTable extends JTable {
     class EventsTableModel extends AbstractTableModel {
         //Can be used to add new columns
         String[] columnNames = {
-                Local.getString("Start Time"),
                 Local.getString("Name"),
+                Local.getString("Class Type"),
+                Local.getString("Belt Needed"),
+                Local.getString("Start Time"),
+                Local.getString("Class Length"),
                 Local.getString("Instructor"),
                 Local.getString("Spots Remaining")
         };
@@ -110,7 +123,7 @@ public class EventsTable extends JTable {
          * @return int
          */
         public int getColumnCount() {
-            return 4;
+            return 7;
         }
 
         /**
@@ -120,7 +133,7 @@ public class EventsTable extends JTable {
         public int getRowCount() {
 			int i;
 			try {
-				i = events.size();
+				i = classList.size();
 			}
 			catch(NullPointerException e) {
 				i = 1;
@@ -135,16 +148,30 @@ public class EventsTable extends JTable {
          * @return Object
          */
         public Object getValueAt(int row, int col) {
-           Event ev = (Event)events.get(row);
-           if (col == 0)
-                return ev.getTimeString();
-           else if (col == 1)
-                return ev.getText();
-           else if (col == 2) return "TBD";
-           else if (col == 3) return "TBD";
-           else if (col == EVENT_ID)
-                return ev.getId();
-           else return ev;
+            GymClass gymClass = classList.get(row);
+            if (col == 0) {
+                return gymClass.getName();
+            } else if (col == 1) {
+                return gymClass.getClassType();
+            } else if (col == 2) {
+                return gymClass.getRank();
+            } else if (col == 3) {
+                return hoursDisplay(gymClass.getStartTime().replace("_"," "));
+            } else if (col ==4) {
+                return gymClass.getClassLength()+" minutes";
+            } else if (col ==5) {
+                //return gymClass.getTrainers().get(0);
+                return "TBD";
+            } else if (col ==6) {
+                try {
+                    return gymClass.getMaxSize() - gymClass.getSize();
+                } catch (NumberFormatException e){
+                    return "Not Set";
+                }
+            } else if (col == EVENT_ID) {
+                return gymClass.getID();
+            }
+            return gymClass;
         }
 
         /**
@@ -154,6 +181,18 @@ public class EventsTable extends JTable {
          */
         public String getColumnName(int col) {
             return columnNames[col];
+        }
+
+        private String hoursDisplay(String disp){
+            String[] dispSplit = disp.split(":");
+            if (dispSplit[0].equalsIgnoreCase("0")){
+                dispSplit[0] = "12";
+            }
+            String[] amPMSplit = dispSplit[1].split(" ");
+            if (amPMSplit[0].length()==1){
+                amPMSplit[0] = "0"+amPMSplit[0];
+            }
+            return dispSplit[0]+":"+amPMSplit[0]+" "+amPMSplit[1];
         }
     }
 }
