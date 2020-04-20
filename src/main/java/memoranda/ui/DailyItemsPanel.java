@@ -63,7 +63,7 @@ public class DailyItemsPanel extends JPanel {
     JLabel currentDateLabel = new JLabel();
     BorderLayout borderLayout4 = new BorderLayout();
     TaskPanel tasksPanel = new TaskPanel(this);
-    EventsPanel eventsPanel = new EventsPanel(this);
+    MySchedulePanel schedulePanel = new MySchedulePanel(this);
     AgendaPanel agendaPanel = new AgendaPanel(this);
     MyInfoPanel myInfoPanel = new MyInfoPanel(this);
     ImageIcon expIcon = new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/exp_right.png"));
@@ -206,7 +206,7 @@ public class DailyItemsPanel extends JPanel {
         mainPanel.add(editorsPanel, BorderLayout.CENTER);
         
         editorsPanel.add(agendaPanel, "AGENDA");
-        editorsPanel.add(eventsPanel, "EVENTS");
+        editorsPanel.add(schedulePanel, "EVENTS");
         editorsPanel.add(tasksPanel, "TASKS");
         editorsPanel.add(editorPanel, "NOTES");
         editorsPanel.add(myInfoPanel, "MYINFO");

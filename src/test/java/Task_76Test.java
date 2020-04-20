@@ -1,14 +1,15 @@
 package test.java;
 
 import main.java.memoranda.date.CalendarDate;
-import main.java.memoranda.gym.Belt;
-import main.java.memoranda.gym.GymClass;
-import main.java.memoranda.gym.GymClassImpl;
+import main.java.memoranda.gym.*;
 import main.java.memoranda.util.Util;
 import nu.xom.Element;
 import org.junit.Before;
 import org.junit.Test;
 
+
+import java.io.File;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -27,6 +28,12 @@ public class Task_76Test {
     CalendarDate startDate;
     CalendarDate endDate;
     Element el;
+    Trainer trainer;
+    Trainer trainer2;
+    Room room;
+    Room room2;
+    Student student;
+
 
     GymClass constructor1;
     GymClass constructor2;
@@ -39,12 +46,22 @@ public class Task_76Test {
     @Before
     public void setUp() throws Exception {
 
+        room = new RoomImpl(1,new ClassListImpl(new ArrayList<>()),new ArrayList<>());
+        room2 = new RoomImpl(2,new ClassListImpl(new ArrayList<>()),new ArrayList<>());
+        student = new StudentImpl("Johnny Karate","JK","student","Password",Belt.WHITE,
+                new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
+        trainer = new TrainerImpl("Country Mac","CMac","trainer","Password",
+                Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
         startDate = new CalendarDate(11, 4, 2020, 4, 0, false);
         endDate = new CalendarDate(11, 4, 2020, 5, 0, false);
         class1 = new GymClassImpl("Kicking 101", "Public", Belt.WHITE);
         class1.setStartDate(startDate);
         class1.setEndDate(endDate);
         class1.setSize(20);
+        class1.setRoom(room);
+        class1.addTrainer(trainer);
+        class1.addStudent(student);
+        class1.setID("K101");
         class2 = new GymClassImpl("Kicking 102", "Public", Belt.WHITE,
                 new CalendarDate(11, 4, 2020, 4, 45, false),
                 new CalendarDate(11, 4, 2020, 5, 0, false));
@@ -77,10 +94,19 @@ public class Task_76Test {
         assertEquals(20,class1.getMaxSize());
         assertTrue(startDate.equals(class1.getStartDate()));
         assertTrue(endDate.equals(class1.getEndDate()));
+        assertEquals(1,class1.getSize());
+        class1.removeStudent(student);
         assertEquals(0,class1.getSize());
         assertEquals(Util.getTimeStamp(startDate),class1.getStartTime());
         assertFalse(class1.isFull());
         assertEquals(el.getAttribute("Name").getValue(),class1.getName());
+        assertEquals(1,class1.getRoom().getRoomNum());
+        class1.setRoom(room2);
+        assertEquals(2,class1.getRoom().getRoomNum());
+        assertEquals("Country Mac",class1.getTrainer().getName());
+        assertEquals("K101",class1.getID());
+        assertNull(class2.getRoom());
+        assertNull(class2.getTrainer());
     }
 
     /**
