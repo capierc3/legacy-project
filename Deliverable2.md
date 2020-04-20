@@ -145,10 +145,17 @@ I would also advise you to already fill out the Contributions section (End of sp
 
 #### Team member Chase Pierce:
   **Links to GitHub commits with main code contribution (up to 5 links):
+    https://github.com/amehlhase316/Kaesekuchen/commit/358323795dd3496d115348dcdc2a9fd36b754ab5
+    https://github.com/amehlhase316/Kaesekuchen/commit/771adb5da6f41dd969ea8cc16c9f28bf27307f5d
+    https://github.com/amehlhase316/Kaesekuchen/commit/6f3afa49dffcbe2167e22a9d175b8fcaa22d2881
+    https://github.com/amehlhase316/Kaesekuchen/commit/5c14794fe459e7af29b5b98cc8b66b31cf5587f7
+    https://github.com/amehlhase316/Kaesekuchen/commit/a5dacf10123e8411622ca53ac1cb9356e89b79cb
     -
 
   **GitHub links to your Unit Tests (up to 3 links):
-
+    https://github.com/amehlhase316/Kaesekuchen/commit/9c19822aaf1601aa85f6018647268fa9d02a8fe8
+    https://github.com/amehlhase316/Kaesekuchen/commit/7ccdacb0d6ae943c6ddb98bcd4e44642894aeee9
+    https://github.com/amehlhase316/Kaesekuchen/commit/2a60e32a07cde585af24ae534eafba3fadc7e06b
     -
 
   **GitHub links to your Code Reviews (up to 3 links):
