@@ -225,4 +225,9 @@ public class UserImpl implements User {
         else
             attr.setValue(value);
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

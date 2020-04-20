@@ -273,6 +273,13 @@ public class CalendarDate {
             return ((date.getDay() == getDay()) && (date.getMonth() == getMonth()) && (date.getYear() == getYear()));
         }
     }
+    public boolean equalsDay(CalendarDate date) {
+        if (date == null) {
+            return false;
+        } else {
+            return ((date.getDay() == getDay()) && (date.getMonth() == getMonth()) && (date.getYear() == getYear()));
+        }
+    }
 
     /**
      * Determines if a date is before the inputted date

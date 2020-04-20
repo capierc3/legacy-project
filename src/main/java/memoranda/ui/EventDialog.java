@@ -53,6 +53,7 @@ public class EventDialog extends JDialog implements WindowListener {
     JLabel lblStTime = new JLabel();
     JLabel lblEdTime = new JLabel();
     public JSpinner timeSpin = new JSpinner(new SpinnerDateModel(new Date(), null, null, Calendar.MINUTE));
+    public JSpinner endSpin;
     JLabel lblText = new JLabel();
     public JTextField textField = new JTextField();
     TitledBorder repeatBorder;
@@ -101,7 +102,7 @@ public class EventDialog extends JDialog implements WindowListener {
         headerPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
         header.setFont(new java.awt.Font("Dialog", 0, 20));
         header.setForeground(new Color(0, 0, 124));
-        header.setText(Local.getString("Class"));
+        header.setText(Local.getString("Create Class"));
         header.setIcon(new ImageIcon(main.java.memoranda.ui.EventDialog.class.getResource(
             "/ui/icons/events.png")));
         headerPanel.add(header);
@@ -117,16 +118,27 @@ public class EventDialog extends JDialog implements WindowListener {
         gbc.anchor = GridBagConstraints.WEST;
         eventPanel.add(lblStTime, gbc);
         gbc = new GridBagConstraints();
-        gbc.gridx = 3; gbc.gridy = 0;
+        gbc.gridx = 2; gbc.gridy = 0;
         gbc.insets = new Insets(10, 10, 5, 10);
         gbc.anchor = GridBagConstraints.WEST;
         eventPanel.add(lblEdTime,gbc);
-        timeSpin.setPreferredSize(new Dimension(60, 24));
+        timeSpin.setPreferredSize(new Dimension(80, 24));
+        ((JSpinner.DateEditor) timeSpin.getEditor()).getFormat().applyPattern("hh:mm a");
         gbc = new GridBagConstraints();
         gbc.gridx = 1; gbc.gridy = 0;
         gbc.insets = new Insets(10, 0, 5, 0);
         gbc.anchor = GridBagConstraints.WEST;
         eventPanel.add(timeSpin, gbc);
+        SpinnerDateModel dm = new SpinnerDateModel(new Date(),null,null,Calendar.MINUTE);
+        endSpin = new JSpinner(dm);
+        JSpinner.DateEditor de = new JSpinner.DateEditor(endSpin, "hh:mm a");
+        endSpin.setEditor(de);
+        endSpin.setPreferredSize(new Dimension(80, 24));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 3; gbc.gridy = 0;
+        gbc.insets = new Insets(10, 0, 5, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        eventPanel.add(endSpin,gbc);
         lblText.setText(Local.getString("Name"));
         lblText.setMinimumSize(new Dimension(120, 24));
         gbc = new GridBagConstraints();
@@ -371,11 +383,7 @@ public class EventDialog extends JDialog implements WindowListener {
         okB.setMinimumSize(new Dimension(100, 26));
         okB.setPreferredSize(new Dimension(100, 26));
         okB.setText(Local.getString("Ok"));
-        okB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                okB_actionPerformed(e);
-            }
-        });
+        okB.addActionListener(this::okB_actionPerformed);
         this.getRootPane().setDefaultButton(okB);
         cancelB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -398,21 +406,16 @@ public class EventDialog extends JDialog implements WindowListener {
         this.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
         
         // Do final things...
-        startCalFrame.cal.addSelectionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (ignoreStartChanged) return;
-                startDate.getModel().setValue(startCalFrame.cal.get().getCalendar().getTime());
-            }
+        startCalFrame.cal.addSelectionListener(e -> {
+            if (ignoreStartChanged) return;
+            startDate.getModel().setValue(startCalFrame.cal.get().getCalendar().getTime());
         });
-        endCalFrame.cal.addSelectionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (ignoreEndChanged)
-                    return;
-                endDate.getModel().setValue(endCalFrame.cal.get().getCalendar().getTime());
-            }
+        endCalFrame.cal.addSelectionListener(e -> {
+            if (ignoreEndChanged)
+                return;
+            endDate.getModel().setValue(endCalFrame.cal.get().getCalendar().getTime());
         });
         disableElements();
-        ((JSpinner.DateEditor) timeSpin.getEditor()).getFormat().applyPattern("HH:mm");
         enableEndDateCB_actionPerformed(null);
         
     }

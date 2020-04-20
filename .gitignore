@@ -24,4 +24,5 @@
 /bin/
 ### intelliJ project files ###
 .idea
+out/
 /Kaesekuchen.iml

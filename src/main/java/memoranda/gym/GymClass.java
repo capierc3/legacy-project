@@ -31,7 +31,7 @@ public interface GymClass {
      * Returns a UserList object filled with trainers
      * @return UserList
      */
-    UserList getTrainers();
+    Trainer getTrainer();
 
     /**
      * Add trainer to the UserList
@@ -49,6 +49,12 @@ public interface GymClass {
      * @param student Student
      */
     void addStudent(Student student);
+
+    /**
+     * removes a student from the Gym Class element
+     * @param student Student
+     */
+    void removeStudent(Student student);
 
     /**
      * Returns the amount of students in the class

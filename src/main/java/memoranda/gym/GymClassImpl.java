@@ -6,6 +6,9 @@ import nu.xom.Attribute;
 import nu.xom.Element;
 import nu.xom.Elements;
 
+import java.io.File;
+import java.util.ArrayList;
+
 /**
  * Class that implements the GymClass Interface
  *
@@ -86,16 +89,25 @@ public class GymClassImpl implements GymClass {
 
     @Override
     public Room getRoom() {
-        return attrToRoom(el.getFirstChildElement("Room"));
+        Element e = el.getFirstChildElement("Room");
+        if (e != null) {
+            return attrToRoom((Element) e.getChild(0));
+        }
+        return null;
     }
 
     @Override
     public void setRoom(Room room) {
         Element roomEl = el.getFirstChildElement("Room");
         if (roomEl == null) {
-            el.appendChild(roomToElm(room));
+            Element e = new Element("Room");
+            e.addAttribute(new Attribute("RoomNum",String.valueOf(room.getRoomNum())));
+            e.appendChild(room.getContent().copy());
+            el.appendChild(e);
         } else {
-            el.replaceChild(roomEl,roomToElm(room));
+            Element e = el.getFirstChildElement("Room");
+            e.removeChildren();
+            e.appendChild(room.getContent().copy());
         }
     }
 
@@ -145,23 +157,37 @@ public class GymClassImpl implements GymClass {
     }
 
     @Override
-    public UserList getTrainers() {
-        return elmsToUserList(el.getChildElements("Trainers"));
+    public Trainer getTrainer() {
+        return elmToTrainer(el.getFirstChildElement("Trainer"));
     }
 
     @Override
     public void addTrainer(Trainer trainer) {
-        el.appendChild(trainerToElm(trainer));
+        el.appendChild(trainer.getContent().copy());
     }
 
+    //Todo: get all student elements and return a class list
     @Override
     public UserList getStudents() {
-        return elmsToUserList(el.getChildElements("Students"));
+        return null;
     }
 
     @Override
     public void addStudent(Student student) {
-        el.appendChild(studentToElm(student));
+        Element element = new Element("Students");
+        element.addAttribute(new Attribute("Id",student.getID()));
+        element.appendChild(student.getContent().copy());
+        el.appendChild(element);
+    }
+
+    public void removeStudent(Student student){
+        for (int i = 0; i < el.getChildElements("Students").size(); i++) {
+            Element element = el.getChildElements("Students").get(i);
+            if (element.getAttributeValue("Id").equalsIgnoreCase(student.getID())){
+                element.detach();
+                break;
+            }
+        }
     }
 
     @Override
@@ -227,18 +253,30 @@ public class GymClassImpl implements GymClass {
 
     //TODO Need room class to write methods or should be public static methods in RoomImpl
     private Room attrToRoom(Element room){
-        return null;
+        if (room == null){
+            return null;
+        }
+        return new RoomImpl(Integer.parseInt(room.getAttributeValue("RoomNumber")),
+                new ClassListImpl(new ArrayList<>()),
+                new ArrayList<>());
     }
-    private Element roomToElm(Room room){
-        return null;
+    private Trainer elmToTrainer(Element el){
+        if (el!=null) {
+            return new TrainerImpl(el.getAttributeValue("Name"),
+                    el.getAttributeValue("Id"),
+                    el.getAttributeValue("UserName"),
+                    el.getAttributeValue("Password"),
+                    Belt.getBelt(Integer.parseInt(el.getAttributeValue("Rank"))),
+                    new File(""),
+                    new ArrayList<>(),
+                    new ClassListImpl(new ArrayList<>()));
+        } else {
+            return null;
+        }
     }
-    private UserList elmsToUserList(Elements els){
-        return null;
-    }
-    private Element trainerToElm(Trainer trainer){
-        return null;
-    }
-    private Element studentToElm(Student student){
-        return null;
-    }
+    //Todo: need to turn elements into a ClassList
+//    private UserList elmsToStudentList(Elements els){
+//        return null;
+//    }
+
 }
