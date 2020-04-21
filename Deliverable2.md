@@ -197,23 +197,28 @@ I would also advise you to already fill out the Contributions section (End of sp
 #### Team member Stephen Wilson:
   **Links to GitHub commits with main code contribution (up to 5 links):
 
-    - 
+    - https://github.com/amehlhase316/Kaesekuchen/commit/acb9fa801aaa19fb9e55a2903a330ab4977a5fc5
+    - https://github.com/amehlhase316/Kaesekuchen/commit/e222f581a8951392cc64fd08669f0fe12fd28a93
+    - https://github.com/amehlhase316/Kaesekuchen/commit/9b575d2a75fce583c0c62a3fdc09e4dc92633119
+    - https://github.com/amehlhase316/Kaesekuchen/commit/75ae3012585a6a4f6cf5cfe6a7acda6c5249e246
+    - https://github.com/amehlhase316/Kaesekuchen/commit/2b60f67045eceb78bb0158eada12158c8f48b360
 
    **GitHub links to your Unit Tests (up to 3 links):
 
-    - NA
+    - https://github.com/amehlhase316/Kaesekuchen/blob/master/src/test/java/Task93_Whitebox.java
 
   **GitHub links to your Code Reviews (up to 3 links):
 
-    - NA
+    - https://github.com/amehlhase316/Kaesekuchen/pull/38#pullrequestreview-395970951
+    - https://github.com/amehlhase316/Kaesekuchen/pull/18#pullrequestreview-391557178
 
   **How did you contribute to Static Analysis:
 
-    - NA
+    - Reviewed the Travis-CI build results when merging a user story and before merging Sprint 2 into master.
  
  **What was your main contribution to the Quality Policy documentation?:
 
-    - 
+    - Participated in team discussions and provided recommendations for revising the git workflow in preparation for Sprint 2.
 
 
 #### Team member Daimi Mussey:
@@ -245,7 +250,7 @@ I would also advise you to already fill out the Contributions section (End of sp
 - [] **Individual** Survey was submitted **individually** (create checkboxes below -- see Canvas to get link)
 - [] Daimi Mussey
 - [] Kyp Bellinger
-- [] Stephen Wilson
+- [X] Stephen Wilson
 - [] Justin Oliver
 - [] Chase Pierce
         
