@@ -23,7 +23,7 @@ Document your Sprint Planning here. Also check the kickoff document for more det
 **Why did you add exactly these US?**
 
 > We first walked through the user stories in the product backlog and tried to realign first based on priority. We placed the higher priority items near the top and lower towards the bottom. 
-Then we talked through about what our goal is this sprint (functionality and data structures) and realigned the items on the top of the list. We then took at the velocity forecasting to determine how much we can take on, and picked from the top of the list the user stories we decided as a group would be the most benficial to accomplish this sprint. 
+Then we talked through about what our goal is this sprint (functionality and data structures) and realigned the items on the top of the list. We then took at the velocity forecasting to determine how much we can take on, and picked from the top of the list the user stories we decided as a group would be the most beneficial to accomplish this sprint. 
 
 **Why do you think you will get them done? (details)**
 
@@ -65,14 +65,14 @@ I would also advise you to already fill out the Contributions section (End of sp
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
 | April 16  | Justin Oliver, Daimi Mussey,           | Burndown is starting to get back on track. Some of the tasks that were originally  |had a flat spot|Dev branch      |                  |
 |           | Stephen Wilson, Chase Pierce           | harder than anticipated are being completed. Stuff is having to be reworked        |but looking to |Builds correctly|                  |
-|           |                                        | a little as memoranda is a bit complicated, but overall everything is pretty solid |get back on    |                |                  |
+|           |                                        | a little as Memoranda is a bit complicated, but overall everything is pretty solid |get back on    |                |                  |
 |           |                                        |                                                                                    |track          |                |                  |
 |           |                                        |                                                                                    |               |                |                  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
 | April 19  | Justin Oliver, Daimi Mussey,           | Everyone is wrapping up the pushes and testing to ensure the sprint wraps up       |Everything came|Dev branch      |                  |
 |           | Stephen Wilson, Chase Pierce           | nicely, as it looks like it will. Unfortunately there were a couple US that weren't|together pretty|Builds correctly|                  |
-|           |                                        | touched. But the workload appears to be the amount or withdrawn team member would  |solid          |                |                  |
-|           |                                        | have commited, so that appears not to be an issue. It appears everyone was able to |               |                |                  |
+|           |                                        | touched. But the workload appears to be the amount our withdrawn team member would |solid          |                |                  |
+|           |                                        | have committed, so that appears not to be an issue. It appears everyone was able to|               |                |                  |
 |           |                                        | complete what they set out to do                                                   |               |                |                  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
 
@@ -99,15 +99,22 @@ I would also advise you to already fill out the Contributions section (End of sp
 
 **What do you think is the value you created this Sprint?**
 
-> 
+> The main value we believe we created are the backbones and the framework for a functioning gym scheduling system. We also changed the overall feel of the site so it looks more like a gym scheduling system and less like a generic program. Some of the functionality includes:
+
+- A user login screen
+- Trainer profiles page with trainer profiles and the ability to add and edit the profiles
+- A calendar planning tool with the ability to schedule upcoming classes
+- Java classes that implement the basic functionality required in a gym scheduling program
+- A test package for Junit and code coverage tests
+- The ability to run Spotbugs and Checkstyle to help with static analysis
 
 **Do you think you worked enough and that you did what was expected of you?**
 
-> 
+> As a team, I think we worked beyond what was expected. We lost a team member early on this sprint, and we all tried to pick up the pieces and keep our team moving forward. There was also a lot of additional work that went into play this sprint compared to what was planned for, because we did not take into account how difficult the Memoranda code base would be to work with. 
 
 **Would you say you met the customers’ expectations? Why, why not?**
 
-> 
+> Unfortunately, we did not quite meet the customers' expectations this sprint. The main reason being we set out at the beginning of this sprint to accomplish 9 user stories. However, due to losing a team member earlier in the sprint, we weren't able to accomplish 2 of those user stories. This made us fall a little short of what the customer expectations should have been at the end of this sprint. 
 
 ### Sprint Retrospective
 
@@ -115,33 +122,37 @@ I would also advise you to already fill out the Contributions section (End of sp
 
 **Did you meet your sprint goal?**
 
-> 
+> Yes, we believe the sprint goal of "Creating core data structures and the foundational functionality of the program" was met. The core data structures that are needed as the backbone of the system now exist as does some basic functionality that can be built upon. 
+
 **Did you complete all stories on your Sprint Backlog?**
 
-> 
+> No, we did not complete all the stories in the backlog. Due to losing a team member early in the sprint, we had two user stories that we were not able to complete. 
 
 **If not, what went wrong?**
 
-> 
+> We lost a team member early on in this sprint. During the sprint planning, we looked at the velocity forecast based on points assigned to User Stories, and laid out a plan that would be pushing it a little, but should have been feasible with 5 members. Once we lost that 5th member, that goal wasn't realistically attainable. 
 
 **Did you work at a consistent rate of speed, or velocity? (Meaning did you work during the whole Sprint or did you start working when the deadline approached.)**
 
-> 
+> We started off the sprint right along the lines of what would be expected according to the burndown chart. But a few days in, as the bigger User Stories' tasks started to come into play, we hit a little bit of a flat spot on our burndown chart. The main reasoning for this is that some of the tasks that we were attempting turned out to be a little tougher than we anticipated, and so they spent more time in the "in process" spots than we anticipated. Work was still being done on the user stories and this can be seen by the commit history in Github. Once we got over that slight hurdle, we got back on track and finished out the last couple days at about the anticipated pace.  
 
 **Did you deliver business value?**
 
-> 
+> We definitely delivered business value in this sprint. The program went from just being a program that would open and close, to something that looks like a gym scheduling system. There is also a lot of the framework and functionality built into the back end that will really help with the future development of the program.
 
 **Are there things the team thinks it can do better in the next Sprint?**
 
-> 
+> I don't think we anticipated how difficult some of the tasks could be. Before last sprint we had a meeting where we talked both high level and low level functionality, and how we thought stuff should go together. Once we started diving into what we discussed, you could say things were easier said then done. We think now that we have a better understanding of the system and code we were given, it should allow us to make better plans and decisions about what we should realistically be able to accomplish this next sprint. 
+
+> We had a few user stories that were dependent on other stories being completed. We didn't really do a great job of listing out what was dependent on others, and this created some blockage as tasks were trying to be accomplished. We will take this lesson learned and apply it to the next sprint planning session.
 
 **How do you feel at this point? Get a pulse on the optimism of the team.**
 
-> 
+>  Overall we are pretty optimistic that we will be able to accomplish the goal of this project. We are all feeling more and more comfortable working together as a team and understanding each others strengths and weaknesses. The flow of the teamwork right now seems pretty solid, and other than the time constraint there aren't really a lot of hurdles. 
+
 ### Contributions:
 
-> In this section I want you to point me to your main contributions (each of you individually). Some of the topcs are not needed for the first deliverables (you should know which things you should have done in this Sprint, if you don't then you have probably missed something):
+> In this section I want you to point me to your main contributions (each of you individually). Some of the topics are not needed for the first deliverables (you should know which things you should have done in this Sprint, if you don't then you have probably missed something):
 
 #### Team member Chase Pierce:
   **Links to GitHub commits with main code contribution (up to 5 links):
@@ -218,7 +229,7 @@ I would also advise you to already fill out the Contributions section (End of sp
  
  **What was your main contribution to the Quality Policy documentation?:
 
-    - Participated in team discussions and provided recommendations for revising the git workflow in preparation for Sprint 2.
+    - Participated in team discussions and provided recommendations for revising the git work flow in preparation for Sprint 2.
 
 
 #### Team member Daimi Mussey:
@@ -253,19 +264,18 @@ I would also advise you to already fill out the Contributions section (End of sp
     - Participated in group conversations about how to improve our git flow, as well as naming conventions for branches.
  
 ## 4: Checklist for you to see if you are done
-- [] Filled out the complete form from above, all fields are filled and written in full sentences
+- [x] Filled out the complete form from above, all fields are filled and written in full sentences
 - [x] Read the kickoff again to make sure you have all the details
-- [] User Stories that were not completed, were left in the Sprint and a copy created
+- [x] User Stories that were not completed, were left in the Sprint and a copy created
 - [x] Your Quality Policies are accurate and up to date
-- [] **Individual** Survey was submitted **individually** (create checkboxes below -- see Canvas to get link)
-- [] Daimi Mussey
-- [] Kyp Bellinger
+- [x] **Individual** Survey was submitted **individually** (create check boxes below -- see Canvas to get link)
+- [x] Daimi Mussey
 - [X] Stephen Wilson
-- [] Justin Oliver
-- [] Chase Pierce
+- [x] Justin Oliver
+- [x] Chase Pierce
         
-- [] The original of this file was copied for the next Sprint (needed for all but last Sprint where you do not need to copy it anymore)
-  - [X] Basic information (part 1) for next Sprint was included (meaning Spring Planning is complete)
-  - [X] All User Stories have acceptance tests
-  - [X] User Stories in your new Sprint Backlog have initial tasks which are in New
+  - [X] The original of this file was copied for the next Sprint (needed for all but last Sprint where you do not need to copy it anymore)
+  - [] Basic information (part 1) for next Sprint was included (meaning Spring Planning is complete)
+  - [] All User Stories have acceptance tests
+  - [] User Stories in your new Sprint Backlog have initial tasks which are in New
   - [X] You know how to proceed
