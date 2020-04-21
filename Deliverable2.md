@@ -224,23 +224,33 @@ I would also advise you to already fill out the Contributions section (End of sp
 #### Team member Daimi Mussey:
   **Links to GitHub commits with main code contribution (up to 5 links):
 
-    - 
+    - https://github.com/amehlhase316/Kaesekuchen/commit/c441028e4759323e36ecbe6895eb5e51071af2f1
+    - https://github.com/amehlhase316/Kaesekuchen/commit/619efa02b21b3ca395d71a1910dfa1590f9c94d7
+    - https://github.com/amehlhase316/Kaesekuchen/commit/8381fd4c88b4d4ba06a67cbda77589c389f812c6
+    - https://github.com/amehlhase316/Kaesekuchen/commit/79e9860161e933ab2360c2027e4572e0108c3b13
+    - https://github.com/amehlhase316/Kaesekuchen/commit/b7dbf41b5d5bdb0864a95050010b74f986b2142f
+    
 
    **GitHub links to your Unit Tests (up to 3 links):
 
-    - N/A
+    - https://github.com/amehlhase316/Kaesekuchen/commit/8786bf918cf17eb09b472052058514cfb0d39d61
+    - https://github.com/amehlhase316/Kaesekuchen/commit/678d71f91b4748cd514cf625646b5a91432f44da
+    - https://github.com/amehlhase316/Kaesekuchen/commit/5969d00d7a2bc08c7a3d4cbf813f9490bbedb56d
 
   **GitHub links to your Code Reviews (up to 3 links):
 
-    - N/A
+    - https://github.com/amehlhase316/Kaesekuchen/pull/35
+    - https://github.com/amehlhase316/Kaesekuchen/pull/15
+    - https://github.com/amehlhase316/Kaesekuchen/pull/41
 
   **How did you contribute to Static Analysis:
 
-    - N/A
+    - Checked Travis-CI build errors when pushing up commits. Also wrote unit tests to make sure that new code I added 
+    had a high coverage rate. 
  
  **What was your main contribution to the Quality Policy documentation?:
 
-    - 
+    - Participated in group conversations about how to improve our git flow, as well as naming conventions for branches.
  
 ## 4: Checklist for you to see if you are done
 - [] Filled out the complete form from above, all fields are filled and written in full sentences
