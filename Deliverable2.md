@@ -184,26 +184,38 @@ I would also advise you to already fill out the Contributions section (End of sp
  #### Team member Justin Oliver:
    **Links to GitHub commits with main code contribution (up to 5 links):
  
-     - 
+     - https://github.com/amehlhase316/Kaesekuchen/commit/08b8cc3730ba79136115b57b4837ae4cbfeec04b
+     - https://github.com/amehlhase316/Kaesekuchen/commit/32c4e2e3b734b02af9297a593af28153a49de568
+     - https://github.com/amehlhase316/Kaesekuchen/commit/e0c2606f73d039fc527223b2e582a7443e3e3957
+     - https://github.com/amehlhase316/Kaesekuchen/commit/fb0c5b845dcef0bcc7b731d02cb15978f453b5f8
+     - https://github.com/amehlhase316/Kaesekuchen/commit/0f8e0ce76be378fc749f0c836d9ebea13171c241
+
  
     **GitHub links to your Unit Tests (up to 3 links):
  
-     - link1
-     - link2
+     - https://github.com/amehlhase316/Kaesekuchen/commit/914734c301bb5f4fa4eb097d1c31546c094c6aa2
+     - https://github.com/amehlhase316/Kaesekuchen/commit/3299ac2c24ff471ffaea6f7c86caecf5fae15718
+     - https://github.com/amehlhase316/Kaesekuchen/commit/55aa773b9fa228fc942253662ac24de9b6188fed
  
    **GitHub links to your Code Reviews (up to 3 links):
  
-     - link1
-     - link2
+     - https://github.com/amehlhase316/Kaesekuchen/pull/20 
+     - https://github.com/amehlhase316/Kaesekuchen/commit/4ff8338083ffec810f5d60b0ecee561d2d42d328
+     - https://github.com/amehlhase316/Kaesekuchen/commit/914734c301bb5f4fa4eb097d1c31546c094c6aa2
  
    **How did you contribute to Static Analysis:
  
-     - link1
-     - link2
+     - Added junit and jacoco to the gradle build.  
+     - Made some minor changes to the Checkstyle xml file based on team discussion. 
+     - Added some code to the gradle build file that would allow the project to build 
+     - while ignoring some spotbugs errors, as it didn't make sense to fix the massive amounts during the sprint.
+     - We didn't want to total remove spotbugs as it was a useful tool, but we also didn't want it to limit
+     - our production. 
   
   **What was your main contribution to the Quality Policy documentation?:
  
-     - 
+     - Created the task in Taiga to have the quality policy updated as per the project requirements, focusing on SA. Facilitated a discussion with the team
+     surrounding SA and any other updates, and after conversation with the team went ahead and updated the policy according to our standards laid out in the discussions.
 
 #### Team member Stephen Wilson:
   **Links to GitHub commits with main code contribution (up to 5 links):
