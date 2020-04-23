@@ -89,7 +89,8 @@ public class TrainerCardPanel extends JPanel {
         this.add(trainerPicture);
         this.add(trainerBelt);        
         this.add(trainerInfo);
-        if (App.appUsers.getActiveUser() instanceof Owner || App.appUsers.getActiveUser().equals(trainer)) {
+        if (App.appUsers.getActiveUser() != null &&
+                (App.appUsers.getActiveUser() instanceof Owner || App.appUsers.getActiveUser().equals(trainer))) {
             this.add(editUser);
         }
         this.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.yellow));
