@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.java.memoranda.gym.AppUsers;
+import main.java.memoranda.gym.Belt;
 import main.java.memoranda.gym.Owner;
 import main.java.memoranda.gym.Trainer;
 import main.java.memoranda.util.Local;
@@ -39,7 +40,7 @@ public class TrainerCardPanel extends JPanel {
     Image scaledImage;
     JLabel trainerPicture;
     String name;
-    String belt;
+    Belt belt;
     String fact;
     File pic;
     Trainer trainer;
@@ -56,7 +57,7 @@ public class TrainerCardPanel extends JPanel {
         try {
             this.trainer = trainer;
             this.name = trainer.getName();
-            this.belt = trainer.getBelt().toString();
+            this.belt = trainer.getBelt();
             this.fact = trainer.getDescription();
             this.pic = trainer.getPic();
             jbInit();
@@ -125,7 +126,7 @@ public class TrainerCardPanel extends JPanel {
         
         // Set new values based on results from edit box
         this.name = dlg.trainerNameText.getText();
-        this.belt = dlg.trainerBeltText.getText();
+        this.belt = (Belt) dlg.beltBox.getSelectedItem();
         this.fact = dlg.trainerFactText.getText();
   
         // Removes old items and writes the new items
@@ -157,9 +158,9 @@ public class TrainerCardPanel extends JPanel {
 
     /**
      * Gets belt rank
-     * @return String belt rank
+     * @return Belt belt rank
      */
-    public String getBelt() {
+    public Belt getBelt() {
         return this.belt;
     }
 

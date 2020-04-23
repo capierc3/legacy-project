@@ -64,7 +64,7 @@ public class TrainerProfilesPanel extends JPanel {
     
     void addUser() {
         String name = "";
-        String belt = "";
+        Belt belt = Belt.WHITE;
         String fact = "";
 
         
@@ -82,14 +82,13 @@ public class TrainerProfilesPanel extends JPanel {
         
         // Set new values based on results from edit box
         name = dlg.trainerNameText.getText();
-        belt = dlg.trainerBeltText.getText();
+        belt = Belt.getBelt(dlg.beltBox.getSelectedIndex());
         fact = dlg.trainerFactText.getText();
   
         // Add components to new card
         JOptionPane.showMessageDialog(null, "New User Successfully Created!");
-        Trainer trainer = new TrainerImpl(name,name,name,"Password", Belt.valueOf(belt),
-                new File(this.getClass().getResource("/ui/icons/john.jpg").getPath()),
-                new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
+        Trainer trainer = new TrainerImpl(name,name,name,"Password", belt,
+                null,new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
         trainer.setDescription(fact);
         App.appUsers.addUser(trainer);
         TrainerCardPanel newTrainer = new TrainerCardPanel(trainer);
