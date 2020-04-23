@@ -7,29 +7,33 @@
 
 **Sprint Number:** Sprint 3
 
-**Scrum Master**: 
+**Scrum Master**: Stephen Wilson
 
-**Git Master**: 
+**Git Master**: Daimi Mussey
 
 ### Sprint Planning (For Sprint 1-4)
 Document your Sprint Planning here. Also check the kickoff document for more details on what needs to be done. This is just the documentation. 
 
-**Sprint Goal:** 
+**Sprint Goal:**  Focus on quality and stabilizing our current product.
 
-**How many User Stories did you add to the Product Backlog:** 
+**How many User Stories did you add to the Product Backlog:**  6 New User Stories
 
-**How many User Stories did you add to this Sprint:** 
+**How many User Stories did you add to this Sprint:** 8 User Stories
 
 **Why did you add exactly these US?**
 
-> 
+> We believe that by adding these stories, we feel confident that we can complete these stories during this sprint. These added 
+> functionality that we wanted to make sure was implemented, as well as included cleanup of code to make our product more
+> stable.
 
 **Why do you think you will get them done? (details)**
 
-> 
+> We believe we can successfully complete these as we are more familiar with the code, and have a better understanding of
+> the project deliverables. 
+>
 **Do you have a rough idea what you need to do? (if the answer is no then please let me know on Slack)**
 
-> 
+> Yes, we had a sprint planning meeting to discuss what all needs to be accomplished and are in agreement.
 
  
 
