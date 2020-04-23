@@ -19,6 +19,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+
+import main.java.memoranda.gym.Owner;
 import main.java.memoranda.util.Local;
 
 
@@ -62,8 +64,10 @@ public class TrainerProfilesPanel extends JPanel {
         this.add(testCard3); 
         this.add(testCard4); 
         this.add(testCard5); 
-        this.add(testCard6); 
-        this.add(newUser);
+        this.add(testCard6);
+        if (App.appUsers.getActiveUser() instanceof Owner) {
+            this.add(newUser);
+        }
         this.setBorder(title);
         
         newUser.addActionListener(new ActionListener() {

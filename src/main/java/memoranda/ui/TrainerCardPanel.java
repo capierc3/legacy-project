@@ -15,6 +15,9 @@ import javax.swing.JOptionPane;
 import java.awt.image.BufferedImage;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import main.java.memoranda.gym.AppUsers;
+import main.java.memoranda.gym.Owner;
 import main.java.memoranda.util.Local;
 
 
@@ -95,7 +98,9 @@ public class TrainerCardPanel extends JPanel {
         this.add(trainerPicture);
         this.add(trainerBelt);        
         this.add(trainerInfo);
-        this.add(editUser);
+        if (App.appUsers.getActiveUser() instanceof Owner) {
+            this.add(editUser);
+        }
         this.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.yellow));
         
         editUser.addActionListener(new ActionListener() {
