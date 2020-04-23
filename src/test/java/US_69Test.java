@@ -27,22 +27,16 @@ import java.util.ArrayList;
 
 public class US_69Test {
     String name = "Bruce Willis";
-    String belt = Belt.BLACK3.toString();
+    Belt belt = Belt.BLACK3;
     String fact = "I have lots of hair";
     Trainer bruce;
     TrainerCardPanel card;
 
     @Before
     public void setUp(){
-
-        try {
-            bruce = new TrainerImpl(name,"",name,"", Belt.valueOf(belt),
-                    new File(this.getClass().getResource("/ui/icons/nunchuckNorris.png").toURI()),
-                    new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
-            bruce.setDescription(fact);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        bruce = new TrainerImpl(name,"",name,"", belt,
+                    null, new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
+        bruce.setDescription(fact);
         card = new TrainerCardPanel(bruce);
     }
     
