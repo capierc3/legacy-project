@@ -289,7 +289,7 @@ I would also advise you to already fill out the Contributions section (End of sp
 - [x] Chase Pierce
         
   - [X] The original of this file was copied for the next Sprint (needed for all but last Sprint where you do not need to copy it anymore)
-  - [] Basic information (part 1) for next Sprint was included (meaning Spring Planning is complete)
-  - [] All User Stories have acceptance tests
-  - [] User Stories in your new Sprint Backlog have initial tasks which are in New
+  - [X] Basic information (part 1) for next Sprint was included (meaning Spring Planning is complete)
+  - [X] All User Stories have acceptance tests
+  - [X] User Stories in your new Sprint Backlog have initial tasks which are in New
   - [X] You know how to proceed
