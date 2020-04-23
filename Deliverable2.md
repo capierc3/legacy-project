@@ -171,15 +171,17 @@ I would also advise you to already fill out the Contributions section (End of sp
 
   **GitHub links to your Code Reviews (up to 3 links):
 
-    - 
+    - https://github.com/amehlhase316/Kaesekuchen/pull/31
+    - https://github.com/amehlhase316/Kaesekuchen/pull/40
+    - https://github.com/amehlhase316/Kaesekuchen/pull/26
 
   **How did you contribute to Static Analysis:
- 
-    -
+
+    - added input on Checkstyle config, and set up spotbugs build.
 
   **What was your main contribution to the Quality Policy documentation?:
 
-    - 
+    - Added in input during group meetings on naming conventions and pull request/review guidelines. 
  
  #### Team member Justin Oliver:
    **Links to GitHub commits with main code contribution (up to 5 links):
