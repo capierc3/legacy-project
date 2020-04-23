@@ -1,3 +1,15 @@
+
+### Operating Instructions
+Application can be executed using the command `gradle run`.  Login functionality exists, but the object states are not saved.  This functionality will be added in Sprint 3.  Until then, use the following credentials to login:
+
+> User Name: admin
+
+> Password: Password
+
+
+---
+
+
 Project SER316
 
 This is the initial dump for the SER316 project. It is a slightly modified version of the Memoranda project from memoranda.sf.net
