@@ -356,18 +356,6 @@ public class AgendaGenerator {
 			if (date.equals(CalendarDate.today())) {
 				if (e.getTime().after(new Date()))
 					txt = "<b>" + txt + "</b>";
-				if ((EventsScheduler.isEventScheduled())
-						&& (EventsScheduler
-								.getFirstScheduledEvent()
-								.getTime()
-								.equals(e.getTime()))) {
-					iurl =
-							main.java.memoranda.ui
-							.AppFrame
-							.class
-							.getResource("/ui/agenda/arrow.gif")
-							.toExternalForm();
-				}
 			}
 			String icon =
 					"<img align=\"right\" width=\"16\" height=\"16\" src=\""

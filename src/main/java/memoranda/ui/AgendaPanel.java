@@ -252,17 +252,6 @@ public class AgendaPanel extends JPanel {
 				if (isActive)
 					refresh(CurrentDate.get());
 			}});
-		EventsScheduler.addListener(new EventNotificationListener() {
-			public void eventIsOccured(main.java.memoranda.Event ev) {
-				if (isActive)
-					refresh(CurrentDate.get());
-			}
-
-			public void eventsChanged() {
-				if (isActive)
-					refresh(CurrentDate.get());
-			}
-		});
 		refresh(CurrentDate.get());
 
 		//        agendaPPMenu.setFont(new java.awt.Font("Dialog", 1, 10));

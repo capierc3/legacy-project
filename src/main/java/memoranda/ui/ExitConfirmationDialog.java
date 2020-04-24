@@ -58,7 +58,7 @@ public class ExitConfirmationDialog extends JDialog implements WindowListener {
         header.setFont(new java.awt.Font("Dialog", 0, 20));
         header.setForeground(new Color(0, 0, 124));
         header.setText(Local.getString("Exit"));
-        header.setIcon(new ImageIcon(main.java.memoranda.ui.EventDialog.class.getResource(
+        header.setIcon(new ImageIcon(main.java.memoranda.ui.ClassDialog.class.getResource(
             "/ui/icons/exit.png")));
         headerPanel.add(header);
 		

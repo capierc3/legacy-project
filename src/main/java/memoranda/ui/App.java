@@ -7,7 +7,6 @@ import java.util.Calendar;
 
 import javax.swing.*;
 
-import main.java.memoranda.EventsScheduler;
 import main.java.memoranda.gym.AppUsers;
 import main.java.memoranda.gym.User;
 import main.java.memoranda.util.Configuration;
@@ -103,8 +102,7 @@ public class App {
 			/* DEBUG */
 			System.out.println("[DEBUG] first day of week is set to " + fdow);
 		}
-		//Starts the EventScheduler and set the frame to the main app frame
-		EventsScheduler.init();
+		//Set the frame to the main app frame
 		frame = new AppFrame();
 		//starts the app and kills the splash screen
 		if (fullmode) {

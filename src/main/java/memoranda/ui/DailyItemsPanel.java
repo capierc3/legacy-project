@@ -25,7 +25,6 @@ import javax.swing.border.Border;
 import main.java.memoranda.CurrentNote;
 import main.java.memoranda.CurrentProject;
 import main.java.memoranda.EventNotificationListener;
-import main.java.memoranda.EventsScheduler;
 import main.java.memoranda.History;
 import main.java.memoranda.HistoryItem;
 import main.java.memoranda.HistoryListener;
@@ -283,18 +282,6 @@ public class DailyItemsPanel extends JPanel {
             }
         });
 
-        EventsScheduler.addListener(new EventNotificationListener() {
-            public void eventIsOccured(main.java.memoranda.Event ev) {
-                /*DEBUG*/
-                System.out.println(ev.getTimeString() + " " + ev.getText());
-                updateIndicators();
-            }
-
-            public void eventsChanged() {
-                updateIndicators();
-            }
-        });
-
 		currentDate = CurrentDate.get();
         currentNote = CurrentProject.getNoteList().getNoteForDate(CurrentDate.get());
 		CurrentNote.set(currentNote,true);
@@ -430,16 +417,6 @@ public class DailyItemsPanel extends JPanel {
         if (date.equals(CalendarDate.today())) {
             if (tl.getActiveSubTasks(null,date).size() > 0)
                 indicatorsPanel.add(taskB, null);
-            if (EventsScheduler.isEventScheduled()) {
-                /*String evlist = "";
-                for (Iterator it = EventsScheduler.getScheduledEvents().iterator(); it.hasNext();) {
-                    net.sf.memoranda.Event ev = (net.sf.memoranda.Event)it.next();   
-                    evlist += ev.getTimeString()+" - "+ev.getText()+"\n";
-                } */
-                main.java.memoranda.Event ev = EventsScheduler.getFirstScheduledEvent();
-                alarmB.setToolTipText(ev.getTimeString() + " - " + ev.getText());
-                indicatorsPanel.add(alarmB, null);
-            }
         }
         indicatorsPanel.updateUI();
     }
