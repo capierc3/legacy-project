@@ -1,21 +1,22 @@
 package main.java.memoranda.ui;
 
+import java.awt.*;
+
+import java.util.ArrayList;
+import java.util.Vector;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellRenderer;
+
 import main.java.memoranda.EventsManager;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
 import main.java.memoranda.gym.GymClass;
 import main.java.memoranda.util.Local;
 
-import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableCellRenderer;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Vector;
-/*$Id: EventsTable.java,v 1.6 2004/10/11 08:48:20 alexeya Exp $*/
-
 /**
- *  Class for the main table that displays the Classes/Events for the software
+ *  Class for the main table that displays the Classes/Events for the software.
  */
 public class MyScheduleTable extends JTable {
 
@@ -25,6 +26,7 @@ public class MyScheduleTable extends JTable {
     Vector events = new Vector();
     MyScheduleManager manager;
     ArrayList<GymClass> classList;
+
     /**
      * Constructor for EventsTable.
      */
@@ -38,25 +40,29 @@ public class MyScheduleTable extends JTable {
     }
 
     /**
-     * sets up the table
+     * sets up the table.
      * @param d CalendarDate
      */
     void initTable(CalendarDate d) {
         events = (Vector)EventsManager.getEventsForDate(d);
         classList = manager.getDaysClasses(d);
-//        getColumnModel().getColumn(0).setPreferredWidth(75);
-//        getColumnModel().getColumn(0).setMaxWidth(75);
         clearSelection();
         updateUI();
     }
 
     /**
-     * refreshes the table
+     * refreshes the table.
      */
     public void refresh() {
         initTable(CurrentDate.get());
     }
 
+    /**
+     * Changes the color of the cell depending on certain variables.
+     * @param row int
+     * @param column int
+     * @return TableCellRenderer
+     */
     public TableCellRenderer getCellRenderer(int row, int column) {
         return new javax.swing.table.DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(
@@ -67,18 +73,17 @@ public class MyScheduleTable extends JTable {
                 int row,
                 int column) {
                 Component comp;
-                comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                comp = super.getTableCellRendererComponent(
+                        table, value, isSelected, hasFocus, row, column);
                 GymClass gymClass = (GymClass)getModel().getValueAt(row, EVENT);
                 comp.setForeground(Color.gray);
-//                if (ev.isRepeatable())
-//                    comp.setFont(comp.getFont().deriveFont(Font.ITALIC));
                 if (CurrentDate.get().after(CalendarDate.today())) {
-                  comp.setForeground(Color.black);
+                    comp.setForeground(Color.black);
                 } else if (CurrentDate.get().equals(CalendarDate.today())) {
                     if (gymClass.getStartDate().after(CalendarDate.today())) {
                         comp.setForeground(Color.black);
                         comp.setFont(comp.getFont().deriveFont(Font.BOLD));
-                    } else if (gymClass.getStartDate().before(CalendarDate.today())){
+                    } else if (gymClass.getStartDate().before(CalendarDate.today())) {
                         comp.setForeground(Color.lightGray);
                     } else {
                         comp.setForeground(Color.black);
@@ -91,7 +96,7 @@ public class MyScheduleTable extends JTable {
     }
 
     /**
-     * Nested class for the table to be used
+     * Nested class for the table to be used.
      */
     class ClassTableModel extends AbstractTableModel {
         //Can be used to add new columns
@@ -106,14 +111,14 @@ public class MyScheduleTable extends JTable {
         };
 
         /**
-         * Constructor for the table
+         * Constructor for the table.
          */
         ClassTableModel() {
             super();
         }
 
         /**
-         * returns the amount of columns, hard coded '4'
+         * returns the amount of columns, hard coded '7'.
          * @return int
          */
         public int getColumnCount() {
@@ -121,22 +126,21 @@ public class MyScheduleTable extends JTable {
         }
 
         /**
-         * gets the amount of rows in the table
+         * gets the amount of rows in the table.
          * @return int
          */
         public int getRowCount() {
-			int i;
-			try {
-				i = classList.size();
-			}
-			catch(NullPointerException e) {
-				i = 1;
-			}
-			return i;
+            int i;
+            try {
+                i = classList.size();
+            } catch (NullPointerException e) {
+                i = 1;
+            }
+            return i;
         }
 
         /**
-         * gets the value displayed in a given row and col
+         * gets the value displayed in a given row and col.
          * @param row int
          * @param col int
          * @return Object
@@ -151,14 +155,14 @@ public class MyScheduleTable extends JTable {
                 return gymClass.getRank();
             } else if (col == 3) {
                 return hoursDisplay(gymClass.getStartTime().replace("_"," "));
-            } else if (col ==4) {
-                return gymClass.getClassLength()+" minutes";
-            } else if (col ==5) {
+            } else if (col == 4) {
+                return gymClass.getClassLength() + " minutes";
+            } else if (col == 5) {
                 return gymClass.getTrainer().getName();
-            } else if (col ==6) {
+            } else if (col == 6) {
                 try {
                     return gymClass.getMaxSize() - gymClass.getSize();
-                } catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
                     return "Not Set";
                 }
             } else if (col == EVENT_ID) {
@@ -168,7 +172,7 @@ public class MyScheduleTable extends JTable {
         }
 
         /**
-         * returns the columnName at a given column number, starts at 0
+         * returns the columnName at a given column number, starts at 0.
          * @param col int
          * @return String
          */
@@ -176,17 +180,16 @@ public class MyScheduleTable extends JTable {
             return columnNames[col];
         }
 
-        private String hoursDisplay(String disp){
+        private String hoursDisplay(String disp) {
             String[] dispSplit = disp.split(":");
-            if (dispSplit[0].equalsIgnoreCase("0")){
+            if (dispSplit[0].equalsIgnoreCase("0")) {
                 dispSplit[0] = "12";
             }
-            String[] amPMSplit = dispSplit[1].split(" ");
-            if (amPMSplit[0].length()==1){
-                amPMSplit[0] = "0"+amPMSplit[0];
+            String[] amPm = dispSplit[1].split(" ");
+            if (amPm[0].length() == 1) {
+                amPm[0] = "0" + amPm[0];
             }
-            return dispSplit[0]+":"+amPMSplit[0]+" "+amPMSplit[1];
+            return dispSplit[0] + ":" + amPm[0] + " " + amPm[1];
         }
-
     }
 }
