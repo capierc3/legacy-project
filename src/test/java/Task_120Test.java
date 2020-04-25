@@ -27,15 +27,11 @@ public class Task_120Test {
     Owner owner1;
     File filename;
     File secondFile;
-    Collection<Note> noteList;
     ClassList classList;
-    GymClass class1;
     GymClass class2;
 
     Date today = new Date();
 
-    CalendarDate date1;
-    CalendarDate date2;
     CalendarDate date3;
 
     Element element;
@@ -46,13 +42,10 @@ public class Task_120Test {
      */
     @Before
     public void setUp() throws Exception {
-        noteList = null;
+        Collection<Note> noteList = null;
         classList = new ClassListImpl(new ArrayList<>());
-        class1 = new GymClassImpl("Kicking 101", "Public", Belt.WHITE);
         filename  = new File("test");
         secondFile = new File("");
-        date1 = new CalendarDate(11, 4, 2020, 4, 0, false);
-        date2 = new CalendarDate(11, 4, 2020, 4, 0, false);
 
         date3 = new CalendarDate(today);
         class2 = new GymClassImpl("Kicking 102", "Public", Belt.WHITE,

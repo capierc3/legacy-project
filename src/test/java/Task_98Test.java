@@ -10,8 +10,6 @@ import static org.junit.Assert.assertEquals;
  * Tests the Belt enums and their values.
  */
 public class Task_98Test {
-    Belt testBelt1;
-    Belt testBelt2;
 
     /**
      * Anything that should happen before any test is ran.

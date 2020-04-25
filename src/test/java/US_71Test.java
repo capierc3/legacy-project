@@ -11,7 +11,6 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -38,8 +37,6 @@ public class US_71Test {
     CalendarDate appt3;
     String appt1Stamp;
     String noTimeStamp;
-    String calStamp;
-    Calendar cal;
     CalendarDate now;
     CalendarDate shorty;
 
@@ -55,8 +52,7 @@ public class US_71Test {
     Boolean beforeNull;
     Boolean afterNull;
     Boolean equalsNull;
-    CalendarDate nullBeforeDate;
-    CalendarDate nullAfterDate;
+
     
     /**
      * Anything that needs to happen before a test is ran and before the next test
@@ -64,6 +60,8 @@ public class US_71Test {
      */
     @Before
     public void setUp() throws Exception {
+        CalendarDate nullBeforeDate = null;
+        CalendarDate nullAfterDate = null;
         am = new CalendarDate(21,6,1987,6,30,true);
         pm = new CalendarDate(21,6,1987,6,30,false);
         before = new CalendarDate(10,4,2020,6,29,true);
@@ -79,10 +77,12 @@ public class US_71Test {
         appt1Stamp = "10/4/2020/6:30_AM";
         noTimeStamp = "10/4/2020";
         now = new CalendarDate();
-        cal = appt1.getCalendar();
         compareOne = am.getDate();
         compareTwo = pm.getDate();
         shorty = new CalendarDate(7,7,1982);
+        beforeNull = am.before(nullBeforeDate);
+        afterNull = am.after(nullAfterDate);
+        equalsNull = am.equals(nullBeforeDate);
 
         
     }
@@ -226,9 +226,6 @@ public class US_71Test {
      */
     @Test
     public void beforeAndAfterNull() {
-    	beforeNull = am.before(nullBeforeDate);
-    	afterNull = am.after(nullAfterDate);
-    	equalsNull = am.equals(nullBeforeDate);
     	assertFalse(equalsNull);
     	assertTrue(beforeNull);
     	assertTrue(afterNull);

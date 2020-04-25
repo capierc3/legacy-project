@@ -1,3 +1,5 @@
+package test.java;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,7 +12,6 @@ import main.java.memoranda.Note;
 import main.java.memoranda.gym.GymClass;
 import main.java.memoranda.gym.GymClassImpl;
 import main.java.memoranda.gym.ClassListImpl;
-import main.java.memoranda.date.CalendarDate;
 import nu.xom.Element;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,12 +25,8 @@ public class Task_75Test {
     Student student1;
     File filename;
     File secondFile;
-    Collection<Note> noteList;
     ClassList classList;
     GymClass class1;
-
-    CalendarDate date1;
-    CalendarDate date2;
 
     Element element;
 
@@ -39,13 +36,11 @@ public class Task_75Test {
      */
     @Before
     public void setUp() throws Exception {
-        noteList = null;
+        Collection<Note> noteList = null;
         classList = new ClassListImpl(new ArrayList<>());
         class1 = new GymClassImpl("Kicking 101", "Public", Belt.WHITE);
         filename  = new File("test");
         secondFile = new File("");
-        date1 = new CalendarDate(11, 4, 2020, 4, 0, false);
-        date2 = new CalendarDate(11, 4, 2020, 4, 0, false);
         student1 = new StudentImpl("Student Ted", "4325", "ted@Student.com", "BestStudent",
                 Belt.WHITE, filename, noteList, classList);
         element = student1.getContent();

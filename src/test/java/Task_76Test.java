@@ -43,7 +43,6 @@ public class Task_76Test {
     CalendarDate endDate;
     Element el;
     Trainer trainer;
-    Trainer trainer2;
     Room room;
     Room room2;
     Student student;
@@ -128,7 +127,7 @@ public class Task_76Test {
      * Test to make sure the class length is calculated properly.
      */
     @Test
-    public void ClassLengthTest() {
+    public void classLengthTest() {
         assertEquals(60,class1.getClassLength());
         assertEquals(15,class2.getClassLength());
         assertEquals(120,class3.getClassLength());

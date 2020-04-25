@@ -1,3 +1,5 @@
+package test.java;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +18,6 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
 
 public class Task_80Test {
-    Element element;
     ClassList classList;
     Collection<CalendarDate> classDates;
     Collection<GymClass> gymClasses;
@@ -26,7 +27,7 @@ public class Task_80Test {
     GymClass class2;
     GymClass class3;
     Date today = new Date();
-    boolean isAvailable;
+    boolean isAvailable = false;
 
     /**
      * Test setup for Gym ClassList.

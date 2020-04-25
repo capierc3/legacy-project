@@ -21,7 +21,6 @@ public class Task_77Test {
     Trainer trainer1;
     File filename;
     File secondFile;
-    Collection<Note> noteList;
     ClassList classList;
 
     String description;
@@ -39,7 +38,7 @@ public class Task_77Test {
      */
     @Before
     public void setUp() throws Exception {
-        noteList = null;
+        Collection<Note> noteList = null;
         classList = new ClassListImpl(new ArrayList<>());
         filename  = new File("test");
         secondFile = new File("");
