@@ -1,8 +1,10 @@
 package test.java;
 
-import main.java.memoranda.gym.*;
-import org.junit.*;
-
+import main.java.memoranda.gym.AppUsers;
+import main.java.memoranda.gym.Belt;
+import main.java.memoranda.gym.User;
+import main.java.memoranda.gym.UserImpl;
+import main.java.memoranda.gym.ClassListImpl;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -12,6 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -51,25 +54,27 @@ public class Task93_Whitebox {
     }
 
     @Test
-    public void verifyUserAddition(){
+    public void verifyUserAddition() {
         AppUsers app = new AppUsers();
 
         UserImpl user = new UserImpl("John Doe","jd001","john","catsRkool64",
-                Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()), "User");
+                Belt.BLACK3,new File(""),new ArrayList<>(),
+                new ClassListImpl(new ArrayList<>()), "User");
 
         app.addUser(user);
 
         User u = app.getUser(user.getUserName());
-        assert(u.equals(user));
+        assertEquals(u, user);
     }
 
     @Test
-    public void verifyUserRemoval(){
+    public void verifyUserRemoval() {
 
         AppUsers app = new AppUsers();
 
         UserImpl user = new UserImpl("John Doe","jd001","john","catsRkool64",
-                Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()), "User");
+                Belt.BLACK3,new File(""),new ArrayList<>(),
+                new ClassListImpl(new ArrayList<>()), "User");
 
         app.addUser(user);
 
@@ -81,11 +86,12 @@ public class Task93_Whitebox {
     }
 
     @Test
-    public void verifyLogin(){
+    public void verifyLogin() {
         AppUsers app = new AppUsers();
 
         UserImpl user = new UserImpl("John Doe","jd001","john","catsRkool64",
-                Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()), "User");
+                Belt.BLACK3,new File(""),new ArrayList<>(),
+                new ClassListImpl(new ArrayList<>()), "User");
 
         app.addUser(user);
 

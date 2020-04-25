@@ -35,7 +35,7 @@ public class Task_75Test {
 
     /**
      * Test setup for Student.
-     * @throws Exception
+     * @throws Exception if null
      */
     @Before
     public void setUp() throws Exception {
@@ -52,10 +52,10 @@ public class Task_75Test {
     }
 
     /**
-     * Test of getters and setters for Trainer
+     * Test of getters and setters for Trainer.
      */
     @Test
-    public void classTest(){
+    public void classTest() {
         assertEquals("Student Ted", student1.getName());
         student1.setName("The Real Ted");
         assertEquals("The Real Ted", student1.getName());

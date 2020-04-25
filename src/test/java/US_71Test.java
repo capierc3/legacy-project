@@ -1,19 +1,25 @@
 package test.java;
 
 import main.java.memoranda.date.CalendarDate;
-import main.java.memoranda.util.Util;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.junit.Assert.*;
+
 
 /**
  * Class to test the US_71 branch.
- * US_71 was the retooling of CalendarDate.java to make it more of a one stop shop for all things date and time.
+ * US_71 was the retooling of CalendarDate.java 
+ * to make it more of a one stop shop for all things date and time.
  * @author Chase
  */
 public class US_71Test {
@@ -52,7 +58,10 @@ public class US_71Test {
     CalendarDate nullBeforeDate;
     CalendarDate nullAfterDate;
     
-
+    /**
+     * Anything that needs to happen before a test is ran and before the next test
+     * such as resetting a variable.
+     */
     @Before
     public void setUp() throws Exception {
         am = new CalendarDate(21,6,1987,6,30,true);
@@ -88,10 +97,11 @@ public class US_71Test {
     }
 
     /**
-     * Test to make sure the AM PM setting is working and .before and .after is working with time added.
+     * Test to make sure the AM PM setting is working and 
+     * .before and .after is working with time added.
      */
     @Test
-    public void AMPMTest(){
+    public void aMpMTest() {
         assertTrue(am.before(pm));
         assertFalse(pm.before(am));
         assertTrue(pm.after(am));
@@ -102,7 +112,7 @@ public class US_71Test {
      * Test to check cases where times are different by a small amount.
      */
     @Test
-    public void preciseBeforeAfter(){
+    public void preciseBeforeAfter() {
         assertTrue(before.before(startTime));
         assertTrue(after.after(startTime));
     }
@@ -111,7 +121,7 @@ public class US_71Test {
      * checks that a CalendarDate without a time set still can be compared to one with a time set.
      */
     @Test
-    public void noTimeAndTimeSet(){
+    public void noTimeAndTimeSet() {
         assertTrue(startTime.after(noTimeBefore));
         assertTrue(startTime.equals(noTimeEqual));
         assertTrue(startTime.before(noTimeAfter));
@@ -124,8 +134,9 @@ public class US_71Test {
      * Tests the inPeriod() with CalendarDate objects with times set to ones without and with time.
      */
     @Test
-    public void inPeriodTestWithTime(){
-        //appt1 should equal start time, appt2 should be in between, and appt3 should be equal to the end time.
+    public void inPeriodTestWithTime() {
+        //appt1 should equal start time, appt2 should be in between, 
+        // and appt3 should be equal to the end time.
         assertTrue(appt1.inPeriod(startTime,endTime));
         assertTrue(appt2.inPeriod(startTime,endTime));
         assertTrue(appt3.inPeriod(startTime,endTime));
@@ -139,10 +150,10 @@ public class US_71Test {
     }
 
     /**
-     * Tests the time stamp out put with times and no times
+     * Tests the time stamp out put with times and no times.
      */
     @Test
-    public void timeStamp(){
+    public void timeStamp() {
         assertEquals(appt1Stamp,appt1.toString());
         assertEquals(noTimeStamp,noTimeEqual.toString());
     }
@@ -151,7 +162,7 @@ public class US_71Test {
      * A new CalendarDate object with no inputs should be set to current time.
      */
     @Test
-    public void today(){
+    public void today() {
         assertTrue(CalendarDate.yesterday().isHourSet());
         assertTrue(CalendarDate.today().isHourSet());
         assertTrue(CalendarDate.tomorrow().isHourSet());
@@ -159,7 +170,7 @@ public class US_71Test {
     }
     
     /**
-     * Tests to ensure if date is over the max days for the month, it defaults to max day
+     * Tests to ensure if date is over the max days for the month, it defaults to max day.
      */
     @Test
     public void maxDay() {
@@ -168,7 +179,7 @@ public class US_71Test {
     }
     
     /**
-     * Tests the compares object function (not the date one)
+     * Tests the compares object function (not the date one).
      */
     @Test
     public void compareObjects() {
@@ -177,7 +188,7 @@ public class US_71Test {
     }
     
     /**
-     * Tests the get date functionality
+     * Tests the get date functionality.
      */
     @Test
     public void shortDateGetDate() {
@@ -186,7 +197,7 @@ public class US_71Test {
     }
     
     /**
-     * Tests the functionality of returning false to see if date is in period
+     * Tests the functionality of returning false to see if date is in period.
      */
     @Test
     public void inPeriodReturn() {
@@ -195,10 +206,10 @@ public class US_71Test {
     }
     
     /**
-     * Testing the functionality of other getters in setters within the Calendar Date class
+     * Testing the functionality of other getters in setters within the Calendar Date class.
      */
     @Test
-    public void toDateTest() throws Exception{
+    public void toDateTest() throws Exception {
     	toDate = am.getDate();
     	testingConstructors = new CalendarDate(toDate);
     	stringDate = testingConstructors.toString();
@@ -211,7 +222,7 @@ public class US_71Test {
     }
     
     /**
-     * Checking to see if before and after null returns work
+     * Checking to see if before and after null returns work.
      */
     @Test
     public void beforeAndAfterNull() {

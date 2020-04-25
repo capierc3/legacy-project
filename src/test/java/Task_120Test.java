@@ -1,3 +1,5 @@
+package test.java;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,7 +42,7 @@ public class Task_120Test {
 
     /**
      * Test setup for Owner.
-     * @throws Exception
+     * @throws Exception if null
      */
     @Before
     public void setUp() throws Exception {
@@ -62,10 +64,10 @@ public class Task_120Test {
     }
 
     /**
-     * Test of getters and setters for Owner
+     * Test of getters and setters for Owner.
      */
     @Test
-    public void classTest(){
+    public void classTest() {
         assertEquals("Owner Ted", owner1.getName());
         owner1.setName("The Real Ted");
         assertEquals("The Real Ted", owner1.getName());

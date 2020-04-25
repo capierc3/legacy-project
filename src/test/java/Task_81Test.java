@@ -39,7 +39,7 @@ public class Task_81Test {
 
     /**
      * Test setup for User.
-     * @throws Exception
+     * @throws Exception if Null
      */
     @Before
     public void setUp() throws Exception {
@@ -64,7 +64,7 @@ public class Task_81Test {
      * Test of getters and setters for User.
      */
     @Test
-    public void classTest(){
+    public void classTest() {
         assertEquals("User Ted", user1.getName());
         user1.setName("The Real Ted");
         assertEquals("The Real Ted", user1.getName());

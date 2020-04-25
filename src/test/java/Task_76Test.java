@@ -1,22 +1,36 @@
 package test.java;
 
 import main.java.memoranda.date.CalendarDate;
-import main.java.memoranda.gym.*;
+import main.java.memoranda.gym.GymClass;
+import main.java.memoranda.gym.Trainer;
+import main.java.memoranda.gym.TrainerImpl;
+import main.java.memoranda.gym.Room;
+import main.java.memoranda.gym.RoomImpl;
+import main.java.memoranda.gym.Student;
+import main.java.memoranda.gym.StudentImpl;
+import main.java.memoranda.gym.Belt;
+import main.java.memoranda.gym.ClassListImpl;
+import main.java.memoranda.gym.GymClassImpl;
 import main.java.memoranda.util.Util;
 import nu.xom.Element;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
 
 /**
- * Tests the GymClassImpl class is working. should be able to pull the information stored in the Element
- *
- * tests the basic building of a gymClass object and testing if returning the information is correct.
+ * Tests the GymClassImpl class is working. 
+ * Should be able to pull the information stored in the Element
+ * tests the basic building of a gymClass object and 
+ * testing if returning the information is correct.
  * Static analysis of the class done on April 16th. 
  */
 public class Task_76Test {
@@ -40,8 +54,8 @@ public class Task_76Test {
     GymClass constructor3;
 
     /**
-     * sets up the vars for testing
-     * @throws Exception
+     * sets up the vars for testing.
+     * @throws Exception if Null
      */
     @Before
     public void setUp() throws Exception {
@@ -78,14 +92,15 @@ public class Task_76Test {
         */
         constructor1 = new GymClassImpl("Kung Foo Fighting Advanced", "private");
         constructor2 = new GymClassImpl("Kung Foo Fighting Intro", "public", Belt.BLUE);
-        constructor3 = new GymClassImpl("Kung Foo Fighting Double Advanced", "public", Belt.BLACK1, startDate, endDate);
+        constructor3 = new GymClassImpl("Kung Foo Fighting Double Advanced", "public", 
+                Belt.BLACK1, startDate, endDate);
     }
 
     /**
-     * Tests that everything is saved properly in the GymClass Element
+     * Tests that everything is saved properly in the GymClass Element.
      */
     @Test
-    public void classTest(){
+    public void classTest() {
         assertEquals("Kicking 101",class1.getName());
         class1.setName("Kicking 202");
         assertEquals("Kicking 202",class1.getName());
@@ -113,7 +128,7 @@ public class Task_76Test {
      * Test to make sure the class length is calculated properly.
      */
     @Test
-    public void ClassLengthTest(){
+    public void ClassLengthTest() {
         assertEquals(60,class1.getClassLength());
         assertEquals(15,class2.getClassLength());
         assertEquals(120,class3.getClassLength());
@@ -121,25 +136,26 @@ public class Task_76Test {
     }
 
     /**
-    *Blackbox testing
+    *Blackbox testing.
     * Most of this is tested above, but I'll test again just for the practice of blackbox testing
     */
     @Test
-    public void classExists(){
+    public void classExists() {
         assertNotNull(constructor1);
         assertNotNull(constructor2);
         assertNotNull(constructor3);
     }
 
     @Test
-    public void correctName(){
+    public void correctName() {
         assertEquals("Kung Foo Fighting Advanced",constructor1.getName());
         assertEquals("Kung Foo Fighting Intro",constructor2.getName());
         assertEquals("Kung Foo Fighting Double Advanced",constructor3.getName());
 
     }
-
-    public void setName(){
+    
+    @Test
+    public void setName() {
         constructor1.setName("KFFA");
         constructor2.setName("KFFI");
         constructor3.setName("KFFDA");

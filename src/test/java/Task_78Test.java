@@ -14,6 +14,7 @@ import nu.xom.Element;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 import static junit.framework.TestCase.assertEquals;
 
 public class Task_78Test {
@@ -30,7 +31,7 @@ public class Task_78Test {
 
     /**
      * Test setup for Room.
-     * @throws Exception
+     * @throws Exception if Null
      */
     @Before
     public void setUp() throws Exception {
@@ -47,10 +48,10 @@ public class Task_78Test {
     }
 
     /**
-     * Test of getters and setters for Room
+     * Test of getters and setters for Room.
      */
     @Test
-    public void classTest(){
+    public void classTest() {
 
         room1.addClass(class2);
         assertEquals(1, room1.getClasses().getSize());
