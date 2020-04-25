@@ -194,8 +194,18 @@ public class AppUsers implements UserList {
         File gordon = new File(this.getClass().getResource("/ui/icons/gordon.jpg").toURI());
         File donna = new File(this.getClass().getResource("/ui/icons/donna.jpg").toURI());
         File john = new File(this.getClass().getResource("/ui/icons/john.jpg").toURI());
-        User user = new StudentImpl("Johnny Karate","JK","student","Password",Belt.WHITE,
-                defaultPic,new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
+        File kip = new File(this.getClass().getResource("/ui/icons/kip.jpg").toURI());
+        File dan = new File(this.getClass().getResource("/ui/icons/dan.jpg").toURI());
+        File chosen = new File(this.getClass().getResource("/ui/icons/chosen.jpeg").toURI());
+        File johnny = new File(this.getClass().getResource("/ui/icons/johnny.jpg").toURI());
+        User student1 = new StudentImpl("Johnny Karate","JK","student","Password",Belt.ORANGE,
+                johnny,new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
+        User student2 = new StudentImpl("Kip Dynamite",Util.generateId(),"KDynamite","Password",Belt.WHITE,
+                kip,new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
+        User student3 = new StudentImpl("Daniel LaRusso",Util.generateId(),"LaRUu","Password",Belt.BROWN3,
+                dan,new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
+        User student4 = new StudentImpl("The Chosen One",Util.generateId(),"Chosen1","Password",Belt.BLACK3,
+                chosen,new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
         UserImpl user1 = new OwnerImpl("Fancy Nancy","admin001","admin","Password",
                 Belt.BLACK3,defaultPic,new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
         Trainer user2 = new TrainerImpl("Country Mac","CMac","trainer","Password",
@@ -219,7 +229,10 @@ public class AppUsers implements UserList {
         Trainer trainer6 = new TrainerImpl("John Bosworth", Util.generateId(),"JBos",
                 "Password",Belt.WHITE,john,new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
         trainer6.setDescription("Innovation is a risk.");
-        appUsers.put(user.getUserName(),user);
+        appUsers.put(student1.getUserName(),student1);
+        appUsers.put(student2.getUserName(),student2);
+        appUsers.put(student3.getUserName(),student3);
+        appUsers.put(student4.getUserName(),student4);
         appUsers.put(user1.getUserName(),user1);
         appUsers.put(user2.getUserName(),user2);
         appUsers.put(trainer1.getUserName(),trainer1);
