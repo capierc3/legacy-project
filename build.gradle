@@ -41,7 +41,7 @@ checkstyle {
 
 spotbugs {
   effort = "max"
-  reportLevel = "low"
+  reportLevel = "medium"
   ignoreFailures = true
 }
 
