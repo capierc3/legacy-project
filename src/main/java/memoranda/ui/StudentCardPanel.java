@@ -1,25 +1,25 @@
-/**
- * This class is designed to display a panel and show the appropriate info when the Student List button is clicked. 
- * It used the resources panel as an original Source
- * 
- * 
- * 
- */
 package main.java.memoranda.ui;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
 import main.java.memoranda.gym.Belt;
 import main.java.memoranda.gym.Owner;
 import main.java.memoranda.gym.Student;
 import main.java.memoranda.util.Local;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 
+/**
+ * This class is designed to display a panel and show the appropriate
+ * info when the Student List button is clicked.
+ * It used the resources panel as an original Source.
+ */
 public class StudentCardPanel extends JPanel {
 
     JButton editUser = new JButton("Edit");
@@ -54,12 +54,11 @@ public class StudentCardPanel extends JPanel {
     }
 
     /**
-     * Initializes the code
-     * html tag is used in Jlabel to allow text to wrap
-     *
-     * @throws Exception
+     * Initializes the code.
+     * html tag is used in Jlabel to allow text to wrap.
+     * @throws IOException e
      */
-    void jbInit() throws Exception {
+    void jbInit() throws IOException {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 
@@ -75,8 +74,9 @@ public class StudentCardPanel extends JPanel {
         this.add(studentName);
         this.add(studentPicture);
         this.add(studentBelt);
-        if (App.appUsers.getActiveUser() != null &&
-                (App.appUsers.getActiveUser() instanceof Owner || App.appUsers.getActiveUser().equals(student))) {
+        if (App.appUsers.getActiveUser() != null
+                && (App.appUsers.getActiveUser() instanceof Owner
+                || App.appUsers.getActiveUser().equals(student))) {
             this.add(editUser);
         }
         this.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.yellow));
@@ -90,7 +90,7 @@ public class StudentCardPanel extends JPanel {
     }
 
     /**
-     * Method to add edit this users card
+     * Method to add edit this users card.
      * Removes all items first so that when it revalidates they display in the correct order
      * repaint to clear old data and revalidate to display new
      * @param e Action Event from button click
@@ -105,7 +105,7 @@ public class StudentCardPanel extends JPanel {
         dlg.setLocation((frmSize.width - dlg.getSize().width) / 2
                 + loc.x, (frmSize.height - dlg.getSize().height) / 2 + loc.y);
         dlg.setVisible(true);
-        if (dlg.CANCELLED) {
+        if (dlg.cancelled) {
             return;
         }
 
@@ -130,7 +130,7 @@ public class StudentCardPanel extends JPanel {
     }
 
     /**
-     * Gets student's name
+     * Gets student's name.
      * @return String student's name
      */
     public String getstudentName() {
@@ -138,7 +138,7 @@ public class StudentCardPanel extends JPanel {
     }
 
     /**
-     * Gets belt rank
+     * Gets belt rank.
      * @return Belt belt rank
      */
     public Belt getBelt() {

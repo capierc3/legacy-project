@@ -1,24 +1,22 @@
 package main.java.memoranda.ui;
 
-import main.java.memoranda.gym.Belt;
-import main.java.memoranda.util.Local;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.*;
+import main.java.memoranda.gym.Belt;
+import main.java.memoranda.util.Local;
+
 
 /**
- * A class to allow the ability to edit and add a new trainer in the trainer profiles page
+ * A class to allow the ability to edit and add a new trainer in the trainer profiles page.
  * @author Justin Oliver
  */
 public class StudentDialog extends JDialog implements WindowListener {
-    public boolean CANCELLED = false;
-    boolean ignoreStartChanged = false;
-    boolean ignoreEndChanged = false;
+    public boolean cancelled = false;
     JPanel topPanel = new JPanel(new BorderLayout());
     JPanel bottomPanel = new JPanel(new BorderLayout());
     JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -43,7 +41,13 @@ public class StudentDialog extends JDialog implements WindowListener {
     JButton okB = new JButton();
     JButton cancelB = new JButton();
 
-
+    /**
+     * Constructor for the pop up dialog.
+     * @param frame Frame
+     * @param title String
+     * @param name String
+     * @param belt Belt
+     */
     public StudentDialog(Frame frame, String title, String name, Belt belt) {
         super(frame, title, true);
         try {
@@ -53,14 +57,13 @@ public class StudentDialog extends JDialog implements WindowListener {
             this.title = title;
             jbInit();
             pack();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             new ExceptionDialog(ex);
         }
         super.addWindowListener(this);
     }
 
-        void jbInit() throws Exception {
+    void jbInit() throws Exception {
         this.setResizable(false);
         // Build headerPanel
         headerPanel.setBackground(Color.WHITE);
@@ -139,7 +142,7 @@ public class StudentDialog extends JDialog implements WindowListener {
     }
 
     void cancelB_actionPerformed(ActionEvent e) {
-        CANCELLED = true;
+        cancelled = true;
         this.dispose();
     }
 
@@ -150,7 +153,7 @@ public class StudentDialog extends JDialog implements WindowListener {
     }
 
     public void windowClosing(WindowEvent e) {
-        CANCELLED = true;
+        cancelled = true;
         this.dispose();
     }
 

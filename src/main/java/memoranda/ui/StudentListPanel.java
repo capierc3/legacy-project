@@ -1,42 +1,30 @@
-/**
- * This class is designed to display a panel and show the appropriate info when the Student List button is clicked. 
- * It used the resources panel as an original Source
- * 
- * 
- * 
- */
 package main.java.memoranda.ui;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import main.java.memoranda.CurrentProject;
-import main.java.memoranda.Resource;
-import main.java.memoranda.gym.*;
-import main.java.memoranda.util.AppList;
-import main.java.memoranda.util.CurrentStorage;
-import main.java.memoranda.util.Local;
-import main.java.memoranda.util.MimeType;
-import main.java.memoranda.util.MimeTypesList;
-import main.java.memoranda.util.Util;
-
-import java.io.*;
 import java.util.ArrayList;
 
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+
+import main.java.memoranda.gym.*;
+import main.java.memoranda.util.Local;
+
+
+/**
+ * This class is designed to display a panel and show the appropriate info
+ * when the Student List button is clicked.
+ * It used the resources panel as an original Source.
+ */
 public class StudentListPanel extends JPanel {
 
     TitledBorder title = BorderFactory.createTitledBorder("KAESEKUCHEN TRAINERS");
     FlowLayout flowlayout = new FlowLayout();
     JButton newUser = new JButton("New Student");
 
+    /**
+     * Constructor for the panel.
+     */
     public StudentListPanel() {
         try {
             jbInit();
@@ -47,8 +35,8 @@ public class StudentListPanel extends JPanel {
 
     void jbInit() throws Exception {
         this.setLayout(flowlayout);
-        for (User s:App.appUsers.getAllUsers()){
-            if (s instanceof Student){
+        for (User s:App.appUsers.getAllUsers()) {
+            if (s instanceof Student) {
                 this.add(new StudentCardPanel((Student) s));
             }
         }
@@ -74,7 +62,7 @@ public class StudentListPanel extends JPanel {
         dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x,
                 (frmSize.height - dlg.getSize().height) / 2 + loc.y);
         dlg.setVisible(true);
-        if (dlg.CANCELLED) {
+        if (dlg.cancelled) {
             return;
         }
 
