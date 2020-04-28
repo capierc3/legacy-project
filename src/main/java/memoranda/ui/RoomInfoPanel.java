@@ -1,4 +1,4 @@
-/* 
+/** 
  * This class is designed to display a panel and show the appropriate info when the Room Info button is clicked. 
  * It used the resources panel as an original Source
  * 

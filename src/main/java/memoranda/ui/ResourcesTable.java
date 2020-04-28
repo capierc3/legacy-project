@@ -180,8 +180,8 @@ public Class getColumnClass(int col) {
             }
             }
             catch (Exception ex) {new ExceptionDialog(ex);}
-            return null;
-        }
+	    return null;
+	}
     }
 
 }
