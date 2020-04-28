@@ -139,16 +139,17 @@ public class ProjectPackager {
      * Packs all files in the given directory into the given ZIP stream. Also
      * recurses down into subdirectories.
      */
-    public static void PackDirectory(String startingDirectory, File theDirectory, ZipOutputStream theZIPStream)
+    public static void PackDirectory(String startingDirectory, File dDirectory, ZipOutputStream theZIPStream)
 	    throws java.io.IOException {
-	File[] theFiles = theDirectory.listFiles();
+	File[] fileFiles = dDirectory.listFiles();
 	File stDirectory = new File(startingDirectory);
 	System.out.println(
-		"Path=" + stDirectory.getPath() + ";length=" + stDirectory.getPath().length() + "==>" + theFiles[0]);
+		"Path=" + stDirectory.getPath() + ";length=" + stDirectory.getPath().length() + "==>" + fileFiles[0]);
 	int j = stDirectory.getPath().length();
-	for (int i = 0; i < theFiles.length; i++) {
-	    String sRelPath = theFiles[i].getPath().substring(j);
-	    if (theFiles[i].isDirectory()) {
+	FileInputStream in = null;
+	for (int i = 0; i < fileFiles.length; i++) {
+	    String sRelPath = fileFiles[i].getPath().substring(j);
+	    if (fileFiles[i].isDirectory()) {
 		// create a directory entry.
 		// directory entries must be terminated by a slash!
 		ZipEntry theEntry = new ZipEntry("." + sRelPath + "/");
@@ -156,20 +157,26 @@ public class ProjectPackager {
 		theZIPStream.closeEntry();
 
 		// recurse down
-		PackDirectory(startingDirectory, theFiles[i], theZIPStream);
+		PackDirectory(startingDirectory, fileFiles[i], theZIPStream);
 	    } else // regular file
 	    {
-		File f = theFiles[i];
+		File f = fileFiles[i];
 		ZipEntry ze = new ZipEntry("." + sRelPath);
-		FileInputStream in = new FileInputStream(f);
-		byte[] data = new byte[(int) f.length()];
-		in.read(data);
-		in.close();
-		theZIPStream.putNextEntry(ze);
-		theZIPStream.write(data);
-		theZIPStream.closeEntry();
+		try {
+        		in = new FileInputStream(f);
+        		byte[] data = new byte[(int) f.length()];
+        		in.read(data);
+        		in.close();
+        		theZIPStream.putNextEntry(ze);
+        		theZIPStream.write(data);
+        		theZIPStream.closeEntry();
+		} catch(Exception e) {
+		    System.out.println("Opps");
+		} finally {
+		    in.close();
+		}
 	    }
-	}
+	}    
     }
 
 }

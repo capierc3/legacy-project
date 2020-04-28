@@ -16,7 +16,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
-import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -76,7 +75,12 @@ public class RoomInfoPanel extends JPanel {
 	newResB.setFocusable(false);
 	newResB.addActionListener(new java.awt.event.ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
-		newResB_actionPerformed(e);
+		try {
+		    newResB_actionPerformed(e);
+		} catch (IOException e1) {
+		    // TODO Auto-generated catch block
+		    e1.printStackTrace();
+		}
 	    }
 	});
 	newResB.setBorderPainted(false);
@@ -195,7 +199,7 @@ public class RoomInfoPanel extends JPanel {
 	});
     }
 
-    void newResB_actionPerformed(ActionEvent e) {
+    void newResB_actionPerformed(ActionEvent e) throws IOException {
 	AddResourceDialog dlg = new AddResourceDialog(App.getFrame(), Local.getString("New resource"));
 	Dimension frmSize = App.getFrame().getSize();
 	Point loc = App.getFrame().getLocation();
@@ -384,7 +388,12 @@ public class RoomInfoPanel extends JPanel {
     }
 
     void ppNewRes_actionPerformed(ActionEvent e) {
-	newResB_actionPerformed(e);
+	try {
+	    newResB_actionPerformed(e);
+	} catch (IOException e1) {
+	    // TODO Auto-generated catch block
+	    e1.printStackTrace();
+	}
     }
 
     void ppRefresh_actionPerformed(ActionEvent e) {
@@ -397,8 +406,9 @@ public class RoomInfoPanel extends JPanel {
      * @param srcStr  The path of the source file.
      * @param destStr The destination path.
      * @return The new path of the file.
+     * @throws IOException 
      */
-    String copyFileToProjectDir(String srcStr) {
+    String copyFileToProjectDir(String srcStr) throws IOException {
 
 	String JN_DOCPATH = Util.getEnvDir();
 
@@ -414,24 +424,39 @@ public class RoomInfoPanel extends JPanel {
 
 	File f = new File(JN_DOCPATH + CurrentProject.get().getID() + File.separator + "_projectFiles");
 	if (!f.exists()) {
-	    f.mkdirs();
+	    if(f != null) {
+		f.mkdirs();
+	    }
 	}
 	System.out.println("[DEBUG] Copy file from: " + srcStr + " to: " + destStr);
-
+	
+	FileInputStream in = null;
+	FileOutputStream out = null;
 	try {
-	    FileInputStream in = new FileInputStream(srcStr);
-	    FileOutputStream out = new FileOutputStream(destStr);
+	    in = new FileInputStream(srcStr);
+	    out = new FileOutputStream(destStr);
 	    byte[] buf = new byte[4096];
 	    int len;
 	    while ((len = in.read(buf)) > 0) {
 		out.write(buf, 0, len);
 	    }
-	    out.close();
-	    in.close();
+
 	} catch (IOException e) {
 	    System.err.println(e.toString());
+	} finally {
+	    if (out!=null) {
+		try {
+		    out.close();
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+	    }
+	    if (in!=null) {
+		in.close();
+	    }
 	}
-
+	
 	return destStr;
     }
 }

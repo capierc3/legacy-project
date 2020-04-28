@@ -1243,7 +1243,7 @@ public class AltHTMLWriter extends AbstractWriter {
      * @version 1.9 12/03/01
      */
 
-    class OptionListModel extends DefaultListModel implements ListSelectionModel, Serializable {
+    class OptionListModel extends DefaultListModel implements Serializable, ListSelectionModel {
 
 	private static final int MIN = -1;
 	private static final int MAX = Integer.MAX_VALUE;

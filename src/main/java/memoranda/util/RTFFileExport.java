@@ -27,7 +27,9 @@ public class RTFFileExport {
     public RTFFileExport(File f, Document doc) {
 	RTFEditorKit kit = new RTFEditorKit();
 	try {
-	    kit.write(new FileOutputStream(f), (DefaultStyledDocument) doc, 0, doc.getLength());
+	    FileOutputStream file1 = new FileOutputStream(f);
+	    kit.write(file1, (DefaultStyledDocument) doc, 0, doc.getLength());
+	    file1.close();
 	} catch (Exception ex) {
 	    ex.printStackTrace();
 	}

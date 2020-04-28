@@ -184,7 +184,7 @@ public class History {
     /**
      * HistoryBackAction declared and initialized
      */
-    public static HistoryBackAction historyBackAction = new HistoryBackAction();
+    public static final HistoryBackAction historyBackAction = new HistoryBackAction();
 
     /**
      * HistoryForwardAction declared and initialized

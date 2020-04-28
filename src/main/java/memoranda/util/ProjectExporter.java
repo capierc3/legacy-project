@@ -96,6 +96,12 @@ public class ProjectExporter {
 	    fw.close();
 	} catch (Exception ex) {
 	    new ExceptionDialog(ex, "Failed to write to " + output, "");
+	} finally {
+	    try {
+		fw.close();
+	    } catch (IOException e) {
+		e.printStackTrace();
+	    }
 	}
     }
 

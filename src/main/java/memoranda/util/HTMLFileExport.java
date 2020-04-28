@@ -56,11 +56,13 @@ public class HTMLFileExport {
 
     /**
      * Method to export the HTML file
+     * @throws IOException 
      */
-    private void doExport() {
+    private void doExport()  {
+	Writer fw = null;
 	try {
 	    // FileWriter fw = new FileWriter(f);
-	    Writer fw;
+	    
 
 	    // Added to fix the file if there was no extention given
 	    // jcscoobyrs 17-Nov-2003 at 09:08:55
@@ -85,6 +87,13 @@ public class HTMLFileExport {
 	    fw.close();
 	} catch (Exception ex) {
 	    new ExceptionDialog(ex, "Cannot export file " + f.getPath(), null);
+	} finally {
+	    try {
+		fw.close();
+	    } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
 	}
     }
 
