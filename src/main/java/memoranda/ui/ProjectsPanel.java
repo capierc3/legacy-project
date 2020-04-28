@@ -359,9 +359,6 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 	    dlg.endDate.setEnabled(true);
 	    dlg.endDate.getModel().setValue(prj.getEndDate().getCalendar().getTime());
 	}
-	/*
-	 * if (prj.getStatus() == Project.FROZEN) dlg.freezeChB.setSelected(true);
-	 */
 	dlg.setVisible(true);
 	if (dlg.CANCELLED)
 	    return;
@@ -373,9 +370,6 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 	else
 	    prj.setEndDate(null);
 	prjTablePanel.updateUI();
-	/*
-	 * if (dlg.freezeChB.isSelected()) prj.freeze(); else
-	 */
     }
 
     void ppShowActiveOnlyChB_actionPerformed(ActionEvent e) {

@@ -214,7 +214,7 @@ public class StudentListPanel extends JPanel {
 		return;
 	    // if file if projectFile, than copy the file and change url.
 	    if (dlg.projectFileCB.isSelected()) {
-		fpath = copyFileToProjectDir(fpath);
+		//fpath = copyFileToProjectDir(fpath);
 		CurrentProject.getResourcesList().addResource(fpath, false, true);
 	    } else
 		CurrentProject.getResourcesList().addResource(fpath);
@@ -383,47 +383,5 @@ public class StudentListPanel extends JPanel {
 	resourcesTable.tableChanged();
     }
 
-    /**
-     * Copy a file to the directory of the current project
-     * 
-     * @param srcStr  The path of the source file.
-     * @param destStr The destination path.
-     * @return The new path of the file.
-     */
-    String copyFileToProjectDir(String srcStr) {
 
-	String JN_DOCPATH = Util.getEnvDir();
-
-	String baseName;
-	int i = srcStr.lastIndexOf(File.separator);
-	if (i != -1) {
-	    baseName = srcStr.substring(i + 1);
-	} else
-	    baseName = srcStr;
-
-	String destStr = JN_DOCPATH + CurrentProject.get().getID() + File.separator + "_projectFiles" + File.separator
-		+ baseName;
-
-	File f = new File(JN_DOCPATH + CurrentProject.get().getID() + File.separator + "_projectFiles");
-	if (!f.exists()) {
-	    f.mkdirs();
-	}
-	System.out.println("[DEBUG] Copy file from: " + srcStr + " to: " + destStr);
-
-	try {
-	    FileInputStream in = new FileInputStream(srcStr);
-	    FileOutputStream out = new FileOutputStream(destStr);
-	    byte[] buf = new byte[4096];
-	    int len;
-	    while ((len = in.read(buf)) > 0) {
-		out.write(buf, 0, len);
-	    }
-	    out.close();
-	    in.close();
-	} catch (IOException e) {
-	    System.err.println(e.toString());
-	}
-
-	return destStr;
-    }
 }

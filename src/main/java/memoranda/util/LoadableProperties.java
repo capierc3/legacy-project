@@ -15,119 +15,121 @@ import java.util.*;
 public class LoadableProperties extends Hashtable {
 
     /**
-     * Constructor for LoadableProperties
+     * Constructor for LoadableProperties.
      */
     public LoadableProperties() {
-        super();
+	super();
     }
 
     /**
      * Method to load the InputStream passed in
+     * 
      * @param inStream
      * @throws IOException
      */
     public void load(InputStream inStream) throws IOException {
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(inStream, "UTF-8"));
+	BufferedReader in = new BufferedReader(new InputStreamReader(inStream, "UTF-8"));
 
-        String aKey;
-        String aValue;
-        int index;
-        String line = getNextLine(in);
-        while (line != null) {
-            line = line.trim();
-            if (isValid(line)) {
-                index = line.indexOf("=");
-                aKey = line.substring(0, index).trim();
-                aValue = line.substring(index + 1).trim();
-                put(aKey.toUpperCase(), aValue);
-            }
-            line = getNextLine(in);
-        }
+	String aKey;
+	String aValue;
+	int index;
+	String line = getNextLine(in);
+	while (line != null) {
+	    line = line.trim();
+	    if (isValid(line)) {
+		index = line.indexOf("=");
+		aKey = line.substring(0, index).trim();
+		aValue = line.substring(index + 1).trim();
+		put(aKey.toUpperCase(), aValue);
+	    }
+	    line = getNextLine(in);
+	}
     }
 
     /**
      * Method to save the sorted tree to the OutputStream passedi n
+     * 
      * @param outStream
      * @param sorted
      * @throws IOException
      */
     public void save(OutputStream outStream, boolean sorted) throws IOException {
-    	if (!sorted) {
-    		save(outStream);
-    		return;
-    	}
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(outStream, "UTF-8"));
-        String aKey;
-        Object aValue;
-        TreeMap tm = new TreeMap(this);
-        for (Iterator i = tm.keySet().iterator(); i.hasNext();) {
-            aKey = (String) i.next();
-            aValue = get(aKey);
-            out.write(aKey + " = " + aValue);
-            out.newLine();
-        }
-        out.flush();
-        out.close();
+	if (!sorted) {
+	    save(outStream);
+	    return;
+	}
+	BufferedWriter out = new BufferedWriter(new OutputStreamWriter(outStream, "UTF-8"));
+	String aKey;
+	Object aValue;
+	TreeMap tm = new TreeMap(this);
+	for (Iterator i = tm.keySet().iterator(); i.hasNext();) {
+	    aKey = (String) i.next();
+	    aValue = get(aKey);
+	    out.write(aKey + " = " + aValue);
+	    out.newLine();
+	}
+	out.flush();
+	out.close();
     }
 
     /**
      * Method to save OutputStream passed in
+     * 
      * @param outStream
      * @throws IOException
      */
     public void save(OutputStream outStream) throws IOException {
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(outStream, "UTF-8"));
-        String aKey;
-        Object aValue;
-        for (Enumeration e = keys(); e.hasMoreElements();) {
-            aKey = (String) e.nextElement();
-            aValue = get(aKey);
-            out.write(aKey + " = " + aValue);
-            out.newLine();
-        }
-        out.flush();
-        out.close();
+	BufferedWriter out = new BufferedWriter(new OutputStreamWriter(outStream, "UTF-8"));
+	String aKey;
+	Object aValue;
+	for (Enumeration e = keys(); e.hasMoreElements();) {
+	    aKey = (String) e.nextElement();
+	    aValue = get(aKey);
+	    out.write(aKey + " = " + aValue);
+	    out.newLine();
+	}
+	out.flush();
+	out.close();
     }
 
     /**
      * Method to check if a string path is valid or not
+     * 
      * @param str
      * @return boolean
      */
     private boolean isValid(String str) {
-        if (str == null)
-            return false;
-        if (str.length() > 0) {
-            if (str.startsWith("#") || str.startsWith("!")) {
-                return false;
-            }
-        }
-        else {
-            return false;
-        }
+	if (str == null)
+	    return false;
+	if (str.length() > 0) {
+	    if (str.startsWith("#") || str.startsWith("!")) {
+		return false;
+	    }
+	} else {
+	    return false;
+	}
 
-        int index = str.indexOf("=");
-        if (index > 0 && str.length() > index) {
-            return true;
-        }
-        else {
-            return false;
-        }
+	int index = str.indexOf("=");
+	if (index > 0 && str.length() > index) {
+	    return true;
+	} else {
+	    return false;
+	}
     }
 
     /**
      * Method to get the next line in the file
+     * 
      * @param br
      * @return String
      */
     private String getNextLine(BufferedReader br) {
-        try {
-            return br.readLine();
-        }
-        catch (Exception e) {
-            return null;
-        }
+	try {
+	    return br.readLine();
+	} catch (Exception e) {
+	    return null;
+	}
 
     }
 

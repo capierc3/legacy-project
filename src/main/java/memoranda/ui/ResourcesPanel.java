@@ -1,6 +1,8 @@
 /** 
- * This class is designed to display a panel and show the appropriate info when the resources button is clicked. 
- * This panel existed in the original version of memoranda that was used for this gym scheduling program
+ * This class is designed to display a panel and show the 
+ * appropriate info when the resources button is clicked. 
+ * This panel existed in the original version of 
+ * memoranda that was used for this gym scheduling program
  * 
  * 
  */
@@ -40,7 +42,6 @@ import main.java.memoranda.util.Util;
 
 import java.io.*;
 
-/*$Id: ResourcesPanel.java,v 1.13 2007/03/20 08:22:41 alexeya Exp $*/
 public class ResourcesPanel extends JPanel {
     BorderLayout borderLayout1 = new BorderLayout();
     JToolBar toolBar = new JToolBar();
@@ -216,7 +217,7 @@ public class ResourcesPanel extends JPanel {
 		return;
 	    // if file if projectFile, than copy the file and change url.
 	    if (dlg.projectFileCB.isSelected()) {
-		fpath = copyFileToProjectDir(fpath);
+		//fpath = copyFileToProjectDir(fpath);
 		CurrentProject.getResourcesList().addResource(fpath, false, true);
 	    } else
 		CurrentProject.getResourcesList().addResource(fpath);
@@ -301,12 +302,6 @@ public class ResourcesPanel extends JPanel {
 	appList.addOrReplaceApp(appId, f.getParent().replace('\\', '/'), f.getName().replace('\\', '/'),
 		dlg.appPanel.argumentsField.getText());
 	mt.setApp(appId);
-	/*
-	 * appList.setFindPath(appId,
-	 * chooser.getSelectedFile().getParent().replace('\\','/'));
-	 * appList.setExec(appId,
-	 * chooser.getSelectedFile().getName().replace('\\','/'));
-	 */
 	CurrentStorage.get().storeMimeTypesList();
 	return true;
     }
@@ -391,47 +386,5 @@ public class ResourcesPanel extends JPanel {
 	resourcesTable.tableChanged();
     }
 
-    /**
-     * Copy a file to the directory of the current project
-     * 
-     * @param srcStr  The path of the source file.
-     * @param destStr The destination path.
-     * @return The new path of the file.
-     */
-    String copyFileToProjectDir(String srcStr) {
 
-	String JN_DOCPATH = Util.getEnvDir();
-
-	String baseName;
-	int i = srcStr.lastIndexOf(File.separator);
-	if (i != -1) {
-	    baseName = srcStr.substring(i + 1);
-	} else
-	    baseName = srcStr;
-
-	String destStr = JN_DOCPATH + CurrentProject.get().getID() + File.separator + "_projectFiles" + File.separator
-		+ baseName;
-
-	File f = new File(JN_DOCPATH + CurrentProject.get().getID() + File.separator + "_projectFiles");
-	if (!f.exists()) {
-	    f.mkdirs();
-	}
-	System.out.println("[DEBUG] Copy file from: " + srcStr + " to: " + destStr);
-
-	try {
-	    FileInputStream in = new FileInputStream(srcStr);
-	    FileOutputStream out = new FileOutputStream(destStr);
-	    byte[] buf = new byte[4096];
-	    int len;
-	    while ((len = in.read(buf)) > 0) {
-		out.write(buf, 0, len);
-	    }
-	    out.close();
-	    in.close();
-	} catch (IOException e) {
-	    System.err.println(e.toString());
-	}
-
-	return destStr;
-    }
 }

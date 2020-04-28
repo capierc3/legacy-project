@@ -277,5 +277,5 @@ public class MyInfoPanel extends JPanel {
     public void setActive(boolean isa) {
 	isActive = isa;
     }
-	
+
 }

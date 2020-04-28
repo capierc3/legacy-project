@@ -283,8 +283,7 @@ public class TaskPanel extends JPanel {
 
 	CurrentDate.addDateListener(new DateListener() {
 	    public void dateChange(CalendarDate d) {
-		newTaskB.setEnabled(d.inPeriod(CurrentProject.get().getStartDate(), 
-			CurrentProject.get().getEndDate()));
+		newTaskB.setEnabled(d.inPeriod(CurrentProject.get().getStartDate(), CurrentProject.get().getEndDate()));
 	    }
 	});
 	CurrentProject.addProjectListener(new ProjectListener() {
@@ -308,7 +307,7 @@ public class TaskPanel extends JPanel {
 		completeTaskB.setEnabled(enbl);
 		ppAddSubTask.setEnabled(enbl);
 		// depending on whether it has sub tasks
-		ppCalcTask.setEnabled(enbl); 
+		ppCalcTask.setEnabled(enbl);
 
 		if (enbl) {
 		    String thisTaskId = taskTable.getModel().getValueAt(taskTable.getSelectedRow(), TaskTable.TASK_ID)
@@ -340,8 +339,6 @@ public class TaskPanel extends JPanel {
 	taskPPMenu.addSeparator();
 	taskPPMenu.add(ppCompleteTask);
 	taskPPMenu.add(ppCalcTask);
-
-
 
 	taskPPMenu.addSeparator();
 	taskPPMenu.add(ppShowActiveOnlyChB);
@@ -417,7 +414,6 @@ public class TaskPanel extends JPanel {
 
     void newTaskB_actionPerformed(ActionEvent e) {
 	TaskDialog dlg = new TaskDialog(App.getFrame(), Local.getString("New task"));
-
 
 	Dimension frmSize = App.getFrame().getSize();
 	Point loc = App.getFrame().getLocation();
@@ -523,7 +519,6 @@ public class TaskPanel extends JPanel {
 	    t.setProgress(thisProgress);
 	}
 
-
 	CurrentStorage.get().storeTaskList(CurrentProject.getTaskList(), CurrentProject.get());
 	taskTable.tableChanged();
 
@@ -532,9 +527,7 @@ public class TaskPanel extends JPanel {
     void listSubTasks_actionPerformed(ActionEvent e) {
 	String parentTaskId = taskTable.getModel().getValueAt(taskTable.getSelectedRow(), TaskTable.TASK_ID).toString();
 
-
 	taskTable.tableChanged();
-
 
     }
 

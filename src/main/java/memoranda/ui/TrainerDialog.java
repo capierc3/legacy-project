@@ -10,8 +10,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-/*
- * A class to allow the ability to edit and add a new trainer in the trainer profiles page
+/**
+ * A class to allow the ability to edit and add a new trainer in the trainer
+ * profiles page
+ * 
  * @author Justin Oliver
  */
 
