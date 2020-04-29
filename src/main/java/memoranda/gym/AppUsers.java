@@ -188,7 +188,7 @@ public class AppUsers implements UserList {
      */
     private void hardCodedData() throws URISyntaxException {
 
-<<<<<<< HEAD
+
 
         File defaultPic = new File(this.getClass().getResource("/ui/icons/nunchuckNorris.png").toURI());
         File mac = new File(this.getClass().getResource("/ui/icons/Mac.jpeg").toURI());

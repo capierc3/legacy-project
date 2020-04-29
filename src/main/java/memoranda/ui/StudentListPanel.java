@@ -11,31 +11,12 @@ import main.java.memoranda.gym.*;
 import main.java.memoranda.util.Local;
 
 
-
-
 /**
  * This class is designed to display a panel and show the appropriate info
  * when the Student List button is clicked.
  * It used the resources panel as an original Source.
  */
 public class StudentListPanel extends JPanel {
-
-
-
-public class StudentListPanel extends JPanel {
-    BorderLayout borderLayout1 = new BorderLayout();
-    JToolBar toolBar = new JToolBar();
-    JButton newResB = new JButton();
-    ResourcesTable resourcesTable = new ResourcesTable();
-    JButton removeResB = new JButton();
-    JScrollPane scrollPane = new JScrollPane();
-    JButton refreshB = new JButton();
-    JPopupMenu resPPMenu = new JPopupMenu();
-    JMenuItem ppRun = new JMenuItem();
-    JMenuItem ppRemoveRes = new JMenuItem();
-    JMenuItem ppNewRes = new JMenuItem();
-    JMenuItem ppRefresh = new JMenuItem();
-
 
     TitledBorder title = BorderFactory.createTitledBorder("KAESEKUCHEN TRAINERS");
     FlowLayout flowlayout = new FlowLayout();
@@ -45,7 +26,6 @@ public class StudentListPanel extends JPanel {
      * Constructor for the panel.
      */
     public StudentListPanel() {
-<<<<<<< HEAD
         try {
             jbInit();
         } catch (Exception ex) {
@@ -65,14 +45,10 @@ public class StudentListPanel extends JPanel {
         }
         this.setBorder(title);
         newUser.addActionListener(e -> addUser());
-
-
     }
     /*
      * Method to add new user to system and card to this panel
      */
-
-
 
     void addUser() {
         String name = "";
@@ -89,7 +65,6 @@ public class StudentListPanel extends JPanel {
         if (dlg.cancelled) {
             return;
         }
-
 
         // Set new values based on results from edit box
         name = dlg.studentNameText.getText();
@@ -108,5 +83,4 @@ public class StudentListPanel extends JPanel {
         repaint();
         revalidate();
     }
-
 }

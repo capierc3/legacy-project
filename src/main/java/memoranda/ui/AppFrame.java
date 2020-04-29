@@ -224,7 +224,7 @@ public class AppFrame extends JFrame {
      * sets up all the menu items.
      */
     private void jbInit() {
-<<<<<<< HEAD
+
 
         //windows toolbar icon
         this.setIconImage(new ImageIcon(AppFrame.class.getResource(
