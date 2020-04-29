@@ -271,7 +271,7 @@ public class AppFrame extends JFrame {
         //statusBar.setText(" Version:" + App.VERSION_INFO + " (Build "
         //        + App.BUILD_INFO + " )");
         
-        statusBar.setText(" Version: (Build  )");
+        statusBar.setText(" Version: 1.1 (Build 3.01 )");
 
         jMenuFile.setText(Local.getString("File"));
         jMenuFileExit.setText(Local.getString("Exit"));
