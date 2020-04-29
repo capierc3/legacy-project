@@ -24,6 +24,7 @@ import main.java.memoranda.util.Local;
 /* $Id: AppFrame_AboutBox.java,v 1.13 2005/11/09 22:38:07 alexeya Exp $ */
 public class AppFrame_AboutBox extends JDialog implements ActionListener {
 
+
     JButton button1 = new JButton();
     JLabel imageLabel = new JLabel();
     JLabel lblText = new JLabel();

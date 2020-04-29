@@ -1,44 +1,17 @@
-/** 
- * This class is designed to display a panel and show the appropriate info when the Student List button is clicked. 
- * 
- * 
- * 
- */
 package main.java.memoranda.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
-import java.io.File;
+import java.awt.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import java.util.ArrayList;
 
-import main.java.memoranda.CurrentProject;
-import main.java.memoranda.Resource;
-import main.java.memoranda.util.AppList;
-import main.java.memoranda.util.CurrentStorage;
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+
+import main.java.memoranda.gym.*;
 import main.java.memoranda.util.Local;
-import main.java.memoranda.util.MimeType;
-import main.java.memoranda.util.MimeTypesList;
-import main.java.memoranda.util.Util;
 
-import java.io.*;
 
+<<<<<<< HEAD
 public class StudentListPanel extends JPanel {
     BorderLayout borderLayout1 = new BorderLayout();
     JToolBar toolBar = new JToolBar();
@@ -53,6 +26,13 @@ public class StudentListPanel extends JPanel {
     JMenuItem ppNewRes = new JMenuItem();
     JMenuItem ppRefresh = new JMenuItem();
 
+    TitledBorder title = BorderFactory.createTitledBorder("KAESEKUCHEN TRAINERS");
+    FlowLayout flowlayout = new FlowLayout();
+    JButton newUser = new JButton("New Student");
+
+    /**
+     * Constructor for the panel.
+     */
     public StudentListPanel() {
 	try {
 	    jbInit();
@@ -248,6 +228,9 @@ public class StudentListPanel extends JPanel {
 	}
 	resourcesTable.tableChanged();
     }
+    /*
+     * Method to add new user to system and card to this panel
+     */
 
     MimeType addResourceType(String fpath) {
 	ResourceTypeDialog dlg = new ResourceTypeDialog(App.getFrame(), Local.getString("Resource type"));
@@ -357,6 +340,22 @@ public class StudentListPanel extends JPanel {
 	    }
 	}
 
+        // Set new values based on results from edit box
+        name = dlg.studentNameText.getText();
+        belt = Belt.getBelt(dlg.beltBox.getSelectedIndex());
+
+        // Add components to new card
+        JOptionPane.showMessageDialog(null, "New User Successfully Created!");
+        Student student = new StudentImpl(name,name,name,"Password", belt,
+                null,new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
+        App.appUsers.addUser(student);
+        StudentCardPanel newstudent = new StudentCardPanel(student);
+        // Remove and read button so it appears in correct spot
+        this.remove(this.newUser);
+        this.add(newstudent);
+        this.add(this.newUser);
+        repaint();
+        revalidate();
     }
 
     void refreshB_actionPerformed(ActionEvent e) {
@@ -382,6 +381,7 @@ public class StudentListPanel extends JPanel {
     void ppRefresh_actionPerformed(ActionEvent e) {
 	resourcesTable.tableChanged();
     }
+
 
 
 }

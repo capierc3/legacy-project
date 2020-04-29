@@ -224,6 +224,7 @@ public class AppFrame extends JFrame {
      * sets up all the menu items.
      */
     private void jbInit() {
+
 	// windows toolbar icon
 	this.setIconImage(new ImageIcon(AppFrame.class.getResource("/ui/icons/agenda.png")).getImage());
 	contentPane = (JPanel) this.getContentPane();
@@ -231,10 +232,7 @@ public class AppFrame extends JFrame {
 	// this.setSize(new Dimension(800, 500));
 	this.setTitle("Kaesekuchen Gym - " + CurrentProject.get().getTitle());
 
-	// The first section was the original version, I just commented it out
-	// and set a blank one until we can get around to it showing the correct info
-	// statusBar.setText(" Version:" + App.VERSION_INFO + " (Build "
-	// + App.BUILD_INFO + " )");
+
 
 	statusBar.setText(" Version: (Build  )");
 
@@ -276,28 +274,18 @@ public class AppFrame extends JFrame {
 		jMenuHelpAbout_actionPerformed(e);
 	    }
 	});
-	// jButton3.setIcon(image3);
 	jButton3.setToolTipText(Local.getString("Help"));
 	splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
 	splitPane.setContinuousLayout(true);
 	splitPane.setDividerSize(3);
-	// splitPane.setOneTouchExpandable(true);
 	splitPane.setDividerLocation(28);
-	// projectsPanel.setMaximumSize(new Dimension(2147483647, 200));
 	projectsPanel.setMinimumSize(new Dimension(10, 28));
 	projectsPanel.setPreferredSize(new Dimension(10, 28));
-	/*
-	 * workPanel.setMinimumSize(new Dimension(734, 300));
-	 * workPanel.setPreferredSize(new Dimension(1073, 300));
-	 */
+
 	splitPane.setDividerLocation(28);
 
-	/*
-	 * jMenuFileNewPrj.setText(Local.getString("New project") + "...");
-	 * jMenuFileNewPrj.addActionListener(new ActionListener() { public void
-	 * actionPerformed(ActionEvent e) { ProjectDialog.newProject(); } });
-	 */
+
 	jMenuFileNewPrj.setAction(projectsPanel.newProjectAction);
 
 	jMenuFileUnpackPrj.setText(Local.getString("Unpack project") + "...");
@@ -550,14 +538,6 @@ public class AppFrame extends JFrame {
 	this.workPanel.studentList.addActionListener(setMenusDisabled);
 	this.workPanel.resources.addActionListener(setMenusDisabled);
 
-	/*
-	 * Not currently using notes, if we are, add this back in
-	 * 
-	 * this.workPanel.notesB.addActionListener( new java.awt.event.ActionListener()
-	 * { public void actionPerformed(ActionEvent e) { setEnabledEditorMenus(true); }
-	 * });
-	 */
-
 	Object fwo = Context.get("FRAME_WIDTH");
 	Object fho = Context.get("FRAME_HEIGHT");
 	if ((fwo != null) && (fho != null)) {
@@ -590,6 +570,7 @@ public class AppFrame extends JFrame {
 		setTitle("Memoranda - " + CurrentProject.get().getTitle());
 	    }
 	});
+
 
     }
 
