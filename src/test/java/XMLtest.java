@@ -13,29 +13,36 @@ import org.junit.runners.MethodSorters;
 
 import java.io.*;
 
+/**
+ * Test that shows how the XOM api can save and load a Element object.
+ *
+ * Runs in a set order of testA then testB.
+ */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class XMLtest {
 
-    private Document writeDoc;
     private GymClass writeClass;
     private GymClass readClass;
-    private Builder parser;
 
     /**
-     * sets up the needed attributes for the tests.
+     * Creates a gymClass object to be used in the tests
      */
     @Before
     public void setup() {
         CalendarDate start = new CalendarDate(29, 3, 2020, 5, 30, false);
         CalendarDate end = new CalendarDate(29, 3, 2020, 6, 30, false);
         writeClass = new GymClassImpl("Test","Public", Belt.WHITE, start, end);
-        Element writeEl = writeClass.getContent();
-        writeDoc = new Document(writeEl);
-        parser  = new Builder();
     }
 
+    /**
+     * First creates a XOM Document object from the element in the gym class object.
+     * The creates an output stream with a new File called test.xml.
+     * Then it creates the serializer from XOM and sets the proper indents and line length.
+     * finally it writes the the XOM document to disk.
+     */
     @Test
     public void testA_Write() {
+        Document writeDoc = new Document(writeClass.getContent());
         try {
             OutputStream fileOutputStream = new FileOutputStream("test.xml");
             Serializer serializer = new Serializer(fileOutputStream, "UTF-8");
@@ -48,9 +55,15 @@ public class XMLtest {
         }
     }
 
+    /**
+     * First a XOM Builder object is created then it sets up the input stream to the created file.
+     * Then uses the builder to parse it to a new XOM Document. Then uses a elmTO method to create a new object.
+     * Finally it tests that the read object matches the one that was written.
+     */
     @Test
     public void testB_Read() {
         try {
+            Builder parser = new Builder();
             InputStream fileInputStream = new FileInputStream("test.xml");
             Document readDoc = parser.build(fileInputStream);
             readClass = GymClass.elmToGymClass(readDoc.getRootElement());
