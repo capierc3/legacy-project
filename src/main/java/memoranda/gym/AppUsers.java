@@ -31,6 +31,7 @@ public class AppUsers implements UserList {
      * Class constructor.  Initiates appUser collection
      * */
     public AppUsers() {
+        element = new Element("AppUser");
         appUsers = new HashMap<>();
         try {
             hardCodedData();
