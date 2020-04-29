@@ -224,6 +224,7 @@ public class AppFrame extends JFrame {
      * sets up all the menu items.
      */
     private void jbInit() {
+<<<<<<< HEAD
 
         //windows toolbar icon
         this.setIconImage(new ImageIcon(AppFrame.class.getResource(
@@ -234,11 +235,6 @@ public class AppFrame extends JFrame {
         //this.setSize(new Dimension(800, 500));
         this.setTitle("Kaesekuchen Gym - " + CurrentProject.get().getTitle());
 
-
-        //The first section was the original version, I just commented it out
-        //and set a blank one until we can get around to it showing the correct info
-        //statusBar.setText(" Version:" + App.VERSION_INFO + " (Build "
-        //        + App.BUILD_INFO + " )");
         
         statusBar.setText(" Version: 1.1 (Build 3.01 )");
 
@@ -297,13 +293,7 @@ public class AppFrame extends JFrame {
          workPanel.setPreferredSize(new Dimension(1073, 300));*/
         splitPane.setDividerLocation(28);
 
-        /* jMenuFileNewPrj.setText(Local.getString("New project") + "...");
-         jMenuFileNewPrj.addActionListener(new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-         ProjectDialog.newProject();
-         }
-         });
-         */
+
         jMenuFileNewPrj.setAction(projectsPanel.newProjectAction);
 
         jMenuFileUnpackPrj.setText(Local.getString("Unpack project") + "...");
@@ -603,6 +593,7 @@ public class AppFrame extends JFrame {
                 setTitle("Memoranda - " + CurrentProject.get().getTitle());
             }
         });
+
 
     }
 

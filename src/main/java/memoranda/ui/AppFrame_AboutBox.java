@@ -28,6 +28,8 @@ public class AppFrame_AboutBox extends JDialog implements ActionListener {
   JLabel imageLabel = new JLabel();
   JLabel lblText = new JLabel();
   
+  // Commented out, fix in Sprint 3 to show actual values
+  //String product = "Version "+App.VERSION_INFO + " (Build " + App.BUILD_INFO + ")";
   String product = "Version 1.1 (Build 3.01)";
   String copyright = "Copyright (c) 2003, 2004 Memoranda team";
   String url = App.WEBSITE_URL;
@@ -69,7 +71,20 @@ public class AppFrame_AboutBox extends JDialog implements ActionListener {
   }
   //Component initialization
   private void jbInit() throws Exception  {
-
+      //old about text
+//    String text = "<html>";
+//    text += "<b>"+product+"</b><br><br>";
+//    text += copyright + "<br>" + url + "<br><br>";
+//    text += "<b>" + developersHead + "</b><br>";
+//    for (int i = 0; i < developers.length; i++)
+//        text += developers[i]+"<br>";
+//    text += "<br><b>" + othersHead + "</b><br>";
+//    for (int i = 0; i < others.length; i++)
+//        text += others[i]+"<br>";
+//    text += "</html>";
+      //lblText.setFont(new java.awt.Font("Dialog", 0, 11));
+      //lblText.setText(text);
+      //lblText.setBounds(10, 55, 300, 400);
 
       image = new ImageIcon(AppFrame_AboutBox.class.getResource("/ui/kaese-splash.png"));
       this.setTitle(Local.getString("About Kaesekuchen"));
