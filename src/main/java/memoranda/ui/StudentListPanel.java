@@ -1,4 +1,4 @@
->>>>>>> sprint3
+
 package main.java.memoranda.ui;
 
 import java.awt.*;

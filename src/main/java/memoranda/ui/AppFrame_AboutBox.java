@@ -21,16 +21,13 @@ import main.java.memoranda.util.Local;
  * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
  */
 
-/* $Id: AppFrame_AboutBox.java,v 1.13 2005/11/09 22:38:07 alexeya Exp $ */
+/*$Id: AppFrame_AboutBox.java,v 1.13 2005/11/09 22:38:07 alexeya Exp $*/
 public class AppFrame_AboutBox extends JDialog implements ActionListener {
-
 
   JButton button1 = new JButton();
   JLabel imageLabel = new JLabel();
   JLabel lblText = new JLabel();
   
-  // Commented out, fix in Sprint 3 to show actual values
-  //String product = "Version "+App.VERSION_INFO + " (Build " + App.BUILD_INFO + ")";
   String product = "Version 1.1 (Build 3.01)";
   String copyright = "Copyright (c) 2003, 2004 Memoranda team";
   String url = App.WEBSITE_URL;
@@ -41,7 +38,7 @@ public class AppFrame_AboutBox extends JDialog implements ActionListener {
               "Ryan Ho (rawsushi@users.sourceforge.net)",
               "Ivan Ribas (ivanrise@users.sourceforge.net)",
               "Jyrki Velhonoja (velhonoja@kapsi.fi>)",
-  			  "Jeremy Whitlock (jwhitlock@starprecision.com)"              
+          "Jeremy Whitlock (jwhitlock@starprecision.com)"              
   };
   String othersHead = Local.getString("Other contributors") + ":";
   String[] others = {
@@ -68,48 +65,48 @@ public class AppFrame_AboutBox extends JDialog implements ActionListener {
     catch(Exception e) {
       e.printStackTrace();
     }
+    setSize(400, 500);
+  }
+  //Component initialization
+  private void jbInit() throws Exception  {
 
-    // Component initialization
-    private void jbInit() throws Exception {
 
+      image = new ImageIcon(AppFrame_AboutBox.class.getResource("/ui/kaese-splash.png"));
+      this.setTitle(Local.getString("About Kaesekuchen"));
+      setResizable(false);
+      // Initialize Objects
 
-	image = new ImageIcon(AppFrame_AboutBox.class.getResource("/ui/kaese-splash.png"));
-	this.setTitle(Local.getString("About Kaesekuchen"));
-	setResizable(false);
-	// Initialize Objects
-
-	button1.setText(Local.getString("Grate"));
-	button1.setBounds(150, 430, 95, 30);
-	button1.addActionListener(this);
-	button1.setPreferredSize(new Dimension(95, 30));
-	button1.setBackground(new Color(69, 125, 186));
-	button1.setForeground(Color.white);
-	layeredPane = getLayeredPane();
-	imgLabel = new JLabel(image);
-	imgLabel.setBounds(12, 10, image.getIconWidth(), image.getIconHeight());
-	layeredPane.add(imgLabel, Integer.valueOf(1));
-	layeredPane.add(lblText, Integer.valueOf(2));
-	layeredPane.add(button1, Integer.valueOf(2));
-	this.getContentPane().setBackground(new Color(251, 197, 63));
+    
+    button1.setText(Local.getString("Grate"));
+    button1.setBounds(150, 430, 95, 30);
+    button1.addActionListener(this);
+    button1.setPreferredSize(new Dimension(95, 30));
+    button1.setBackground(new Color(69, 125, 186));
+    button1.setForeground(Color.white);
+    layeredPane = getLayeredPane();
+    //layeredPane.setPreferredSize(new Dimension(300, 300));
+    imgLabel = new JLabel(image);
+    imgLabel.setBounds(12, 10, image.getIconWidth(), image.getIconHeight());
+    layeredPane.add(imgLabel, Integer.valueOf(1));
+    layeredPane.add(lblText, Integer.valueOf(2));
+    layeredPane.add(button1, Integer.valueOf(2));
+    this.getContentPane().setBackground(new Color(251, 197, 63));
+  }
+  //Overridden so we can exit when window is closed
+  protected void processWindowEvent(WindowEvent e) {
+    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+      cancel();
     }
-
-    // Overridden so we can exit when window is closed
-    protected void processWindowEvent(WindowEvent e) {
-	if (e.getID() == WindowEvent.WINDOW_CLOSING) {
-	    cancel();
-	}
-	super.processWindowEvent(e);
+    super.processWindowEvent(e);
+  }
+  //Close the dialog
+  void cancel() {
+    dispose();
+  }
+  //Close the dialog on a button event
+  public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == button1) {
+      cancel();
     }
-
-    // Close the dialog
-    void cancel() {
-	dispose();
-    }
-
-    // Close the dialog on a button event
-    public void actionPerformed(ActionEvent e) {
-	if (e.getSource() == button1) {
-	    cancel();
-	}
-    }
+  }
 }
