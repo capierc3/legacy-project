@@ -3,7 +3,9 @@ import main.java.memoranda.gym.GymClass;
 import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.date.CalendarDate;
 import nu.xom.Element;
+import nu.xom.Elements;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -67,5 +69,19 @@ public interface ClassList{
      * returns the main Element used for the class.
      */
     Element getContent();
+
+    /**
+     * Takes an element and turns it into a ClassList object
+     * @param e Element
+     * @return ClassList
+     */
+    static ClassList elmToClassList(Element e) {
+        Elements elms = e.getChildElements("GymClass");
+        ArrayList<GymClass> classes = new ArrayList<>();
+        for (int i = 0; i < elms.size(); i++) {
+            classes.add(GymClass.elmToGymClass(elms.get(i)));
+        }
+        return new ClassListImpl(classes);
+    }
 
 }

@@ -10,6 +10,7 @@ import main.java.memoranda.gym.Trainer;
 import main.java.memoranda.gym.UserImpl;
 import nu.xom.Attribute;
 import nu.xom.Element;
+import nu.xom.Elements;
 
 /**
  * Interface for the trainer methods to be used
@@ -29,7 +30,11 @@ public class TrainerImpl extends UserImpl implements Trainer{
      * @param description
      */
     public void setDescription(String description) {
-        setAttr("Description", description);
+        if (description == null) {
+            setAttr("Description", "tbd");
+        } else {
+            setAttr("Description", description);
+        }
     }
 
     /**
@@ -44,10 +49,14 @@ public class TrainerImpl extends UserImpl implements Trainer{
      * Method to set Availability Dates in Element
      */
     public void setAvailabilityDates(Collection<CalendarDate> availableDates) {
+        Element e = new Element("Available");
         if (availableDates != null) {
             for (CalendarDate date : availableDates) {
-                element.appendChild(date.toString());
+                Element dateEl = new Element("Date");
+                dateEl.addAttribute(new Attribute("date",date.toString()));
+                e.appendChild(dateEl);
             }
+            element.appendChild(e);
         }
 
     }

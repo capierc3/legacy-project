@@ -115,6 +115,11 @@ public interface GymClass {
      */
     Element getContent();
 
+    /**
+     * Takes an element and turns it into a gymClass object.
+     * @param el Element
+     * @return GymeClass
+     */
     static GymClass elmToGymClass(Element el) {
         String name = el.getAttributeValue("Name");
         String type = el.getAttributeValue("Type");

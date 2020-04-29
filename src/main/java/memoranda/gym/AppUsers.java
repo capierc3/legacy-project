@@ -1,18 +1,19 @@
 package main.java.memoranda.gym;
 
-
-
-import main.java.memoranda.ui.TrainerCardPanel;
 import main.java.memoranda.util.Util;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+import nu.xom.Element;
+import nu.xom.Elements;
 
 
 /**
@@ -24,6 +25,7 @@ public class AppUsers implements UserList {
     private final String APP_USER_FILE_PATH = "appusers.dat";
     private HashMap<String, User> appUsers;
     private User activeUser;
+    private Element element;
 
     /**
      * Class constructor.  Initiates appUser collection
@@ -67,6 +69,9 @@ public class AppUsers implements UserList {
 
         if(!appUsers.containsKey(login)){
             appUsers.put(login, user);
+            Element e = new Element("User");
+            e.appendChild(user.getContent().copy());
+            element.appendChild(e);
 
             //TODO: Implement in Sprint 3
             //save to file
@@ -110,7 +115,6 @@ public class AppUsers implements UserList {
             appUsers.forEach((k,v) -> list.add(v));
             return list;
         }
-
         return null;
 
     }
@@ -145,6 +149,15 @@ public class AppUsers implements UserList {
      */
     public void setActiveUser(User user) {
         activeUser = user;
+    }
+
+    static AppUsers elmToUserList(Element el) {
+        AppUsers appUsers = new AppUsers();
+        Elements elms = el.getChildElements("User");
+        for (int i = 0; i < elms.size(); i++) {
+            appUsers.addUser(User.elmToUser(elms.get(i)));
+        }
+        return appUsers;
     }
 
     /**

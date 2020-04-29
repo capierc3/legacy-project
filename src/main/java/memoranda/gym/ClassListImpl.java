@@ -54,9 +54,11 @@ public class ClassListImpl implements ClassList {
      * @param gymClass GymClass
      */
     public void addClass(GymClass gymClass) {
+        Element e = new Element("GymClass");
         if (getClass(gymClass.getID())==null){
             classes.add(gymClass);
-            element.appendChild(gymClass.getContent().copy());
+            e.appendChild(gymClass.getContent().copy());
+            element.appendChild(e);
         }
     }
 
