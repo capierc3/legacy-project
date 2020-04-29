@@ -115,6 +115,15 @@ public interface GymClass {
      */
     Element getContent();
 
+    static GymClass elmToGymClass(Element el) {
+        String name = el.getAttributeValue("Name");
+        String type = el.getAttributeValue("Type");
+        Belt rank = Belt.getBelt(Integer.parseInt(el.getAttributeValue("Rank")));
+        CalendarDate start = new CalendarDate(el.getAttributeValue("StartDate"));
+        CalendarDate end = new CalendarDate(el.getAttributeValue("EndDate"));
+        return new GymClassImpl(name,type,rank,start,end);
+    }
+
 
 
 

@@ -249,8 +249,6 @@ public class GymClassImpl implements GymClass {
     }
 
 
-
-
     //TODO Need room class to write methods or should be public static methods in RoomImpl
     private Room attrToRoom(Element room){
         if (room == null){
