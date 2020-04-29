@@ -1,22 +1,22 @@
 package main.java.memoranda.gym;
 
-import java.io.Serializable;
+import java.io.*;
 
+/**
+ * This class contains static methods for serializing and deserializing objects.
+ */
 public class ObjectSerializer implements Serializable {
-
-    /**
-     * Default Constructor.
-     */
-    public ObjectSerializer () {
-
-    }
 
     /**
      * Serialize object to file.
      * @param obj Object to be serialized
      * @param filepath File path object is to be saved to
      */
-    public void serializeObject(Object obj, String filepath) {
+    public static void serializeObject(Object obj, String filepath) throws IOException {
+
+        FileOutputStream fileOutputStream = new FileOutputStream(filepath);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(obj);
 
     }
 
@@ -25,9 +25,12 @@ public class ObjectSerializer implements Serializable {
      * @param filepath File path object is to be extracted from
      * @return Object deserialized from file
      */
-    public Object deserializeObject(String filepath) {
+    public static Object deserializeObject(String filepath) throws IOException, ClassNotFoundException {
 
-        return null;
+        FileInputStream fileInputStream = new FileInputStream(filepath);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        return objectInputStream.readObject();
+
     }
 
 }
