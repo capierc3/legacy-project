@@ -156,16 +156,13 @@ public class AppUsers implements UserList {
     private void saveToFile(Object obj, String file_path) {
 
         try {
-            System.out.println("Saving object to file...");
-            FileOutputStream fileOutputStream = new FileOutputStream(file_path);
-            ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
-            outputStream.writeObject(obj);
-            outputStream.close();
 
-            System.out.println("Object saved to " + file_path);
+            ObjectSerializer.serializeObject(obj, file_path);
 
         } catch (IOException e) {
+
             e.printStackTrace();
+
         }
 
     }
@@ -176,9 +173,17 @@ public class AppUsers implements UserList {
      * @param file_path file location
      */
     private void loadFromFile(String file_path){
-        //read from file
 
+        try {
 
+            Object obj = ObjectSerializer.deserializeObject(file_path);
+            appUsers = (HashMap<String, User>) obj;
+
+        } catch (IOException | ClassNotFoundException e) {
+
+            e.printStackTrace();
+
+        }
 
     }
 
