@@ -55,6 +55,10 @@ public class GymClassImpl implements GymClass {
         setEndDate(endDate);
     }
 
+    public GymClassImpl(Element el) {
+        this.el = el;
+    }
+
 
 
     @Override

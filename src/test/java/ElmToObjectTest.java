@@ -8,16 +8,22 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+/**
+ * Tests the elmTo[Object] methods of the main gym object classes.
+ */
 public class ElmToObjectTest {
 
-    AppUsers users;
-    ClassList classList;
-    GymClass gymClass;
-    Owner owner;
-    Room room;
-    Student student;
-    Trainer trainer;
+    private AppUsers users;
+    private ClassList classList;
+    private GymClass gymClass;
+    private Owner owner;
+    private Room room;
+    private Student student;
+    private Trainer trainer;
 
+    /**
+     * Sets up the needed variables.
+     */
     @Before
     public void setUp() {
         users = new AppUsers();
@@ -41,9 +47,51 @@ public class ElmToObjectTest {
                 Belt.BLACK3,null,new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
         student.setClassList(classList);
         room = new RoomImpl(1,classList,dates);
+        gymClass.setRoom(room);
+        gymClass.addTrainer(trainer);
+        gymClass.setSize(15);
+        gymClass.addStudent(student);
 
     }
 
+    /**
+     * Tests that a room and gym class can be build from an element object.
+     */
+    @Test
+    public void roomClassTest() {
+        Room readRoom = Room.elmToRoom(room.getContent());
+        Assert.assertEquals(readRoom.getRoomNum(),room.getRoomNum());
+        Assert.assertEquals(readRoom.getClasses().getSize(),room.getClasses().getSize());
+
+        GymClass readClass = GymClass.elmToGymClass(gymClass.getContent());
+        Assert.assertTrue(readClass.getStartDate().equals(gymClass.getStartDate()));
+        Assert.assertTrue(readClass.getEndDate().equals(gymClass.getEndDate()));
+        Assert.assertEquals(readClass.getRank(),gymClass.getRank());
+        Assert.assertEquals(readClass.getName(),gymClass.getName());
+        Assert.assertEquals(readClass.getSize(),gymClass.getSize());
+        Assert.assertEquals(readClass.getMaxSize(),gymClass.getMaxSize());
+        Assert.assertEquals(readClass.getClassLength(),gymClass.getClassLength());
+        Assert.assertEquals(readClass.getClassType(),gymClass.getClassType());
+        Assert.assertEquals(readClass.getID(),gymClass.getID());
+        Assert.assertEquals(readClass.getRoom().getRoomNum(),gymClass.getRoom().getRoomNum());
+        Assert.assertEquals(readClass.getTrainer().getID(),gymClass.getTrainer().getID());
+    }
+
+    /**
+     * Tests that a Class list and App user object is created correctly from an element.
+     */
+    @Test
+    public void elmToList() {
+        ClassList readList = ClassList.elmToClassList(classList.getContent());
+        Assert.assertEquals(readList.getSize(),classList.getSize());
+
+        AppUsers readUsers = AppUsers.elmToUserList(users.getContext());
+        Assert.assertEquals(users.getSize(),readUsers.getSize());
+    }
+
+    /**
+     * Tests that the students are created properly.
+     */
     @Test
     public void elmToUserTest() {
         Student newStudent = (Student) User.elmToUser(student.getContent());
@@ -74,6 +122,4 @@ public class ElmToObjectTest {
         Assert.assertEquals(owner.getPic(),newOwner.getPic());
         Assert.assertEquals(owner.getAllClasses().getSize(),newOwner.getAllClasses().getSize());
     }
-
-
 }

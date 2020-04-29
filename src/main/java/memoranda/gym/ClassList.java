@@ -76,7 +76,7 @@ public interface ClassList{
      * @return ClassList
      */
     static ClassList elmToClassList(Element e) {
-        Elements elms = e.getChildElements("GymClass");
+        Elements elms = e.getChildElements("Class");
         ArrayList<GymClass> classes = new ArrayList<>();
         for (int i = 0; i < elms.size(); i++) {
             classes.add(GymClass.elmToGymClass(elms.get(i)));

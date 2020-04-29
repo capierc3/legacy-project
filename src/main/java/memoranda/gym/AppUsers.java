@@ -152,13 +152,17 @@ public class AppUsers implements UserList {
         activeUser = user;
     }
 
-    static AppUsers elmToUserList(Element el) {
+    public static AppUsers elmToUserList(Element el) {
         AppUsers appUsers = new AppUsers();
         Elements elms = el.getChildElements("User");
         for (int i = 0; i < elms.size(); i++) {
             appUsers.addUser(User.elmToUser(elms.get(i)));
         }
         return appUsers;
+    }
+
+    public Element getContext() {
+        return element;
     }
 
     /**
