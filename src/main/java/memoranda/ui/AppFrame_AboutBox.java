@@ -30,7 +30,7 @@ public class AppFrame_AboutBox extends JDialog implements ActionListener {
   
   // Commented out, fix in Sprint 3 to show actual values
   //String product = "Version "+App.VERSION_INFO + " (Build " + App.BUILD_INFO + ")";
-  String product = "Version  (Build )";
+  String product = "Version 1.1 (Build 3.01)";
   String copyright = "Copyright (c) 2003, 2004 Memoranda team";
   String url = App.WEBSITE_URL;
   String developersHead = Local.getString("Developers") + ":";
