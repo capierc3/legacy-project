@@ -4,7 +4,6 @@ import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.util.Util;
 import nu.xom.Attribute;
 import nu.xom.Element;
-import nu.xom.Elements;
 
 import java.io.File;
 import java.util.ArrayList;

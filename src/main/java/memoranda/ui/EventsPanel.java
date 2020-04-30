@@ -52,7 +52,7 @@ public class EventsPanel extends JPanel {
     JButton removeEventB = new JButton();
     JScrollPane scrollPane = new JScrollPane();
     User user = new OwnerImpl("Owner","Owner","Owner","Owner", Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
-    EventsTable eventsTable = new EventsTable(new MyScheduleManager(new ClassListImpl(new ArrayList<>()),user));
+    EventsTable eventsTable = new EventsTable(new MyScheduleManager(user));
     JPopupMenu eventPPMenu = new JPopupMenu();
     JMenuItem ppEditEvent = new JMenuItem();
     JMenuItem ppRemoveEvent = new JMenuItem();

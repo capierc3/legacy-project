@@ -24,7 +24,7 @@ import main.java.memoranda.util.Util;
  *
  */
 public class MySchedulePanel extends JPanel {
-    MyScheduleManager manager = new MyScheduleManager(new ClassListImpl(new ArrayList<>()),App.appUsers.getActiveUser());
+    MyScheduleManager manager;
     BorderLayout borderLayout1 = new BorderLayout();
     JToolBar eventsToolBar = new JToolBar();
     //JButton historyBackB = new JButton();
@@ -35,7 +35,7 @@ public class MySchedulePanel extends JPanel {
     JButton addClassB = new JButton();
     JButton dropClassB = new JButton();
     JScrollPane scrollPane = new JScrollPane();
-    MyScheduleTable classTable = new MyScheduleTable(manager);
+    MyScheduleTable classTable = new MyScheduleTable();
     JPopupMenu classPPMenu = new JPopupMenu();
     JMenuItem ppEditClass = new JMenuItem();
     JMenuItem ppRemoveClass = new JMenuItem();
@@ -52,7 +52,7 @@ public class MySchedulePanel extends JPanel {
     //User user;
 
 
-    public MySchedulePanel(DailyItemsPanel _parentPanel) {
+    MySchedulePanel(DailyItemsPanel _parentPanel) {
 
         try {
             parentPanel = _parentPanel;
@@ -63,6 +63,7 @@ public class MySchedulePanel extends JPanel {
         }
     }
     void jbInit() throws Exception {
+        manager = App.appUsers.getManager();
         eventsToolBar.setFloatable(false);
         //Set toolbar buttons
         if (manager.getUser() instanceof Owner) {

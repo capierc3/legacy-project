@@ -1,5 +1,6 @@
 package main.java.memoranda.gym;
 
+import main.java.memoranda.ui.MyScheduleManager;
 import main.java.memoranda.util.Util;
 
 import java.io.File;
@@ -26,6 +27,7 @@ public class AppUsers implements UserList {
     private HashMap<String, User> appUsers;
     private User activeUser;
     private Element element;
+    private MyScheduleManager manager;
 
     /**
      * Class constructor.  Initiates appUser collection
@@ -149,6 +151,7 @@ public class AppUsers implements UserList {
      * @param user User object to set as active user
      */
     public void setActiveUser(User user) {
+        manager = new MyScheduleManager(user);
         activeUser = user;
     }
 
@@ -163,6 +166,13 @@ public class AppUsers implements UserList {
 
     public Element getContext() {
         return element;
+    }
+
+    public MyScheduleManager getManager() {
+        return manager;
+    }
+    public void setManager(MyScheduleManager manager) {
+        this.manager = manager;
     }
 
     /**

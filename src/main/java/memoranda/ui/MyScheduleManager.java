@@ -4,7 +4,9 @@ import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.gym.*;
 import main.java.memoranda.util.Local;
 import main.java.memoranda.util.Util;
+import nu.xom.*;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -24,14 +26,18 @@ public class MyScheduleManager {
     /**
      * main constructor for the Manager
      */
-    MyScheduleManager(ClassList list,User user){
+    public MyScheduleManager(User user){
         _user = user;
-        _allClasses = list;
-        fillAllClasses(0,"Ascending");
-        if (_user instanceof Student) {
-            fillStudentClasses(0, "Ascending");
-        } else if (_user instanceof Trainer) {
-            fillTeachingClasses(0, "Ascending");
+        _allClasses = new ClassListImpl(new ArrayList<>());
+        try {
+            fillAllClasses(0, "Ascending");
+            if (_user instanceof Student) {
+                fillStudentClasses(0, "Ascending");
+            } else if (_user instanceof Trainer) {
+                fillTeachingClasses(0, "Ascending");
+            }
+        }catch (IOException | ParsingException e) {
+            e.printStackTrace();
         }
         _ShownList = _allClasses;
 
@@ -45,7 +51,11 @@ public class MyScheduleManager {
      */
     void updateLists(String list, int sort, String dir){
         if (list.equalsIgnoreCase("All Classes")){
-            fillAllClasses(sort, dir);
+            try {
+                fillAllClasses(sort, dir);
+            } catch (IOException | ParsingException e) {
+                e.printStackTrace();
+            }
         } else if (list.equalsIgnoreCase("Teaching")){
             fillTeachingClasses(sort,dir);
         } else {
@@ -104,27 +114,18 @@ public class MyScheduleManager {
      * @param dir String
      * @return ClassList
      */
-    private void fillAllClasses(int sort,String dir){
-        //need some way to pull saved classes
-        GymClass gymClass1 = new GymClassImpl("Kicking 101","Public",Belt.WHITE,
-                new CalendarDate(18,3,2020,7,0,false),
-                new CalendarDate(18,3,2020,7,30,false));
-        gymClass1.setSize(3);
-        gymClass1.addTrainer((Trainer) App.appUsers.getUser("trainer"));
-        GymClass gymClass2 = new GymClassImpl("Kicking 202","Public",Belt.YELLOW,
-                new CalendarDate(18,3,2020,8,0,false),
-                new CalendarDate(18,3,2020,8,30,false));
-        gymClass2.setSize(20);
-        gymClass2.addTrainer((Trainer) App.appUsers.getUser("trainer"));
-        GymClass gymClass3 = new GymClassImpl("One on One with Mac","Private",Belt.WHITE,
-                new CalendarDate(18,3,2020,10,0,false),
-                new CalendarDate(18,3,2020,10,30,false));
-        gymClass3.setSize(0);
-        gymClass3.addTrainer((Trainer) App.appUsers.getUser("trainer"));
-        _allClasses.addClass(gymClass1);
-        _allClasses.addClass(gymClass2);
-        _allClasses.addClass(gymClass3);
-        sortList(_allClasses,sort,dir);
+    private void fillAllClasses(int sort,String dir) throws IOException, ParsingException {
+        Builder parser;
+        File userFile = new File("server/GymClasses");
+        if (userFile.exists() && userFile.isDirectory()) {
+            for (int i = 0; i < userFile.listFiles().length; i++) {
+                parser = new Builder();
+                InputStream fileInputStream = new FileInputStream(userFile.listFiles()[i]);
+                Document readDoc = parser.build(fileInputStream);
+                _allClasses.addClass(GymClass.elmToGymClass(readDoc.getRootElement()));
+            }
+            sortList(_allClasses,sort,dir);
+        }
     }
 
     /**
@@ -224,6 +225,23 @@ public class MyScheduleManager {
 
     User getUser(){
         return _user;
+    }
+
+    public void save() {
+        Document writeDoc;
+        for (GymClass gymClass:_allClasses.getAllClasses()) {
+            writeDoc = new Document((Element) gymClass.getContent().copy());
+            try {
+                OutputStream fileOutputStream = new FileOutputStream(("server/GymClasses/" + gymClass.getID()));
+                Serializer serializer = new Serializer(fileOutputStream, "UTF-8");
+                serializer.setIndent(4);
+                serializer.setMaxLength(64);
+                serializer.write(writeDoc);
+                serializer.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
