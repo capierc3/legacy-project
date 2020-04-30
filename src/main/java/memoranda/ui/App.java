@@ -164,6 +164,9 @@ public class App {
 		if (appUsers.getManager() != null) {
 			appUsers.getManager().save();
 		}
+		if (appUsers != null) {
+			appUsers.save();
+		}
 		frame.dispose();
 		System.exit(0);
 	}

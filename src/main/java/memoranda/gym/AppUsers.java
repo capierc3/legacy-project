@@ -3,18 +3,15 @@ package main.java.memoranda.gym;
 import main.java.memoranda.ui.MyScheduleManager;
 import main.java.memoranda.util.Util;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import nu.xom.Element;
-import nu.xom.Elements;
+import nu.xom.*;
+import org.junit.Assert;
 
 
 /**
@@ -34,13 +31,24 @@ public class AppUsers implements UserList {
      * */
     public AppUsers() {
         element = new Element("AppUser");
-        appUsers = new HashMap<>();
-        try {
-            hardCodedData();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
+        File usersFile = new File("server/users.xml");
+        if (usersFile.exists()) {
+            try {
+                loadFromFile();
+            } catch (ParsingException | IOException e) {
+                e.printStackTrace();
+            }
         }
-
+//        else {
+//
+//            System.out.println("hardCoded");
+//            try {
+//                appUsers = new HashMap<>();
+//                hardCodedData();
+//            } catch (URISyntaxException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     /**
@@ -67,7 +75,6 @@ public class AppUsers implements UserList {
      * @return void
      */
     public void addUser(User user) {
-
         String login = user.getUserName();
 
         if(!appUsers.containsKey(login)){
@@ -176,38 +183,36 @@ public class AppUsers implements UserList {
     }
 
     /**
-     * Saves hashMap to file
-     *
-     * @param obj object to be saved to file
-     * @param file_path file path to save file to
+     * Saves hashMap to file.
      */
-    private void saveToFile(Object obj, String file_path) {
-
+    public void save() {
+        Document writeDoc = new Document(element);
         try {
-            System.out.println("Saving object to file...");
-            FileOutputStream fileOutputStream = new FileOutputStream(file_path);
-            ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
-            outputStream.writeObject(obj);
-            outputStream.close();
-
-            System.out.println("Object saved to " + file_path);
-
+            OutputStream fileOutputStream = new FileOutputStream("server/users.xml");
+            Serializer serializer = new Serializer(fileOutputStream, "UTF-8");
+            serializer.setIndent(4);
+            serializer.setMaxLength(64);
+            serializer.write(writeDoc);
+            serializer.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
-     * Load object from file
-     *
-     * @param file_path file location
+     * Load object from file.
      */
-    private void loadFromFile(String file_path){
-        //read from file
-
-
-
+    private void loadFromFile() throws IOException, ParsingException {
+        appUsers = new HashMap<>();
+        Builder parser = new Builder();
+        InputStream fileInputStream = new FileInputStream("server/users.xml");
+        Document readDoc = parser.build(fileInputStream);
+        Element element = readDoc.getRootElement();
+        for (int i = 0; i < element.getChildElements("User").size(); i++) {
+            Element element1 = element.getChildElements("User").get(i).getChildElements().get(0);
+            User user = User.elmToUser(element1);
+            addUser(user);
+        }
     }
 
     /**
@@ -257,19 +262,18 @@ public class AppUsers implements UserList {
         Trainer trainer6 = new TrainerImpl("John Bosworth", Util.generateId(),"JBos",
                 "Password",Belt.WHITE,john,new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
         trainer6.setDescription("Innovation is a risk.");
-        appUsers.put(student1.getUserName(),student1);
-        appUsers.put(student2.getUserName(),student2);
-        appUsers.put(student3.getUserName(),student3);
-        appUsers.put(student4.getUserName(),student4);
-        appUsers.put(user1.getUserName(),user1);
-        appUsers.put(user2.getUserName(),user2);
-        appUsers.put(trainer1.getUserName(),trainer1);
-        appUsers.put(trainer2.getUserName(),trainer2);
-        appUsers.put(trainer3.getUserName(),trainer3);
-        appUsers.put(trainer4.getUserName(),trainer4);
-        appUsers.put(trainer5.getUserName(),trainer5);
-        appUsers.put(trainer6.getUserName(),trainer6);
-
+        addUser(student1);
+        addUser(student2);
+        addUser(student3);
+        addUser(student4);
+        addUser(user1);
+        addUser(user2);
+        addUser(trainer1);
+        addUser(trainer2);
+        addUser(trainer3);
+        addUser(trainer4);
+        addUser(trainer5);
+        addUser(trainer6);
     }
 
 }

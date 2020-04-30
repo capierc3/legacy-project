@@ -1,6 +1,7 @@
 package main.java.memoranda.gym;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import main.java.memoranda.Note;
@@ -23,6 +24,7 @@ public class TrainerImpl extends UserImpl implements Trainer{
     public TrainerImpl(String name, String id, String userName, String password, Belt belt, File newPicture,
                        Collection<Note> newNoteList, ClassList newUserClasses) {
         super(name, id, userName, password, belt, newPicture, newNoteList, newUserClasses, "Trainer");
+        setAvailability(new ArrayList<>());
     }
 
     /**

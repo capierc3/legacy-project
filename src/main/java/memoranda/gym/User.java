@@ -2,9 +2,11 @@ package main.java.memoranda.gym;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.gym.ClassList;
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
 import main.java.memoranda.Note;
+import main.java.memoranda.ui.App;
 import nu.xom.Element;
 import nu.xom.Elements;
 
@@ -65,7 +67,12 @@ public interface User {
         String userName = el.getAttributeValue("UserName");
         String password = el.getAttributeValue("Password");
         Belt belt = Belt.getBelt(Integer.parseInt(el.getAttributeValue("Rank")));
-        File newPicture = new File(el.getAttributeValue("Picture"));
+        File newPicture = null;
+        try {
+            newPicture = new File(App.class.getResource(el.getAttributeValue("Picture")).toURI());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         Collection newNoteList = new ArrayList();
         ClassList newUserClasses = ClassList.elmToClassList(el.getFirstChildElement("ClassList"));
         String userType = el.getLocalName();
@@ -84,6 +91,7 @@ public interface User {
         } else {
             return new OwnerImpl(name,id,userName,password,belt,newPicture,new ArrayList<>(),newUserClasses);
         }
+        //return new UserImpl("test","sd","sad","dsf",Belt.BLACK1,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()), "teach");
     }
 
 }

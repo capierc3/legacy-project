@@ -3,6 +3,8 @@ package main.java.memoranda.gym;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.util.Collection;
+import java.util.regex.Matcher;
+
 import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.Note;
 import main.java.memoranda.date.CalendarDate;
@@ -79,7 +81,10 @@ public class UserImpl implements User {
             }
         }
         picture = fileName;
-        setAttr("Picture", fileName.getPath());
+
+        String[] pathArray = fileName.getPath().split(Matcher.quoteReplacement(System.getProperty("file.separator")));
+        String path = "/ui/icons/" + pathArray[pathArray.length - 1];
+        setAttr("Picture",path);
     }
 
     /**

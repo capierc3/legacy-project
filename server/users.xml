@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AppUser>
+    <User>
+        <Student Name="Johnny Karate" Id="JK" UserName="student"
+        Password="Password" Rank="2" Picture="/ui/icons/johnny.jpg">
+            <NoteList/>
+            <ClassList>
+                <ClassList/>
+            </ClassList>
+        </Student>
+    </User>
+    <User>
+        <Student Name="Kip Dynamite" Id="-7cb037cb-b868-3180-a4bc"
+        UserName="KDynamite" Password="Password" Rank="0"
+        Picture="/ui/icons/kip.jpg">
+            <NoteList/>
+            <ClassList>
+                <ClassList/>
+            </ClassList>
+        </Student>
+    </User>
+    <User>
+        <Student Name="Daniel LaRusso" Id="-7c3acd49-9370-61e2-49ab"
+        UserName="LaRUu" Password="Password" Rank="10"
+        Picture="/ui/icons/dan.jpg">
+            <NoteList/>
+            <ClassList>
+                <ClassList/>
+            </ClassList>
+        </Student>
+    </User>
+    <User>
+        <Student Name="The Chosen One" Id="-7c63e5c3-d2d-e426-f657"
+        UserName="Chosen1" Password="Password" Rank="13"
+        Picture="/ui/icons/chosen.jpeg">
+            <NoteList/>
+            <ClassList>
+                <ClassList/>
+            </ClassList>
+        </Student>
+    </User>
+    <User>
+        <Owner Name="Fancy Nancy" Id="admin001" UserName="admin"
+        Password="Password" Rank="13" Picture="/ui/icons/nunchuckNorris.png">
+            <NoteList/>
+            <ClassList>
+                <ClassList/>
+            </ClassList>
+        </Owner>
+    </User>
+    <User>
+        <Trainer Name="Country Mac" Id="CMac" UserName="trainer"
+        Password="Password" Rank="13" Picture="/ui/icons/Mac.jpeg"
+        Description="I gave him an ocular patdown, assessed
+        the threat level, clocked a knife in his boot.">
+            <NoteList/>
+            <ClassList>
+                <ClassList/>
+            </ClassList>
+            <Available/>
+            <Available/>
+        </Trainer>
+    </User>
+    <User>
+        <Trainer Name="Justic Oliver" Id="-7c5248fc-346f-3e9c-757b"
+        UserName="Joliver" Password="Password" Rank="4"
+        Picture="/ui/icons/nunchuckNorris.png" Description="I
+        use ketchup on everything!">
+            <NoteList/>
+            <ClassList>
+                <ClassList/>
+            </ClassList>
+            <Available/>
+            <Available/>
+        </Trainer>
+    </User>
+    <User>
+        <Trainer Name="Cameron Howe" Id="-7c5827e9-fcae-75c9-a06f"
+        UserName="Chowe" Password="Password" Rank="7" Picture="/ui/icons/howe.jpg"
+        Description="What the hell is this Yahoo">
+            <NoteList/>
+            <ClassList>
+                <ClassList/>
+            </ClassList>
+            <Available/>
+            <Available/>
+        </Trainer>
+    </User>
+    <User>
+        <Trainer Name="Joe MacMillan" Id="-7c75828a-65ec-89b0-f733"
+        UserName="JMac" Password="Password" Rank="2" Picture="/ui/icons/joe.jpg"
+        Description="The thing that gets you to the thing">
+            <NoteList/>
+            <ClassList>
+                <ClassList/>
+            </ClassList>
+            <Available/>
+            <Available/>
+        </Trainer>
+    </User>
+    <User>
+        <Trainer Name="Gordon Clark" Id="-7c7b6177-ae2b-40df-2228"
+        UserName="Gclark" Password="Password" Rank="12"
+        Picture="/ui/icons/gordon.jpg" Description="We
+        had a problem. Now we have a product.">
+            <NoteList/>
+            <ClassList>
+                <ClassList/>
+            </ClassList>
+            <Available/>
+            <Available/>
+        </Trainer>
+    </User>
+    <User>
+        <Trainer Name="Donna Clark" Id="-7c69c4b0-d56c-9b54-a14c"
+        UserName="Dclark" Password="Password" Rank="13"
+        Picture="/ui/icons/donna.jpg" Description="Software
+        comes and goes. Hardware is forever.">
+            <NoteList/>
+            <ClassList>
+                <ClassList/>
+            </ClassList>
+            <Available/>
+            <Available/>
+        </Trainer>
+    </User>
+    <User>
+        <Trainer Name="John Bosworth" Id="-7c6fa39d-9dac-5283-cc40"
+        UserName="JBos" Password="Password" Rank="0" Picture="/ui/icons/john.jpg"
+        Description="Innovation is a risk.">
+            <NoteList/>
+            <ClassList>
+                <ClassList/>
+            </ClassList>
+            <Available/>
+            <Available/>
+        </Trainer>
+    </User>
+</AppUser>
