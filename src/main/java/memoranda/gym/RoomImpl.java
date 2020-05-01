@@ -109,10 +109,19 @@ public class RoomImpl implements Room{
         return true;
     }
 
+    /**
+     * Method to return Room element.
+     * @return
+     */
     public Element getContent() {
         return el;
     }
 
+    /**
+     * Method to set attribute of a Room on the element.
+     * @param a
+     * @param value
+     */
     private void setAttr(String a, String value) {
         Attribute attr = el.getAttribute(a);
         if (attr == null)
@@ -120,6 +129,7 @@ public class RoomImpl implements Room{
         else
             attr.setValue(value);
     }
+
     /**
      * Method to set the file for picture in Element.
      */
@@ -137,7 +147,7 @@ public class RoomImpl implements Room{
 
     /**
      * Method to set the Room's picture to file passed in.
-     * @param newPicture
+     * @param newPicture File
      */
     public void setPic(File newPicture) {
         picture = newPicture;
