@@ -13,8 +13,6 @@ public interface ResourcesList {
      * @return Vector
      */
     Vector getAllResources();
-    
-    //Vector getResourcesForTask(String taskId);
 
     /**
      * returns a single resource form the list
@@ -36,8 +34,6 @@ public interface ResourcesList {
      * @param path String
      */
     void addResource(String path);
-    
-    //void addResource(String path, String taskId);
 
     /**
      * removes a resource with matching path

@@ -1,4 +1,5 @@
 package main.java.memoranda.gym;
+
 import main.java.memoranda.date.CalendarDate;
 
 import java.io.File;
@@ -13,9 +14,10 @@ import nu.xom.Elements;
 
 /**
  * Interface for the Room methods
+ * 
  * @author Daimi Mussey
  */
-public class RoomImpl implements Room{
+public class RoomImpl implements Room {
     private ClassList list;
     private Collection<CalendarDate> classDates;
     private File picture;
@@ -45,7 +47,7 @@ public class RoomImpl implements Room{
      * @param list ClassList
      */
     public void setClassList(ClassList list) {
-        el.appendChild(list.getContent().copy());
+	el.appendChild(list.getContent().copy());
     }
 
     /**
@@ -53,11 +55,11 @@ public class RoomImpl implements Room{
      * @param classDates Collection
      */
     public void setClassDates(Collection<CalendarDate> classDates) {
-        Element classList = new Element("ClassDates");
-        for (CalendarDate date : classDates) {
-            classList.appendChild(date.toString());
-        }
-        el.appendChild(classList);
+	Element classList = new Element("ClassDates");
+	for (CalendarDate date : classDates) {
+	    classList.appendChild(date.toString());
+	}
+	el.appendChild(classList);
     }
 
     /**
@@ -65,7 +67,7 @@ public class RoomImpl implements Room{
      * @return ClassList
      */
     public ClassList getClasses() {
-        return list;
+	return list;
     }
 
     /**
@@ -73,10 +75,10 @@ public class RoomImpl implements Room{
      * @param gymClass GymClass
      */
     public void addClass(GymClass gymClass) {
-        list.addClass(gymClass);
-        classDates.add(gymClass.getStartDate());
-        setClassList(list);
-        setClassDates(classDates);
+	list.addClass(gymClass);
+	classDates.add(gymClass.getStartDate());
+	setClassList(list);
+	setClassDates(classDates);
     }
 
     /**
@@ -84,7 +86,7 @@ public class RoomImpl implements Room{
      * @return int
      */
     public int getRoomNum() {
-        return Integer.parseInt(el.getAttributeValue("RoomNumber"));
+	return Integer.parseInt(el.getAttributeValue("RoomNumber"));
     }
 
     /**
@@ -92,21 +94,22 @@ public class RoomImpl implements Room{
      * @param num int
      */
     public void setRoomNum(int num) {
-        setAttr("RoomNumber", String.valueOf(num));
+	setAttr("RoomNumber", String.valueOf(num));
     }
 
     /**
      * Lets you know if a room is available on a given date and time.
+     * 
      * @param date CalendarDate
      * @return boolean
      */
     public boolean isAvailable(CalendarDate date) {
-        for (CalendarDate d:classDates) {
-            if (d.equals(date)){
-                return false;
-            }
-        }
-        return true;
+	for (CalendarDate d : classDates) {
+	    if (d.equals(date)) {
+		return false;
+	    }
+	}
+	return true;
     }
 
     /**
@@ -114,7 +117,7 @@ public class RoomImpl implements Room{
      * @return
      */
     public Element getContent() {
-        return el;
+	return el;
     }
 
     /**
@@ -123,11 +126,11 @@ public class RoomImpl implements Room{
      * @param value
      */
     private void setAttr(String a, String value) {
-        Attribute attr = el.getAttribute(a);
-        if (attr == null)
-            el.addAttribute(new Attribute(a, value));
-        else
-            attr.setValue(value);
+	Attribute attr = el.getAttribute(a);
+	if (attr == null)
+	    el.addAttribute(new Attribute(a, value));
+	else
+	    attr.setValue(value);
     }
 
     /**

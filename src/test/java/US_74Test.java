@@ -19,9 +19,14 @@
  */
 
 /*
- * The task was the creation of the sampleTest.java file, the test folder, and the addition of Junit and Jacoco to build.gradle. 
- * I don't know how to test the code coverage from this test specifically, but if you run a code coverage test on sampleTest.Java, you will see that code is covered 100% and that 
- * the class functions as intended. You can also run a sample a test via a CLI and see the correct .html outputs from Junit and jacoco. 
+ * The task was the creation of the sampleTest.java file, the test folder, 
+ * and the addition of Junit and Jacoco to build.gradle. 
+ * I don't know how to test the code coverage from this test specifically, 
+ * but if you run a code coverage test on sampleTest.Java, 
+ * you will see that code is covered 100% and that 
+ * the class functions as intended. 
+ * You can also run a sample a test via a CLI 
+ * and see the correct .html outputs from Junit and jacoco. 
  */
 
 

@@ -7,6 +7,6 @@ package main.java.memoranda.date;
  */
 public interface DateListener {
 
-  void dateChange(CalendarDate date);
+    void dateChange(CalendarDate date);
 
 }

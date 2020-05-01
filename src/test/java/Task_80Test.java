@@ -1,3 +1,5 @@
+package test.java;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +18,6 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
 
 public class Task_80Test {
-    Element element;
     ClassList classList;
     Collection<CalendarDate> classDates;
     Collection<GymClass> gymClasses;
@@ -26,11 +27,11 @@ public class Task_80Test {
     GymClass class2;
     GymClass class3;
     Date today = new Date();
-    boolean isAvailable;
+    boolean isAvailable = false;
 
     /**
      * Test setup for Gym ClassList.
-     * @throws Exception
+     * @throws Exception if Null
      */
     @Before
     public void setUp() throws Exception {
@@ -57,7 +58,7 @@ public class Task_80Test {
      * Test of getters and setters for Gym ClassList.
      */
     @Test
-    public void classTest(){
+    public void classTest() {
         assertEquals(2, classList.getSize());
         classList.addClass(class3);
         assertEquals(3, classList.getSize());

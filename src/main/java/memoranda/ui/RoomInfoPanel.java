@@ -1,4 +1,4 @@
-/* 
+/** 
  * This class is designed to display a panel and show the appropriate info when the Room Info button is clicked. 
  * It used the resources panel as an original Source
  * 
@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class RoomInfoPanel extends JPanel {
+
     TitledBorder title = BorderFactory.createTitledBorder("KAESEKUCHEN ROOMS");
     FlowLayout flowlayout = new FlowLayout();
     JButton newUser = new JButton("New Student");
@@ -30,7 +31,6 @@ public class RoomInfoPanel extends JPanel {
     Collection<GymClass> gymClasses = new ArrayList<>();
     Collection<CalendarDate> calendarDates = new ArrayList<>();
     ClassList list = new ClassListImpl(gymClasses);
-
 
     /**
      * Constructor for the panel.
@@ -68,5 +68,4 @@ public class RoomInfoPanel extends JPanel {
         }
         this.setBorder(title);
     }
-
 }
