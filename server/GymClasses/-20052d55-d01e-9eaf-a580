@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Class Name="Brick Breaking while on FIRE!!" Type="Public"
+ID="-20052d55-d01e-9eaf-a580" Rank="1" StartDate="1/4/2020/0:0_PM"
+EndDate="1/4/2020/1:0_PM" MaxSize="15">
+    <Trainer Name="Country Mac" Id="CMac" UserName="trainer"
+    Password="Password" Rank="13" Picture="/ui/icons/Mac.jpeg"
+    Description="I gave him an ocular patdown, assessed
+    the threat level, clocked a knife in his boot.">
+        <NoteList/>
+        <ClassList>
+            <ClassList/>
+        </ClassList>
+        <Available/>
+        <Available/>
+    </Trainer>
+    <Students Id="JK">
+        <Student Name="Johnny Karate" Id="JK" UserName="student"
+        Password="Password" Rank="2" Picture="/ui/icons/johnny.jpg">
+            <NoteList/>
+            <ClassList>
+                <ClassList/>
+            </ClassList>
+            <ClassList>
+                <ClassList>
+                    <Class Name="Brick Breaking while on
+                    FIRE!!" Type="Public" ID="-20052d55-d01e-9eaf-a580"
+                    Rank="1" StartDate="1/4/2020/0:0_PM"
+                    EndDate="1/4/2020/1:0_PM" MaxSize="15">
+                        <Trainer Name="Country Mac" Id="CMac"
+                        UserName="trainer" Password="Password"
+                        Rank="13" Picture="/ui/icons/Mac.jpeg"
+                        Description="I gave him an ocular
+                        patdown, assessed the threat level,
+                        clocked a knife in his boot.">
+                            <NoteList/>
+                            <ClassList>
+                                <ClassList/>
+                            </ClassList>
+                            <Available/>
+                            <Available/>
+                        </Trainer>
+                    </Class>
+                </ClassList>
+            </ClassList>
+        </Student>
+    </Students>
+</Class>

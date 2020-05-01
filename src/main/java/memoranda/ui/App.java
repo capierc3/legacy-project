@@ -1,16 +1,12 @@
 package main.java.memoranda.ui;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.*;
 
 import main.java.memoranda.EventsScheduler;
 import main.java.memoranda.gym.AppUsers;
-import main.java.memoranda.gym.ClassListImpl;
 import main.java.memoranda.gym.User;
 import main.java.memoranda.util.Configuration;
 
@@ -165,7 +161,7 @@ public class App {
 			appUsers.getManager().save();
 		}
 		if (appUsers != null) {
-			appUsers.save();
+			appUsers.saveToFile();
 		}
 		frame.dispose();
 		System.exit(0);

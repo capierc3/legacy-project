@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Class Name="Brick Breaking" Type="Public" ID="579e9093-88f6-6ba0-4c18"
+Rank="1" StartDate="1/4/2020/0:0_PM" EndDate="1/4/2020/1:0_PM"
+MaxSize="15">
+    <Trainer Name="Donna Clark" Id="b6fad1c-b36c-c877-eac6"
+    UserName="Dclark" Password="Password" Rank="13" Picture="/ui/icons/donna.jpg"
+    Description="Software comes and goes. Hardware is forever.">
+        <NoteList/>
+        <ClassList>
+            <ClassList/>
+        </ClassList>
+        <Available/>
+        <Available/>
+    </Trainer>
+</Class>

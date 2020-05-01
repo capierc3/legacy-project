@@ -22,6 +22,7 @@ public class MyScheduleManager {
     private ClassList _myTeachingClasses;
     private ClassList _ShownList;
     private User _user;
+    private final String FILE_PATH = "server/GymClasses/";
 
     /**
      * main constructor for the Manager
@@ -138,15 +139,19 @@ public class MyScheduleManager {
         if (_user instanceof Student){
             if (!gymClass.isFull()) {
                 _myStudentClasses.addClass(gymClass);
+                App.appUsers.getActiveUser().addClass(gymClass);
                 gymClass.addStudent((Student) _user);
+                save();
                 return true;
             } else {
                 return false;
             }
         } else {
             _allClasses.addClass(gymClass);
+            save();
             return true;
         }
+
     }
 
     /**
@@ -228,20 +233,14 @@ public class MyScheduleManager {
     }
 
     public void save() {
-        Document writeDoc;
         for (GymClass gymClass:_allClasses.getAllClasses()) {
-            writeDoc = new Document((Element) gymClass.getContent().copy());
             try {
-                OutputStream fileOutputStream = new FileOutputStream(("server/GymClasses/" + gymClass.getID()));
-                Serializer serializer = new Serializer(fileOutputStream, "UTF-8");
-                serializer.setIndent(4);
-                serializer.setMaxLength(64);
-                serializer.write(writeDoc);
-                serializer.flush();
+                ObjectSerializer.serializeElement(gymClass.getContent(),FILE_PATH + gymClass.getID());
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        System.out.println("Saved");
     }
 
     /**

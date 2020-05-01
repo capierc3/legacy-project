@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import nu.xom.*;
-import org.junit.Assert;
 
 
 /**
@@ -20,7 +19,7 @@ import org.junit.Assert;
 
 public class AppUsers implements UserList {
 
-    private final String APP_USER_FILE_PATH = "appusers.xml";
+    private final String APP_USER_FILE_PATH = "server/appusers.xml";
     private HashMap<String, User> appUsers;
     private User activeUser;
     private Element element;
@@ -31,24 +30,24 @@ public class AppUsers implements UserList {
      * */
     public AppUsers() {
         element = new Element("AppUser");
-        File usersFile = new File("server/users.xml");
+        File usersFile = new File(APP_USER_FILE_PATH);
         if (usersFile.exists()) {
             try {
+                System.out.println("Loaded");
                 loadFromFile();
             } catch (ParsingException | IOException e) {
                 e.printStackTrace();
             }
         }
-//        else {
-//
-//            System.out.println("hardCoded");
-//            try {
-//                appUsers = new HashMap<>();
-//                hardCodedData();
-//            } catch (URISyntaxException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        else {
+            System.out.println("hardCoded");
+            try {
+                appUsers = new HashMap<>();
+                hardCodedData();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -82,7 +81,7 @@ public class AppUsers implements UserList {
             Element e = new Element("User");
             e.appendChild(user.getContent().copy());
             element.appendChild(e);
-            save();
+            saveToFile();
         }
 
     }
@@ -96,7 +95,7 @@ public class AppUsers implements UserList {
     public void removeUser(String login) {
         if (appUsers.containsKey(login)) {
             appUsers.remove(login);
-            save();
+            saveToFile();
         }
 
     }
@@ -180,15 +179,9 @@ public class AppUsers implements UserList {
     /**
      * Saves hashMap to file.
      */
-    public void save() {
-        Document writeDoc = new Document(element);
+    public void saveToFile() {
         try {
-            OutputStream fileOutputStream = new FileOutputStream("server/users.xml");
-            Serializer serializer = new Serializer(fileOutputStream, "UTF-8");
-            serializer.setIndent(4);
-            serializer.setMaxLength(64);
-            serializer.write(writeDoc);
-            serializer.flush();
+            ObjectSerializer.serializeElement(element,APP_USER_FILE_PATH);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -200,10 +193,14 @@ public class AppUsers implements UserList {
     private void loadFromFile() throws IOException, ParsingException {
         appUsers = new HashMap<>();
         Builder parser = new Builder();
-        InputStream fileInputStream = new FileInputStream("server/users.xml");
+        InputStream fileInputStream = new FileInputStream(APP_USER_FILE_PATH);
         Document readDoc = parser.build(fileInputStream);
-        Element element = readDoc.getRootElement();
-        for (int i = 0; i < element.getChildElements("User").size(); i++) {
+        populateLibrary(readDoc.getRootElement());
+    }
+
+    private void populateLibrary(Element element) {
+        Elements elements = element.getChildElements("User");
+        for (int i = 0; i < elements.size(); i++) {
             Element element1 = element.getChildElements("User").get(i).getChildElements().get(0);
             User user = User.elmToUser(element1);
             addUser(user);

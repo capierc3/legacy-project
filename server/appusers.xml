@@ -10,7 +10,7 @@
         </Student>
     </User>
     <User>
-        <Student Name="Kip Dynamite" Id="-7cb037cb-b868-3180-a4bc"
+        <Student Name="Kip Dynamite" Id="b235b14-5ea8-15d1-192c"
         UserName="KDynamite" Password="Password" Rank="0"
         Picture="/ui/icons/kip.jpg">
             <NoteList/>
@@ -20,7 +20,7 @@
         </Student>
     </User>
     <User>
-        <Student Name="Daniel LaRusso" Id="-7c3acd49-9370-61e2-49ab"
+        <Student Name="Daniel LaRusso" Id="b98c596-39af-4634-3e1b"
         UserName="LaRUu" Password="Password" Rank="10"
         Picture="/ui/icons/dan.jpg">
             <NoteList/>
@@ -30,7 +30,7 @@
         </Student>
     </User>
     <User>
-        <Student Name="The Chosen One" Id="-7c63e5c3-d2d-e426-f657"
+        <Student Name="The Chosen One" Id="b758c08-eb2c-1149-bfd3"
         UserName="Chosen1" Password="Password" Rank="13"
         Picture="/ui/icons/chosen.jpeg">
             <NoteList/>
@@ -62,7 +62,7 @@
         </Trainer>
     </User>
     <User>
-        <Trainer Name="Justic Oliver" Id="-7c5248fc-346f-3e9c-757b"
+        <Trainer Name="Justic Oliver" Id="b8728cf-126e-6bbe-bef6"
         UserName="Joliver" Password="Password" Rank="4"
         Picture="/ui/icons/nunchuckNorris.png" Description="I
         use ketchup on everything!">
@@ -75,7 +75,7 @@
         </Trainer>
     </User>
     <User>
-        <Trainer Name="Cameron Howe" Id="-7c5827e9-fcae-75c9-a06f"
+        <Trainer Name="Cameron Howe" Id="b8149e2-daad-22ed-e9ea"
         UserName="Chowe" Password="Password" Rank="7" Picture="/ui/icons/howe.jpg"
         Description="What the hell is this Yahoo">
             <NoteList/>
@@ -87,7 +87,7 @@
         </Trainer>
     </User>
     <User>
-        <Trainer Name="Joe MacMillan" Id="-7c75828a-65ec-89b0-f733"
+        <Trainer Name="Joe MacMillan" Id="b63ef42-c3eb-36d4-40af"
         UserName="JMac" Password="Password" Rank="2" Picture="/ui/icons/joe.jpg"
         Description="The thing that gets you to the thing">
             <NoteList/>
@@ -99,7 +99,7 @@
         </Trainer>
     </User>
     <User>
-        <Trainer Name="Gordon Clark" Id="-7c7b6177-ae2b-40df-2228"
+        <Trainer Name="Gordon Clark" Id="b5e1055-8c2b-ee02-eba3"
         UserName="Gclark" Password="Password" Rank="12"
         Picture="/ui/icons/gordon.jpg" Description="We
         had a problem. Now we have a product.">
@@ -112,7 +112,7 @@
         </Trainer>
     </User>
     <User>
-        <Trainer Name="Donna Clark" Id="-7c69c4b0-d56c-9b54-a14c"
+        <Trainer Name="Donna Clark" Id="b6fad1c-b36c-c877-eac6"
         UserName="Dclark" Password="Password" Rank="13"
         Picture="/ui/icons/donna.jpg" Description="Software
         comes and goes. Hardware is forever.">
@@ -125,7 +125,7 @@
         </Trainer>
     </User>
     <User>
-        <Trainer Name="John Bosworth" Id="-7c6fa39d-9dac-5283-cc40"
+        <Trainer Name="John Bosworth" Id="b69ce2f-7bac-7fa6-15bb"
         UserName="JBos" Password="Password" Rank="0" Picture="/ui/icons/john.jpg"
         Description="Innovation is a risk.">
             <NoteList/>
@@ -135,5 +135,14 @@
             <Available/>
             <Available/>
         </Trainer>
+    </User>
+    <User>
+        <Student Name="Mark" Id="Mark" UserName="Mark"
+        Password="Password" Rank="0" Picture="/ui/icons/nunchuckNorris.png">
+            <NoteList/>
+            <ClassList>
+                <ClassList/>
+            </ClassList>
+        </Student>
     </User>
 </AppUser>
