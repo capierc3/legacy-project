@@ -534,10 +534,6 @@ public class EventsManager {
 			return Integer.parseInt(dEl.getAttribute("day").getValue());
 		}
 
-		/*
-		 * public Note getNote() { return new NoteImpl(dEl);
-		 */
-
 		/**
 		 * Method that returns the current Day element
 		 * @return Element
