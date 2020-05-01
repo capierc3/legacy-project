@@ -1,6 +1,7 @@
 package main.java.memoranda.gym;
 
 import java.io.File;
+import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.util.Collection;
 import main.java.memoranda.gym.ClassList;
@@ -13,7 +14,7 @@ import nu.xom.Element;
  * Interface for the User methods which will be extended to Trainer, Student and Owner
  * @author Daimi Mussey
  */
-public class UserImpl implements User {
+public class UserImpl implements User, Serializable {
     private File picture;
     private Collection<Note> noteList;
     private ClassList userClasses;

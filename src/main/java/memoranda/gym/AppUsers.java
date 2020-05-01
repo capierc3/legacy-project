@@ -35,7 +35,8 @@ public class AppUsers implements UserList {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-
+        saveToFile(appUsers, APP_USER_FILE_PATH);
+        loadFromFile(APP_USER_FILE_PATH);
     }
 
     /**
@@ -175,7 +176,7 @@ public class AppUsers implements UserList {
     private void loadFromFile(String file_path){
 
         try {
-
+            System.out.println("Loading AppUsers from " + file_path);
             Object obj = ObjectSerializer.deserializeObject(file_path);
             appUsers = (HashMap<String, User>) obj;
 

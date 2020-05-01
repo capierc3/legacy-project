@@ -4,11 +4,13 @@ import main.java.memoranda.gym.GymClass;
 import main.java.memoranda.gym.User;
 import nu.xom.Element;
 
+import java.io.Serializable;
+
 /**
  * Interface for the methods used for the Student class
  * @author Chase
  */
-public interface Student extends User{
+public interface Student extends User, Serializable {
 
     /**
      * Getter for the collection of classes

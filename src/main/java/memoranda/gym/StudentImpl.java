@@ -9,13 +9,14 @@ import nu.xom.Attribute;
 import nu.xom.Element;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
  * Interface for the methods used for the Student class
  * @author Daimi Mussey
  */
-public class StudentImpl extends UserImpl implements Student {
+public class StudentImpl extends UserImpl implements Student, Serializable {
 
     private ClassList list;
 

@@ -1,6 +1,7 @@
 package main.java.memoranda.gym;
 import main.java.memoranda.gym.ClassList;
 import java.io.File;
+import java.io.Serializable;
 import java.util.Collection;
 import main.java.memoranda.Note;
 import nu.xom.Element;
@@ -9,7 +10,7 @@ import nu.xom.Element;
  * Interface for the User methods which will be extended to Trainer, Student and Owner
  * @author Chase
  */
-public interface User {
+public interface User extends Serializable {
 
     /**
      * Method to set NoteList in Element.
