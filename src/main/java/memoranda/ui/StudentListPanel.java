@@ -18,7 +18,7 @@ import main.java.memoranda.util.Local;
  */
 public class StudentListPanel extends JPanel {
 
-    TitledBorder title = BorderFactory.createTitledBorder("KAESEKUCHEN TRAINERS");
+    TitledBorder title = BorderFactory.createTitledBorder("KAESEKUCHEN STUDENTS");
     FlowLayout flowlayout = new FlowLayout();
     JButton newUser = new JButton("New Student");
 
