@@ -14,6 +14,9 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.*;
 
+import nu.xom.Attribute;
+import nu.xom.Element;
+import nu.xom.Elements;
 
 /**
  * The AppUsers class is a data model that houses information on all application users.
@@ -21,9 +24,10 @@ import java.util.*;
 
 public class AppUsers implements UserList {
 
-    private final String APP_USER_FILE_PATH = "appusers.dat";
+    private final String APP_USER_FILE_PATH = "appusers.xml";
     private HashMap<String, User> appUsers;
     private User activeUser;
+    private Element element;
 
     /**
      * Class constructor.  Initiates appUser collection
@@ -35,8 +39,7 @@ public class AppUsers implements UserList {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        saveToFile(appUsers, APP_USER_FILE_PATH);
-        loadFromFile(APP_USER_FILE_PATH);
+        //loadFromFile();
     }
 
     /**
@@ -69,9 +72,8 @@ public class AppUsers implements UserList {
         if(!appUsers.containsKey(login)){
             appUsers.put(login, user);
 
-            //TODO: Implement in Sprint 3
             //save to file
-            //saveToFile(appUsers, APP_USER_FILE_PATH);
+            saveToFile();
         }
 
     }
@@ -86,6 +88,8 @@ public class AppUsers implements UserList {
 
         appUsers.remove(login);
 
+        //save to file
+        saveToFile();
     }
 
     /**
@@ -151,14 +155,13 @@ public class AppUsers implements UserList {
     /**
      * Saves hashMap to file
      *
-     * @param obj object to be saved to file
-     * @param file_path file path to save file to
      */
-    private void saveToFile(Object obj, String file_path) {
+    private void saveToFile() {
 
         try {
 
-            ObjectSerializer.serializeObject(obj, file_path);
+            Element element = convertLibraryToXML();
+            ObjectSerializer.serializeObject(element, APP_USER_FILE_PATH);
 
         } catch (IOException e) {
 
@@ -166,6 +169,21 @@ public class AppUsers implements UserList {
 
         }
 
+    }
+
+    /**
+     * Convert appUsers to XML Element
+     * @return Element
+     */
+    private Element convertLibraryToXML() {
+
+        Element element = new Element("appUsers");
+
+        appUsers.forEach((k,v) -> {
+            //element.appendChild(v);
+        });
+
+        return element;
     }
 
     /**
