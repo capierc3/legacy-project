@@ -1,10 +1,15 @@
 package main.java.memoranda.gym;
 
 import main.java.memoranda.date.CalendarDate;
+
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+
 import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.gym.GymClass;
 import nu.xom.Element;
+import nu.xom.Elements;
 
 /**
  * Interface for the Room methods
@@ -59,4 +64,15 @@ public interface Room {
      * @return Element
      */
     Element getContent();
+
+    static Room elmToRoom(Element el) {
+        int num = Integer.parseInt(el.getAttributeValue("RoomNumber"));
+        ClassList classList = ClassList.elmToClassList(el.getFirstChildElement("ClassList"));
+        ArrayList<CalendarDate> classDates = new ArrayList<>();
+        Elements elms = el.getFirstChildElement("ClassDates").getChildElements();
+        for (int i = 0; i < elms.size(); i++) {
+            classDates.add(new CalendarDate(elms.get(i).getLocalName()));
+        }
+        return new RoomImpl(num,classList,classDates);
+    }
 }

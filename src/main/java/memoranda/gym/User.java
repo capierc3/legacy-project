@@ -59,31 +59,31 @@ public interface User extends Serializable {
     void addClass(GymClass gymClass);
     void removeClass(GymClass gymClass);
     Element getContent();
-//    static User elementToUser(Element el) {
-//        String name = el.getAttributeValue("Name");
-//        String id = el.getAttributeValue("Id");
-//        String userName = el.getAttributeValue("UserName");
-//        String password = el.getAttributeValue("Password");
-//        Belt belt = Belt.getBelt(Integer.parseInt(el.getAttributeValue("Rank")));
-//        File newPicture = new File(el.getAttributeValue("Picture"));
-//        Collection newNoteList = new ArrayList();
-//        ClassList newUserClasses = ClassList.elementToClassList(el.getFirstChildElement("ClassList"));
-//        String userType = el.getLocalName();
-//        if (userType.equalsIgnoreCase("Student")) {
-//            return new StudentImpl(name,id,userName,password,belt,newPicture,new ArrayList<>(),newUserClasses);
-//        } else if (userType.equalsIgnoreCase("Trainer")) {
-//            Trainer trainer = new TrainerImpl(name, id, userName, password, belt, newPicture, new ArrayList<>(), newUserClasses);
-//            trainer.setDescription(el.getAttributeValue("Description"));
-//            ArrayList<CalendarDate> dates = new ArrayList<>();
-//            Elements elms = el.getFirstChildElement("Available").getChildElements("Date");
-//            for (int i = 0; i < elms.size(); i++) {
-//                dates.add(new CalendarDate(elms.get(i).getAttributeValue("date")));
-//            }
-//            trainer.setAvailability(dates);
-//            return trainer;
-//        } else {
-//            return new OwnerImpl(name,id,userName,password,belt,newPicture,new ArrayList<>(),newUserClasses);
-//        }
-//    }
+    static User elmToUser(Element el) {
+        String name = el.getAttributeValue("Name");
+        String id = el.getAttributeValue("Id");
+        String userName = el.getAttributeValue("UserName");
+        String password = el.getAttributeValue("Password");
+        Belt belt = Belt.getBelt(Integer.parseInt(el.getAttributeValue("Rank")));
+        File newPicture = new File(el.getAttributeValue("Picture"));
+        Collection newNoteList = new ArrayList();
+        ClassList newUserClasses = ClassList.elmToClassList(el.getFirstChildElement("ClassList"));
+        String userType = el.getLocalName();
+        if (userType.equalsIgnoreCase("Student")) {
+            return new StudentImpl(name,id,userName,password,belt,newPicture,new ArrayList<>(),newUserClasses);
+        } else if (userType.equalsIgnoreCase("Trainer")) {
+            Trainer trainer = new TrainerImpl(name, id, userName, password, belt, newPicture, new ArrayList<>(), newUserClasses);
+            trainer.setDescription(el.getAttributeValue("Description"));
+            ArrayList<CalendarDate> dates = new ArrayList<>();
+            Elements elms = el.getFirstChildElement("Available").getChildElements("Date");
+            for (int i = 0; i < elms.size(); i++) {
+                dates.add(new CalendarDate(elms.get(i).getAttributeValue("date")));
+            }
+            trainer.setAvailability(dates);
+            return trainer;
+        } else {
+            return new OwnerImpl(name,id,userName,password,belt,newPicture,new ArrayList<>(),newUserClasses);
+        }
+    }
 
 }

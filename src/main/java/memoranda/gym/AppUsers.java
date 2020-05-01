@@ -1,18 +1,19 @@
 package main.java.memoranda.gym;
 
-
-
-import main.java.memoranda.ui.TrainerCardPanel;
 import main.java.memoranda.util.Util;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+import nu.xom.Element;
+import nu.xom.Elements;
 
 import nu.xom.Attribute;
 import nu.xom.Element;
@@ -33,6 +34,7 @@ public class AppUsers implements UserList {
      * Class constructor.  Initiates appUser collection
      * */
     public AppUsers() {
+        element = new Element("AppUser");
         appUsers = new HashMap<>();
         try {
             hardCodedData();
@@ -72,6 +74,9 @@ public class AppUsers implements UserList {
 
         if(!appUsers.containsKey(login)){
             appUsers.put(login, user);
+            Element e = new Element("User");
+            e.appendChild(user.getContent().copy());
+            element.appendChild(e);
 
             //save to file
             saveToFile();
@@ -116,7 +121,6 @@ public class AppUsers implements UserList {
             appUsers.forEach((k,v) -> list.add(v));
             return list;
         }
-
         return null;
 
     }
@@ -151,6 +155,19 @@ public class AppUsers implements UserList {
      */
     public void setActiveUser(User user) {
         activeUser = user;
+    }
+
+    public static AppUsers elmToUserList(Element el) {
+        AppUsers appUsers = new AppUsers();
+        Elements elms = el.getChildElements("User");
+        for (int i = 0; i < elms.size(); i++) {
+            appUsers.addUser(User.elmToUser(elms.get(i)));
+        }
+        return appUsers;
+    }
+
+    public Element getContext() {
+        return element;
     }
 
     /**

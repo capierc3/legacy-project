@@ -70,12 +70,18 @@ public interface ClassList{
      */
     Element getContent();
 
-//    static ClassList elementToClassList(Element e) {
-//        Elements elms = e.getChildElements("Class");
-//        ArrayList<GymClass> classes = new ArrayList<>();
-//        for (int i = 0; i < elms.size(); i++) {
-//            classes.add(GymClass.elementToGymClass(elms.get(i)));
-//        }
-//        return new ClassListImpl(classes);
-//    }
+    /**
+     * Takes an element and turns it into a ClassList object
+     * @param e Element
+     * @return ClassList
+     */
+    static ClassList elmToClassList(Element e) {
+        Elements elms = e.getChildElements("Class");
+        ArrayList<GymClass> classes = new ArrayList<>();
+        for (int i = 0; i < elms.size(); i++) {
+            classes.add(GymClass.elmToGymClass(elms.get(i)));
+        }
+        return new ClassListImpl(classes);
+    }
+
 }

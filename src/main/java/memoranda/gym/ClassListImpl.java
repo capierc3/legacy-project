@@ -27,6 +27,7 @@ public class ClassListImpl implements ClassList {
     }
 
     public void setClassList(Collection<GymClass> classes) {
+        element.removeChildren();
         for (GymClass gymClass : classes) {
             element.appendChild(gymClass.getContent().copy());
         }
@@ -56,7 +57,6 @@ public class ClassListImpl implements ClassList {
     public void addClass(GymClass gymClass) {
         if (getClass(gymClass.getID())==null){
             classes.add(gymClass);
-            element.appendChild(gymClass.getContent().copy());
         }
     }
 

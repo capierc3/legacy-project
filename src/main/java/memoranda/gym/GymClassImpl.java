@@ -55,6 +55,10 @@ public class GymClassImpl implements GymClass {
         setEndDate(endDate);
     }
 
+    public GymClassImpl(Element el) {
+        this.el = el;
+    }
+
 
 
     @Override
@@ -247,8 +251,6 @@ public class GymClassImpl implements GymClass {
         else
             attr.setValue(value);
     }
-
-
 
 
     //TODO Need room class to write methods or should be public static methods in RoomImpl

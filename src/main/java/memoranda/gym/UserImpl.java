@@ -62,7 +62,9 @@ public class UserImpl implements User, Serializable {
      */
     public void setClassList(ClassList classList) {
         if(classList != null) {
-            element.appendChild(userClasses.getContent().copy());
+            Element e = new Element("ClassList");
+            e.appendChild(userClasses.getContent().copy());
+            element.appendChild(e);
         }
     }
 
