@@ -11,34 +11,15 @@
 package test.java;
 
 import static org.junit.Assert.*;
-
-import main.java.memoranda.gym.Belt;
-import main.java.memoranda.gym.ClassListImpl;
-import main.java.memoranda.gym.Trainer;
-import main.java.memoranda.gym.TrainerImpl;
 import main.java.memoranda.ui.*;
-import org.junit.Before;
 import org.junit.Test;
-
-
-import java.io.File;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
+import main.java.memoranda.ui.*;
 
 public class US_69Test {
     String name = "Bruce Willis";
-    Belt belt = Belt.BLACK3;
+    String belt = "Dark Black";
     String fact = "I have lots of hair";
-    Trainer bruce;
-    TrainerCardPanel card;
-
-    @Before
-    public void setUp(){
-        bruce = new TrainerImpl(name,"",name,"", belt,
-                    null, new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
-        bruce.setDescription(fact);
-        card = new TrainerCardPanel(bruce);
-    }
+    TrainerCardPanel card = new TrainerCardPanel(name, belt, fact);
     
     @Test
     public void testCardCreation() {

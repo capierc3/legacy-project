@@ -14,21 +14,36 @@ import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
-
-import main.java.memoranda.gym.*;
 import main.java.memoranda.util.Local;
+
+
+
+
 
 public class TrainerProfilesPanel extends JPanel {
     TitledBorder title = BorderFactory.createTitledBorder("KAESEKUCHEN TRAINERS");
     FlowLayout flowlayout = new FlowLayout();
+    TrainerCardPanel testCard = new TrainerCardPanel
+            ("Justin Oliver", "Blue", "I use ketchup on everything!");
+    TrainerCardPanel testCard2 = new TrainerCardPanel
+            ("Cameron Howe", "Green Stripe", "What the hell is this Yahoo");
+    TrainerCardPanel testCard3 = new TrainerCardPanel
+            ("Joe MacMillan", "Orange", "The thing that gets you to the thing");
+    TrainerCardPanel testCard4 = new TrainerCardPanel
+            ("Gordon Clark", "Black2", "We had a problem. Now we have a product.");
+    TrainerCardPanel testCard5 = new TrainerCardPanel
+            ("Donna Clark", "Black3", "Software comes and goes. Hardware is forever.");
+    TrainerCardPanel testCard6 = new TrainerCardPanel
+            ("John Bosworth", "White", "Innovation is a risk.");
     JButton newUser = new JButton("New Trainer");
+
+    
+    
 
     public TrainerProfilesPanel() {
         try {
@@ -39,15 +54,16 @@ public class TrainerProfilesPanel extends JPanel {
     }
 
     void jbInit() throws Exception {
+        
         this.setLayout(flowlayout);
-        for (User t:App.appUsers.getAllUsers()){
-            if (t instanceof Trainer){
-                this.add(new TrainerCardPanel((Trainer) t));
-            }
-        }
-        if (App.appUsers.getActiveUser() instanceof Owner) {
-            this.add(newUser);
-        }
+
+        this.add(testCard); 
+        this.add(testCard2); 
+        this.add(testCard3); 
+        this.add(testCard4); 
+        this.add(testCard5); 
+        this.add(testCard6); 
+        this.add(newUser);
         this.setBorder(title);
         
         newUser.addActionListener(new ActionListener() {
@@ -64,7 +80,7 @@ public class TrainerProfilesPanel extends JPanel {
     
     void addUser() {
         String name = "";
-        Belt belt = Belt.WHITE;
+        String belt = "";
         String fact = "";
 
         
@@ -82,16 +98,12 @@ public class TrainerProfilesPanel extends JPanel {
         
         // Set new values based on results from edit box
         name = dlg.trainerNameText.getText();
-        belt = Belt.getBelt(dlg.beltBox.getSelectedIndex());
+        belt = dlg.trainerBeltText.getText();
         fact = dlg.trainerFactText.getText();
   
         // Add components to new card
         JOptionPane.showMessageDialog(null, "New User Successfully Created!");
-        Trainer trainer = new TrainerImpl(name,name,name,"Password", belt,
-                null,new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
-        trainer.setDescription(fact);
-        App.appUsers.addUser(trainer);
-        TrainerCardPanel newTrainer = new TrainerCardPanel(trainer);
+        TrainerCardPanel newTrainer = new TrainerCardPanel(name, belt, fact);
         // Remove and read button so it appears in correct spot
         this.remove(this.newUser);
         this.add(newTrainer);
