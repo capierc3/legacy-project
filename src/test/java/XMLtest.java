@@ -44,7 +44,7 @@ public class XMLtest {
     public void testA_Write() {
         Document writeDoc = new Document(writeClass.getContent());
         try {
-            OutputStream fileOutputStream = new FileOutputStream("test.xml");
+            OutputStream fileOutputStream = new FileOutputStream("server/test.xml");
             Serializer serializer = new Serializer(fileOutputStream, "UTF-8");
             serializer.setIndent(4);
             serializer.setMaxLength(64);
