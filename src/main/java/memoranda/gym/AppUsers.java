@@ -36,10 +36,11 @@ public class AppUsers implements UserList {
         appUsers = new HashMap<>();
         try {
             hardCodedData();
+            saveToFile();
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        //loadFromFile();
+        loadFromFile();
     }
 
     /**
@@ -180,7 +181,9 @@ public class AppUsers implements UserList {
         Element element = new Element("appUsers");
 
         appUsers.forEach((k,v) -> {
-            //element.appendChild(v);
+            Element e = new Element("user");
+            e.appendChild(v.getContent().copy());
+            element.appendChild(e);
         });
 
         return element;
@@ -191,18 +194,26 @@ public class AppUsers implements UserList {
      *
      * @param file_path file location
      */
-    private void loadFromFile(String file_path){
+    private void loadFromFile(){
+
+        Element element = new Element("appUsers");
 
         try {
-            System.out.println("Loading AppUsers from " + file_path);
-            Object obj = ObjectSerializer.deserializeObject(file_path);
-            appUsers = (HashMap<String, User>) obj;
+            System.out.println("Loading AppUsers from " + APP_USER_FILE_PATH);
+            element = (Element) ObjectSerializer.deserializeObject(APP_USER_FILE_PATH);
+            populateLibrary(element);
 
         } catch (IOException | ClassNotFoundException e) {
 
             e.printStackTrace();
 
         }
+
+    }
+
+    private void populateLibrary(Element element) {
+
+
 
     }
 
