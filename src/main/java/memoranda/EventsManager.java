@@ -202,21 +202,12 @@ public class EventsManager {
 			// ignore this event if it's a 'only working days' event and today is weekend.
 			if (ev.getWorkingDays() && (date.getCalendar().get(Calendar.DAY_OF_WEEK) == 1 ||
 					date.getCalendar().get(Calendar.DAY_OF_WEEK) == 7)) continue;
-			// ---
-			/*
-			 * /if ( ((date.after(ev.getStartDate())) &&
-			 * (date.before(ev.getEndDate()))) ||
-			 * (date.equals(ev.getStartDate()))
-			 */
-			//System.out.println(date.inPeriod(ev.getStartDate(),
-			// ev.getEndDate()));
 			if (date.inPeriod(ev.getStartDate(), ev.getEndDate())) {
 				if (ev.getRepeat() == REPEAT_DAILY) {
 					int n = date.getCalendar().get(Calendar.DAY_OF_YEAR);
 					int ns =
 							ev.getStartDate().getCalendar().get(
 									Calendar.DAY_OF_YEAR);
-					//System.out.println((n - ns) % ev.getPeriod());
 					if ((n - ns) % ev.getPeriod() == 0)
 						v.add(ev);
 				} else if (ev.getRepeat() == REPEAT_WEEKLY) {
@@ -229,7 +220,6 @@ public class EventsManager {
 						v.add(ev);
 				} else if (ev.getRepeat() == REPEAT_YEARLY) {
 					int period = ev.getPeriod();
-					//System.out.println(date.getCalendar().get(Calendar.DAY_OF_YEAR));
 					if ((date.getYear() % 4) == 0
 							&& date.getCalendar().get(Calendar.DAY_OF_YEAR) > 60)
 						period++;
@@ -293,6 +283,9 @@ public class EventsManager {
 		ParentNode parent = ev.getContent().getParent();
 		parent.removeChild(ev.getContent());
 	}
+
+
+	//year, month, and day class just like Notes has. Should just turn into its own classes.
 
 	/**
 	 * Method that creates and returns a Day from the CalendarDate passed in
@@ -533,6 +526,10 @@ public class EventsManager {
 		public int getValue() {
 			return Integer.parseInt(dEl.getAttribute("day").getValue());
 		}
+
+		/*
+		 * public Note getNote() { return new NoteImpl(dEl);
+		 */
 
 		/**
 		 * Method that returns the current Day element
