@@ -54,38 +54,23 @@ public class Task93_Whitebox {
     public void verifyUserAddition(){
         AppUsers app = new AppUsers();
 
-        UserImpl user = new UserImpl("John Doe","jd001","john","catsRkool64",
-                Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()), "User");
-
+        Student user = new StudentImpl("John Doe","jd001","john","catsRkool64",
+                Belt.BLACK3,null,new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
         app.addUser(user);
 
         User u = app.getUser(user.getUserName());
-        assert(u.equals(user));
-    }
-
-    @Test
-    public void verifyUserRemoval(){
-
-        AppUsers app = new AppUsers();
-
-        UserImpl user = new UserImpl("John Doe","jd001","john","catsRkool64",
-                Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()), "User");
-
-        app.addUser(user);
-
+        Assert.assertEquals(u.getID(), user.getID());
         app.removeUser(user.getID());
-
         User result = app.getUser(user.getID());
         assertNull(result);
-
     }
 
     @Test
     public void verifyLogin(){
         AppUsers app = new AppUsers();
 
-        UserImpl user = new UserImpl("John Doe","jd001","john","catsRkool64",
-                Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()), "User");
+        UserImpl user = new StudentImpl("John Doe","jd001","john","catsRkool64",
+                Belt.BLACK3,null,new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
 
         app.addUser(user);
 
@@ -95,6 +80,8 @@ public class Task93_Whitebox {
         assertTrue(actual.equalsIgnoreCase("User not found"));
         actual = app.verifyPassword("john", "Wrong Password");
         assertTrue(actual.equalsIgnoreCase("Incorrect Password"));
+
+        app.removeUser(user.getID());
 
     }
 

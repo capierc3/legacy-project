@@ -38,6 +38,8 @@ public class AppUsers implements UserList {
             } catch (ParsingException | IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            appUsers = new HashMap<>();
         }
     }
 
@@ -66,7 +68,6 @@ public class AppUsers implements UserList {
      */
     public void addUser(User user) {
         String login = user.getUserName();
-
         if (!appUsers.containsKey(login)) {
             appUsers.put(login, user);
             Element e = new Element("User");

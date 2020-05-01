@@ -145,4 +145,13 @@
             </ClassList>
         </Student>
     </User>
+    <User>
+        <Student Name="John Doe" Id="jd001" UserName="john"
+        Password="catsRkool64" Rank="13" Picture="/ui/icons/nunchuckNorris.png">
+            <NoteList/>
+            <ClassList>
+                <ClassList/>
+            </ClassList>
+        </Student>
+    </User>
 </AppUser>
