@@ -9,6 +9,12 @@ import nu.xom.Document;
  */
 public interface ResourcesList {
     /**
+     * returns all the resources in the list
+     * @return Vector
+     */
+    Vector getAllResources();
+
+    /**
      * returns a single resource form the list
      * @param path String
      * @return Resource
@@ -22,6 +28,12 @@ public interface ResourcesList {
      * @param isProjectFile boolean
      */
     void addResource(String path, boolean isInternetShortcut, boolean isProjectFile);
+
+    /**
+     * adds a resource to a list with only the path
+     * @param path String
+     */
+    void addResource(String path);
 
     /**
      * removes a resource with matching path
