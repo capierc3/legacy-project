@@ -8,6 +8,7 @@
  *
  */
 package main.java.memoranda;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
@@ -21,7 +22,7 @@ import main.java.memoranda.util.Storage;
 /**
  *
  */
-/*$Id: CurrentProject.java,v 1.6 2005/12/01 08:12:26 alexeya Exp $*/
+/* $Id: CurrentProject.java,v 1.6 2005/12/01 08:12:26 alexeya Exp $ */
 public class CurrentProject {
 
     private static Project _project = null;
@@ -31,145 +32,154 @@ public class CurrentProject {
     private static Vector projectListeners = new Vector();
 
     /**
-     *  Initializing current project variables
+     * Initializing current project variables
      */
     static {
-        String prjId = (String)Context.get("LAST_OPENED_PROJECT_ID");
-        if (prjId == null) {
-            prjId = "__default";
-            Context.put("LAST_OPENED_PROJECT_ID", prjId);
-        }
-        //ProjectManager.init();
-        _project = ProjectManager.getProject(prjId);
-		
-		if (_project == null) {
-			// alexeya: Fixed bug with NullPointer when LAST_OPENED_PROJECT_ID
-			// references to missing project
-			_project = ProjectManager.getProject("__default");
-			if (_project == null) 
-				_project = (Project)ProjectManager.getActiveProjects().get(0);						
-            Context.put("LAST_OPENED_PROJECT_ID", _project.getID());
-			
-		}		
-		
-        _tasklist = CurrentStorage.get().openTaskList(_project);
-        _notelist = CurrentStorage.get().openNoteList(_project);
-        _resources = CurrentStorage.get().openResourcesList(_project);
-        AppFrame.addExitListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                save();                                               
-            }
-        });
+	String prjId = (String) Context.get("LAST_OPENED_PROJECT_ID");
+	if (prjId == null) {
+	    prjId = "__default";
+	    Context.put("LAST_OPENED_PROJECT_ID", prjId);
+	}
+	// ProjectManager.init();
+	_project = ProjectManager.getProject(prjId);
+
+	if (_project == null) {
+	    // alexeya: Fixed bug with NullPointer when LAST_OPENED_PROJECT_ID
+	    // references to missing project
+	    _project = ProjectManager.getProject("__default");
+	    if (_project == null)
+		_project = (Project) ProjectManager.getActiveProjects().get(0);
+	    Context.put("LAST_OPENED_PROJECT_ID", _project.getID());
+
+	}
+
+	_tasklist = CurrentStorage.get().openTaskList(_project);
+	_notelist = CurrentStorage.get().openNoteList(_project);
+	_resources = CurrentStorage.get().openResourcesList(_project);
+	AppFrame.addExitListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		save();
+	    }
+	});
     }
 
     /**
      * Method to current Project
+     * 
      * @return Project
      */
     public static Project get() {
-        return _project;
+	return _project;
     }
 
     /**
      * Method to get TaskList tied to Project
+     * 
      * @return TaskList
      */
     public static TaskList getTaskList() {
-            return _tasklist;
+	return _tasklist;
     }
 
     /**
      * Method to get NoteList tied to Project
+     * 
      * @return NoteList
      */
     public static NoteList getNoteList() {
-            return _notelist;
+	return _notelist;
     }
 
     /**
      * Method to get ResourcesList tied to Project
+     * 
      * @return ResourcesList
      */
     public static ResourcesList getResourcesList() {
-            return _resources;
+	return _resources;
     }
 
     /**
      * Method to Set details and variables of current Project
+     * 
      * @param project
      */
     public static void set(Project project) {
-        if (project.getID().equals(_project.getID())) return;
-        TaskList newtasklist = CurrentStorage.get().openTaskList(project);
-        NoteList newnotelist = CurrentStorage.get().openNoteList(project);
-        ResourcesList newresources = CurrentStorage.get().openResourcesList(project);
-        notifyListenersBefore(project, newnotelist, newtasklist, newresources);
-        _project = project;
-        _tasklist = newtasklist;
-        _notelist = newnotelist;
-        _resources = newresources;
-        notifyListenersAfter();
-        Context.put("LAST_OPENED_PROJECT_ID", project.getID());
+	if (project.getID().equals(_project.getID()))
+	    return;
+	TaskList newtasklist = CurrentStorage.get().openTaskList(project);
+	NoteList newnotelist = CurrentStorage.get().openNoteList(project);
+	ResourcesList newresources = CurrentStorage.get().openResourcesList(project);
+	notifyListenersBefore(project, newnotelist, newtasklist, newresources);
+	_project = project;
+	_tasklist = newtasklist;
+	_notelist = newnotelist;
+	_resources = newresources;
+	notifyListenersAfter();
+	Context.put("LAST_OPENED_PROJECT_ID", project.getID());
     }
 
     /**
      * Method to add ProjectListener to list of ProjectListeners
+     * 
      * @param pl
      */
     public static void addProjectListener(ProjectListener pl) {
-        projectListeners.add(pl);
+	projectListeners.add(pl);
     }
 
     /**
      * Method returning the Collection of ProjectListeners
+     * 
      * @return Collection
      */
     public static Collection getChangeListeners() {
-        return projectListeners;
+	return projectListeners;
     }
 
     /**
      * Method to notify ProjectListeners of any project changes before changes occur
+     * 
      * @param project
      * @param nl
      * @param tl
      * @param rl
      */
     private static void notifyListenersBefore(Project project, NoteList nl, TaskList tl, ResourcesList rl) {
-        for (int i = 0; i < projectListeners.size(); i++) {
-            ((ProjectListener)projectListeners.get(i)).projectChange(project, nl, tl, rl);
-            /*DEBUGSystem.out.println(projectListeners.get(i));*/
-        }
+	for (int i = 0; i < projectListeners.size(); i++) {
+	    ((ProjectListener) projectListeners.get(i)).projectChange(project, nl, tl, rl);
+	    /* DEBUGSystem.out.println(projectListeners.get(i)); */
+	}
     }
 
     /**
      * Method that notify all of the ProjectListeners after the project was changed
      */
     private static void notifyListenersAfter() {
-        for (int i = 0; i < projectListeners.size(); i++) {
-            ((ProjectListener)projectListeners.get(i)).projectWasChanged();            
-        }
+	for (int i = 0; i < projectListeners.size(); i++) {
+	    ((ProjectListener) projectListeners.get(i)).projectWasChanged();
+	}
     }
 
     /**
      * Method to save the Project and Project details to Storage
      */
     public static void save() {
-        Storage storage = CurrentStorage.get();
+	Storage storage = CurrentStorage.get();
 
-        storage.storeNoteList(_notelist, _project);
-        storage.storeTaskList(_tasklist, _project); 
-        storage.storeResourcesList(_resources, _project);
-        storage.storeProjectManager();
+	storage.storeNoteList(_notelist, _project);
+	storage.storeTaskList(_tasklist, _project);
+	storage.storeResourcesList(_resources, _project);
+	storage.storeProjectManager();
     }
 
     /**
      * Method that frees Project detail variables and set to null
      */
     public static void free() {
-        _project = null;
-        _tasklist = null;
-        _notelist = null;
-        _resources = null;
+	_project = null;
+	_tasklist = null;
+	_notelist = null;
+	_resources = null;
     }
 }

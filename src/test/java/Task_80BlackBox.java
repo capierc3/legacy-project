@@ -1,15 +1,19 @@
 package test.java;
 
 import main.java.memoranda.date.CalendarDate;
-import main.java.memoranda.gym.*;
+import main.java.memoranda.gym.GymClass;
+import main.java.memoranda.gym.Belt;
+import main.java.memoranda.gym.ClassListImpl;
+import main.java.memoranda.gym.GymClassImpl;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 /**
- * Black box test for GymClassList
+ * Black box test for GymClassList.
  *
  * @author Chase
  */
@@ -69,7 +73,7 @@ public class Task_80BlackBox {
      * checks sizes after adding and removing classes.
      */
     @Test
-    public void addRemoveTest(){
+    public void addRemoveTest() {
         assertEquals(0,classList.getSize());
         classList.addClass(gymClass1);
         assertEquals(1,classList.getSize());
@@ -98,7 +102,7 @@ public class Task_80BlackBox {
      * Tests the get and set Collection methods.
      */
     @Test
-    public void getSetTest(){
+    public void getSetTest() {
         classList.addClass(gymClass1);
         classList.addClass(gymClass2);
         classList.addClass(gymClass3);
@@ -119,7 +123,7 @@ public class Task_80BlackBox {
      * lastly
      */
     @Test
-    public void errorTest(){
+    public void errorTest() {
         classList.addClass(gymClass1);
         classList.removeClass("not class1's id");
         assertEquals(1,classList.getSize());

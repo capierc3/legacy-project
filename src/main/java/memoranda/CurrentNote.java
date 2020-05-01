@@ -8,25 +8,27 @@ import java.util.Vector;
  */
 public class CurrentNote {
 
-	private static Note currentNote = null;
+    private static Note currentNote = null;
     private static Vector noteListeners = new Vector();
 
     /**
      * Basic getter method
+     * 
      * @return Note
      */
     public static Note get() {
-        return currentNote;
+	return currentNote;
     }
 
     /**
      * Sets the inputted note to be the current note.
-     * @param note Note object
+     * 
+     * @param note              Note object
      * @param toSaveCurrentNote Boolean
      */
     public static void set(Note note, boolean toSaveCurrentNote) {
-        noteChanged(note, toSaveCurrentNote);
-        currentNote = note;
+	noteChanged(note, toSaveCurrentNote);
+	currentNote = note;
     }
 
     /**
@@ -34,33 +36,36 @@ public class CurrentNote {
      */
     public static void reset() {
 //    	 set toSave to true to mimic status quo behaviour only. the appropriate setting could be false
-        set(null, true);
+	set(null, true);
     }
 
     /**
      * Adds a new listener to the vectors
+     * 
      * @param nl NoteListener object]
      */
     public static void addNoteListener(NoteListener nl) {
-        noteListeners.add(nl);
+	noteListeners.add(nl);
     }
 
     /**
      * Getter for the noteListener vector
+     * 
      * @return Vector
      */
     public static Collection getChangeListeners() {
-        return noteListeners;
+	return noteListeners;
     }
 
     /**
      * Informs the vectors in noteListeners that the current note has changed
-     * @param note Note object
+     * 
+     * @param note              Note object
      * @param toSaveCurrentNote boolean
      */
     private static void noteChanged(Note note, boolean toSaveCurrentNote) {
-        for (int i = 0; i < noteListeners.size(); i++) {
-            ((NoteListener)noteListeners.get(i)).noteChange(note,toSaveCurrentNote);
-		}
+	for (int i = 0; i < noteListeners.size(); i++) {
+	    ((NoteListener) noteListeners.get(i)).noteChange(note, toSaveCurrentNote);
+	}
     }
 }

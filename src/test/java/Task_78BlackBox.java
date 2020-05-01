@@ -1,14 +1,23 @@
 package test.java;
 
 import main.java.memoranda.date.CalendarDate;
-import main.java.memoranda.gym.*;
+import main.java.memoranda.gym.GymClass;
+import main.java.memoranda.gym.RoomImpl;
+import main.java.memoranda.gym.Belt;
+import main.java.memoranda.gym.ClassListImpl;
+import main.java.memoranda.gym.GymClassImpl;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
-import static org.junit.Assert.*;
+
 
 /**
- * Black box test for the room class
+ * Black box test for the room class.
  *
  * @author Chase
   */
@@ -31,10 +40,10 @@ public class Task_78BlackBox {
     }
 
     /**
-     * basic tests of the room1 object
+     * basic tests of the room1 object.
      */
     @Test
-    public void test(){
+    public void test() {
         assertEquals(0,room1.getClasses().getSize());
         room1.addClass(gymClass1);
         assertEquals(1,room1.getClasses().getSize());

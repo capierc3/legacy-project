@@ -13,40 +13,51 @@ import main.java.memoranda.NoteList;
 import main.java.memoranda.Project;
 import main.java.memoranda.ResourcesList;
 import main.java.memoranda.TaskList;
+
 /**
- * 
+ * yepprs.
  */
-/*$Id: Storage.java,v 1.4 2004/01/30 12:17:42 alexeya Exp $*/
+/* $Id: Storage.java,v 1.4 2004/01/30 12:17:42 alexeya Exp $ */
 public interface Storage {
-            
-    TaskList openTaskList(Project prj);    
+
+    TaskList openTaskList(Project prj);
+
     void storeTaskList(TaskList tl, Project prj);
-    
+
     NoteList openNoteList(Project prj);
+
     void storeNoteList(NoteList nl, Project prj);
-    
-    void storeNote(Note note, javax.swing.text.Document doc);    
+
+    void storeNote(Note note, javax.swing.text.Document doc);
+
     javax.swing.text.Document openNote(Note note);
+
     void removeNote(Note note);
-    
+
     String getNoteURL(Note note);
-    
-    void openProjectManager();    
+
+    void openProjectManager();
+
     void storeProjectManager();
-    
+
     void openEventsManager();
+
     void storeEventsManager();
-    
+
     void openMimeTypesList();
+
     void storeMimeTypesList();
-    
+
     void createProjectStorage(Project prj);
+
     void removeProjectStorage(Project prj);
-   
+
     ResourcesList openResourcesList(Project prj);
+
     void storeResourcesList(ResourcesList rl, Project prj);
-    
+
     void restoreContext();
-    void storeContext(); 
-       
+
+    void storeContext();
+
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * This class is designed to display a panel and show the appropriate info
  * when the Resources.
@@ -6,6 +7,15 @@
  * @author Justin Oliver
  *
  *
+=======
+/** 
+ * This class is designed to display a panel and show the 
+ * appropriate info when the resources button is clicked. 
+ * This panel existed in the original version of 
+ * memoranda that was used for this gym scheduling program
+ * 
+ * 
+>>>>>>> 2a720a366365be82b417b6f5e40e961de5da2edf
  */
 package main.java.memoranda.ui;
 
@@ -48,5 +58,4 @@ public class ResourcesPanel extends JPanel {
                 "Coming soon....While you wait, " + "Can I offer you an egg in this trying time?", "Add Resource",
                 JOptionPane.PLAIN_MESSAGE);
     }
-
 }
