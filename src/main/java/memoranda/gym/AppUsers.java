@@ -192,11 +192,8 @@ public class AppUsers implements UserList {
     /**
      * Load object from file
      *
-     * @param file_path file location
      */
     private void loadFromFile(){
-
-        Element element = new Element("appUsers");
 
         try {
             System.out.println("Loading AppUsers from " + APP_USER_FILE_PATH);
@@ -213,7 +210,12 @@ public class AppUsers implements UserList {
 
     private void populateLibrary(Element element) {
 
+        AppUsers appUsers = new AppUsers();
 
+        Elements elements = element.getChildElements("User");
+        for (int i = 0; i < elements.size(); i++) {
+            //appUsers.addUser(User.elementToUser(elements.get(i)));
+        }
 
     }
 
