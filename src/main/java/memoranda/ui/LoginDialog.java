@@ -6,10 +6,7 @@ import main.java.memoranda.util.Local;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 
 public class LoginDialog extends JDialog implements WindowListener {
 
@@ -24,6 +21,8 @@ public class LoginDialog extends JDialog implements WindowListener {
     JPanel mainPanel = new JPanel(new GridBagLayout());
     AppUsers appUsers;
     GridBagConstraints gbc;
+    boolean error;
+
 
     public LoginDialog(Frame frame, String title, AppUsers appUsers) {
 	super(frame, title, true);
@@ -37,44 +36,57 @@ public class LoginDialog extends JDialog implements WindowListener {
 	super.addWindowListener(this);
     }
 
-    void jbInit() {
 
-	this.setResizable(false);
-	// Build headerPanel
-	headerPanel.setBackground(Color.WHITE);
-	headerPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
-	header.setFont(new java.awt.Font("Dialog", 0, 20));
-	header.setForeground(new Color(0, 0, 124));
-	header.setText(Local.getString("Login"));
-	header.setIcon(
-		new ImageIcon(main.java.memoranda.ui.ClassDialog.class.getResource("/ui/icons/personal_info.png")));
-	headerPanel.add(header);
+    void jbInit(){
+        error = false;
+        this.setResizable(false);
+        // Build headerPanel
+        headerPanel.setBackground(Color.WHITE);
+        headerPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
+        header.setFont(new java.awt.Font("Dialog", 0, 20));
+        header.setForeground(new Color(0, 0, 124));
+        header.setText(Local.getString("Login"));
+        header.setIcon(new ImageIcon(main.java.memoranda.ui.EventDialog.class.getResource(
+                "/ui/icons/personal_info.png")));
+        headerPanel.add(header);
 
-	lblLogin = new JLabel("LOGIN:");
-	txtLogin = new JTextField();
-	txtLogin.setColumns(10);
-	lblPassword = new JLabel("PASSWORD:");
-	txtPassword = new JTextField();
-	txtPassword.setColumns(10);
-	btnSubmit = new JButton("Submit");
-	btnSubmit.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		loginSubmitButton_clicked(txtLogin.getText(), txtPassword.getText());
-	    }
-	});
-	gbc = newGbc(0, 0);
-	mainPanel.add(lblLogin, gbc);
-	gbc = newGbc(1, 0);
-	mainPanel.add(txtLogin, gbc);
-	gbc = newGbc(0, 1);
-	mainPanel.add(lblPassword, gbc);
-	gbc = newGbc(1, 1);
-	mainPanel.add(txtPassword, gbc);
-	gbc = newGbc(2, 2);
-	mainPanel.add(btnSubmit, gbc);
-	topPanel.add(headerPanel, BorderLayout.NORTH);
-	topPanel.add(mainPanel, BorderLayout.SOUTH);
-	this.getContentPane().add(topPanel, BorderLayout.NORTH);
+        lblLogin = new JLabel("LOGIN:");
+        txtLogin = new JTextField();
+        txtLogin.setColumns(10);
+        lblPassword = new JLabel("PASSWORD:");
+        txtPassword = new JTextField();
+        txtPassword.setColumns(10);
+        btnSubmit = new JButton("Submit");
+        btnSubmit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                loginSubmitButton_clicked(txtLogin.getText(),txtPassword.getText());
+            }
+        });
+        gbc = newGbc(0,0);
+        mainPanel.add(lblLogin,gbc);
+        gbc = newGbc(1,0);
+        mainPanel.add(txtLogin,gbc);
+        gbc = newGbc(0,1);
+        mainPanel.add(lblPassword,gbc);
+        gbc = newGbc(1,1);
+        mainPanel.add(txtPassword,gbc);
+        gbc = newGbc(2,3);
+        mainPanel.add(btnSubmit,gbc);
+        topPanel.add(headerPanel, BorderLayout.NORTH);
+        topPanel.add(mainPanel, BorderLayout.SOUTH);
+        this.getContentPane().add(topPanel, BorderLayout.NORTH);
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(keyEvent -> {
+            boolean keyHandled = false;
+            if (keyEvent.getID() == KeyEvent.KEY_PRESSED) {
+                if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (!error) {
+                        loginSubmitButton_clicked(txtLogin.getText(), txtPassword.getText());
+                        keyHandled = true;
+                    }
+                }
+            }
+            return keyHandled;
+        });
     }
 
     private GridBagConstraints newGbc(int x, int y) {
@@ -88,17 +100,23 @@ public class LoginDialog extends JDialog implements WindowListener {
 
     private void loginSubmitButton_clicked(String login, String password) {
 
-	Boolean verified = appUsers.verifyPassword(login, password);
 
-	if (verified) {
-	    User user = appUsers.getUser(login);
-	    appUsers.setActiveUser(user);
-	    this.dispose();
-	} else {
-	    // notify user of incorrect credentials
-	    // TODO: Change UI to reflect incorrect values
-	    JOptionPane.showMessageDialog(null, "Wrong Info", "Incorrect Login", JOptionPane.INFORMATION_MESSAGE);
-	}
+        String verified = appUsers.verifyPassword(login, password);
+
+        if(verified.equalsIgnoreCase("found")) {
+            User user = appUsers.getUser(login);
+            appUsers.setActiveUser(user);
+            this.dispose();
+        }else {
+            error = true;
+            int res = JOptionPane.showOptionDialog(null,verified,"Incorrect Login",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE,null,null,null);
+            if (res == 0) {
+                error = false;
+            }
+        }
+
 
     }
 

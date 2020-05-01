@@ -121,14 +121,17 @@ public class AppUsers implements UserList {
      * @param password User's super-not-so-encrypted password
      * @return true if password & login match.
      */
-    public Boolean verifyPassword(String login, String password) {
 
-	User user = getUser(login);
-	if (user != null && user.getPassword().contentEquals(password)) {
-	    return true;
-	}
+    public String verifyPassword(String login, String password){
 
-	return false;
+        User user = getUser(login);
+        if (user == null) {
+            return "User not found";
+        } else if (user.getPassword().equals(password)) {
+            return "found";
+        } else {
+            return "Incorrect Password";
+        }
     }
 
     /**

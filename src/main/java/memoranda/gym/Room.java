@@ -1,6 +1,8 @@
 package main.java.memoranda.gym;
 
 import main.java.memoranda.date.CalendarDate;
+
+import java.io.File;
 import java.util.Collection;
 import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.gym.GymClass;
@@ -64,9 +66,28 @@ public interface Room {
     boolean isAvailable(CalendarDate date);
 
     /**
-     * Returns Room as an Element
-     * 
+
+     * Returns Room as an Element.
+
      * @return Element
      */
     Element getContent();
+
+    /**
+     * Method to set Picture and add picture to Element.
+     * @param fileName File
+     */
+    void setPicture(File fileName);
+
+    /**
+     * Method to set a picture for a Room.
+     * @param newPicture File
+     */
+    void setPic(File newPicture);
+
+    /**
+     * Method to get Picture for a Room.
+     * @return File
+     */
+    File getPic();
 }
