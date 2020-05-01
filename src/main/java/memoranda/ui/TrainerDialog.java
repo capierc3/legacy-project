@@ -1,8 +1,6 @@
 package main.java.memoranda.ui;
 
 import javax.swing.*;
-
-import main.java.memoranda.gym.Belt;
 import main.java.memoranda.util.Local;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,15 +26,15 @@ public class TrainerDialog extends JDialog implements WindowListener {
     JPanel eventPanel = new JPanel(new GridBagLayout());
     GridBagConstraints gbc;
     String name; 
-    Belt belt;
+    String belt;
     String fact;
     String title;
-
+    
     // The three editable values, creating label and text field
     JLabel trainerName = new JLabel();
     JTextField trainerNameText = new JTextField("", 20);
     JLabel trainerBelt = new JLabel();
-    JComboBox beltBox;
+    JTextField trainerBeltText = new JTextField("",20);
     JLabel trainerFact = new JLabel();
     JTextField trainerFactText = new JTextField("",20);
 
@@ -48,7 +46,7 @@ public class TrainerDialog extends JDialog implements WindowListener {
     JButton cancelB = new JButton();
 
 
-    public TrainerDialog(Frame frame, String title, String name, Belt belt, String fact) {
+    public TrainerDialog(Frame frame, String title, String name, String belt, String fact) {
         super(frame, title, true);
         try {
             this.name = name;
@@ -79,7 +77,6 @@ public class TrainerDialog extends JDialog implements WindowListener {
         // Build eventPanel 
         trainerName.setText("Name");
         trainerName.setMinimumSize(new Dimension(60, 24));
-
         trainerBelt.setText("Belt");
         trainerBelt.setMinimumSize(new Dimension(60, 24));
         trainerFact.setText("Fact");
@@ -91,14 +88,14 @@ public class TrainerDialog extends JDialog implements WindowListener {
         eventPanel.add(trainerName, gbc);
         gbc.gridx++;
         eventPanel.add(trainerNameText, gbc);
-
-        beltBox = new JComboBox(Belt.values());
-        beltBox.setSelectedItem(belt);
-        beltBox.setMinimumSize(new Dimension(120, 24));
+        
+        
+        trainerBeltText.setText(belt);
+        trainerBeltText.setMinimumSize(new Dimension(120, 24));
         newGbc(0,2,1);
         eventPanel.add(trainerBelt, gbc);
         gbc.gridx++;
-        eventPanel.add(beltBox, gbc);
+        eventPanel.add(trainerBeltText, gbc);
               
         trainerFactText.setText(fact);
         trainerFactText.setMinimumSize(new Dimension(120, 24));
