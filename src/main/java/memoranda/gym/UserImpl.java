@@ -1,6 +1,7 @@
 package main.java.memoranda.gym;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.Collection;
 import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.Note;
@@ -68,6 +69,13 @@ public class UserImpl implements User {
      * Method to set the file for picture in Element.
      */
     public void setPicture(File fileName) {
+        if (fileName == null) {
+            try {
+                fileName = new File(this.getClass().getResource("/ui/icons/nunchuckNorris.png").toURI());
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
         picture = fileName;
         setAttr("Picture", fileName.getPath());
     }

@@ -201,25 +201,4 @@ public class App {
 		dlg.setVisible(true);
 	}
 
-	/**
-	 * On Click event for Submit button
-	 *
-	 * @param login User's login credentials
-	 * @param password User's password credentials
-	 */
-	private void loginSubmitButton_clicked(String login, String password){
-
-		Boolean verified = appUsers.verifyPassword(login, password);
-
-		if(verified) {
-			User user = appUsers.getUser(login);
-			appUsers.setActiveUser(user);
-			splash.dispose();
-		}else {
-			//notify user of incorrect credentials
-			//TODO: Change UI to reflect incorrect values
-		}
-
-	}
-
 }

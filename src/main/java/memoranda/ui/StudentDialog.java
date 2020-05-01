@@ -1,44 +1,38 @@
 package main.java.memoranda.ui;
 
-import javax.swing.*;
-
-import main.java.memoranda.gym.Belt;
-import main.java.memoranda.util.Local;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.*;
+import main.java.memoranda.gym.Belt;
+import main.java.memoranda.util.Local;
 
-/*
- * A class to allow the ability to edit and add a new trainer in the trainer profiles page
+
+/**
+ * A class to allow the ability to edit and add a new trainer in the trainer profiles page.
  * @author Justin Oliver
  */
-
-
-public class TrainerDialog extends JDialog implements WindowListener {
-    public boolean CANCELLED = false;
-    boolean ignoreStartChanged = false;
-    boolean ignoreEndChanged = false;
+public class StudentDialog extends JDialog implements WindowListener {
+    public boolean cancelled = false;
     JPanel topPanel = new JPanel(new BorderLayout());
     JPanel bottomPanel = new JPanel(new BorderLayout());
     JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     public JLabel header = new JLabel();
     JPanel eventPanel = new JPanel(new GridBagLayout());
     GridBagConstraints gbc;
-    String name; 
+    String name;
     Belt belt;
     String fact;
     String title;
 
     // The three editable values, creating label and text field
-    JLabel trainerName = new JLabel();
-    JTextField trainerNameText = new JTextField("", 20);
-    JLabel trainerBelt = new JLabel();
+    JLabel studentName = new JLabel();
+    JTextField studentNameText = new JTextField("", 20);
+    JLabel studentBelt = new JLabel();
     JComboBox beltBox;
-    JLabel trainerFact = new JLabel();
-    JTextField trainerFactText = new JTextField("",20);
 
 
 
@@ -47,8 +41,14 @@ public class TrainerDialog extends JDialog implements WindowListener {
     JButton okB = new JButton();
     JButton cancelB = new JButton();
 
-
-    public TrainerDialog(Frame frame, String title, String name, Belt belt, String fact) {
+    /**
+     * Constructor for the pop up dialog.
+     * @param frame Frame
+     * @param title String
+     * @param name String
+     * @param belt Belt
+     */
+    public StudentDialog(Frame frame, String title, String name, Belt belt) {
         super(frame, title, true);
         try {
             this.name = name;
@@ -57,56 +57,45 @@ public class TrainerDialog extends JDialog implements WindowListener {
             this.title = title;
             jbInit();
             pack();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             new ExceptionDialog(ex);
         }
         super.addWindowListener(this);
     }
 
-        void jbInit() throws Exception {
+    void jbInit() throws Exception {
         this.setResizable(false);
         // Build headerPanel
         headerPanel.setBackground(Color.WHITE);
         headerPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
-        header.setFont(new java.awt.Font("Dialog", 0, 20));
+        header.setFont(new Font("Dialog", 0, 20));
         header.setForeground(new Color(0, 0, 124));
         header.setText(title);
-        header.setIcon(new ImageIcon(TrainerDialog.class.getResource(
+        header.setIcon(new ImageIcon(StudentDialog.class.getResource(
             "/ui/icons/trainer-profiles.png")));
         headerPanel.add(header);
 
         // Build eventPanel 
-        trainerName.setText("Name");
-        trainerName.setMinimumSize(new Dimension(60, 24));
+        studentName.setText("Name");
+        studentName.setMinimumSize(new Dimension(60, 24));
 
-        trainerBelt.setText("Belt");
-        trainerBelt.setMinimumSize(new Dimension(60, 24));
-        trainerFact.setText("Fact");
-        trainerFact.setMinimumSize(new Dimension(60, 24));
+        studentBelt.setText("Belt");
+        studentBelt.setMinimumSize(new Dimension(60, 24));
 
-        trainerNameText.setText(name);
-        trainerNameText.setMinimumSize(new Dimension(120, 24));
+        studentNameText.setText(name);
+        studentNameText.setMinimumSize(new Dimension(120, 24));
         newGbc(0,1,1);
-        eventPanel.add(trainerName, gbc);
+        eventPanel.add(studentName, gbc);
         gbc.gridx++;
-        eventPanel.add(trainerNameText, gbc);
+        eventPanel.add(studentNameText, gbc);
 
         beltBox = new JComboBox(Belt.values());
         beltBox.setSelectedItem(belt);
         beltBox.setMinimumSize(new Dimension(120, 24));
         newGbc(0,2,1);
-        eventPanel.add(trainerBelt, gbc);
+        eventPanel.add(studentBelt, gbc);
         gbc.gridx++;
         eventPanel.add(beltBox, gbc);
-              
-        trainerFactText.setText(fact);
-        trainerFactText.setMinimumSize(new Dimension(120, 24));
-        newGbc(0,3,1); 
-        eventPanel.add(trainerFact, gbc);
-        gbc.gridx++;
-        eventPanel.add(trainerFactText, gbc);
-
 
 
         // Build ButtonsPanel
@@ -153,7 +142,7 @@ public class TrainerDialog extends JDialog implements WindowListener {
     }
 
     void cancelB_actionPerformed(ActionEvent e) {
-        CANCELLED = true;
+        cancelled = true;
         this.dispose();
     }
 
@@ -164,11 +153,11 @@ public class TrainerDialog extends JDialog implements WindowListener {
     }
 
     public void windowClosing(WindowEvent e) {
-        CANCELLED = true;
+        cancelled = true;
         this.dispose();
     }
 
-    public String getTrainerName() { 
+    public String getStudentName() {
         return this.name; 
     }
 
