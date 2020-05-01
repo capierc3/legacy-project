@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.Calendar;
 
 import javax.swing.*;
-
+import main.java.memoranda.ui.AppFrame;
 import main.java.memoranda.EventsScheduler;
 import main.java.memoranda.gym.AppUsers;
 import main.java.memoranda.gym.User;
