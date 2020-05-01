@@ -20,7 +20,7 @@ import org.junit.Assert;
 
 public class AppUsers implements UserList {
 
-    private final String APP_USER_FILE_PATH = "appusers.dat";
+    private final String APP_USER_FILE_PATH = "appusers.xml";
     private HashMap<String, User> appUsers;
     private User activeUser;
     private Element element;
@@ -82,10 +82,7 @@ public class AppUsers implements UserList {
             Element e = new Element("User");
             e.appendChild(user.getContent().copy());
             element.appendChild(e);
-
-            //TODO: Implement in Sprint 3
-            //save to file
-            //saveToFile(appUsers, APP_USER_FILE_PATH);
+            save();
         }
 
     }
@@ -97,8 +94,10 @@ public class AppUsers implements UserList {
      * @return void
      */
     public void removeUser(String login) {
-
-        appUsers.remove(login);
+        if (appUsers.containsKey(login)) {
+            appUsers.remove(login);
+            save();
+        }
 
     }
 
@@ -138,11 +137,7 @@ public class AppUsers implements UserList {
     public Boolean verifyPassword(String login, String password){
 
         User user = getUser(login);
-        if(user != null && user.getPassword().contentEquals(password)){
-            return true;
-        }
-
-        return false;
+        return user != null && user.getPassword().contentEquals(password);
     }
 
     /**
