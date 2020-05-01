@@ -2,12 +2,11 @@ package main.java.memoranda.gym;
 
 import main.java.memoranda.date.CalendarDate;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
-import main.java.memoranda.gym.ClassList;
-import main.java.memoranda.gym.GymClass;
+import java.util.ArrayList;
+import java.io.File;
+import java.util.Collection;
+
 import nu.xom.Element;
 import nu.xom.Elements;
 
@@ -60,7 +59,7 @@ public interface Room {
     boolean isAvailable(CalendarDate date);
 
     /**
-     * Returns Room as an Element
+     * Returns Room as an Element.
      * @return Element
      */
     Element getContent();
@@ -75,4 +74,22 @@ public interface Room {
         }
         return new RoomImpl(num,classList,classDates);
     }
+
+    /**
+     * Method to set Picture and add picture to Element.
+     * @param fileName File
+     */
+    void setPicture(File fileName);
+
+    /**
+     * Method to set a picture for a Room.
+     * @param newPicture File
+     */
+    void setPic(File newPicture);
+
+    /**
+     * Method to get Picture for a Room.
+     * @return File
+     */
+    File getPic();
 }
