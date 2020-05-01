@@ -4,7 +4,6 @@ import main.java.memoranda.gym.*;
 import nu.xom.*;
 
 import java.io.*;
-import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -85,28 +84,6 @@ public class RoomManager {
                 }
             }
         }
-//        else {
-//            System.out.println("HardCoded");
-//            Collection<GymClass> gymClasses = new ArrayList<>();
-//            Collection<CalendarDate> calendarDates = new ArrayList<>();
-//            ClassList list = new ClassListImpl(gymClasses);
-//            Room room1 = new RoomImpl(403, list, calendarDates);
-//            File file1 = new File(this.getClass().getResource("/ui/icons/redRoom.jpeg").toURI());
-//            room1.setPic(file1);
-//            addRoom(room1);
-//            Room room2 = new RoomImpl(202, list, calendarDates);
-//            File file2 = new File(this.getClass().getResource("/ui/icons/ringsRoom.jpeg").toURI());
-//            room2.setPic(file2);
-//            addRoom(room2);
-//            Room room3 = new RoomImpl(303, list, calendarDates);
-//            File file3 = new File(this.getClass().getResource("/ui/icons/whiteRoom.jpeg").toURI());
-//            room3.setPic(file3);
-//            addRoom(room3);
-//            Room room4 = new RoomImpl(500, list, calendarDates);
-//            File file4 = new File(this.getClass().getResource("/ui/icons/blueRoom.jpeg").toURI());
-//            room4.setPic(file4);
-//            addRoom(room4);
-//        }
     }
 
 }
