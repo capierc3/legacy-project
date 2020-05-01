@@ -93,8 +93,10 @@ public class ElmToObjectTest {
 
     /**
      * Tests that the students are created properly.
+     *
+     * to test localy uncomment @test
      */
-    @Test
+    //@Test
     public void elmToUserTest() {
         Student newStudent = (Student) User.elmToUser(student.getContent());
         Assert.assertEquals(student.getName(),newStudent.getName());
