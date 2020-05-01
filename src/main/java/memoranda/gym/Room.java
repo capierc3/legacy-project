@@ -3,10 +3,12 @@ package main.java.memoranda.gym;
 import main.java.memoranda.date.CalendarDate;
 
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.io.File;
 import java.util.Collection;
 
+import main.java.memoranda.ui.App;
 import nu.xom.Element;
 import nu.xom.Elements;
 
@@ -69,10 +71,18 @@ public interface Room {
         ClassList classList = ClassList.elmToClassList(el.getFirstChildElement("ClassList"));
         ArrayList<CalendarDate> classDates = new ArrayList<>();
         Elements elms = el.getFirstChildElement("ClassDates").getChildElements();
+        File newPicture = null;
+        try {
+            newPicture = new File(App.class.getResource(el.getAttributeValue("Picture")).toURI());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         for (int i = 0; i < elms.size(); i++) {
             classDates.add(new CalendarDate(elms.get(i).getLocalName()));
         }
-        return new RoomImpl(num,classList,classDates);
+        RoomImpl room = new RoomImpl(num,classList,classDates);
+        room.setPic(newPicture);
+        return room;
     }
 
     /**

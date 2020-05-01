@@ -21,6 +21,7 @@ public class App {
 
 	//keep state of AppUser
 	static AppUsers appUsers = new AppUsers();
+	static RoomManager roomManager = new RoomManager();
 
 	// boolean packFrame = false;
 	/**Main App frame**/
@@ -163,6 +164,10 @@ public class App {
 		if (appUsers != null) {
 			appUsers.saveToFile();
 		}
+		if (roomManager != null) {
+			roomManager.saveRooms();
+		}
+
 		frame.dispose();
 		System.exit(0);
 	}

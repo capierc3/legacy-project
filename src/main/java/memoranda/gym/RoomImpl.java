@@ -4,6 +4,8 @@ import main.java.memoranda.date.CalendarDate;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.util.Collection;
+import java.util.regex.Matcher;
+
 import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.gym.GymClass;
 import main.java.memoranda.gym.Room;
@@ -132,7 +134,10 @@ public class RoomImpl implements Room{
             }
         }
         picture = fileName;
-        setAttr("Picture", fileName.getPath());
+
+        String[] pathArray = fileName.getPath().split(Matcher.quoteReplacement(System.getProperty("file.separator")));
+        String path = "/ui/icons/" + pathArray[pathArray.length - 1];
+        setAttr("Picture",path);
     }
 
     /**
