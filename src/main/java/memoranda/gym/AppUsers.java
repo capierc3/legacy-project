@@ -7,15 +7,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 
-import nu.xom.Element;
-import nu.xom.Elements;
+import nu.xom.*;
 
-import nu.xom.Attribute;
 import nu.xom.Element;
 import nu.xom.Elements;
 
@@ -42,7 +37,7 @@ public class AppUsers implements UserList {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        loadFromFile();
+        //loadFromFile();
     }
 
     /**
@@ -117,7 +112,7 @@ public class AppUsers implements UserList {
     public Collection<User> getAllUsers() {
 
         if(appUsers.size() > 0) {
-            LinkedList<User> list = new LinkedList<User>();
+            LinkedList<User> list = new LinkedList<>();
             appUsers.forEach((k,v) -> list.add(v));
             return list;
         }
@@ -157,6 +152,11 @@ public class AppUsers implements UserList {
         activeUser = user;
     }
 
+    /**
+     * Build appUsers library from XML
+     * @param el
+     * @return AppUsers object
+     */
     public static AppUsers elmToUserList(Element el) {
         AppUsers appUsers = new AppUsers();
         Elements elms = el.getChildElements("User");
@@ -166,6 +166,10 @@ public class AppUsers implements UserList {
         return appUsers;
     }
 
+    /**
+     * Get object element
+     * @return
+     */
     public Element getContext() {
         return element;
     }
@@ -179,7 +183,7 @@ public class AppUsers implements UserList {
         try {
 
             Element element = convertLibraryToXML();
-            ObjectSerializer.serializeObject(element, APP_USER_FILE_PATH);
+            ObjectSerializer.serializeElement(element, APP_USER_FILE_PATH);
 
         } catch (IOException e) {
 
@@ -195,10 +199,10 @@ public class AppUsers implements UserList {
      */
     private Element convertLibraryToXML() {
 
-        Element element = new Element("appUsers");
+        Element element = new Element("AppUser");
 
         appUsers.forEach((k,v) -> {
-            Element e = new Element("user");
+            Element e = new Element("User");
             e.appendChild(v.getContent().copy());
             element.appendChild(e);
         });
@@ -210,28 +214,31 @@ public class AppUsers implements UserList {
      * Load object from file
      *
      */
-    private void loadFromFile(){
+    private void loadFromFile() {
 
         try {
-            System.out.println("Loading AppUsers from " + APP_USER_FILE_PATH);
-            element = (Element) ObjectSerializer.deserializeObject(APP_USER_FILE_PATH);
+            File file = new File(APP_USER_FILE_PATH);
+            Builder parser = new Builder();
+            Document doc = parser.build(file);
+
+            element = doc.getRootElement();
             populateLibrary(element);
-
-        } catch (IOException | ClassNotFoundException e) {
-
-            e.printStackTrace();
-
+        }
+        catch (ParsingException | IOException ex) {
+            ex.printStackTrace();
         }
 
     }
 
-    private void populateLibrary(Element element) {
 
-        AppUsers appUsers = new AppUsers();
+    private void populateLibrary(Element element) {
 
         Elements elements = element.getChildElements("User");
         for (int i = 0; i < elements.size(); i++) {
-            //appUsers.addUser(User.elementToUser(elements.get(i)));
+            User user = User.elmToUser(elements.get(i));
+            this.addUser(user);
+
+            System.out.println(user.getUserName());
         }
 
     }

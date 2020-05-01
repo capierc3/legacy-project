@@ -1,5 +1,7 @@
 package main.java.memoranda.gym;
 
+import nu.xom.Element;
+
 import java.io.*;
 
 /**
@@ -32,5 +34,18 @@ public class ObjectSerializer implements Serializable {
         return objectInputStream.readObject();
 
     }
+
+    public static void serializeElement(Element element, String filepath) throws IOException {
+        String xml = element.toXML();
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
+        writer.write(xml);
+
+        writer.close();
+    }
+
+//    public static Element deserializeElement(String filepath) {
+//
+//    }
 
 }
