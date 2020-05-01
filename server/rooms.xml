@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Rooms>
+    <Room>
+        <Room RoomNumber="403" Picture="/ui/icons/redRoom.jpeg">
+            <ClassList/>
+            <ClassDates/>
+        </Room>
+    </Room>
+    <Room>
+        <Room RoomNumber="202" Picture="/ui/icons/ringsRoom.jpeg">
+            <ClassList/>
+            <ClassDates/>
+        </Room>
+    </Room>
+    <Room>
+        <Room RoomNumber="303" Picture="/ui/icons/whiteRoom.jpeg">
+            <ClassList/>
+            <ClassDates/>
+        </Room>
+    </Room>
+    <Room>
+        <Room RoomNumber="500" Picture="/ui/icons/blueRoom.jpeg">
+            <ClassList/>
+            <ClassDates/>
+        </Room>
+    </Room>
+</Rooms>
