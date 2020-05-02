@@ -1,6 +1,3 @@
-/**
- * Javadoc Header
- */
 package main.java.memoranda.ui;
 
 import java.awt.BorderLayout;

@@ -11,8 +11,6 @@
 
 package test.java;
 
-
-
 import main.java.memoranda.gym.Belt;
 import main.java.memoranda.gym.ClassListImpl;
 import main.java.memoranda.gym.Trainer;
@@ -27,7 +25,7 @@ import java.util.ArrayList;
 
 public class US_69Test {
     String name = "Bruce Willis";
-    Belt belt = Belt.BLACK3;
+    String belt = "Dark Black";
     String fact = "I have lots of hair";
     Trainer bruce;
     TrainerCardPanel card;
@@ -42,7 +40,7 @@ public class US_69Test {
         bruce.setDescription(fact);
         card = new TrainerCardPanel(bruce);
     }
-    
+
     @Test
     public void testCardCreation() {
         assertEquals(name, card.getTrainerName());
