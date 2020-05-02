@@ -15,36 +15,21 @@ import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+
+import main.java.memoranda.gym.*;
 import main.java.memoranda.util.Local;
-
-
-
-
 
 public class TrainerProfilesPanel extends JPanel {
     TitledBorder title = BorderFactory.createTitledBorder("KAESEKUCHEN TRAINERS");
     FlowLayout flowlayout = new FlowLayout();
-    TrainerCardPanel testCard = new TrainerCardPanel
-            ("Justin Oliver", "Blue", "I use ketchup on everything!");
-    TrainerCardPanel testCard2 = new TrainerCardPanel
-            ("Cameron Howe", "Green Stripe", "What the hell is this Yahoo");
-    TrainerCardPanel testCard3 = new TrainerCardPanel
-            ("Joe MacMillan", "Orange", "The thing that gets you to the thing");
-    TrainerCardPanel testCard4 = new TrainerCardPanel
-            ("Gordon Clark", "Black2", "We had a problem. Now we have a product.");
-    TrainerCardPanel testCard5 = new TrainerCardPanel
-            ("Donna Clark", "Black3", "Software comes and goes. Hardware is forever.");
-    TrainerCardPanel testCard6 = new TrainerCardPanel
-            ("John Bosworth", "White", "Innovation is a risk.");
     JButton newUser = new JButton("New Trainer");
-
-    
-    
 
     public TrainerProfilesPanel() {
 	try {
@@ -71,13 +56,13 @@ public class TrainerProfilesPanel extends JPanel {
 		addUser();
 	    }
 	});
+
     }
 
     /**
      * Method to add new user to system and card to this panel
      */
     void addUser() {
-
 	String name = "";
 	Belt belt = Belt.WHITE;
 	String fact = "";

@@ -264,7 +264,7 @@ public class AppFrame extends JFrame {
         contentPane.setLayout(borderLayout1);
         this.setTitle("Kaesekuchen Gym - " + CurrentProject.get().getTitle());
         
-        statusBar.setText(" Version: (Build  )");
+        statusBar.setText(" Version: 1.1 (Build 3.01 )");
 
         jMenuFile.setText(Local.getString("File"));
         jMenuFileExit.setText(Local.getString("Exit"));

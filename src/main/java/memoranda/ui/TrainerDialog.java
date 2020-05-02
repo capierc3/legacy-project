@@ -1,6 +1,8 @@
 package main.java.memoranda.ui;
 
 import javax.swing.*;
+
+import main.java.memoranda.gym.Belt;
 import main.java.memoranda.util.Local;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,12 +31,12 @@ public class TrainerDialog extends JDialog implements WindowListener {
     Belt belt;
     String fact;
     String title;
-    
+
     // The three editable values, creating label and text field
     JLabel trainerName = new JLabel();
     JTextField trainerNameText = new JTextField("", 20);
     JLabel trainerBelt = new JLabel();
-    JTextField trainerBeltText = new JTextField("",20);
+    JComboBox beltBox;
     JLabel trainerFact = new JLabel();
     JTextField trainerFactText = new JTextField("", 20);
 

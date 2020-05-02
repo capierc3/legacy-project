@@ -13,8 +13,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URL;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import main.java.memoranda.gym.AppUsers;
+import main.java.memoranda.gym.Belt;
+import main.java.memoranda.gym.Owner;
+import main.java.memoranda.gym.Trainer;
 import main.java.memoranda.util.Local;
 
 /**
@@ -33,7 +40,7 @@ public class TrainerCardPanel extends JPanel {
     Image scaledImage;
     JLabel trainerPicture;
     String name;
-    String belt;
+    Belt belt;
     String fact;
     File pic;
     Trainer trainer;
@@ -91,6 +98,7 @@ public class TrainerCardPanel extends JPanel {
 		editUser(e);
 	    }
 	});
+
     }
 
     /**
@@ -101,7 +109,6 @@ public class TrainerCardPanel extends JPanel {
      * @param e Action Event from button click
      */
     void editUser(ActionEvent e) {
-
 
 	// Creates and renders an edit box
 	TrainerDialog dlg = new TrainerDialog(App.getFrame(), Local.getString("Edit Trainer"), name, belt, fact);
@@ -136,7 +143,6 @@ public class TrainerCardPanel extends JPanel {
 	this.add(editUser);
 	repaint();
 	revalidate();
-
     }
 
     /**

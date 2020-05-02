@@ -74,8 +74,12 @@ public class Task93_Whitebox {
 
         app.addUser(user);
 
-        Boolean actual = app.verifyPassword("john", "catsRkool64");
-        assertTrue(actual);
+        String actual = app.verifyPassword("john", "catsRkool64");
+        assertTrue(actual.equalsIgnoreCase("found"));
+        actual = app.verifyPassword("Wrong name", "catsRkool64");
+        assertTrue(actual.equalsIgnoreCase("User not found"));
+        actual = app.verifyPassword("john", "Wrong Password");
+        assertTrue(actual.equalsIgnoreCase("Incorrect Password"));
 
         app.removeUser(user.getID());
 

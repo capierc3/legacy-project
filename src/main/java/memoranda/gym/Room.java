@@ -2,6 +2,7 @@ package main.java.memoranda.gym;
 
 import main.java.memoranda.date.CalendarDate;
 
+
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.io.File;
@@ -69,7 +70,9 @@ public interface Room {
     boolean isAvailable(CalendarDate date);
 
     /**
+
      * Returns Room as an Element.
+
      * @return Element
      */
     Element getContent();
