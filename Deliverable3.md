@@ -254,15 +254,15 @@ I would also advise you to already fill out the Contributions section (End of sp
     as a developer, you resolve those issues before moving the ticket to Ready For Test status. 
  
 ## 4: Checklist for you to see if you are done
-- [] Filled out the complete form from above, all fields are filled and written in full sentences
+- [X] Filled out the complete form from above, all fields are filled and written in full sentences
 - [X] Read the kickoff again to make sure you have all the details
 - [X] User Stories that were not completed, were left in the Sprint and a copy created
 - [X] Your Quality Policies are accurate and up to date
 - [] **Individual** Survey was submitted **individually** (create checkboxes below -- see Canvas to get link)
 - [X] Daimi Mussey
-- [] Stephen Wilson
+- [X] Stephen Wilson
 - [X] Justin Oliver
-- [] Chase Pierce
+- [X] Chase Pierce
         
   - [X] The original of this file was copied for the next Sprint (needed for all but last Sprint where you do not need to copy it anymore)
   - [X] Basic information (part 1) for next Sprint was included (meaning Spring Planning is complete)
