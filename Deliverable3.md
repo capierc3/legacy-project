@@ -215,7 +215,10 @@ I would also advise you to already fill out the Contributions section (End of sp
 #### Team member Daimi Mussey:
   **Links to GitHub commits with main code contribution (up to 5 links):
 
-    - 
+    - https://github.com/amehlhase316/Kaesekuchen/commit/96cb22f53c8e0db53c4053379b875d48a76c5b45
+    - https://github.com/amehlhase316/Kaesekuchen/commit/fffd1bde3ed1fe2fab807f585d3cf279a47c9cf8
+    - https://github.com/amehlhase316/Kaesekuchen/commit/f5848965413c41a82c9ef07ee4ec1b16a7224a24
+    - https://github.com/amehlhase316/Kaesekuchen/commit/0973fe27b1580432de354b8ad17720660dee6b84
 
    **GitHub links to your Unit Tests (up to 3 links):
 
@@ -223,15 +226,18 @@ I would also advise you to already fill out the Contributions section (End of sp
 
   **GitHub links to your Code Reviews (up to 3 links):
 
-    - N/A
+    - https://github.com/amehlhase316/Kaesekuchen/pull/49
+    - https://github.com/amehlhase316/Kaesekuchen/pull/58
 
   **How did you contribute to Static Analysis:
 
-    - N/A
+    - I helped with adding comments in the files I was working in that we missed previously, and removed unused code
+    from the project.
  
  **What was your main contribution to the Quality Policy documentation?:
 
-    - 
+    - As a team, we discussed and decided upon no merging in of code that didn't pass Travis CI checks and making sure
+    as a developer, you resolve those issues before moving the ticket to Ready For Test status. 
  
 ## 4: Checklist for you to see if you are done
 - [] Filled out the complete form from above, all fields are filled and written in full sentences
@@ -239,8 +245,7 @@ I would also advise you to already fill out the Contributions section (End of sp
 - [X] User Stories that were not completed, were left in the Sprint and a copy created
 - [X] Your Quality Policies are accurate and up to date
 - [] **Individual** Survey was submitted **individually** (create checkboxes below -- see Canvas to get link)
-- [] Daimi Mussey
-- [] Kyp Bellinger
+- [X] Daimi Mussey
 - [] Stephen Wilson
 - [] Justin Oliver
 - [] Chase Pierce
