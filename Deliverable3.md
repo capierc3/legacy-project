@@ -200,27 +200,28 @@ I would also advise you to already fill out the Contributions section (End of sp
 #### Team member Stephen Wilson:
   **Links to GitHub commits with main code contribution (up to 5 links):
 
-    - 
-    -
-    -
-
+    - https://github.com/amehlhase316/Kaesekuchen/commit/85ff6bac73b25efd0d66f16b98eebb89599770e3
+    - https://github.com/amehlhase316/Kaesekuchen/commit/e53abd57f8c5db13693324c7d2e480d1abd8de07
+    - https://github.com/amehlhase316/Kaesekuchen/commit/2e9fb9861ff0885f913e4b1b5601a497b91d4fab
+    - https://github.com/amehlhase316/Kaesekuchen/commit/684702068b8a043abca62721d04d61836ec5c4e1
+    - https://github.com/amehlhase316/Kaesekuchen/commit/389c6ce1b6f7ccf242aec4e70892dc025fa39019
 
    **GitHub links to your Unit Tests (up to 3 links):
 
-    - 
+    - N/A
 
   **GitHub links to your Code Reviews (up to 3 links):
 
-    - 
+    - https://github.com/amehlhase316/Kaesekuchen/pull/59
 
 
   **How did you contribute to Static Analysis:
 
-    - 
+    - Monitored Travis-CI regularly for quality and potential issues
  
  **What was your main contribution to the Quality Policy documentation?:
 
-    - 
+    - Reviewed documentation at beginning of the sprint to look for any recommended changes.
 
 
 #### Team member Daimi Mussey:
