@@ -139,26 +139,29 @@ I would also advise you to already fill out the Contributions section (End of sp
 #### Team member Chase Pierce:
   **Links to GitHub commits with main code contribution (up to 5 links):
 
-    -
+    -https://github.com/amehlhase316/Kaesekuchen/pull/59/commits/f5a16c14b570ce5c277bda91494383d652ed8e4f
+    -https://github.com/amehlhase316/Kaesekuchen/commit/0e32cb8a58eef647cc8e39960e049b73b6abd9ba
+    -https://github.com/amehlhase316/Kaesekuchen/commit/d492d6df3da41619f26e997e9c42a8d30d46b148
+    -https://github.com/amehlhase316/Kaesekuchen/commit/d3d4d1978970823c61644635f7900d106ee65c13
 
   **GitHub links to your Unit Tests (up to 3 links):
-    -
-    -
+    - https://github.com/amehlhase316/Kaesekuchen/pull/59/commits/f305a27e6341d1933a0152cb6519c7bc93cd293b
+    -https://github.com/amehlhase316/Kaesekuchen/pull/59/commits/72f2a9b2396334f96308e163afbe5dd03e622c99
     -
 
   **GitHub links to your Code Reviews (up to 3 links):
 
-    - 
-    -
-    -
+    - https://github.com/amehlhase316/Kaesekuchen/pull/57
+    - https://github.com/amehlhase316/Kaesekuchen/pull/54
+    - reviewed US_130 to find where the bug was that was preventing it from working. 
 
   **How did you contribute to Static Analysis:
  
-    -
+    - I helped clean up some checkstyle errors to lower the total amount.
 
   **What was your main contribution to the Quality Policy documentation?:
 
-    - 
+    - reviewed and discussed what worked and didn't work during planing.
  
 #### Team member Justin Oliver:
    **Links to GitHub commits with main code contribution (up to 5 links):
