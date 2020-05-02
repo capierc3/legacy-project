@@ -71,14 +71,6 @@ public class ResourcesListImpl implements ResourcesList {
                 return new Resource(rs.get(i).getAttribute("path").getValue(), rs.get(i).getAttribute("isInetShortcut") != null, rs.get(i).getAttribute("isProjectFile") != null);
         return null;
     }
-
-    /*public void addResource(String path, String taskId) {
-        Element el = new Element("resource");
-        el.addAttribute(new Attribute("id", Util.generateId()));
-        el.addAttribute(new Attribute("path", path));
-        if (taskId != null) el.addAttribute(new Attribute("taskId", taskId));
-        _root.appendChild(el);
-    }*/
     
     /**
      * @see main.java.memoranda.ResourcesList#addResource(String, boolean, boolean)
@@ -130,15 +122,5 @@ public class ResourcesListImpl implements ResourcesList {
     public Document getXMLContent() {
         return _doc;
     }
-
-    /*public Vector getResourcesForTask(String taskId) {
-        Vector v = new Vector();
-        Elements rs = _root.getChildElements("resource");
-        for (int i = 0; i < rs.size(); i++)
-            if (rs.get(i).getAttribute("taskId").getValue().equals(taskId))
-                v.add(rs.get(i).getAttribute("path").getValue());
-        return v;
-    }*/
-   
 
 }

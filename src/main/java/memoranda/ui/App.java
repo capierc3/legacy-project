@@ -1,8 +1,6 @@
 package main.java.memoranda.ui;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Calendar;
 
 import javax.swing.*;
@@ -23,6 +21,7 @@ public class App {
 
 	//keep state of AppUser
 	static AppUsers appUsers = new AppUsers();
+	static RoomManager roomManager = new RoomManager();
 
 	// boolean packFrame = false;
 	/**Main App frame**/
@@ -159,6 +158,16 @@ public class App {
 	public static void closeWindow() {
 		if (frame == null)
 			return;
+		if (appUsers.getManager() != null) {
+			appUsers.getManager().save();
+		}
+		if (appUsers != null) {
+			appUsers.saveToFile();
+		}
+		if (roomManager != null) {
+			roomManager.saveRooms();
+		}
+
 		frame.dispose();
 		System.exit(0);
 	}
@@ -199,27 +208,6 @@ public class App {
 		Point loc = splash.getLocation();
 		dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x, (frmSize.height - dlg.getSize().height) / 2 + loc.y);
 		dlg.setVisible(true);
-	}
-
-	/**
-	 * On Click event for Submit button
-	 *
-	 * @param login User's login credentials
-	 * @param password User's password credentials
-	 */
-	private void loginSubmitButton_clicked(String login, String password){
-
-		Boolean verified = appUsers.verifyPassword(login, password);
-
-		if(verified) {
-			User user = appUsers.getUser(login);
-			appUsers.setActiveUser(user);
-			splash.dispose();
-		}else {
-			//notify user of incorrect credentials
-			//TODO: Change UI to reflect incorrect values
-		}
-
 	}
 
 }

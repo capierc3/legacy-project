@@ -46,46 +46,40 @@ I would also advise you to already fill out the Contributions section (End of sp
 
 | Date      | Attendees                              |Minutes                                                                             | Burndown Info | TravisCI info  | Additional Info  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
+| April 23  | Justin Oliver, Daimi Mussey,           | Began the sprint well, with no immediate blockers.                                 | Sprint just   | Sprint3 branch |                  |
+|           | Stephen Wilson, Chase Pierce           |                                                                                    | started.      | is passing     |                  |
 |           |                                        |                                                                                    |               |                |                  |
 |           |                                        |                                                                                    |               |                |                  |
 |           |                                        |                                                                                    |               |                |                  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
+| April 26  | Justin Oliver, Daimi Mussey,           | The individual assignment for the week seemed to inhibit the                       | Progress is   | Sprint3 branch |                  |
+|           | Stephen Wilson, Chase Pierce           | team's progress, but some good progress was made on working down                   | below capacity| is passing     |                  |
+|           |                                        | outstanding checkstyle issues.                                                     | but           |                |                  |
+|           |                                        |                                                                                    | is starting to|                |                  |
+|           |                                        |                                                                                    | plateau       |                |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
+| April 28  | Justin Oliver, Daimi Mussey,           | There were some difficulties around getting the build.gradle                       | Some progress | Sprint3 branch |                  |
+|           | Stephen Wilson, Chase Pierce           | file to run, but will resort to hard-coding the value this iteration               | has been made,| is passing     |                  |
+|           |                                        | if necessary.  More progress from the team was inhibited today due                 | but not much. |                |                  |
+|           |                                        | to the looming deadline for the individual assignment.                             |               |                |                  |
 |           |                                        |                                                                                    |               |                |                  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
+| April 30  | Justin Oliver, Daimi Mussey,           | Progress was made at last with XML serialization, code cleanup,                    | Progress is   | Sprint3 branch |                  |
+|           | Stephen Wilson, Chase Pierce           | and UI functionality.  Assistance was asked for on US_130 to get                   | stagnant and  | is passing     |                  |
+|           |                                        | the AppUser class to load from the xml file.                                       | the team runs |                |                  |
+|           |                                        |                                                                                    | the risk of   |                |                  |
+|           |                                        |                                                                                    | not finishing.|                |                  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
 
 ### Meeting Summary:
 
-   Justin Oliver : 
+   Justin Oliver : 4
 
-   Daimi Mussey :
+   Daimi Mussey : 4
 
-   Chase Pierce :
+   Chase Pierce : 4
 
-   Stephen Wilson :     
+   Stephen Wilson : 4
 
 
 ## 3: After the Sprint
@@ -94,50 +88,52 @@ I would also advise you to already fill out the Contributions section (End of sp
 
 **Screen Cast link**: 
 
+> https://www.youtube.com/watch?v=Hx2w_k5kK-o&feature=youtu.be
+
 > Answer the following questions as a team. 
 
 **What do you think is the value you created this Sprint?**
 
-> 
+> We transformed the application from something static into a dynamic, living application by adding the ability to save state, alter user information, and provide real-time information
 
 **Do you think you worked enough and that you did what was expected of you?**
 
-> 
+> Given the current situation and complexity of juggling both individual assignments and project work, we accomplished what we had intended to for this sprint.
 
 **Would you say you met the customers’ expectations? Why, why not?**
 
-> 
+> Yes, we finished the majority of the user stories and tasks we committed to for this sprint. The customer has a functional gym scheduling system that includes a little personalized flavor. 
 
-### Sprint Retrospective
-
-> 
+### Sprint Retrospective 
 
 **Did you meet your sprint goal?**
 
-> 
+> Yes, we met our goal of focusing on the quality of our work and stabilizing our product. We built on previous sprints and functionality, and cleaned up code to help with future development work.
+
 **Did you complete all stories on your Sprint Backlog?**
 
-> 
+> No, but we completed the majority of the sprint backlog. There were 3 tasks that were left unfinished.
 
 **If not, what went wrong?**
 
-> 
+> One of our user stories was to reduce the number of Spotbugs. We were overly ambitious with the ability to reduce the Spotbugs errors in the codebase we were given. We thought we would be able to remove some unused classes, and by doing that it would reduce the number of Spotbug issues. Come to find out, that’s not as easy as it sounds, as Memoranda is quite complicated. We were able to reduce the number of errors significantly. There were however a couple that we just weren’t able to fix and that kept us from reaching the goal we set. Not finishing these tasks doesn’t impact the functionality of the program at all. 
 
 **Did you work at a consistent rate of speed, or velocity? (Meaning did you work during the whole Sprint or did you start working when the deadline approached.)**
 
-> 
+> We did not have a consistent rate of velocity during the middle of the sprint while most of us were working to complete our individual assignments. Our team rallied together to meet the end of sprint deadline and complete most of the user stories we committed to accomplishing. 
 
 **Did you deliver business value?**
 
-> 
+> Yes, our Kaesekuchen Gym Scheduler has a lot of functionality that the customer wanted.  
 
 **Are there things the team thinks it can do better in the next Sprint?**
 
-> 
+> N/A
 
 **How do you feel at this point? Get a pulse on the optimism of the team.**
 
-> 
+> Ready to be done with the semester. Good job, team! 
+>
 ### Contributions:
 
 > In this section I want you to point me to your main contributions (each of you individually). Some of the topcs are not needed for the first deliverables (you should know which things you should have done in this Sprint, if you don't then you have probably missed something):
@@ -145,83 +141,98 @@ I would also advise you to already fill out the Contributions section (End of sp
 #### Team member Chase Pierce:
   **Links to GitHub commits with main code contribution (up to 5 links):
 
-    -
+    -https://github.com/amehlhase316/Kaesekuchen/pull/59/commits/f5a16c14b570ce5c277bda91494383d652ed8e4f
+    -https://github.com/amehlhase316/Kaesekuchen/commit/0e32cb8a58eef647cc8e39960e049b73b6abd9ba
+    -https://github.com/amehlhase316/Kaesekuchen/commit/d492d6df3da41619f26e997e9c42a8d30d46b148
+    -https://github.com/amehlhase316/Kaesekuchen/commit/d3d4d1978970823c61644635f7900d106ee65c13
 
   **GitHub links to your Unit Tests (up to 3 links):
-    -
-    -
+    - https://github.com/amehlhase316/Kaesekuchen/pull/59/commits/f305a27e6341d1933a0152cb6519c7bc93cd293b
+    -https://github.com/amehlhase316/Kaesekuchen/pull/59/commits/72f2a9b2396334f96308e163afbe5dd03e622c99
     -
 
   **GitHub links to your Code Reviews (up to 3 links):
 
-    - 
-    -
-    -
+    - https://github.com/amehlhase316/Kaesekuchen/pull/57
+    - https://github.com/amehlhase316/Kaesekuchen/pull/54
+    - reviewed US_130 to find where the bug was that was preventing it from working. 
 
   **How did you contribute to Static Analysis:
  
-    -
+    - I helped clean up some checkstyle errors to lower the total amount.
 
   **What was your main contribution to the Quality Policy documentation?:
 
-    - 
+    - reviewed and discussed what worked and didn't work during planing.
  
- #### Team member Justin Oliver:
+#### Team member Justin Oliver:
    **Links to GitHub commits with main code contribution (up to 5 links):
  
-     - 
-     -
-     -
+     - https://github.com/amehlhase316/Kaesekuchen/commit/4bd9ab059cff0784212c3c6757253768491bdf83
+     - https://github.com/amehlhase316/Kaesekuchen/commit/02333a1a8d62a10e71bba2cb8e92c716c329253d
+     - https://github.com/amehlhase316/Kaesekuchen/commit/c3dd558716eb407b4fba45de631a8be507cfce32
+     - https://github.com/amehlhase316/Kaesekuchen/commit/ffbf70102851c005a2cb72f7a9cec95d5296ddfc
+     - https://github.com/amehlhase316/Kaesekuchen/commit/0973fe27b1580432de354b8ad17720660dee6b84
  
     **GitHub links to your Unit Tests (up to 3 links):
  
-     - link1
-     - link2
+     - Most of my coding work I did this round didn't really make sense for unit testing. I did a lot of code cleanup and error removal/code refactoring.
+     - I did run the JUnit tests after all major commits to ensure I didn't add any failures to the current unit tests that exist.
+     - I also cleaned the tests package to be free of checkstyle and spotbug issues. 
+     - The additional class I did build out was a UI thing (resources panel) and didn't really make sense for unit tests. 
  
    **GitHub links to your Code Reviews (up to 3 links):
  
-     - link1
-     - link2
+     - https://github.com/amehlhase316/Kaesekuchen/pull/45
+     - https://github.com/amehlhase316/Kaesekuchen/pull/46
+     - https://github.com/amehlhase316/Kaesekuchen/pull/52
  
    **How did you contribute to Static Analysis:
  
-     - link1
-     - link2
+     - https://github.com/amehlhase316/Kaesekuchen/commit/4bd9ab059cff0784212c3c6757253768491bdf83
+     - https://github.com/amehlhase316/Kaesekuchen/commit/96657568b18c55e5a325159ed8f973b8f470ebe0
+     - https://github.com/amehlhase316/Kaesekuchen/commit/02333a1a8d62a10e71bba2cb8e92c716c329253d
+     - https://github.com/amehlhase316/Kaesekuchen/commit/c3dd558716eb407b4fba45de631a8be507cfce32
   
   **What was your main contribution to the Quality Policy documentation?:
  
-     - 
+     - I reviewed our quality policy before the sprint started to ensure that it met all of the requriements for Sprint3 and for the project. I didn't see any 
+     issues from what we currently had, so I didn't bring any up in sprint planning. 
 
 #### Team member Stephen Wilson:
   **Links to GitHub commits with main code contribution (up to 5 links):
 
-    - 
-    -
-    -
-
+    - https://github.com/amehlhase316/Kaesekuchen/commit/85ff6bac73b25efd0d66f16b98eebb89599770e3
+    - https://github.com/amehlhase316/Kaesekuchen/commit/e53abd57f8c5db13693324c7d2e480d1abd8de07
+    - https://github.com/amehlhase316/Kaesekuchen/commit/2e9fb9861ff0885f913e4b1b5601a497b91d4fab
+    - https://github.com/amehlhase316/Kaesekuchen/commit/684702068b8a043abca62721d04d61836ec5c4e1
+    - https://github.com/amehlhase316/Kaesekuchen/commit/389c6ce1b6f7ccf242aec4e70892dc025fa39019
 
    **GitHub links to your Unit Tests (up to 3 links):
 
-    - 
+    - N/A
 
   **GitHub links to your Code Reviews (up to 3 links):
 
-    - 
+    - https://github.com/amehlhase316/Kaesekuchen/pull/59
 
 
   **How did you contribute to Static Analysis:
 
-    - 
+    - Monitored Travis-CI regularly for quality and potential issues
  
  **What was your main contribution to the Quality Policy documentation?:
 
-    - 
+    - Reviewed documentation at beginning of the sprint to look for any recommended changes.
 
 
 #### Team member Daimi Mussey:
   **Links to GitHub commits with main code contribution (up to 5 links):
 
-    - 
+    - https://github.com/amehlhase316/Kaesekuchen/commit/96cb22f53c8e0db53c4053379b875d48a76c5b45
+    - https://github.com/amehlhase316/Kaesekuchen/commit/fffd1bde3ed1fe2fab807f585d3cf279a47c9cf8
+    - https://github.com/amehlhase316/Kaesekuchen/commit/f5848965413c41a82c9ef07ee4ec1b16a7224a24
+    - https://github.com/amehlhase316/Kaesekuchen/commit/0973fe27b1580432de354b8ad17720660dee6b84
 
    **GitHub links to your Unit Tests (up to 3 links):
 
@@ -229,30 +240,32 @@ I would also advise you to already fill out the Contributions section (End of sp
 
   **GitHub links to your Code Reviews (up to 3 links):
 
-    - N/A
+    - https://github.com/amehlhase316/Kaesekuchen/pull/49
+    - https://github.com/amehlhase316/Kaesekuchen/pull/58
 
   **How did you contribute to Static Analysis:
 
-    - N/A
+    - I helped with adding comments in the files I was working in that we missed previously, and removed unused code
+    from the project.
  
  **What was your main contribution to the Quality Policy documentation?:
 
-    - 
+    - As a team, we discussed and decided upon no merging in of code that didn't pass Travis CI checks and making sure
+    as a developer, you resolve those issues before moving the ticket to Ready For Test status. 
  
 ## 4: Checklist for you to see if you are done
-- [] Filled out the complete form from above, all fields are filled and written in full sentences
-- [] Read the kickoff again to make sure you have all the details
-- [] User Stories that were not completed, were left in the Sprint and a copy created
-- [] Your Quality Policies are accurate and up to date
+- [X] Filled out the complete form from above, all fields are filled and written in full sentences
+- [X] Read the kickoff again to make sure you have all the details
+- [X] User Stories that were not completed, were left in the Sprint and a copy created
+- [X] Your Quality Policies are accurate and up to date
 - [] **Individual** Survey was submitted **individually** (create checkboxes below -- see Canvas to get link)
-- [] Daimi Mussey
-- [] Kyp Bellinger
-- [] Stephen Wilson
-- [] Justin Oliver
-- [] Chase Pierce
+- [X] Daimi Mussey
+- [X] Stephen Wilson
+- [X] Justin Oliver
+- [X] Chase Pierce
         
-  - [] The original of this file was copied for the next Sprint (needed for all but last Sprint where you do not need to copy it anymore)
-  - [] Basic information (part 1) for next Sprint was included (meaning Spring Planning is complete)
-  - [] All User Stories have acceptance tests
-  - [] User Stories in your new Sprint Backlog have initial tasks which are in New
-  - [] You know how to proceed
+  - [X] The original of this file was copied for the next Sprint (needed for all but last Sprint where you do not need to copy it anymore)
+  - [X] Basic information (part 1) for next Sprint was included (meaning Spring Planning is complete)
+  - [X] All User Stories have acceptance tests
+  - [X] User Stories in your new Sprint Backlog have initial tasks which are in New
+  - [X] You know how to proceed

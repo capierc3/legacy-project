@@ -13,7 +13,7 @@ import java.io.FileOutputStream;
 
 import main.java.memoranda.ui.ExceptionDialog;
 /**
- *
+ * hello, it's me.
  */
 /*$Id: Configuration.java,v 1.5 2004/10/11 08:48:21 alexeya Exp $*/
 public class Configuration {

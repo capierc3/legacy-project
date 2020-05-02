@@ -1,55 +1,63 @@
 package main.java.memoranda.gym;
 
 
+import main.java.memoranda.ui.MyScheduleManager;
+import main.java.memoranda.util.Util;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import nu.xom.*;
 
 /**
- * The AppUsers class is a data model that houses information on all application users.
+ * The AppUsers class is a data model that houses information on all application
+ * users.
  */
 
 public class AppUsers implements UserList {
 
-    private final String APP_USER_FILE_PATH = "appusers.dat";
+    private final String APP_USER_FILE_PATH = "server/appusers.xml";
     private HashMap<String, User> appUsers;
     private User activeUser;
+    private Element element;
+    private MyScheduleManager manager;
 
     /**
+<<<<<<< HEAD
      * Class constructor.  Initiates appUser collection
-     * */
+     */
     public AppUsers() {
-        appUsers = new HashMap<>();
-        User user = new StudentImpl("Johnny Karate","JK","student","Password",Belt.WHITE,
-                new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
-        UserImpl user1 = new OwnerImpl("Fancy Nancy","admin001","admin","Password",
-                Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
-        UserImpl user2 = new TrainerImpl("Country Mac","CMac","trainer","Password",
-                Belt.BLACK3,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
-        appUsers.put(user.getUserName(),user);
-        appUsers.put(user1.getUserName(),user1);
-        appUsers.put(user2.getUserName(),user2);
+        element = new Element("AppUser");
+        File usersFile = new File(APP_USER_FILE_PATH);
+        if (usersFile.exists()) {
+            try {
+                System.out.println("Users Loaded");
+                loadFromFile();
+            } catch (ParsingException | IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            appUsers = new HashMap<>();
+        }
     }
 
     /**
      * Simple getter method for User
      *
      * @param login String value of user's login
-     * @return User object from collection.  Returns null if id does not exist in collection.
+     * @return User object from collection. Returns null if id does not exist in
+     *         collection.
      */
 
     public User getUser(String login) {
-
-        if(appUsers.containsKey(login)) {
+        if (appUsers.containsKey(login)) {
             return appUsers.get(login);
         }
-
-        return null;
-
+	return null;
     }
 
     /**
@@ -59,17 +67,14 @@ public class AppUsers implements UserList {
      * @return void
      */
     public void addUser(User user) {
-
         String login = user.getUserName();
-
-        if(!appUsers.containsKey(login)){
+        if (!appUsers.containsKey(login)) {
             appUsers.put(login, user);
-
-            //TODO: Implement in Sprint 3
-            //save to file
-            //saveToFile(appUsers, APP_USER_FILE_PATH);
+            Element e = new Element("User");
+            e.appendChild(user.getContent().copy());
+            element.appendChild(e);
+            saveToFile();
         }
-
     }
 
     /**
@@ -79,8 +84,11 @@ public class AppUsers implements UserList {
      * @return void
      */
     public void removeUser(String login) {
+        if (appUsers.containsKey(login)) {
+            appUsers.remove(login);
+            saveToFile();
+        }
 
-        appUsers.remove(login);
 
     }
 
@@ -91,63 +99,99 @@ public class AppUsers implements UserList {
      */
     public int getSize() {
 
-        return appUsers.size();
+	return appUsers.size();
 
     }
 
     /**
      * Return entire collection of users
      *
-     * @return LinkedList of all users in collection.  Returns null if collection is empty.
+     * @return LinkedList of all users in collection. Returns null if collection is
+     *         empty.
      */
     public Collection<User> getAllUsers() {
 
-        if(appUsers.size() > 0) {
+        if (appUsers.size() > 0) {
             LinkedList<User> list = new LinkedList<User>();
-            appUsers.forEach((k,v) -> list.add(v));
+            appUsers.forEach((k, v) -> list.add(v));
             return list;
         }
-
         return null;
-
     }
 
     /**
+     *Verifies the password when logging in.
      *
-     * @param login User's login name
+     * @param login    User's login name
      * @param password User's super-not-so-encrypted password
      * @return true if password & login match.
      */
-    public Boolean verifyPassword(String login, String password){
-
+    public String verifyPassword(String login, String password) {
         User user = getUser(login);
-        if(user != null && user.getPassword().contentEquals(password)){
-            return true;
+        if (user == null) {
+            return "User not found";
+        } else if (user.getPassword().equals(password)) {
+            return "found";
+        } else {
+            return "Incorrect Password";
         }
-
-        return false;
     }
 
     /**
      * Returns active user
+     *
      * @return active User
      */
-    public User getActiveUser(){
+    public User getActiveUser() {
         return activeUser;
     }
 
     /**
      * Sets active user
+     *
      * @param user User object to set as active user
      */
     public void setActiveUser(User user) {
+        manager = new MyScheduleManager(user);
         activeUser = user;
+    }
+
+    public static AppUsers elmToUserList(Element el) {
+        AppUsers appUsers = new AppUsers();
+        Elements elms = el.getChildElements("User");
+        for (int i = 0; i < elms.size(); i++) {
+            appUsers.addUser(User.elmToUser(elms.get(i)));
+        }
+        return appUsers;
+    }
+
+    public Element getContext() {
+        return element;
+    }
+
+    public MyScheduleManager getManager() {
+        return manager;
+    }
+
+    public void setManager(MyScheduleManager manager) {
+        this.manager = manager;
+    }
+
+    /**
+     * Saves hashMap to file.
+     */
+    public void saveToFile() {
+        try {
+            ObjectSerializer.serializeElement(element, APP_USER_FILE_PATH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Saves hashMap to file
      *
-     * @param obj object to be saved to file
+     * @param obj       object to be saved to file
      * @param file_path file path to save file to
      */
     private void saveToFile(Object obj, String file_path) {
@@ -163,20 +207,28 @@ public class AppUsers implements UserList {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
 
+        }
     }
+
 
     /**
-     * Load object from file
-     *
-     * @param file_path file location
+     * Load object from file.
      */
-    private void loadFromFile(String file_path){
-        //read from file
-
-
-
+    private void loadFromFile() throws IOException, ParsingException {
+        appUsers = new HashMap<>();
+        Builder parser = new Builder();
+        InputStream fileInputStream = new FileInputStream(APP_USER_FILE_PATH);
+        Document readDoc = parser.build(fileInputStream);
+        populateLibrary(readDoc.getRootElement());
     }
 
+    private void populateLibrary(Element element) {
+        Elements elements = element.getChildElements("User");
+        for (int i = 0; i < elements.size(); i++) {
+            Element element1 = element.getChildElements("User").get(i).getChildElements().get(0);
+            User user = User.elmToUser(element1);
+            addUser(user);
+        }
+    }
 }

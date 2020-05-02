@@ -21,7 +21,6 @@ public class Task_77Test {
     Trainer trainer1;
     File filename;
     File secondFile;
-    Collection<Note> noteList;
     ClassList classList;
 
     String description;
@@ -35,11 +34,11 @@ public class Task_77Test {
 
     /**
      * Test setup for Trainer.
-     * @throws Exception
+     * @throws Exception if Null
      */
     @Before
     public void setUp() throws Exception {
-        noteList = null;
+        Collection<Note> noteList = null;
         classList = new ClassListImpl(new ArrayList<>());
         filename  = new File("test");
         secondFile = new File("");
@@ -54,10 +53,10 @@ public class Task_77Test {
     }
 
     /**
-     * Test of getters and setters for Trainer
+     * Test of getters and setters for Trainer.
      */
     @Test
-    public void classTest(){
+    public void classTest() {
         assertEquals("Tester Ted", trainer1.getName());
         trainer1.setName("Trainer Ted");
         assertEquals("Trainer Ted", trainer1.getName());

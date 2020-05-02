@@ -115,20 +115,6 @@ public class TaskListVersioning {
             for (int j = 0; j < tasks.size(); j++) {                                
                 Element task = tasks.get(j );
 
-//	Decided not to change the date format after all but I'm leaving this code here 
-//	in case we need it later. Ryan
-//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//
-//                Attribute startDateAttr = task.getAttribute("startDate");
-//                Date startDate = (new CalendarDate(startDateAttr.getValue(),"/")).getDate();
-//                startDateAttr.setValue(sdf.format(startDate));
-//
-//                Attribute endDateAttr = task.getAttribute("endDate");
-//                if (endDateAttr != null) {
-//                    Date endDate = (new CalendarDate(endDateAttr.getValue(),"/")).getDate();
-//                    endDateAttr.setValue(sdf.format(endDate));                    
-//                }
-                
                 Attribute parentAttr = task.getAttribute("parent");
             	if ((parentAttr == null) || (parentAttr.getValue() == "")) {
             		// no parent, do nothing here

@@ -262,16 +262,9 @@ public class AppFrame extends JFrame {
                 .getImage());
         contentPane = (JPanel) this.getContentPane();
         contentPane.setLayout(borderLayout1);
-        //this.setSize(new Dimension(800, 500));
         this.setTitle("Kaesekuchen Gym - " + CurrentProject.get().getTitle());
-
-
-        //The first section was the original version, I just commented it out
-        //and set a blank one until we can get around to it showing the correct info
-        //statusBar.setText(" Version:" + App.VERSION_INFO + " (Build "
-        //        + App.BUILD_INFO + " )");
         
-        statusBar.setText(" Version: (Build  )");
+        statusBar.setText(" Version: 1.1 (Build 3.01 )");
 
         jMenuFile.setText(Local.getString("File"));
         jMenuFileExit.setText(Local.getString("Exit"));
@@ -313,28 +306,16 @@ public class AppFrame extends JFrame {
                 jMenuHelpAbout_actionPerformed(e);
             }
         });
-        //jButton3.setIcon(image3);
         jButton3.setToolTipText(Local.getString("Help"));
         splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
         splitPane.setContinuousLayout(true);
         splitPane.setDividerSize(3);
-        //splitPane.setOneTouchExpandable(true);
         splitPane.setDividerLocation(28);
-        //projectsPanel.setMaximumSize(new Dimension(2147483647, 200));
         projectsPanel.setMinimumSize(new Dimension(10, 28));
         projectsPanel.setPreferredSize(new Dimension(10, 28));
-        /*workPanel.setMinimumSize(new Dimension(734, 300));
-         workPanel.setPreferredSize(new Dimension(1073, 300));*/
         splitPane.setDividerLocation(28);
 
-        /* jMenuFileNewPrj.setText(Local.getString("New project") + "...");
-         jMenuFileNewPrj.addActionListener(new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-         ProjectDialog.newProject();
-         }
-         });
-         */
         jMenuFileNewPrj.setAction(projectsPanel.newProjectAction);
 
         jMenuFileUnpackPrj.setText(Local.getString("Unpack project") + "...");
@@ -479,9 +460,7 @@ public class AppFrame extends JFrame {
         menuBar.add(jMenuInsert);
         menuBar.add(jMenuFormat);
         menuBar.add(jMenuGo);
-        //menuBar.add(jMenuHelp);
         this.setJMenuBar(menuBar);
-        //contentPane.add(toolBar, BorderLayout.NORTH);
         contentPane.add(statusBar, BorderLayout.SOUTH);
         contentPane.add(splitPane, BorderLayout.CENTER);
         splitPane.add(projectsPanel, JSplitPane.TOP);
@@ -502,7 +481,6 @@ public class AppFrame extends JFrame {
         jMenuInsert.add(jMenuInsertTable);
         jMenuInsert.add(jMenuInsertLink);
         jMenuInsert.add(jMenuInsertList);
-        //jMenuInsert.add(jMenuInsertSpecial);
         jMenuInsertList.add(jMenuInsertListUL);
         jMenuInsertList.add(jMenuInsertListOL);
         jMenuInsert.addSeparator();
@@ -595,23 +573,6 @@ public class AppFrame extends JFrame {
         this.workPanel.roomInfo.addActionListener(setMenusDisabled);
         this.workPanel.studentList.addActionListener(setMenusDisabled);
         this.workPanel.resources.addActionListener(setMenusDisabled);
-      
-        
-        
-
-        /*
-         * Not currently using notes, if we are, add this back in
-         * 
-         * this.workPanel.notesB.addActionListener(
-                new java.awt.event.ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        setEnabledEditorMenus(true);
-                    }
-                });*/
-
-
-        
-        
 
         Object fwo = Context.get("FRAME_WIDTH");
         Object fho = Context.get("FRAME_HEIGHT");
@@ -762,7 +723,6 @@ public class AppFrame extends JFrame {
         chooser.setDialogTitle(Local.getString("Pack project"));
         chooser.setAcceptAllFileFilterUsed(false);
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        //chooser.addChoosableFileFilter(new AllFilesFilter(AllFilesFilter.RTF));
         chooser.addChoosableFileFilter(new AllFilesFilter(AllFilesFilter.ZIP));
         // fixes XP style look cosmetical problems JVM 1.4.2 and 1.4.2_01
         chooser.setPreferredSize(new Dimension(550, 375));
@@ -819,7 +779,6 @@ public class AppFrame extends JFrame {
         chooser.setAcceptAllFileFilterUsed(false);
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.addChoosableFileFilter(new AllFilesFilter(AllFilesFilter.ZIP));
-        //chooser.addChoosableFileFilter(new AllFilesFilter(AllFilesFilter.RTF));
         // fixes XP style look cosmetical problems JVM 1.4.2 and 1.4.2_01
         chooser.setPreferredSize(new Dimension(550, 375));
 

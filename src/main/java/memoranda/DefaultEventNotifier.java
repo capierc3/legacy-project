@@ -1,10 +1,10 @@
 /**
- * DefaultEventNotifier.java Created on 10.03.2003, 21:18:02 Alex Package:
- * net.sf.memoranda
- * 
- * @author Alex V. Alishevskikh, alex@openmechanics.net Copyright (c) 2003
- *         Memoranda Team. http://memoranda.sf.net
- */
+* DefaultEventNotifier.java Created on 10.03.2003, 21:18:02 Alex Package:
+* net.sf.memoranda
+*
+* @author Alex V. Alishevskikh, alex@openmechanics.net Copyright (c) 2003
+*         Memoranda Team. http://memoranda.sf.net
+*/
 package main.java.memoranda;
 
 import main.java.memoranda.ui.EventNotificationDialog;
@@ -21,7 +21,7 @@ public class DefaultEventNotifier implements EventNotificationListener {
 	/**
 	 * @see main.java.memoranda.EventNotificationListener#eventIsOccured(main.java.memoranda.Event)
 	 */
-	public void eventIsOccured(Event ev) {		
+	public void eventIsOccured(Event ev) {
 		new EventNotificationDialog(
 			"Memoranda event",
 			ev.getTimeString(),
@@ -34,5 +34,5 @@ public class DefaultEventNotifier implements EventNotificationListener {
 		//
 	}
 
-	
+
 }
