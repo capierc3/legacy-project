@@ -46,35 +46,29 @@ I would also advise you to already fill out the Contributions section (End of sp
 
 | Date      | Attendees                              |Minutes                                                                             | Burndown Info | TravisCI info  | Additional Info  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
+| April 23  | Justin Oliver, Daimi Mussey,           | Began the sprint well, with no immediate blockers.                                 | Sprint just   | Sprint3 branch |                  |
+|           | Stephen Wilson, Chase Pierce           |                                                                                    | started.      | is passing     |                  |
 |           |                                        |                                                                                    |               |                |                  |
 |           |                                        |                                                                                    |               |                |                  |
 |           |                                        |                                                                                    |               |                |                  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
+| April 26  | Justin Oliver, Daimi Mussey,           | The individual assignment for the week seemed to inhibit the                       | Progress is   | Sprint3 branch |                  |
+|           | Stephen Wilson, Chase Pierce           | team's progress, but some good progress was made on working down                   | below capacity| is passing     |                  |
+|           |                                        | outstanding checkstyle issues.                                                     | but           |                |                  |
+|           |                                        |                                                                                    | is starting to|                |                  |
+|           |                                        |                                                                                    | plateau       |                |                  |
+|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
+| April 28  | Justin Oliver, Daimi Mussey,           | There were some difficulties around getting the build.gradle                       | Some progress | Sprint3 branch |                  |
+|           | Stephen Wilson, Chase Pierce           | file to run, but will resort to hard-coding the value this iteration               | has been made,| is passing     |                  |
+|           |                                        | if necessary.  More progress from the team was inhibited today due                 | but not much. |                |                  |
+|           |                                        | to the looming deadline for the individual assignment.                             |               |                |                  |
 |           |                                        |                                                                                    |               |                |                  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
-|           |                                        |                                                                                    |               |                |                  |
+| April 30  | Justin Oliver, Daimi Mussey,           | Progress was made at last with XML serialization, code cleanup,                    | Progress is   | Sprint3 branch |                  |
+|           | Stephen Wilson, Chase Pierce           | and UI functionality.  Assistance was asked for on US_130 to get                   | stagnant and  | is passing     |                  |
+|           |                                        | the AppUser class to load from the xml file.                                       | the team runs |                |                  |
+|           |                                        |                                                                                    | the risk of   |                |                  |
+|           |                                        |                                                                                    | not finishing.|                |                  |
 |-----------|----------------------------------------|------------------------------------------------------------------------------------|---------------|----------------|------------------|
 
 ### Meeting Summary:
@@ -241,9 +235,9 @@ I would also advise you to already fill out the Contributions section (End of sp
  
 ## 4: Checklist for you to see if you are done
 - [] Filled out the complete form from above, all fields are filled and written in full sentences
-- [] Read the kickoff again to make sure you have all the details
-- [] User Stories that were not completed, were left in the Sprint and a copy created
-- [] Your Quality Policies are accurate and up to date
+- [X] Read the kickoff again to make sure you have all the details
+- [X] User Stories that were not completed, were left in the Sprint and a copy created
+- [X] Your Quality Policies are accurate and up to date
 - [] **Individual** Survey was submitted **individually** (create checkboxes below -- see Canvas to get link)
 - [] Daimi Mussey
 - [] Kyp Bellinger
@@ -251,8 +245,8 @@ I would also advise you to already fill out the Contributions section (End of sp
 - [] Justin Oliver
 - [] Chase Pierce
         
-  - [] The original of this file was copied for the next Sprint (needed for all but last Sprint where you do not need to copy it anymore)
-  - [] Basic information (part 1) for next Sprint was included (meaning Spring Planning is complete)
-  - [] All User Stories have acceptance tests
-  - [] User Stories in your new Sprint Backlog have initial tasks which are in New
-  - [] You know how to proceed
+  - [X] The original of this file was copied for the next Sprint (needed for all but last Sprint where you do not need to copy it anymore)
+  - [X] Basic information (part 1) for next Sprint was included (meaning Spring Planning is complete)
+  - [X] All User Stories have acceptance tests
+  - [X] User Stories in your new Sprint Backlog have initial tasks which are in New
+  - [X] You know how to proceed
