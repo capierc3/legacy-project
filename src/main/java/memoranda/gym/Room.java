@@ -2,11 +2,15 @@ package main.java.memoranda.gym;
 
 import main.java.memoranda.date.CalendarDate;
 
+
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.io.File;
 import java.util.Collection;
-import main.java.memoranda.gym.ClassList;
-import main.java.memoranda.gym.GymClass;
+
+import main.java.memoranda.ui.App;
 import nu.xom.Element;
+import nu.xom.Elements;
 
 /**
  * Interface for the Room methods
@@ -72,6 +76,25 @@ public interface Room {
      * @return Element
      */
     Element getContent();
+
+    static Room elmToRoom(Element el) {
+        int num = Integer.parseInt(el.getAttributeValue("RoomNumber"));
+        ClassList classList = ClassList.elmToClassList(el.getFirstChildElement("ClassList"));
+        ArrayList<CalendarDate> classDates = new ArrayList<>();
+        Elements elms = el.getFirstChildElement("ClassDates").getChildElements();
+        File newPicture = null;
+        try {
+            newPicture = new File(App.class.getResource(el.getAttributeValue("Picture")).toURI());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < elms.size(); i++) {
+            classDates.add(new CalendarDate(elms.get(i).getLocalName()));
+        }
+        RoomImpl room = new RoomImpl(num,classList,classDates);
+        room.setPic(newPicture);
+        return room;
+    }
 
     /**
      * Method to set Picture and add picture to Element.

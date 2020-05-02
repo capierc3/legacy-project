@@ -45,6 +45,13 @@ spotbugs {
   ignoreFailures = true
 }
 
+test {
+  testLogging {
+    events "passed", "skipped", "failed"
+    exceptionFormat "full"
+  }
+}
+
 tasks.withType(com.github.spotbugs.SpotBugsTask) {
   reports {
     xml.enabled = false

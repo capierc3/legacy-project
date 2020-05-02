@@ -1,6 +1,7 @@
 package main.java.memoranda.gym;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import main.java.memoranda.Note;
@@ -10,6 +11,7 @@ import main.java.memoranda.gym.Trainer;
 import main.java.memoranda.gym.UserImpl;
 import nu.xom.Attribute;
 import nu.xom.Element;
+import nu.xom.Elements;
 
 /**
  * Interface for the trainer methods to be used
@@ -20,8 +22,9 @@ public class TrainerImpl extends UserImpl implements Trainer {
     private Collection<CalendarDate> availabilityDates;
 
     public TrainerImpl(String name, String id, String userName, String password, Belt belt, File newPicture,
-	    Collection<Note> newNoteList, ClassList newUserClasses) {
-	super(name, id, userName, password, belt, newPicture, newNoteList, newUserClasses, "Trainer");
+                       Collection<Note> newNoteList, ClassList newUserClasses) {
+        super(name, id, userName, password, belt, newPicture, newNoteList, newUserClasses, "Trainer");
+        setAvailability(new ArrayList<>());
     }
 
     /**
@@ -30,7 +33,11 @@ public class TrainerImpl extends UserImpl implements Trainer {
      * @param description
      */
     public void setDescription(String description) {
-	setAttr("Description", description);
+        if (description == null) {
+            setAttr("Description", "tbd");
+        } else {
+            setAttr("Description", description);
+        }
     }
 
     /**
@@ -46,12 +53,15 @@ public class TrainerImpl extends UserImpl implements Trainer {
      * Method to set Availability Dates in Element
      */
     public void setAvailabilityDates(Collection<CalendarDate> availableDates) {
-	if (availableDates != null) {
-	    for (CalendarDate date : availableDates) {
-		element.appendChild(date.toString());
-	    }
-	}
-
+        Element e = new Element("Available");
+        if (availableDates != null) {
+            for (CalendarDate date : availableDates) {
+                Element dateEl = new Element("Date");
+                dateEl.addAttribute(new Attribute("date",date.toString()));
+                e.appendChild(dateEl);
+            }
+            element.appendChild(e);
+        }
     }
 
     /**
