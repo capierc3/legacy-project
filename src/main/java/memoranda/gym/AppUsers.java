@@ -1,5 +1,6 @@
 package main.java.memoranda.gym;
 
+
 import main.java.memoranda.ui.MyScheduleManager;
 import main.java.memoranda.util.Util;
 
@@ -12,9 +13,9 @@ import java.util.LinkedList;
 
 import nu.xom.*;
 
-
 /**
- * The AppUsers class is a data model that houses information on all application users.
+ * The AppUsers class is a data model that houses information on all application
+ * users.
  */
 
 public class AppUsers implements UserList {
@@ -26,6 +27,7 @@ public class AppUsers implements UserList {
     private MyScheduleManager manager;
 
     /**
+<<<<<<< HEAD
      * Class constructor.  Initiates appUser collection
      */
     public AppUsers() {
@@ -47,17 +49,15 @@ public class AppUsers implements UserList {
      * Simple getter method for User
      *
      * @param login String value of user's login
-     * @return User object from collection.  Returns null if id does not exist in collection.
+     * @return User object from collection. Returns null if id does not exist in
+     *         collection.
      */
 
     public User getUser(String login) {
-
         if (appUsers.containsKey(login)) {
             return appUsers.get(login);
         }
-
-        return null;
-
+	return null;
     }
 
     /**
@@ -75,7 +75,6 @@ public class AppUsers implements UserList {
             element.appendChild(e);
             saveToFile();
         }
-
     }
 
     /**
@@ -90,6 +89,7 @@ public class AppUsers implements UserList {
             saveToFile();
         }
 
+
     }
 
     /**
@@ -99,14 +99,15 @@ public class AppUsers implements UserList {
      */
     public int getSize() {
 
-        return appUsers.size();
+	return appUsers.size();
 
     }
 
     /**
      * Return entire collection of users
      *
-     * @return LinkedList of all users in collection.  Returns null if collection is empty.
+     * @return LinkedList of all users in collection. Returns null if collection is
+     *         empty.
      */
     public Collection<User> getAllUsers() {
 
@@ -116,16 +117,16 @@ public class AppUsers implements UserList {
             return list;
         }
         return null;
-
     }
 
     /**
+     *Verifies the password when logging in.
+     *
      * @param login    User's login name
      * @param password User's super-not-so-encrypted password
      * @return true if password & login match.
      */
     public String verifyPassword(String login, String password) {
-
         User user = getUser(login);
         if (user == null) {
             return "User not found";
@@ -186,6 +187,30 @@ public class AppUsers implements UserList {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Saves hashMap to file
+     *
+     * @param obj       object to be saved to file
+     * @param file_path file path to save file to
+     */
+    private void saveToFile(Object obj, String file_path) {
+
+        try {
+            System.out.println("Saving object to file...");
+            FileOutputStream fileOutputStream = new FileOutputStream(file_path);
+            ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
+            outputStream.writeObject(obj);
+            outputStream.close();
+
+            System.out.println("Object saved to " + file_path);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
 
     /**
      * Load object from file.

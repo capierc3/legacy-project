@@ -7,7 +7,6 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,6 +19,7 @@ import main.java.memoranda.util.Util;
 
 /**
  * This is the main class for the MySchedule display in the ui.
+ * 
  * @author Chase
  *
  */
@@ -27,8 +27,6 @@ public class MySchedulePanel extends JPanel {
     MyScheduleManager manager;
     BorderLayout borderLayout1 = new BorderLayout();
     JToolBar eventsToolBar = new JToolBar();
-    //JButton historyBackB = new JButton();
-    //JButton historyForwardB = new JButton();
     JButton newClassB = new JButton();
     JButton editClassB = new JButton();
     JButton removeClassB = new JButton();
@@ -43,25 +41,29 @@ public class MySchedulePanel extends JPanel {
     JMenuItem ppAddClass = new JMenuItem();
     JMenuItem ppDropClass = new JMenuItem();
     DailyItemsPanel parentPanel = null;
-    String[] sorts = new String[]{"Date","Rank","Trainer","Name"};
+    String[] sorts = new String[] { "Date", "Rank", "Trainer", "Name" };
     JComboBox sortCombo = new JComboBox(sorts);
     JButton sortDirB = new JButton();
     String[] listTypesA;
     JComboBox listTypeBox;
-    //Early setup for UI changes based on user
-    //User user;
 
+    // Early setup for UI changes based on user
+    // User user;
 
-    MySchedulePanel(DailyItemsPanel _parentPanel) {
-
-        try {
-            parentPanel = _parentPanel;
-            jbInit();
-        }
-        catch (Exception ex) {
-            new ExceptionDialog(ex);
-        }
+    /**
+     * Main constructor for the MySchedulePanel.
+     * 
+     * @param parentPanel DailyItemsPanel
+     */
+    public MySchedulePanel(DailyItemsPanel parentPanel) {
+		try {
+	    	this.parentPanel = parentPanel;
+	    	jbInit();
+		} catch (Exception ex) {
+	    	new ExceptionDialog(ex);
+		}
     }
+
     void jbInit() throws Exception {
         manager = App.appUsers.getManager();
         eventsToolBar.setFloatable(false);
@@ -267,367 +269,287 @@ public class MySchedulePanel extends JPanel {
         }
     }
 
-//    private void editEventB_actionPerformed(ActionEvent e) {
-//        EventDialog dlg = new EventDialog(App.getFrame(), Local.getString("Event"));
-//        main.java.memoranda.Event ev =
-//            (main.java.memoranda.Event) eventsTable.getModel().getValueAt(
-//                eventsTable.getSelectedRow(),
-//                EventsTable.EVENT);
-//
-//        dlg.timeSpin.getModel().setValue(ev.getTime());
-//        /*if (new CalendarDate(ev.getTime()).equals(CalendarDate.today()))
-//            ((SpinnerDateModel)dlg.timeSpin.getModel()).setStart(new Date());
-//        else
-//        ((SpinnerDateModel)dlg.timeSpin.getModel()).setStart(CalendarDate.today().getDate());
-//        ((SpinnerDateModel)dlg.timeSpin.getModel()).setEnd(CalendarDate.tomorrow().getDate());*/
-//        dlg.textField.setText(ev.getText());
-//        int rep = ev.getRepeat();
-//        if (rep > 0) {
-//            dlg.startDate.getModel().setValue(ev.getStartDate().getDate());
-//            if (rep == EventsManager.REPEAT_DAILY) {
-//                dlg.dailyRepeatRB.setSelected(true);
-//                dlg.dailyRepeatRB_actionPerformed(null);
-//                dlg.daySpin.setValue(ev.getPeriod());
-//            }
-//            else if (rep == EventsManager.REPEAT_WEEKLY) {
-//                dlg.weeklyRepeatRB.setSelected(true);
-//                dlg.weeklyRepeatRB_actionPerformed(null);
-//		int d = ev.getPeriod() - 1;
-//		if(Configuration.get("FIRST_DAY_OF_WEEK").equals("mon")) {
-//		    d--;
-//		    if(d<0) d=6;
-//		}
-//                dlg.weekdaysCB.setSelectedIndex(d);
-//            }
-//            else if (rep == EventsManager.REPEAT_MONTHLY) {
-//                dlg.monthlyRepeatRB.setSelected(true);
-//                dlg.monthlyRepeatRB_actionPerformed(null);
-//                dlg.dayOfMonthSpin.setValue(ev.getPeriod());
-//            }
-//	    else if (rep == EventsManager.REPEAT_YEARLY) {
-//		dlg.yearlyRepeatRB.setSelected(true);
-//		dlg.yearlyRepeatRB_actionPerformed(null);
-//		dlg.dayOfMonthSpin.setValue(new Integer(ev.getPeriod()));
-//	    }
-//        if (ev.getEndDate() != null) {
-//           dlg.endDate.getModel().setValue(ev.getEndDate().getDate());
-//           dlg.enableEndDateCB.setSelected(true);
-//           dlg.enableEndDateCB_actionPerformed(null);
-//        }
-//		if(ev.getWorkingDays()) {
-//			dlg.workingDaysOnlyCB.setSelected(true);
-//		}
-//
-//        }
-//
-//        Dimension frmSize = App.getFrame().getSize();
-//        Point loc = App.getFrame().getLocation();
-//        dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x, (frmSize.height - dlg.getSize().height) / 2 + loc.y);
-//        dlg.setVisible(true);
-//        if (dlg.CANCELLED)
-//            return;
-//        EventsManager.removeEvent(ev);
-//
-//		Calendar calendar = new GregorianCalendar(Local.getCurrentLocale()); //Fix deprecated methods to get hours
-//		//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
-//		calendar.setTime(((Date)dlg.timeSpin.getModel().getValue()));//Fix deprecated methods to get hours
-//		//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
-//		int hh = calendar.get(Calendar.HOUR_OF_DAY);//Fix deprecated methods to get hours
-//		//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
-//		int mm = calendar.get(Calendar.MINUTE);//Fix deprecated methods to get hours
-//		//by (jcscoobyrs) 14-Nov-2003 at 10:24:38 AM
-//
-//        //int hh = ((Date) dlg.timeSpin.getModel().getValue()).getHours();
-//        //int mm = ((Date) dlg.timeSpin.getModel().getValue()).getMinutes();
-//        String text = dlg.textField.getText();
-//        if (dlg.noRepeatRB.isSelected())
-//   	    EventsManager.createEvent(CurrentDate.get(), hh, mm, text);
-//        else {
-//	    updateEvents(dlg,hh,mm,text);
-//	}
-//	saveEvents();
-//    }
+    private void editClassB_actionPerformed(ActionEvent e) {
+	GymClass gymClass = (GymClass) classTable.getModel().getValueAt(classTable.getSelectedRow(),
+		MyScheduleTable.EVENT);
+	editEventB_actionPerformed(e, gymClass);
+    }
 
-    private void newEventB_actionPerformed(ActionEvent e) {
-        Calendar cdate1 = CurrentDate.get().getCalendar();
-        Calendar cdate2 = CurrentDate.get().getCalendar();
-        // round down to hour
-        cdate1.set(Calendar.MINUTE,0);
-        cdate2.set(Calendar.MINUTE,0);
-        cdate2.add(Calendar.HOUR_OF_DAY,1);
-        Util.debug("Default time is " + cdate1);
-        
-    	newEventB_actionPerformed(e, cdate1.getTime(), cdate2.getTime());
-    }
-    private void editClassB_actionPerformed(ActionEvent e){
-        GymClass gymClass = (GymClass) classTable.getModel().getValueAt(
-                classTable.getSelectedRow(),
-                MyScheduleTable.EVENT);
-        editEventB_actionPerformed(e,gymClass);
-    }
     private void addClassB_actionPerformed(ActionEvent e) {
-        String msg;
-        GymClass gymClass;
+	String msg;
+	GymClass gymClass;
 
-        if(classTable.getSelectedRows().length > 1)
-            msg = Local.getString("Register for") + " " + classTable.getSelectedRows().length
-                    + " " + Local.getString("classes") + "\n" + Local.getString("Are you sure?");
-        else {
-            gymClass = (GymClass) classTable.getModel().getValueAt(
-                    classTable.getSelectedRow(),
-                    MyScheduleTable.EVENT);
-            msg = Local.getString("Register for class") + "\n'"
-                    + gymClass.getName() + "'\n" + Local.getString("Are you sure?");
-        }
+	if (classTable.getSelectedRows().length > 1) {
+	    msg = Local.getString("Register for") + " " + classTable.getSelectedRows().length + " "
+		    + Local.getString("classes") + "\n" + Local.getString("Are you sure?");
+	} else {
+	    gymClass = (GymClass) classTable.getModel().getValueAt(classTable.getSelectedRow(), MyScheduleTable.EVENT);
+	    msg = Local.getString("Register for class") + "\n'" + gymClass.getName() + "'\n"
+		    + Local.getString("Are you sure?");
+	}
 
-        int n =
-                JOptionPane.showConfirmDialog(
-                        App.getFrame(),
-                        msg,
-                        Local.getString("Register for class"),
-                        JOptionPane.YES_NO_OPTION);
-        if (n != JOptionPane.YES_OPTION){
-            return;
-        }
+	int n = JOptionPane.showConfirmDialog(App.getFrame(), msg, Local.getString("Register for class"),
+		JOptionPane.YES_NO_OPTION);
+	if (n != JOptionPane.YES_OPTION) {
+	    return;
+	}
 
-        for(int i = 0; i< classTable.getSelectedRows().length; i++) {
-            gymClass = (GymClass) classTable.getModel().getValueAt(
-                    classTable.getSelectedRows()[i], MyScheduleTable.EVENT);
-            if (gymClass.isFull()){
-                addError(gymClass,0);
-            } else if (gymClass.getRank().getValue()>manager.getUser().getBelt().getValue()){
-                addError(gymClass,1);
-            }
-            manager.addClass(gymClass);
-        }
-        classTable.getSelectionModel().clearSelection();
-        classTable.refresh();
+	for (int i = 0; i < classTable.getSelectedRows().length; i++) {
+	    gymClass = (GymClass) classTable.getModel().getValueAt(classTable.getSelectedRows()[i],
+		    MyScheduleTable.EVENT);
+	    if (gymClass.isFull()) {
+		addError(gymClass, 0);
+	    } else if (gymClass.getRank().getValue() > manager.getUser().getBelt().getValue()) {
+		addError(gymClass, 1);
+	    }
+	    manager.addClass(gymClass);
+	}
+	classTable.getSelectionModel().clearSelection();
+	classTable.refresh();
     }
+
     private void dropClassB_actionPerformed(ActionEvent e) {
-        String msg;
-        GymClass gymClass;
+	String msg;
+	GymClass gymClass;
 
-        if(classTable.getSelectedRows().length > 1)
-            msg = Local.getString("Drop") + " " + classTable.getSelectedRows().length
-                    + " " + Local.getString("Classes") + "\n" + Local.getString("Are you sure?");
-        else {
-            gymClass = (GymClass) classTable.getModel().getValueAt(
-                    classTable.getSelectedRow(),
-                    MyScheduleTable.EVENT);
-            msg = Local.getString("Drop ") + "\n'"
-                    + gymClass.getName() + "'\n" + Local.getString("Are you sure?");
-        }
+	if (classTable.getSelectedRows().length > 1) {
+	    msg = Local.getString("Drop") + " " + classTable.getSelectedRows().length + " " + Local.getString("Classes")
+		    + "\n" + Local.getString("Are you sure?");
+	} else {
+	    gymClass = (GymClass) classTable.getModel().getValueAt(classTable.getSelectedRow(), MyScheduleTable.EVENT);
+	    msg = Local.getString("Drop ") + "\n'" + gymClass.getName() + "'\n" + Local.getString("Are you sure?");
+	}
 
-        int n =
-                JOptionPane.showConfirmDialog(
-                        App.getFrame(),
-                        msg,
-                        Local.getString("Drop Class"),
-                        JOptionPane.YES_NO_OPTION);
-        if (n != JOptionPane.YES_OPTION) return;
+	int n = JOptionPane.showConfirmDialog(App.getFrame(), msg, Local.getString("Drop Class"),
+		JOptionPane.YES_NO_OPTION);
+	if (n != JOptionPane.YES_OPTION) {
+	    return;
+	}
 
-        for(int i = 0; i< classTable.getSelectedRows().length; i++) {
-            gymClass = (GymClass) classTable.getModel().getValueAt(
-                    classTable.getSelectedRows()[i], MyScheduleTable.EVENT);
-            manager.removeClass(gymClass);
-        }
-        classTable.getSelectionModel().clearSelection();
-        classTable.refresh();
+	for (int i = 0; i < classTable.getSelectedRows().length; i++) {
+	    gymClass = (GymClass) classTable.getModel().getValueAt(classTable.getSelectedRows()[i],
+		    MyScheduleTable.EVENT);
+	    manager.removeClass(gymClass);
+	}
+	classTable.getSelectionModel().clearSelection();
+	classTable.refresh();
     }
+
     private void sortBox_actionPerformed(ActionEvent e) {
-        int sort = sortCombo.getSelectedIndex();
-        String dir =  sortDirB.getToolTipText();
-        String listName = (String) listTypeBox.getSelectedItem();
-        manager.updateLists(listName,sort,dir);
-        classTable.refresh();
+	int sort = sortCombo.getSelectedIndex();
+	String dir = sortDirB.getToolTipText();
+	String listName = (String) listTypeBox.getSelectedItem();
+	manager.updateLists(listName, sort, dir);
+	classTable.refresh();
 
     }
+
     private void sortDirB_actionPerformed(ActionEvent e) {
-        if (sortDirB.getToolTipText().equalsIgnoreCase("Descending")) {
-            sortDirB.setIcon(
-                    new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/Down.png")));
-            sortDirB.setToolTipText(Local.getString("Ascending"));
-            sortBox_actionPerformed(e);
-        } else {
-            sortDirB.setIcon(
-                    new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/Up.png")));
-            sortDirB.setToolTipText(Local.getString("Descending"));
-            sortBox_actionPerformed(e);
-        }
+	if (sortDirB.getToolTipText().equalsIgnoreCase("Descending")) {
+	    sortDirB.setIcon(new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/Down.png")));
+	    sortDirB.setToolTipText(Local.getString("Ascending"));
+	    sortBox_actionPerformed(e);
+	} else {
+	    sortDirB.setIcon(new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/Up.png")));
+	    sortDirB.setToolTipText(Local.getString("Descending"));
+	    sortBox_actionPerformed(e);
+	}
     }
+
     private void listBox_actionPerformed(ActionEvent e) {
 
     }
-    void newEventB_actionPerformed(ActionEvent e, Date startDate, Date endDate) {
-    	ClassDialog dlg = new ClassDialog(App.getFrame(), Local.getString("Create  Class"));
-    	Dimension frmSize = App.getFrame().getSize();
-    	Point loc = App.getFrame().getLocation();
-    	dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x, (frmSize.height - dlg.getSize().height) / 2 + loc.y);
-    	dlg.setEventDate(startDate);
-		dlg.setVisible(true);
-    	if (dlg.CANCELLED)
-    		return;
-    	String name = dlg.textField.getText();
-        Belt rank = Belt.getBelt(dlg.beltBox.getSelectedIndex());
-        CalendarDate start = comboValueToDate((String) dlg.startTime.getSelectedItem());
-        CalendarDate end = comboValueToDate((String) dlg.endTime.getSelectedItem());
-        GymClass gymClass = new GymClassImpl(name,"Public",rank,start,end);
-        gymClass.setSize((int) dlg.sizeSpin.getValue());
-        gymClass.addTrainer((Trainer) dlg.trainerBox.getSelectedItem());
-        manager.addClass(gymClass);
-        classTable.refresh();
-    }
-    private void editEventB_actionPerformed(ActionEvent e, GymClass gymClass) {
-        ClassDialog dlg = new ClassDialog(App.getFrame(), Local.getString("Edit Class"));
-        Dimension frmSize = App.getFrame().getSize();
-        Point loc = App.getFrame().getLocation();
-        dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x, (frmSize.height - dlg.getSize().height) / 2 + loc.y);
-        dlg.setEventDate(gymClass.getStartDate().getDate());
-        dlg.textField.setText(gymClass.getName());
-        dlg.beltBox.setSelectedIndex(gymClass.getRank().getValue());
-        dlg.startTime.setSelectedIndex(findIndexValue(gymClass.getStartDate()));
-        dlg.endTime.setSelectedIndex(findIndexValue(gymClass.getEndDate()));
-        dlg.sizeSpin.setValue(gymClass.getMaxSize());
-        dlg.trainerBox.setSelectedItem(gymClass.getTrainer());
-        dlg.setVisible(true);
-        if (dlg.CANCELLED) return;
-        CalendarDate start = comboValueToDate((String) dlg.startTime.getSelectedItem());
-        CalendarDate end = comboValueToDate((String) dlg.endTime.getSelectedItem());
-        gymClass.setName(dlg.textField.getText());
-        gymClass.setRank(Belt.getBelt(dlg.beltBox.getSelectedIndex()));
-        gymClass.setSize((Integer) dlg.sizeSpin.getValue());
-        gymClass.setStartDate(start);
-        gymClass.setEndDate(end);
-        gymClass.addTrainer((Trainer) dlg.trainerBox.getSelectedItem());
-        classTable.refresh();
+
+    private void newEventB_actionPerformed(ActionEvent e) {
+	Calendar cdate1 = CurrentDate.get().getCalendar();
+	Calendar cdate2 = CurrentDate.get().getCalendar();
+	// round down to hour
+	cdate1.set(Calendar.MINUTE, 0);
+	cdate2.set(Calendar.MINUTE, 0);
+	cdate2.add(Calendar.HOUR_OF_DAY, 1);
+	Util.debug("Default time is " + cdate1);
+
+	newEventB_actionPerformed(e, cdate1.getTime(), cdate2.getTime());
     }
 
-    private int findIndexValue(CalendarDate date){
-        int value;
-        if (date.getHour()<12){
-            value = (date.getHour()-1)*4;
-            if (!date.isAM()) {
-                value += 48;
-            }
-        } else {
-            if (date.isAM()) {
-                value = 93;
-            } else {
-                value = 44;
-            }
-        }
-        if (date.getMin()==15){
-            value+=1;
-        } else if (date.getMin()==30){
-            value+=2;
-        } else if (date.getMin()==45){
-            value+=3;
-        }
-        return value;
+    void newEventB_actionPerformed(ActionEvent e, Date startDate, Date endDate) {
+	ClassDialog dlg = new ClassDialog(App.getFrame(), Local.getString("Create  Class"));
+	Dimension frmSize = App.getFrame().getSize();
+	Point loc = App.getFrame().getLocation();
+	dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x,
+		(frmSize.height - dlg.getSize().height) / 2 + loc.y);
+	dlg.setEventDate(startDate);
+	dlg.setVisible(true);
+	if (dlg.CANCELLED) {
+	    return;
+	}
+	String name = dlg.textField.getText();
+	Belt rank = Belt.getBelt(dlg.beltBox.getSelectedIndex());
+	CalendarDate start = comboValueToDate((String) dlg.startTime.getSelectedItem());
+	CalendarDate end = comboValueToDate((String) dlg.endTime.getSelectedItem());
+	GymClass gymClass = new GymClassImpl(name, "Public", rank, start, end);
+	gymClass.setSize((int) dlg.sizeSpin.getValue());
+	gymClass.addTrainer((Trainer) dlg.trainerBox.getSelectedItem());
+	manager.addClass(gymClass);
+	classTable.refresh();
+    }
+
+    private void editEventB_actionPerformed(ActionEvent e, GymClass gymClass) {
+	ClassDialog dlg = new ClassDialog(App.getFrame(), Local.getString("Edit Class"));
+	Dimension frmSize = App.getFrame().getSize();
+	Point loc = App.getFrame().getLocation();
+	dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x,
+		(frmSize.height - dlg.getSize().height) / 2 + loc.y);
+	dlg.setEventDate(gymClass.getStartDate().getDate());
+	dlg.textField.setText(gymClass.getName());
+	dlg.beltBox.setSelectedIndex(gymClass.getRank().getValue());
+	dlg.startTime.setSelectedIndex(findIndexValue(gymClass.getStartDate()));
+	dlg.endTime.setSelectedIndex(findIndexValue(gymClass.getEndDate()));
+	dlg.sizeSpin.setValue(gymClass.getMaxSize());
+	dlg.trainerBox.setSelectedItem(gymClass.getTrainer());
+	dlg.setVisible(true);
+	if (dlg.CANCELLED) {
+	    return;
+	}
+	CalendarDate start = comboValueToDate((String) dlg.startTime.getSelectedItem());
+	CalendarDate end = comboValueToDate((String) dlg.endTime.getSelectedItem());
+	gymClass.setName(dlg.textField.getText());
+	gymClass.setRank(Belt.getBelt(dlg.beltBox.getSelectedIndex()));
+	gymClass.setSize((Integer) dlg.sizeSpin.getValue());
+	gymClass.setStartDate(start);
+	gymClass.setEndDate(end);
+	gymClass.addTrainer((Trainer) dlg.trainerBox.getSelectedItem());
+	classTable.refresh();
+    }
+
+    private int findIndexValue(CalendarDate date) {
+	int value;
+	if (date.getHour() < 12) {
+	    value = (date.getHour() - 1) * 4;
+	    if (!date.isAM()) {
+		value += 48;
+	    }
+	} else {
+	    if (date.isAM()) {
+		value = 93;
+	    } else {
+		value = 44;
+	    }
+	}
+	if (date.getMin() == 15) {
+	    value += 1;
+	} else if (date.getMin() == 30) {
+	    value += 2;
+	} else if (date.getMin() == 45) {
+	    value += 3;
+	}
+	return value;
     }
 
     private void removeEventB_actionPerformed(ActionEvent e) {
-		String msg;
-		GymClass gymClass;
+	String msg;
+	GymClass gymClass;
+	if (classTable.getSelectedRows().length > 1) {
+	    msg = Local.getString("Remove") + " " + classTable.getSelectedRows().length + " "
+		    + Local.getString("Classes") + "\n" + Local.getString("Are you sure?");
+	} else {
+	    gymClass = (GymClass) classTable.getModel().getValueAt(classTable.getSelectedRow(), MyScheduleTable.EVENT);
+	    msg = Local.getString("Remove Class") + "\n'" + gymClass.getName() + "'\n"
+		    + Local.getString("Are you sure?");
+	}
 
-		if(classTable.getSelectedRows().length > 1)
-			msg = Local.getString("Remove") + " " + classTable.getSelectedRows().length
-				+ " " + Local.getString("Classes") + "\n" + Local.getString("Are you sure?");
-		else {
-			gymClass = (GymClass) classTable.getModel().getValueAt(
-                classTable.getSelectedRow(),
-                MyScheduleTable.EVENT);
-			msg = Local.getString("Remove Class") + "\n'"
-				+ gymClass.getName() + "'\n" + Local.getString("Are you sure?");
-		}
+	int n = JOptionPane.showConfirmDialog(App.getFrame(), msg, Local.getString("Remove Class"),
+		JOptionPane.YES_NO_OPTION);
+	if (n != JOptionPane.YES_OPTION) {
+	    return;
+	}
 
-        int n =
-            JOptionPane.showConfirmDialog(
-                App.getFrame(),
-                msg,
-                Local.getString("Remove Class"),
-                JOptionPane.YES_NO_OPTION);
-        if (n != JOptionPane.YES_OPTION) return;
-
-        for(int i = 0; i< classTable.getSelectedRows().length; i++) {
-			gymClass = (GymClass) classTable.getModel().getValueAt(
-                  classTable.getSelectedRows()[i], MyScheduleTable.EVENT);
-        manager.removeClass(gymClass);
-		}
-        classTable.getSelectionModel().clearSelection();
-        classTable.refresh();
+	for (int i = 0; i < classTable.getSelectedRows().length; i++) {
+	    gymClass = (GymClass) classTable.getModel().getValueAt(classTable.getSelectedRows()[i],
+		    MyScheduleTable.EVENT);
+	    manager.removeClass(gymClass);
+	}
+	classTable.getSelectionModel().clearSelection();
+	classTable.refresh();
     }
 
     class PopupListener extends MouseAdapter {
 
-        public void mouseClicked(MouseEvent e) {
-            if ((e.getClickCount() == 2) && (classTable.getSelectedRow() > -1)) {
-                //editEventB_actionPerformed(null);
-            }
-        }
-        public void mousePressed(MouseEvent e) {
-            maybeShowPopup(e);
-        }
-        public void mouseReleased(MouseEvent e) {
-            maybeShowPopup(e);
-        }
-        private void maybeShowPopup(MouseEvent e) {
-            if (e.isPopupTrigger()) {
-                classPPMenu.show(e.getComponent(), e.getX(), e.getY());
-            }
-        }
+	public void mouseClicked(MouseEvent e) {
+	    if ((e.getClickCount() == 2) && (classTable.getSelectedRow() > -1)) {
+		// editEventB_actionPerformed(null);
+	    }
+	}
+
+	public void mousePressed(MouseEvent e) {
+	    maybeShowPopup(e);
+	}
+
+	public void mouseReleased(MouseEvent e) {
+	    maybeShowPopup(e);
+	}
+
+	private void maybeShowPopup(MouseEvent e) {
+	    if (e.isPopupTrigger()) {
+	    	classPPMenu.show(e.getComponent(),e.getX(),e.getY());
+	    }
+	}
 
     }
 
     private void ppEditEvent_actionPerformed(ActionEvent e) {
-        editClassB_actionPerformed(e);
+	editClassB_actionPerformed(e);
     }
+
     private void ppRemoveEvent_actionPerformed(ActionEvent e) {
-        removeEventB_actionPerformed(e);
+	removeEventB_actionPerformed(e);
     }
+
     private void ppNewEvent_actionPerformed(ActionEvent e) {
-        newEventB_actionPerformed(e);
-    }
-    private void ppAddClass_actionPerformed(ActionEvent e){
-        addClassB_actionPerformed(e);
-    }
-    private void ppDropClass_actionPerformed(ActionEvent e){
-        dropClassB_actionPerformed(e);
+	newEventB_actionPerformed(e);
     }
 
-    private CalendarDate comboValueToDate(String s){
-        CalendarDate date = new CalendarDate();
-        Calendar date1 = date.getCalendar();
-        String[] timeString = s.split(":");
-        int hour = Integer.parseInt(timeString[0]);
-        int mins = Integer.parseInt(timeString[1].split(" ")[0]);
-        int amPm;
-        if (timeString[1].split(" ")[1].equalsIgnoreCase("AM")){
-            amPm = Calendar.AM;
-        } else {
-            amPm = Calendar.PM;
-        }
-        if (hour == 12){
-            hour = 0;
-        }
-        date1.set(Calendar.HOUR,hour);
-        date1.set(Calendar.MINUTE, mins);
-        date1.set(Calendar.AM_PM,amPm);
-        date = new CalendarDate(date1);
-        return date;
+    private void ppAddClass_actionPerformed(ActionEvent e) {
+	addClassB_actionPerformed(e);
     }
 
-    private void addError(GymClass gymClass, int errorNum){
-        String msg;
-        String msg2;
-        if (errorNum == 0){
-            msg = "Sorry, "+gymClass.getName()+" is full.";
-            msg2 = "Class Full";
-        } else {
-            msg = "Sorry, "+gymClass.getRank().name() + " belt needed for this class";
-            msg2 = "Not high enough Belt";
-        }
-        JOptionPane.showMessageDialog(null,msg,msg2,JOptionPane.INFORMATION_MESSAGE);
+    private void ppDropClass_actionPerformed(ActionEvent e) {
+	dropClassB_actionPerformed(e);
+    }
+
+    private CalendarDate comboValueToDate(String s) {
+	CalendarDate date = new CalendarDate();
+	Calendar date1 = date.getCalendar();
+	String[] timeString = s.split(":");
+	int hour = Integer.parseInt(timeString[0]);
+	int amPm;
+	if (timeString[1].split(" ")[1].equalsIgnoreCase("AM")) {
+	    amPm = Calendar.AM;
+	} else {
+	    amPm = Calendar.PM;
+	}
+	if (hour == 12) {
+	    hour = 0;
+	}
+	int mins = Integer.parseInt(timeString[1].split(" ")[0]);
+	date1.set(Calendar.HOUR, hour);
+	date1.set(Calendar.MINUTE, mins);
+	date1.set(Calendar.AM_PM, amPm);
+	date = new CalendarDate(date1);
+	return date;
+    }
+
+    private void addError(GymClass gymClass, int errorNum) {
+	String msg;
+	String msg2;
+	if (errorNum == 0) {
+	    msg = "Sorry, " + gymClass.getName() + " is full.";
+	    msg2 = "Class Full";
+	} else {
+	    msg = "Sorry, " + gymClass.getRank().name() + " belt needed for this class";
+	    msg2 = "Not high enough Belt";
+	}
+	JOptionPane.showMessageDialog(null, msg, msg2, JOptionPane.INFORMATION_MESSAGE);
     }
 
     private enum Lists {
@@ -635,19 +557,16 @@ public class MySchedulePanel extends JPanel {
     }
 
     public enum Sorts {
-        DATE(0),
-        RANK(1),
-        TRAINER(2),
-        NAME(3);
+	DATE(0), RANK(1), TRAINER(2), NAME(3);
 
-        private int value;
+	private int value;
 
-        private Sorts(int i){
-            value = i;
-        }
+	private Sorts(int i) {
+	    value = i;
+	}
 
-        public int getValue(){
-            return value;
-        }
+	public int getValue() {
+	    return value;
+	}
     }
 }

@@ -1,7 +1,13 @@
 package test.java;
 
 import main.java.memoranda.date.CalendarDate;
-import main.java.memoranda.gym.*;
+import main.java.memoranda.gym.GymClass;
+import main.java.memoranda.gym.TrainerImpl;
+import main.java.memoranda.gym.StudentImpl;
+import main.java.memoranda.gym.Belt;
+import main.java.memoranda.gym.ClassListImpl;
+import main.java.memoranda.gym.GymClassImpl;
+import main.java.memoranda.gym.User;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +17,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Black box testing for the Trainer class
+ * Black box testing for the Trainer class.
  */
 public class Task_77BlackBox {
 
@@ -22,15 +28,17 @@ public class Task_77BlackBox {
     GymClass gymClass2;
 
     /**
-     * sets up the vars for testing
+     * sets up the vars for testing.
      */
     @Before
     public void setUp() {
         trainer1 = new TrainerImpl("Marky Mark","MM2","MarkyMark89","Oh_Hi_Mark",
                 Belt.BLACK3,new File(""),new ArrayList<>(),
                 new ClassListImpl(new ArrayList<>()));
-        gymClass1 = new GymClassImpl("Test","Public", Belt.BLUE,new CalendarDate(),new CalendarDate());
-        gymClass2 = new GymClassImpl("Test","Public", Belt.BLUE,CalendarDate.tomorrow(),CalendarDate.tomorrow());
+        gymClass1 = new GymClassImpl("Test","Public", 
+                Belt.BLUE,new CalendarDate(),new CalendarDate());
+        gymClass2 = new GymClassImpl("Test","Public", 
+                Belt.BLUE,CalendarDate.tomorrow(),CalendarDate.tomorrow());
         student1 = new StudentImpl("Ben Affleck","BA1","Batfleck16","Martha!!",
                 Belt.YELLOW,new File(""),new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
     }

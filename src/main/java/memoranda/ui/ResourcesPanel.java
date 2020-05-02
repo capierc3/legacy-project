@@ -48,5 +48,4 @@ public class ResourcesPanel extends JPanel {
                 "Coming soon....While you wait, " + "Can I offer you an egg in this trying time?", "Add Resource",
                 JOptionPane.PLAIN_MESSAGE);
     }
-
 }

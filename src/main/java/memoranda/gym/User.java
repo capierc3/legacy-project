@@ -1,6 +1,7 @@
 package main.java.memoranda.gym;
+
 import main.java.memoranda.date.CalendarDate;
-import main.java.memoranda.gym.ClassList;
+
 import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -11,54 +12,78 @@ import nu.xom.Element;
 import nu.xom.Elements;
 
 /**
- * Interface for the User methods which will be extended to Trainer, Student and Owner
+ * Interface for the User methods which will be extended to Trainer, Student and
+ * Owner
+ * 
  * @author Chase
  */
 public interface User {
 
     /**
      * Method to set NoteList in Element.
+     * 
      * @param noteList
      */
     void setNoteList(Collection<Note> noteList);
 
     /**
      * Method to set ClassList in Element.
+     * 
      * @param classList
      */
     void setClassList(ClassList classList);
 
     /**
      * Method to set picture to filename in Element.
+     * 
      * @param fileName
      */
     void setPicture(File fileName);
 
-    //All pretty basic getters and setters
+    // All pretty basic getters and setters
     String getName();
+
     void setName(String newName);
+
     String getID();
+
     void setID(String newId);
+
     String getUserName();
+
     void setUserName(String newUserName);
+
     String getPassword();
+
     void setPassword(String newPassword);
+
     Belt getBelt();
+
     void setBelt(Belt newBelt);
+
     File getPic();
+
     void setPic(File newPicture);
+
     Collection getNotes();
+
     void addNote(Note note);
 
     /**
-     * Returns a ClassList filled with any events for that day, trainers and owners will see a list of classes they teach,
-     * Students see ones they are registered for.
+     * Returns a ClassList filled with any events for that day, trainers and owners
+     * will see a list of classes they teach, Students see ones they are registered
+     * for.
+     * 
      * @return ClassList
      */
     ClassList getTodaysEvents();
+
     ClassList getAllClasses();
+
     void addClass(GymClass gymClass);
+
     void removeClass(GymClass gymClass);
+
     Element getContent();
 
     static User elmToUser(Element el) {

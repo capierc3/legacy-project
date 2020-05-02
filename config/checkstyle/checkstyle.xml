@@ -58,6 +58,7 @@
             <property name="allowEmptyMethods" value="true"/>
             <property name="allowEmptyTypes" value="true"/>
             <property name="allowEmptyLoops" value="true"/>
+            <property name="tokens" value="LITERAL_SWITCH"/>
             <message key="ws.notFollowed"
              value="WhitespaceAround: ''{0}'' is not followed by whitespace. Empty blocks may only be represented as '{}' when not part of a multi-block statement (4.1.3)"/>
              <message key="ws.notPreceded"
@@ -106,9 +107,6 @@
              value="Package name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="MemberName">
-            <property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9]*$"/>
-            <message key="name.invalidPattern"
-             value="Member name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="ParameterName">
             <property name="format" value="^[a-z]([a-z0-9][a-zA-Z0-9]*)?$"/>
@@ -147,12 +145,12 @@
         </module>
         <module name="AbbreviationAsWordInName">
             <property name="ignoreFinal" value="false"/>
-            <property name="allowedAbbreviationLength" value="1"/>
+            <property name="allowedAbbreviationLength" value="10"/>
         </module>
         <module name="OverloadMethodsDeclarationOrder"/>
         <module name="MethodParamPad"/>
         <module name="NoWhitespaceBefore">
-          <property name="tokens" value="COMMA, SEMI, POST_INC, POST_DEC, DOT, ELLIPSIS, METHOD_REF"/>
+            <property name="tokens" value="ELLIPSIS"/>
             <property name="allowLineBreaks" value="true"/>
         </module>
         <module name="ParenPad"/>
@@ -173,6 +171,7 @@
         <module name="JavadocTagContinuationIndentation"/>
         <module name="SummaryJavadoc">
             <property name="forbiddenSummaryFragments" value="^@return the *|^This method returns |^A [{]@code [a-zA-Z0-9]+[}]( is a )"/>
+            <property name="period" value=""/>
         </module>
         <module name="JavadocParagraph"/>
         <module name="AtclauseOrder">

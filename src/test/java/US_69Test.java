@@ -8,21 +8,21 @@
  * 
  * 
  */
+
 package test.java;
 
-import static org.junit.Assert.*;
+
 
 import main.java.memoranda.gym.Belt;
 import main.java.memoranda.gym.ClassListImpl;
 import main.java.memoranda.gym.Trainer;
 import main.java.memoranda.gym.TrainerImpl;
-import main.java.memoranda.ui.*;
+import main.java.memoranda.ui.TrainerCardPanel;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 
-import java.io.File;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class US_69Test {
@@ -32,8 +32,11 @@ public class US_69Test {
     Trainer bruce;
     TrainerCardPanel card;
 
+    /**
+     * Sets up before the test is ran.
+     */
     @Before
-    public void setUp(){
+    public void setUp() {
         bruce = new TrainerImpl(name,"",name,"", belt,
                     null, new ArrayList<>(),new ClassListImpl(new ArrayList<>()));
         bruce.setDescription(fact);

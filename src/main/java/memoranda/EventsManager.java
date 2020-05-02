@@ -21,9 +21,6 @@ import nu.xom.Elements;
 import nu.xom.ParentNode;
 
 public class EventsManager {
-/*	public static final String NS_JNEVENTS =
-		"http://www.openmechanics.org/2003/jnotes-events-file";
-*/
 	public static final int NO_REPEAT = 0;
 	public static final int REPEAT_DAILY = 1;
 	public static final int REPEAT_WEEKLY = 2;
@@ -205,21 +202,12 @@ public class EventsManager {
 			// ignore this event if it's a 'only working days' event and today is weekend.
 			if (ev.getWorkingDays() && (date.getCalendar().get(Calendar.DAY_OF_WEEK) == 1 ||
 					date.getCalendar().get(Calendar.DAY_OF_WEEK) == 7)) continue;
-			// ---
-			/*
-			 * /if ( ((date.after(ev.getStartDate())) &&
-			 * (date.before(ev.getEndDate()))) ||
-			 * (date.equals(ev.getStartDate()))
-			 */
-			//System.out.println(date.inPeriod(ev.getStartDate(),
-			// ev.getEndDate()));
 			if (date.inPeriod(ev.getStartDate(), ev.getEndDate())) {
 				if (ev.getRepeat() == REPEAT_DAILY) {
 					int n = date.getCalendar().get(Calendar.DAY_OF_YEAR);
 					int ns =
 							ev.getStartDate().getCalendar().get(
 									Calendar.DAY_OF_YEAR);
-					//System.out.println((n - ns) % ev.getPeriod());
 					if ((n - ns) % ev.getPeriod() == 0)
 						v.add(ev);
 				} else if (ev.getRepeat() == REPEAT_WEEKLY) {
@@ -232,7 +220,6 @@ public class EventsManager {
 						v.add(ev);
 				} else if (ev.getRepeat() == REPEAT_YEARLY) {
 					int period = ev.getPeriod();
-					//System.out.println(date.getCalendar().get(Calendar.DAY_OF_YEAR));
 					if ((date.getYear() % 4) == 0
 							&& date.getCalendar().get(Calendar.DAY_OF_YEAR) > 60)
 						period++;
@@ -552,54 +539,4 @@ public class EventsManager {
 			return dEl;
 		}
 	}
-/*
-	static class EventsVectorSorter {
-
-		private static Vector keys = null;
-
-		private static int toMinutes(Object obj) {
-			Event ev = (Event) obj;
-			return ev.getHour() * 60 + ev.getMinute();
-		}
-
-		private static void doSort(int L, int R) { // Hoar's QuickSort
-			int i = L;
-			int j = R;
-			int x = toMinutes(keys.get((L + R) / 2));
-			Object w = null;
-			do {
-				while (toMinutes(keys.get(i)) < x) {
-					i++;
-				}
-				while (x < toMinutes(keys.get(j))) {
-					j--;
-				}
-				if (i <= j) {
-					w = keys.get(i);
-					keys.set(i, keys.get(j));
-					keys.set(j, w);
-					i++;
-					j--;
-				}
-			}
-			while (i <= j);
-			if (L < j) {
-				doSort(L, j);
-			}
-			if (i < R) {
-				doSort(i, R);
-			}
-		}
-
-		public static void sort(Vector theKeys) {
-			if (theKeys == null)
-				return;
-			if (theKeys.size() <= 0)
-				return;
-			keys = theKeys;
-			doSort(0, keys.size() - 1);
-		}
-
-	}
-*/
 }

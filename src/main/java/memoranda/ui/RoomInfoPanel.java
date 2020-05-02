@@ -1,4 +1,4 @@
-/* 
+/** 
  * This class is designed to display a panel and show the appropriate info when the Room Info button is clicked. 
  * It used the resources panel as an original Source
  * 
@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class RoomInfoPanel extends JPanel {
+
     TitledBorder title = BorderFactory.createTitledBorder("KAESEKUCHEN ROOMS");
     FlowLayout flowlayout = new FlowLayout();
 
@@ -45,5 +46,4 @@ public class RoomInfoPanel extends JPanel {
         }
         this.setBorder(title);
     }
-
 }

@@ -81,14 +81,6 @@ public interface Project {
      * @return
      */
     int getStatus();
-            
-    //int getProgress();
-    
-    //TaskList getTaskList();
-    
-    //NoteList getNoteList();
-    
-    //ResourcesList getResourcesList();
 
     /**
      * Method to freeze a project

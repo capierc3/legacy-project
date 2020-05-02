@@ -1,17 +1,13 @@
 package test.java;
 
 import main.java.memoranda.gym.*;
-import org.junit.*;
 
 import java.io.File;
 import java.util.ArrayList;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -52,6 +48,7 @@ public class Task93_Whitebox {
     @After
     public void tearDown() throws Exception {
     }
+
 
     //@Test
     public void verifyUserAddition(){
