@@ -3,6 +3,8 @@ package main.java.memoranda.gym;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.util.Collection;
+import java.util.regex.Matcher;
+
 import main.java.memoranda.gym.ClassList;
 import main.java.memoranda.Note;
 import main.java.memoranda.date.CalendarDate;
@@ -64,24 +66,29 @@ public class UserImpl implements User {
      * @param classList
      */
     public void setClassList(ClassList classList) {
-	if (classList != null) {
-	    element.appendChild(userClasses.getContent().copy());
-	}
+        if(classList != null) {
+            Element e = new Element("ClassList");
+            e.appendChild(userClasses.getContent().copy());
+            element.appendChild(e);
+        }
     }
 
     /**
      * Method to set the file for picture in Element.
      */
     public void setPicture(File fileName) {
-	if (fileName == null) {
-	    try {
-		fileName = new File(this.getClass().getResource("/ui/icons/nunchuckNorris.png").toURI());
-	    } catch (URISyntaxException e) {
-		e.printStackTrace();
-	    }
-	}
-	picture = fileName;
-	setAttr("Picture", fileName.getPath());
+        if (fileName == null) {
+            try {
+                fileName = new File(this.getClass().getResource("/ui/icons/nunchuckNorris.png").toURI());
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+        picture = fileName;
+
+        String[] pathArray = fileName.getPath().split(Matcher.quoteReplacement(System.getProperty("file.separator")));
+        String path = "/ui/icons/" + pathArray[pathArray.length - 1];
+        setAttr("Picture",path);
     }
 
     /**

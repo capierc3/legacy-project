@@ -1,10 +1,15 @@
 package main.java.memoranda.ui;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.gym.*;
+
+import nu.xom.*;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+
 
 /**
  * Class to manage adding and removing classes in the MySchedulePanel.
@@ -13,6 +18,8 @@ import main.java.memoranda.gym.*;
  */
 public class MyScheduleManager {
 
+
+    private final String FILE_PATH = "server/GymClasses/";
     private ClassList allClasses;
     private ClassList myStudentClasses;
     private ClassList myTeachingClasses;
@@ -22,17 +29,20 @@ public class MyScheduleManager {
     /**
      * main constructor for the Manager.
      */
-    MyScheduleManager(ClassList list, User user) {
-	this.user = user;
-	allClasses = list;
-	fillAllClasses(0, "Ascending");
-	if (this.user instanceof Student) {
-	    fillStudentClasses(0, "Ascending");
-	} else if (this.user instanceof Trainer) {
-	    fillTeachingClasses(0, "Ascending");
-	}
-	shownList = allClasses;
-
+    public MyScheduleManager(User user){
+        this.user = user;
+        allClasses = new ClassListImpl(new ArrayList<>());
+        try {
+            fillAllClasses(0, "Ascending");
+            if (user instanceof Student) {
+                fillStudentClasses(0, "Ascending");
+            } else if (user instanceof Trainer) {
+                fillTeachingClasses(0, "Ascending");
+            }
+        }catch (IOException | ParsingException e) {
+            e.printStackTrace();
+        }
+        shownList = allClasses;
     }
 
     /**
@@ -42,14 +52,18 @@ public class MyScheduleManager {
      * @param sort int
      * @param dir  String
      */
-    void updateLists(String list, int sort, String dir) {
-	if (list.equalsIgnoreCase("All Classes")) {
-	    fillAllClasses(sort, dir);
-	} else if (list.equalsIgnoreCase("Teaching")) {
-	    fillTeachingClasses(sort, dir);
-	} else {
-	    fillStudentClasses(sort, dir);
-	}
+    void updateLists(String list, int sort, String dir){
+        if (list.equalsIgnoreCase("All Classes")){
+            try {
+                fillAllClasses(sort, dir);
+            } catch (IOException | ParsingException e) {
+                e.printStackTrace();
+            }
+        } else if (list.equalsIgnoreCase("Teaching")){
+            fillTeachingClasses(sort,dir);
+        } else {
+            fillStudentClasses(sort,dir);
+        }
     }
 
     /**
@@ -60,21 +74,21 @@ public class MyScheduleManager {
      * @return ClassList
      */
     private void fillStudentClasses(int sort, String dir) {
-	if (user instanceof Student) {
-	    myStudentClasses = user.getAllClasses();
-	} else if (user instanceof Trainer) {
-	    myStudentClasses = new ClassListImpl(new ArrayList<>());
-	    for (GymClass gymClass : user.getAllClasses().getAllClasses()) {
-		boolean notTrainer = true;
-		if (gymClass.getTrainer().getName().equalsIgnoreCase(user.getName())) {
-		    notTrainer = false;
+		if (user instanceof Student) {
+	    	myStudentClasses = user.getAllClasses();
+		} else if (user instanceof Trainer) {
+			myStudentClasses = new ClassListImpl(new ArrayList<>());
+			for (GymClass gymClass : user.getAllClasses().getAllClasses()) {
+				boolean notTrainer = true;
+				if (gymClass.getTrainer().getName().equalsIgnoreCase(user.getName())) {
+					notTrainer = false;
+				}
+				if (notTrainer) {
+					myStudentClasses.addClass(gymClass);
+				}
+			}
 		}
-		if (notTrainer) {
-		    myStudentClasses.addClass(gymClass);
-		}
-	    }
-	}
-	sortList(myStudentClasses, sort, dir);
+		sortList(myStudentClasses, sort, dir);
     }
 
     /**
@@ -101,24 +115,18 @@ public class MyScheduleManager {
      * @param dir  String
      * @return ClassList
      */
-    private void fillAllClasses(int sort, String dir) {
-	// need some way to pull saved classes
-	GymClass gymClass1 = new GymClassImpl("Kicking 101", "Public", Belt.WHITE,
-		new CalendarDate(18, 3, 2020, 7, 0, false), new CalendarDate(18, 3, 2020, 7, 30, false));
-	gymClass1.setSize(3);
-	gymClass1.addTrainer((Trainer) App.appUsers.getUser("trainer"));
-	GymClass gymClass2 = new GymClassImpl("Kicking 202", "Public", Belt.YELLOW,
-		new CalendarDate(18, 3, 2020, 8, 0, false), new CalendarDate(18, 3, 2020, 8, 30, false));
-	gymClass2.setSize(20);
-	gymClass2.addTrainer((Trainer) App.appUsers.getUser("trainer"));
-	GymClass gymClass3 = new GymClassImpl("One on One with Mac", "Private", Belt.WHITE,
-		new CalendarDate(18, 3, 2020, 10, 0, false), new CalendarDate(18, 3, 2020, 10, 30, false));
-	gymClass3.setSize(0);
-	gymClass3.addTrainer((Trainer) App.appUsers.getUser("trainer"));
-	allClasses.addClass(gymClass1);
-	allClasses.addClass(gymClass2);
-	allClasses.addClass(gymClass3);
-	sortList(allClasses, sort, dir);
+    private void fillAllClasses(int sort,String dir) throws IOException, ParsingException {
+        Builder parser;
+        File userFile = new File("server/GymClasses");
+        if (userFile.exists() && userFile.isDirectory()) {
+            for (int i = 0; i < userFile.listFiles().length; i++) {
+                parser = new Builder();
+                InputStream fileInputStream = new FileInputStream(userFile.listFiles()[i]);
+                Document readDoc = parser.build(fileInputStream);
+                allClasses.addClass(GymClass.elmToGymClass(readDoc.getRootElement()));
+            }
+            sortList(allClasses,sort,dir);
+        }
     }
 
     /**
@@ -129,18 +137,21 @@ public class MyScheduleManager {
      * @return boolean
      */
     public boolean addClass(GymClass gymClass) {
-	if (user instanceof Student) {
-	    if (!gymClass.isFull()) {
-		myStudentClasses.addClass(gymClass);
-		gymClass.addStudent((Student) user);
-		return true;
-	    } else {
-		return false;
-	    }
-	} else {
-	    allClasses.addClass(gymClass);
-	    return true;
-	}
+        if (user instanceof Student){
+            if (!gymClass.isFull()) {
+                myStudentClasses.addClass(gymClass);
+                App.appUsers.getActiveUser().addClass(gymClass);
+                gymClass.addStudent((Student) user);
+                save();
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            allClasses.addClass(gymClass);
+            save();
+            return true;
+        }
     }
 
     /**
@@ -227,6 +238,16 @@ public class MyScheduleManager {
 	return user;
     }
 
+    public void save() {
+        for (GymClass gymClass:allClasses.getAllClasses()) {
+            try {
+                ObjectSerializer.serializeElement(gymClass.getContent(),FILE_PATH + gymClass.getID());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     /**
      * class to sort by date.
      */
@@ -307,22 +328,21 @@ public class MyScheduleManager {
      */
     private static class TrainerCompare implements Comparator<GymClass> {
 
-	private boolean as;
+		private boolean as;
 
-	TrainerCompare(boolean as) {
+		TrainerCompare(boolean as) {
 	    this.as = as;
 	}
 
-	@Override
-	public int compare(GymClass c1, GymClass c2) {
-	    int value;
-	    if (as) {
-		value = c1.getTrainer().getName().compareTo(c2.getTrainer().getName());
-	    } else {
-		value = c1.getTrainer().getName().compareTo(c2.getTrainer().getName()) * -1;
-	    }
+		@Override
+		public int compare(GymClass c1, GymClass c2) {
+	    	int value;
+	    	if (as) {
+				value = c1.getTrainer().getName().compareTo(c2.getTrainer().getName());
+	    	} else {
+				value = c1.getTrainer().getName().compareTo(c2.getTrainer().getName()) * -1;
+	    	}
 	    return value;
-	}
+		}
     }
-
 }

@@ -12,6 +12,7 @@ import javax.swing.table.TableCellRenderer;
 import main.java.memoranda.EventsManager;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
+import main.java.memoranda.gym.AppUsers;
 import main.java.memoranda.gym.GymClass;
 import main.java.memoranda.util.Local;
 
@@ -23,20 +24,19 @@ public class MyScheduleTable extends JTable {
     public static final int EVENT = 100;
     public static final int EVENT_ID = 101;
 
-    Vector events = new Vector();
     MyScheduleManager manager;
     ArrayList<GymClass> classList;
 
     /**
      * Constructor for EventsTable.
      */
-    MyScheduleTable(MyScheduleManager manager) {
-	super();
-	this.manager = manager;
-	setModel(new ClassTableModel());
-	initTable(CurrentDate.get());
-	this.setShowGrid(false);
-	CurrentDate.addDateListener(this::initTable);
+    MyScheduleTable() {
+        super();
+        this.manager = App.appUsers.getManager();
+        setModel(new ClassTableModel());
+        initTable(CurrentDate.get());
+        this.setShowGrid(false);
+        CurrentDate.addDateListener(this::initTable);
     }
 
     /**
@@ -45,10 +45,9 @@ public class MyScheduleTable extends JTable {
      * @param d CalendarDate
      */
     void initTable(CalendarDate d) {
-	events = (Vector) EventsManager.getEventsForDate(d);
-	classList = manager.getDaysClasses(d);
-	clearSelection();
-	updateUI();
+        classList = manager.getDaysClasses(d);
+        clearSelection();
+        updateUI();
     }
 
     /**

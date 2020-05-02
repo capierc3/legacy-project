@@ -4,7 +4,6 @@ import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.util.Util;
 import nu.xom.Attribute;
 import nu.xom.Element;
-import nu.xom.Elements;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -57,6 +56,10 @@ public class GymClassImpl implements GymClass {
 	this(name, type, rank);
 	setStartDate(startDate);
 	setEndDate(endDate);
+    }
+
+    public GymClassImpl(Element el) {
+        this.el = el;
     }
 
     @Override
@@ -243,36 +246,33 @@ public class GymClassImpl implements GymClass {
     }
 
     private void setAttr(String a, String value) {
-	Attribute attr = el.getAttribute(a);
-	if (attr == null)
-	    el.addAttribute(new Attribute(a, value));
-	else
-	    attr.setValue(value);
+        Attribute attr = el.getAttribute(a);
+        if (attr == null)
+            el.addAttribute(new Attribute(a, value));
+        else
+            attr.setValue(value);
     }
 
-    // TODO Need room class to write methods or should be public static methods in
-    // RoomImpl
-    private Room attrToRoom(Element room) {
-	if (room == null) {
-	    return null;
-	}
-	return new RoomImpl(Integer.parseInt(room.getAttributeValue("RoomNumber")),
-		new ClassListImpl(new ArrayList<>()), new ArrayList<>());
+    private Room attrToRoom(Element room){
+        if (room == null){
+            return null;
+        }
+        return new RoomImpl(Integer.parseInt(room.getAttributeValue("RoomNumber")),
+                new ClassListImpl(new ArrayList<>()),
+                new ArrayList<>());
     }
-
-    private Trainer elmToTrainer(Element el) {
-	if (el != null) {
-	    return new TrainerImpl(el.getAttributeValue("Name"), el.getAttributeValue("Id"),
-		    el.getAttributeValue("UserName"), el.getAttributeValue("Password"),
-		    Belt.getBelt(Integer.parseInt(el.getAttributeValue("Rank"))), new File(""), new ArrayList<>(),
-		    new ClassListImpl(new ArrayList<>()));
-	} else {
-	    return null;
-	}
+    private Trainer elmToTrainer(Element el){
+        if (el!=null) {
+            return new TrainerImpl(el.getAttributeValue("Name"),
+                    el.getAttributeValue("Id"),
+                    el.getAttributeValue("UserName"),
+                    el.getAttributeValue("Password"),
+                    Belt.getBelt(Integer.parseInt(el.getAttributeValue("Rank"))),
+                    new File(""),
+                    new ArrayList<>(),
+                    new ClassListImpl(new ArrayList<>()));
+        } else {
+            return null;
+        }
     }
-    // Todo: need to turn elements into a ClassList
-//    private UserList elmsToStudentList(Elements els){
-//        return null;
-//    }
-
 }

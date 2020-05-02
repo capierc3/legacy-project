@@ -1,8 +1,6 @@
 package main.java.memoranda.ui;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Calendar;
 
 import javax.swing.*;
@@ -23,6 +21,7 @@ public class App {
 
 	//keep state of AppUser
 	static AppUsers appUsers = new AppUsers();
+	static RoomManager roomManager = new RoomManager();
 
 	// boolean packFrame = false;
 	/**Main App frame**/
@@ -159,6 +158,16 @@ public class App {
 	public static void closeWindow() {
 		if (frame == null)
 			return;
+		if (appUsers.getManager() != null) {
+			appUsers.getManager().save();
+		}
+		if (appUsers != null) {
+			appUsers.saveToFile();
+		}
+		if (roomManager != null) {
+			roomManager.saveRooms();
+		}
+
 		frame.dispose();
 		System.exit(0);
 	}
