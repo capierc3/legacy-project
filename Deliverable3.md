@@ -160,31 +160,39 @@ I would also advise you to already fill out the Contributions section (End of sp
 
     - 
  
- #### Team member Justin Oliver:
+#### Team member Justin Oliver:
    **Links to GitHub commits with main code contribution (up to 5 links):
  
-     - 
-     -
-     -
+     - https://github.com/amehlhase316/Kaesekuchen/commit/4bd9ab059cff0784212c3c6757253768491bdf83
+     - https://github.com/amehlhase316/Kaesekuchen/commit/02333a1a8d62a10e71bba2cb8e92c716c329253d
+     - https://github.com/amehlhase316/Kaesekuchen/commit/c3dd558716eb407b4fba45de631a8be507cfce32
+     - https://github.com/amehlhase316/Kaesekuchen/commit/ffbf70102851c005a2cb72f7a9cec95d5296ddfc
+     - https://github.com/amehlhase316/Kaesekuchen/commit/0973fe27b1580432de354b8ad17720660dee6b84
  
     **GitHub links to your Unit Tests (up to 3 links):
  
-     - link1
-     - link2
+     - Most of my coding work I did this round didn't really make sense for unit testing. I did a lot of code cleanup and error removal/code refactoring.
+     - I did run the JUnit tests after all major commits to ensure I didn't add any failures to the current unit tests that exist.
+     - I also cleaned the tests package to be free of checkstyle and spotbug issues. 
+     - The additional class I did build out was a UI thing (resources panel) and didn't really make sense for unit tests. 
  
    **GitHub links to your Code Reviews (up to 3 links):
  
-     - link1
-     - link2
+     - https://github.com/amehlhase316/Kaesekuchen/pull/45
+     - https://github.com/amehlhase316/Kaesekuchen/pull/46
+     - https://github.com/amehlhase316/Kaesekuchen/pull/52
  
    **How did you contribute to Static Analysis:
  
-     - link1
-     - link2
+     - https://github.com/amehlhase316/Kaesekuchen/commit/4bd9ab059cff0784212c3c6757253768491bdf83
+     - https://github.com/amehlhase316/Kaesekuchen/commit/96657568b18c55e5a325159ed8f973b8f470ebe0
+     - https://github.com/amehlhase316/Kaesekuchen/commit/02333a1a8d62a10e71bba2cb8e92c716c329253d
+     - https://github.com/amehlhase316/Kaesekuchen/commit/c3dd558716eb407b4fba45de631a8be507cfce32
   
   **What was your main contribution to the Quality Policy documentation?:
  
-     - 
+     - I reviewed our quality policy before the sprint started to ensure that it met all of the requriements for Sprint3 and for the project. I didn't see any 
+     issues from what we currently had, so I didn't bring any up in sprint planning. 
 
 #### Team member Stephen Wilson:
   **Links to GitHub commits with main code contribution (up to 5 links):
@@ -247,7 +255,7 @@ I would also advise you to already fill out the Contributions section (End of sp
 - [] **Individual** Survey was submitted **individually** (create checkboxes below -- see Canvas to get link)
 - [X] Daimi Mussey
 - [] Stephen Wilson
-- [] Justin Oliver
+- [X] Justin Oliver
 - [] Chase Pierce
         
   - [X] The original of this file was copied for the next Sprint (needed for all but last Sprint where you do not need to copy it anymore)
