@@ -73,13 +73,13 @@ I would also advise you to already fill out the Contributions section (End of sp
 
 ### Meeting Summary:
 
-   Justin Oliver : 
+   Justin Oliver : 4
 
-   Daimi Mussey :
+   Daimi Mussey : 4
 
-   Chase Pierce :
+   Chase Pierce : 4
 
-   Stephen Wilson :     
+   Stephen Wilson : 4
 
 
 ## 3: After the Sprint
@@ -88,50 +88,52 @@ I would also advise you to already fill out the Contributions section (End of sp
 
 **Screen Cast link**: 
 
+> https://www.youtube.com/watch?v=Hx2w_k5kK-o&feature=youtu.be
+
 > Answer the following questions as a team. 
 
 **What do you think is the value you created this Sprint?**
 
-> 
+> We transformed the application from something static into a dynamic, living application by adding the ability to save state, alter user information, and provide real-time information
 
 **Do you think you worked enough and that you did what was expected of you?**
 
-> 
+> Given the current situation and complexity of juggling both individual assignments and project work, we accomplished what we had intended to for this sprint.
 
 **Would you say you met the customers’ expectations? Why, why not?**
 
-> 
+> Yes, we finished the majority of the user stories and tasks we committed to for this sprint. The customer has a functional gym scheduling system that includes a little personalized flavor. 
 
-### Sprint Retrospective
-
-> 
+### Sprint Retrospective 
 
 **Did you meet your sprint goal?**
 
-> 
+> Yes, we met our goal of focusing on the quality of our work and stabilizing our product. We built on previous sprints and functionality, and cleaned up code to help with future development work.
+
 **Did you complete all stories on your Sprint Backlog?**
 
-> 
+> No, but we completed the majority of the sprint backlog. There were 3 tasks that were left unfinished.
 
 **If not, what went wrong?**
 
-> 
+> One of our user stories was to reduce the number of Spotbugs. We were overly ambitious with the ability to reduce the Spotbugs errors in the codebase we were given. We thought we would be able to remove some unused classes, and by doing that it would reduce the number of Spotbug issues. Come to find out, that’s not as easy as it sounds, as Memoranda is quite complicated. We were able to reduce the number of errors significantly. There were however a couple that we just weren’t able to fix and that kept us from reaching the goal we set. Not finishing these tasks doesn’t impact the functionality of the program at all. 
 
 **Did you work at a consistent rate of speed, or velocity? (Meaning did you work during the whole Sprint or did you start working when the deadline approached.)**
 
-> 
+> We did not have a consistent rate of velocity during the middle of the sprint while most of us were working to complete our individual assignments. Our team rallied together to meet the end of sprint deadline and complete most of the user stories we committed to accomplishing. 
 
 **Did you deliver business value?**
 
-> 
+> Yes, our Kaesekuchen Gym Scheduler has a lot of functionality that the customer wanted.  
 
 **Are there things the team thinks it can do better in the next Sprint?**
 
-> 
+> N/A
 
 **How do you feel at this point? Get a pulse on the optimism of the team.**
 
-> 
+> Ready to be done with the semester. Good job, team! 
+>
 ### Contributions:
 
 > In this section I want you to point me to your main contributions (each of you individually). Some of the topcs are not needed for the first deliverables (you should know which things you should have done in this Sprint, if you don't then you have probably missed something):
